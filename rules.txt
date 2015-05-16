@@ -1,0 +1,17 @@
+Decks
+1
+2
+4
+8
+
+DAS
+true
+false
+
+Dealer hits soft 17
+true
+false
+
+6 deck
+DAS false
+DHS17 false
