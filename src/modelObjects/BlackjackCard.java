@@ -48,9 +48,9 @@ public class BlackjackCard extends PlayingCard {
 	
 	/**
 	 * Get the value of the card.  
-	 * <br>Aces have value 1.
-	 * <br>2s through 10s have their rank as their value.
-	 * <br>Face cards have value 10.
+	 * Aces have value 1.
+	 * 2s through 10s have their rank as their value.
+	 * Face cards have value 10.
 	 * @return The value of the card.
 	 */
 	public int getValue() {

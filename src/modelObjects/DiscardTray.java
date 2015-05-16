@@ -3,25 +3,25 @@ package modelObjects;
 import java.util.ArrayList;
 
 public class DiscardTray {
-	ArrayList<BlackjackCard> discardTray;
+	ArrayList<PlayingCard> discardTray;
 	
 	/**
 	 * Constructor
 	 */
 	public DiscardTray() {
-		discardTray = new ArrayList<BlackjackCard>();
+		discardTray = new ArrayList<PlayingCard>();
 	}
 	
 	/**
 	 * Adds the card to the discard tray.
 	 * @param card  The card being added to the discard tray.
 	 */
-	public void addCard(final BlackjackCard card) {
+	public void addCard(final PlayingCard card) {
 		discardTray.add(card);
 	}
 	
-	public BlackjackCard removeCard() {
-		BlackjackCard card = null;
+	public PlayingCard removeCard() {
+		PlayingCard card = null;
 		
 		if (discardTray.size() > 0) {
 			card = discardTray.remove(discardTray.size() - 1);

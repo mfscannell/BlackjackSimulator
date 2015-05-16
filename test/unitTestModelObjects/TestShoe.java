@@ -2,6 +2,7 @@ package unitTestModelObjects;
 
 import static org.junit.Assert.*;
 import modelObjects.BlackjackCard;
+import modelObjects.PlayingCard;
 import modelObjects.Shoe;
 
 import org.junit.Test;
@@ -127,7 +128,7 @@ public class TestShoe {
 			shoe.print();
 			
 			for (int i = 0; i < 10; i++) {
-				BlackjackCard card = shoe.dealCard();
+				PlayingCard card = shoe.dealCard();
 				System.out.println("Dealt card:" + card);
 			}
 			

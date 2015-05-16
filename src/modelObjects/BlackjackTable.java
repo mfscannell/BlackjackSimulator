@@ -12,6 +12,9 @@ import rules.CompositionStrategy;
 import rules.KISSIStrategy;
 
 public class BlackjackTable {
+	public static final int MIN_PLAYERS = 1;
+	public static final int MAX_PLAYERS = 7;
+	
 	private int numHands;
 	private int numPlayers;
 	private Shoe shoe;
@@ -24,9 +27,6 @@ public class BlackjackTable {
 	private CompositionStrategy compositionStrategy;
 	private KISSIStrategy kissIStrategy;
 	private boolean insuranceOffered;
-	
-	public static final int MIN_PLAYERS = 1;
-	public static final int MAX_PLAYERS = 7;
 	
 	/**
 	 * Constructor
@@ -98,7 +98,7 @@ public class BlackjackTable {
 		
 		if (shoe.isNewShoe()) {
 			shoe.shuffleShoe();
-			BlackjackCard initialCard = shoe.dealCard();
+			PlayingCard initialCard = shoe.dealCard();
 			discardTray.addCard(initialCard);
 			kissIStrategy.resetCount();
 		}
@@ -166,7 +166,7 @@ public class BlackjackTable {
 					continue;
 				}
 				
-				BlackjackCard dealtCard = shoe.dealCard();
+				PlayingCard dealtCard = shoe.dealCard();
 				adjustCount(dealtCard);
 				
 				if (playersHands.get(j).size() == 0) {
@@ -178,7 +178,7 @@ public class BlackjackTable {
 			}
 			
 			//deal card to dealer
-			BlackjackCard dealersCard = shoe.dealCard();
+			PlayingCard dealersCard = shoe.dealCard();
 			
 			if (i == 0) {
 				adjustCount(dealersCard);
@@ -232,11 +232,11 @@ public class BlackjackTable {
 	 */
 	private void playPlayerTurn(final int seat) {
 		int j = 0;
-		final BlackjackCard dealerUpCard = dealerHand.getFirstCard();
+		final PlayingCard dealerUpCard = dealerHand.getFirstCard();
 		
 		while (j < playersHands.get(seat).size()) {
 			BlackjackMove move;
-			BlackjackCard dealtCard;
+			PlayingCard dealtCard;
 			final BlackjackHand playerHand = playersHands.get(seat).get(j);
 			final int numHands = playersHands.get(seat).size();
 			
@@ -266,7 +266,7 @@ public class BlackjackTable {
 									
 									break;
 					case SPLIT:		//System.out.println("" + seat + " splits hand");
-									BlackjackCard splitCard = playersHands.get(seat).get(j).split();
+									PlayingCard splitCard = playersHands.get(seat).get(j).split();
 									BlackjackHand splitHand = new BlackjackHand(splitCard, true);
 									playersHands.get(seat).get(j).setFromSplit(true);
 									splitHand.setFromSplit(true);
@@ -305,7 +305,7 @@ public class BlackjackTable {
 				BlackjackMove dealersMove = rules.getDealersMove(dealerHand);
 				
 				if (dealersMove == BlackjackMove.HIT) {
-					BlackjackCard dealtCard = shoe.dealCard();
+					PlayingCard dealtCard = shoe.dealCard();
 					
 					adjustCount(dealtCard);
 					dealerHand.addCard(dealtCard);
@@ -473,7 +473,7 @@ public class BlackjackTable {
 			
 			//collect the dealer's cards
 			while (dealerHand.getNumCards() > 0) {
-				BlackjackCard card = dealerHand.removeCard();
+				PlayingCard card = dealerHand.removeCard();
 				discardTray.addCard(card);
 			}
 		}
@@ -488,7 +488,7 @@ public class BlackjackTable {
 			BlackjackHand hand = playersHands.get(seat).remove(playersHands.get(seat).size() - 1);
 			
 			while (hand.getNumCards() > 0) {
-				BlackjackCard card = hand.removeCard();
+				PlayingCard card = hand.removeCard();
 				discardTray.addCard(card);
 			}
 		}
@@ -499,7 +499,7 @@ public class BlackjackTable {
 	 */
 	private void refillShoe() {
 		while (discardTray.getNumCards() > 0) {
-			BlackjackCard card = discardTray.removeCard();
+			PlayingCard card = discardTray.removeCard();
 			shoe.addCard(card);
 		}
 	}
@@ -508,7 +508,7 @@ public class BlackjackTable {
 	 * Adjust all of the card counting methods according to the dealt card.
 	 * @param dealtCard  The card dealt from the shoe.
 	 */
-	private void adjustCount(final BlackjackCard dealtCard) {
+	private void adjustCount(final PlayingCard dealtCard) {
 		kissIStrategy.adjustCount(dealtCard);
 	}
 	

@@ -7,6 +7,7 @@ import exceptions.InvalidNumDecksException;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 import modelObjects.BlackjackTable;
+import modelObjects.PlayingCard;
 import modelObjects.Shoe;
 
 public class BasicStrategy {
@@ -287,7 +288,7 @@ public class BasicStrategy {
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
-	public BlackjackMove getAction(final BlackjackCard dealerUpCard, 
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
 								   final BlackjackHand hand,
 								   final BlackjackRules rules,
 								   int numHands) {

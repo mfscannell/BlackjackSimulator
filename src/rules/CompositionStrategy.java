@@ -2,6 +2,7 @@ package rules;
 
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
+import modelObjects.PlayingCard;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import exceptions.InvalidNumDecksException;
@@ -28,7 +29,7 @@ public class CompositionStrategy extends BasicStrategy {
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
-	public BlackjackMove getAction(final BlackjackCard dealerUpCard, 
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
 								   final BlackjackHand hand,
 								   final BlackjackRules rules,
 								   int numHands) {

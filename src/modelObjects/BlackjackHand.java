@@ -6,7 +6,7 @@ import enumerations.CardRank;
 import exceptions.InvalidMoveException;
 
 public class BlackjackHand {
-	private ArrayList<BlackjackCard> cards;
+	private ArrayList<PlayingCard> cards;
 	private boolean containsAce;
 	private int total;
 	private boolean fromSplit;
@@ -18,7 +18,7 @@ public class BlackjackHand {
 	public BlackjackHand() {
 		containsAce = false;
 		total = 0;
-		cards = new ArrayList<BlackjackCard>();
+		cards = new ArrayList<PlayingCard>();
 		fromSplit = false;
 		doubleDown = false;
 	}
@@ -28,8 +28,8 @@ public class BlackjackHand {
 	 * @param card  The first card of the new hand.
 	 * @param fromSplit  True if the hand was created from another hand that was split.
 	 */
-	public BlackjackHand(final BlackjackCard card, boolean fromSplit) {
-		cards = new ArrayList<BlackjackCard>();
+	public BlackjackHand(final PlayingCard card, boolean fromSplit) {
+		cards = new ArrayList<PlayingCard>();
 		cards.add(card);
 		total = card.getValue();
 		
@@ -46,7 +46,7 @@ public class BlackjackHand {
 	 * Adds the specified card to the hand.
 	 * @param card The card to be added to the hand.
 	 */
-	public void addCard(final BlackjackCard card) {
+	public void addCard(final PlayingCard card) {
 		total = total + card.getValue();
 		
 		if (card.isAce()) {
@@ -62,8 +62,8 @@ public class BlackjackHand {
 	 * Remove the last card from the hand.
 	 * @return  The last card in the hand.
 	 */
-	public BlackjackCard removeCard() {
-		BlackjackCard card = null;
+	public PlayingCard removeCard() {
+		PlayingCard card = null;
 		
 		if (cards.size() > 0) {
 			card = cards.remove(cards.size() - 1);
@@ -279,7 +279,7 @@ public class BlackjackHand {
 	 * Inquire the first card dealt in the hand.
 	 * @return
 	 */
-	public final BlackjackCard getFirstCard() {
+	public final PlayingCard getFirstCard() {
 		return cards.get(0);
 	}
 	
@@ -287,7 +287,7 @@ public class BlackjackHand {
 	 * Inquire the second card dealt in the hand.
 	 * @return
 	 */
-	public final BlackjackCard getSecondCard() {
+	public final PlayingCard getSecondCard() {
 		return cards.get(1);
 	}
 	
@@ -323,8 +323,8 @@ public class BlackjackHand {
 	 * @return  The second card in the hand after splitting the hand.
 	 * @precondition The method call BlackjackHand.isSplitable() returns true.
 	 */
-	public BlackjackCard split() {
-		BlackjackCard returnCard = null;
+	public PlayingCard split() {
+		PlayingCard returnCard = null;
 		
 		returnCard = cards.remove(1);
 		fromSplit = true;

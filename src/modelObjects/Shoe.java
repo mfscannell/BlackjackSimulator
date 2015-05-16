@@ -11,7 +11,7 @@ public class Shoe {
 	public static final int MAX_NUM_DECKS = 8;
 	public static final int MIN_DECK_PENETRATION = 1;
 	public static final int MAX_DECK_PENETRATION = 99;
-	private ArrayList<BlackjackCard> shoe;
+	private ArrayList<PlayingCard> shoe;
 	private int numDecks;
 	private int deckPenetration;
 	
@@ -31,7 +31,7 @@ public class Shoe {
 			throw new InvalidShoeException("Invalid deck penetration (" + deckPenetration + ")");
 		}
 		
-		shoe = new ArrayList<BlackjackCard>();
+		shoe = new ArrayList<PlayingCard>();
 		this.numDecks = numDecks;
 		this.deckPenetration = deckPenetration;
 		initializeShoe();
@@ -87,7 +87,7 @@ public class Shoe {
 		for (int i = 0; i < SHUFFLES_PER_DECK * numDecks; i++) {
 			for (int j = 0; j < shoe.size(); j++) {
 				int swapIndex = (int) (Math.random() * shoe.size());
-				BlackjackCard temp = shoe.get(j);
+				PlayingCard temp = shoe.get(j);
 				shoe.set(j, shoe.get(swapIndex));
 				shoe.set(swapIndex, temp);
 			}
@@ -98,8 +98,8 @@ public class Shoe {
 	 * Removes a card from the shoe and deals it out.
 	 * @return  A card dealt from the shoe.
 	 */
-	public BlackjackCard dealCard() {
-		BlackjackCard dealtCard = shoe.remove(shoe.size() - 1);
+	public PlayingCard dealCard() {
+		PlayingCard dealtCard = shoe.remove(shoe.size() - 1);
 		
 		return dealtCard;
 	}
@@ -108,7 +108,7 @@ public class Shoe {
 	 * Add a card to the shoe.
 	 * @param card  The card to be added to the shoe.
 	 */
-	public void addCard(final BlackjackCard card) {
+	public void addCard(final PlayingCard card) {
 		shoe.add(card);
 	}
 	

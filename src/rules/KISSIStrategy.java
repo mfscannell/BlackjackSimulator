@@ -2,6 +2,7 @@ package rules;
 
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
+import modelObjects.PlayingCard;
 import modelObjects.Shoe;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
@@ -41,7 +42,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * Adjusts the card count based upon the dealt card.
 	 * @param card  The dealt card.
 	 */
-	public void adjustCount(BlackjackCard card) {
+	public void adjustCount(PlayingCard card) {
 		int cardValue = card.getValue();
 		
 		if ((cardValue == 2 && !card.isRedCard()) || 
@@ -67,7 +68,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
-	public BlackjackMove getAction(final BlackjackCard dealerUpCard, 
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
 								   final BlackjackHand hand,
 								   final BlackjackRules rules,
 								   int numHands) {

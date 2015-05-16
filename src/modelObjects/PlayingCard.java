@@ -8,7 +8,7 @@ import enumerations.CardSuit;
  * @author mscannell
  *
  */
-public class PlayingCard {
+public abstract class PlayingCard {
 	private CardSuit suit;
 	private CardRank rank;
 	
@@ -91,6 +91,8 @@ public class PlayingCard {
 	public String toString() {
 		return "[" + rank + " " + suit + "]";
 	}
+	
+	public abstract int getValue();
 	
 	/**
 	 * Gets the cards rank (Ace, Two, Queen, etc.).

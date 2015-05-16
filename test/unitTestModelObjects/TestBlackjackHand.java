@@ -292,7 +292,7 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		BlackjackCard returnCard = null;
+		PlayingCard returnCard = null;
 		
 		returnCard = hand.split();
 		
