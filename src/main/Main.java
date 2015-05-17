@@ -11,7 +11,8 @@ import enumerations.CardRank;
 import enumerations.CardSuit;
 import exceptions.InvalidConfigFileException;
 import exceptions.InvalidShoeException;
-import exceptions.TableOperationException;
+import exceptions.TableSeatNumberInvalidException;
+import exceptions.TableSeatTakenException;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackDealer;
 import modelObjects.BlackjackPlayer;
@@ -95,20 +96,17 @@ public class Main {
 	private static void setUpShoe() throws InvalidConfigFileException {
 		String heading;
 		
-		//read the heading
 		heading = configFileReader.next();
 		if (!heading.equals(ConfigFileHeading.SHOE_CONFIG_HEADING)) {
 			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.SHOE_CONFIG_HEADING);
 		}
 		
-		//read the number of decks
 		heading = configFileReader.next();
 		if (!heading.equals(ConfigFileHeading.NUM_DECKS)) {
 			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.NUM_DECKS);
 		}
 		numDecks = configFileReader.nextInt();
 		
-		//read the deck penetration
 		heading = configFileReader.next();
 		if (!heading.equals(ConfigFileHeading.DECK_PENETRATION_IN_PERCENT)) {
 			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.DECK_PENETRATION_IN_PERCENT);
@@ -120,7 +118,7 @@ public class Main {
 		} catch (InvalidShoeException e) {
 			e.printStackTrace();
 		}
-	}//end method setUpShoe
+	}
 	
 	/**
 	 * Reads the opened configuration file to read the shoe parameters.
@@ -198,7 +196,7 @@ public class Main {
 		numHands = configFileReader.nextInt();
 		
 		blackjackTable = new BlackjackTable(numHands, shoe, rules);
-	}//end method setUpTable
+	}
 	
 	/**
 	 * Creates the blackjack dealer.
@@ -249,7 +247,9 @@ public class Main {
 			
 			try {
 				blackjackTable.addPlayer(player, seat);
-			} catch (TableOperationException e) {
+			} catch (TableSeatTakenException e) {
+				e.printStackTrace();
+			} catch (TableSeatNumberInvalidException e) {
 				e.printStackTrace();
 			}
 		}

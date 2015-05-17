@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import enumerations.BlackjackMove;
 import exceptions.InvalidNumDecksException;
 import exceptions.InvalidShoeException;
-import exceptions.TableOperationException;
+import exceptions.TableSeatNumberInvalidException;
+import exceptions.TableSeatTakenException;
 import rules.BasicStrategy;
 import rules.BlackjackRules;
 import rules.CompositionStrategy;
@@ -61,21 +62,40 @@ public class BlackjackTable {
 	 * Add a player to the table at the specified seat.
 	 * @param blackjackPlayer
 	 * @param seat
-	 * @throws TableOperationException Thrown if the seat is already taken.
+	 * @throws TableSeatTakenException Thrown if the seat is already taken.
+	 * @throws TableSeatNumberInvalidException 
 	 */
-	public void addPlayer(BlackjackPlayer blackjackPlayer, int seat) throws TableOperationException {
-		if (players.get(seat) != null || 
-			playersHands.get(seat) != null || 
-			seat < 0 || 
-			seat >= MAX_PLAYERS) {
-			throw new TableOperationException("That seat is already taken");
+	public void addPlayer(BlackjackPlayer blackjackPlayer, int seat) throws TableSeatTakenException, TableSeatNumberInvalidException {
+		if (isSeatOccupied(seat) || seat < 0 || seat >= MAX_PLAYERS) {
+			throw new TableSeatTakenException("That seat is already taken");
 		}
+		
+		if (!isValidSeat(seat)) {
+			throw new TableSeatNumberInvalidException("Seat number must be between 0 and " + MAX_PLAYERS);
+		}
+		
 		ArrayList<BlackjackHand> hands = new ArrayList<BlackjackHand>();
 		playersHands.set(seat, hands);
 		blackjackPlayer.setHands(hands);
 		players.set(seat, blackjackPlayer);
 		numPlayers++;
-	}//end method addPlayer
+	}
+	
+	private boolean isSeatOccupied(int seat) {
+		boolean seatOccupied = players.get(seat) != null || playersHands.get(seat) != null;
+		
+		return seatOccupied;
+	}
+	
+	private boolean isValidSeat(int seat) {
+		boolean validSeat = true;
+		
+		if (seat < 0 || seat >= MAX_PLAYERS) {
+			validSeat = false;
+		}
+		
+		return validSeat;
+	}
 	
 	/**
 	 * Associates a blackjack dealer with the table.

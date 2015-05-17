@@ -1,11 +1,11 @@
 package exceptions;
 
-public class TableOperationException extends Exception {
+public class TableSeatTakenException extends Exception {
 	/**
 	 * Constructor.
 	 * @param message  The error message
 	 */
-	public TableOperationException(String message) {
+	public TableSeatTakenException(String message) {
 		super(message);
 	}
 
