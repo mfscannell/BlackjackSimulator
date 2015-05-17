@@ -33,7 +33,7 @@ public class Main {
 	private static boolean resplitAces;
 	
 	//Table parameters
-	private static int numHands;
+	private static int numHandsToSimulate;
 	
 	//Player parameters
 	private static int numPlayers;
@@ -193,9 +193,9 @@ public class Main {
 		if (!heading.equals(ConfigFileHeading.NUM_HANDS_TO_SIMULATE)) {
 			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.NUM_HANDS_TO_SIMULATE);
 		}
-		numHands = configFileReader.nextInt();
+		numHandsToSimulate = configFileReader.nextInt();
 		
-		blackjackTable = new BlackjackTable(numHands, shoe, rules);
+		blackjackTable = new BlackjackTable(shoe, rules);
 	}
 	
 	/**
@@ -246,7 +246,7 @@ public class Main {
 			BlackjackPlayer player = new BlackjackPlayer(0, cardCounter);
 			
 			try {
-				blackjackTable.addPlayer(player, seat);
+				blackjackTable.addPlayerAtSeat(player, seat);
 			} catch (TableSeatTakenException e) {
 				e.printStackTrace();
 			} catch (TableSeatNumberInvalidException e) {
@@ -263,7 +263,7 @@ public class Main {
 	}
 	
 	private static void runSimulation() {
-		for (int i = 0; i < numHands; i++) {
+		for (int i = 0; i < numHandsToSimulate; i++) {
 			System.out.println("**********************************");
 			System.out.println("Round:" + i);
 			blackjackTable.playRound();
