@@ -38,10 +38,6 @@ public class KISSIStrategy extends CompositionStrategy {
 		count = initialCount;
 	}
 	
-	/**
-	 * Adjusts the card count based upon the dealt card.
-	 * @param card  The dealt card.
-	 */
 	public void adjustCount(PlayingCard card) {
 		int cardValue = card.getValue();
 		
@@ -53,7 +49,7 @@ public class KISSIStrategy extends CompositionStrategy {
 		} else if (card.isFaceCard()) {
 			count--;
 		}
-	}//end method adjustCount
+	}
 	
 	public int getCount() {
 		return count;
@@ -150,13 +146,11 @@ public class KISSIStrategy extends CompositionStrategy {
 			if (count <= 19) {
 				betSize = 1;
 			} else if (count == 20) {
-				betSize = 3;
+				betSize = 2;
 			} else if (count == 21) {
+				betSize = 4;
+			} else if (count >= 22) {
 				betSize = 6;
-			} else if (count == 22) {
-				betSize = 8;
-			} else if (count >= 23) {
-				betSize = 12;
 			}
 		}
 		
