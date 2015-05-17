@@ -1,4 +1,4 @@
-package unitTestModelObjects;
+package unitTestRules;
 
 import static org.junit.Assert.*;
 import modelObjects.BlackjackCard;
@@ -12,16 +12,22 @@ import enumerations.CardRank;
 import enumerations.CardSuit;
 
 public class TestBlackjackRules {
+	private BlackjackRules.Builder rulesBuilder;
+	private BlackjackRules rules;
+	
+	private void beforeEach() {
+		rulesBuilder = new BlackjackRules.Builder();
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
+		rulesBuilder.setDoubleAfterSplitAllowed(true);
+		rulesBuilder.setDealerHitsSoft17(true);
+		rulesBuilder.setCanResplitAces(true);
+		rules = rulesBuilder.build();
+	}
 
 	@Test
 	public void testGetDealersMoveHit() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setBlackjackPayout(1.5);
-		rulesBuilder.setDoubleAfterSplit(true);
-		rulesBuilder.setDealerHitsSoft17(true);
-		rulesBuilder.setResplitAces(true);
-		BlackjackRules rules = rulesBuilder.build();
+		beforeEach();
 		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
@@ -35,13 +41,7 @@ public class TestBlackjackRules {
 	
 	@Test
 	public void testGetDealersMoveStand() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setBlackjackPayout(1.5);
-		rulesBuilder.setDoubleAfterSplit(true);
-		rulesBuilder.setDealerHitsSoft17(true);
-		rulesBuilder.setResplitAces(true);
-		BlackjackRules rules = rulesBuilder.build();
+		beforeEach();
 		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -55,13 +55,7 @@ public class TestBlackjackRules {
 	
 	@Test
 	public void testGetDealersMoveHitSoft() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setBlackjackPayout(1.5);
-		rulesBuilder.setDoubleAfterSplit(true);
-		rulesBuilder.setDealerHitsSoft17(true);
-		rulesBuilder.setResplitAces(true);
-		BlackjackRules rules = rulesBuilder.build();
+		beforeEach();
 		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
@@ -75,13 +69,7 @@ public class TestBlackjackRules {
 	
 	@Test
 	public void testGetDealersMoveStandSoft() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setBlackjackPayout(1.5);
-		rulesBuilder.setDoubleAfterSplit(true);
-		rulesBuilder.setDealerHitsSoft17(true);
-		rulesBuilder.setResplitAces(true);
-		BlackjackRules rules = rulesBuilder.build();
+		beforeEach();
 		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
@@ -91,6 +79,20 @@ public class TestBlackjackRules {
 		hand.addCard(secondCard);
 		
 		assertTrue(rules.getDealersMove(hand) == BlackjackMove.STAND);
+	}
+	
+	@Test
+	public void testAceCardValue() {
+		beforeEach();
+		
+		assertTrue(rules.getCardValue(CardRank.ACE) == 1);
+	}
+	
+	@Test
+	public void testTenCardValue() {
+		beforeEach();
+		
+		assertTrue(rules.getCardValue(CardRank.TEN) == 10);
 	}
 
 }

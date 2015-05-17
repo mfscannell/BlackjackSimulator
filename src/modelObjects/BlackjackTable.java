@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import enumerations.BlackjackMove;
 import exceptions.InvalidNumDecksException;
 import exceptions.InvalidShoeException;
-import exceptions.TableOperationException;
+import exceptions.TableSeatNumberInvalidException;
+import exceptions.TableSeatTakenException;
 import rules.BasicStrategy;
 import rules.BlackjackRules;
 import rules.CompositionStrategy;
@@ -61,21 +62,50 @@ public class BlackjackTable {
 	 * Add a player to the table at the specified seat.
 	 * @param blackjackPlayer
 	 * @param seat
-	 * @throws TableOperationException Thrown if the seat is already taken.
+	 * @throws TableSeatTakenException Thrown if the seat is already taken.
+	 * @throws TableSeatNumberInvalidException Thrown if the seat is an invalid seat number.
 	 */
-	public void addPlayer(BlackjackPlayer blackjackPlayer, int seat) throws TableOperationException {
-		if (players.get(seat) != null || 
-			playersHands.get(seat) != null || 
-			seat < 0 || 
-			seat >= MAX_PLAYERS) {
-			throw new TableOperationException("That seat is already taken");
+	public void addPlayer(BlackjackPlayer blackjackPlayer, int seat) throws TableSeatTakenException, TableSeatNumberInvalidException {
+		checkIfValidSeat(seat);
+		checkIfSeatOccupied(seat);
+		seatPlayerAndAssociateHands(blackjackPlayer, seat);
+	}
+	
+	private void checkIfValidSeat(int seat) throws TableSeatNumberInvalidException {
+		if (!isValidSeat(seat)) {
+			throw new TableSeatNumberInvalidException("Seat number must be between 0 and " + MAX_PLAYERS);
 		}
+	}
+	
+	private boolean isValidSeat(int seat) {
+		boolean validSeat = true;
+		
+		if (seat < 0 || seat >= MAX_PLAYERS) {
+			validSeat = false;
+		}
+		
+		return validSeat;
+	}
+	
+	private void checkIfSeatOccupied(int seat) throws TableSeatTakenException {
+		if (isSeatOccupied(seat)) {
+			throw new TableSeatTakenException("That seat is already taken");
+		}
+	}
+	
+	private boolean isSeatOccupied(int seat) {
+		boolean seatOccupied = players.get(seat) != null || playersHands.get(seat) != null;
+		
+		return seatOccupied;
+	}
+	
+	private void seatPlayerAndAssociateHands(BlackjackPlayer blackjackPlayer, int seat) {
 		ArrayList<BlackjackHand> hands = new ArrayList<BlackjackHand>();
 		playersHands.set(seat, hands);
 		blackjackPlayer.setHands(hands);
 		players.set(seat, blackjackPlayer);
 		numPlayers++;
-	}//end method addPlayer
+	}
 	
 	/**
 	 * Associates a blackjack dealer with the table.
@@ -96,13 +126,7 @@ public class BlackjackTable {
 			refillShoe();
 		}
 		
-		if (shoe.isNewShoe()) {
-			shoe.shuffleShoe();
-			PlayingCard initialCard = shoe.dealCard();
-			discardTray.addCard(initialCard);
-			kissIStrategy.resetCount();
-		}
-		
+		checkIfNewShoe();
 		resetInsurance();
 		setBetAmounts();
 		dealInitialCards();
@@ -129,6 +153,25 @@ public class BlackjackTable {
 	}//end method playRound
 	
 	/**
+	 * Refills the shoe with all the cards from the discard tray.
+	 */
+	private void refillShoe() {
+		while (discardTray.getNumCards() > 0) {
+			PlayingCard card = discardTray.removeCard();
+			shoe.addCard(card);
+		}
+	}
+	
+	private void checkIfNewShoe() {
+		if (shoe.isNewShoe()) {
+			shoe.shuffleShoe();
+			PlayingCard initialCard = shoe.dealCard();
+			discardTray.addCard(initialCard);
+			kissIStrategy.resetCount();
+		}
+	}
+	
+	/**
 	 * Sets all players to not take insurance when the dealer offers it.
 	 */
 	private void resetInsurance() {
@@ -138,7 +181,7 @@ public class BlackjackTable {
 				players.get(i).setsTakesInsurance(false);
 			}
 		}
-	}//end method resetInsurance
+	}
 	
 	/**
 	 * Sets each player's bet amount at the start of the round as a reference to the minimum bet.
@@ -153,7 +196,7 @@ public class BlackjackTable {
 				}
 			}
 		}
-	}//end method setBetAmounts
+	}
 	
 	/**
 	 * Deal two cards to each player and the dealer.
@@ -186,7 +229,7 @@ public class BlackjackTable {
 			
 			dealerHand.addCard(dealersCard);
 		}
-	}//end method dealInitialCards
+	}
 	
 	/**
 	 * Offer insurance to the players.
@@ -213,7 +256,7 @@ public class BlackjackTable {
 			
 			players.get(i).setsTakesInsurance(insurance);
 		}
-	}//end method offerInsurance
+	}
 	
 	/**
 	 * Play each of the players turns.
@@ -224,7 +267,7 @@ public class BlackjackTable {
 				playPlayerTurn(i);
 			}
 		}
-	}//end method playPlayersTurns
+	}
 	
 	/**
 	 * Play the hand(s) of the player at the specified seat.
@@ -283,7 +326,7 @@ public class BlackjackTable {
 				}
 			}
 		}
-	}//end method playPlayerTurn
+	}
 	
 	
 	
@@ -314,7 +357,7 @@ public class BlackjackTable {
 				}
 			}
 		}
-	}//end method playDealersTurn
+	}
 	
 	/**
 	 * Checks if the dealers hand is playable.  The dealer's hand is playable if any of the
@@ -345,7 +388,7 @@ public class BlackjackTable {
 		}
 		
 		return playable;
-	}//end method dealerPlayable
+	}
 	
 	/**
 	 * Adjusts the player's chip stacks according to what they have vs the dealer.
@@ -354,7 +397,7 @@ public class BlackjackTable {
 		checkDealerBlackjack();
 		checkIfInsuranceOffered();
 		payoutPlayers();
-	}//end method comparePlayersToDealer
+	}
 	
 	/**
 	 * Adjust the players chip counts if the dealer has blackjack.  Any player who does not
@@ -374,7 +417,7 @@ public class BlackjackTable {
 				}
 			}
 		}
-	}//end method checkDealerBlackjack
+	}
 	
 	/**
 	 * Adjust the players chip counts if insurance was offered.
@@ -387,7 +430,7 @@ public class BlackjackTable {
 				}
 				
 				final double betAmount = players.get(i).getBetAmount();
-				final double insuranceWinnings = BlackjackRules.INSURANCE_PAYOUT * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
+				final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
 				final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
 					
 				//adjust the players cash total based upon the insurance bet.
@@ -398,7 +441,7 @@ public class BlackjackTable {
 				}
 			}
 		}
-	}//end method checkIfInsuranceOffered
+	}
 	
 	/**
 	 * Adjust the players chips accordingly with the exception for when the dealer has blackjack 
@@ -416,7 +459,7 @@ public class BlackjackTable {
 				final double losings = playerBet * -1.0;
 				final double doubleWinnings = 2.0 * playerBet;
 				final double doubleLosings = -2.0 * playerBet;
-				final double blackjackWinnings = rules.getBlackjackPayout() * playerBet;
+				final double blackjackWinnings = rules.getBlackjackPayoutMultiple() * playerBet;
 				
 				if (playersHands.get(i).get(0).isBlackjack()) {
 					System.out.println("" + i + " Player Blackjack");
@@ -491,16 +534,6 @@ public class BlackjackTable {
 				PlayingCard card = hand.removeCard();
 				discardTray.addCard(card);
 			}
-		}
-	}//end method collectPlayerCards
-	
-	/**
-	 * Refills the shoe with all the cards from the discard tray.
-	 */
-	private void refillShoe() {
-		while (discardTray.getNumCards() > 0) {
-			PlayingCard card = discardTray.removeCard();
-			shoe.addCard(card);
 		}
 	}
 	

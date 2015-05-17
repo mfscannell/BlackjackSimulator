@@ -1,11 +1,5 @@
-#SHOE_PARAMETERS
-#numDecks
-2
-#deckPenetration
-55
-
 #RULES
-#maxHands
+#maxHandsAfterResplits
 4
 #blackjackPayout
 1.5
@@ -16,9 +10,15 @@ true
 #resplitAces
 false
 
+#SHOE_PARAMETERS
+#numDecks
+2
+#deckPenetration
+55
+
 #TABLE_PARAMETERS
-#numHands
-100000
+#numHandsToSimulate
+10000
 
 #PLAYER_PARAMETERS
 #numPlayers

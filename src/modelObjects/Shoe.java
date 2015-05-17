@@ -23,23 +23,30 @@ public class Shoe {
 	 * @throws InvalidShoeException 
 	 */
 	public Shoe(int numDecks, int deckPenetration) throws InvalidShoeException {
+		checkNumDecksIsValid(numDecks);
+		checkDeckPenetrationIsValid(deckPenetration);
+		setShoeParameters(numDecks, deckPenetration);
+		initializeShoe();
+	}
+	
+	private void checkNumDecksIsValid(int numDecks) throws InvalidShoeException {
 		if (numDecks < MIN_NUM_DECKS || numDecks > MAX_NUM_DECKS) {
 			throw new InvalidShoeException("Invalid deck size (" + numDecks + ")");
 		}
-		
+	}
+	
+	private void checkDeckPenetrationIsValid(int deckPenetration) throws InvalidShoeException {
 		if (deckPenetration < MIN_DECK_PENETRATION || deckPenetration > MAX_DECK_PENETRATION) {
 			throw new InvalidShoeException("Invalid deck penetration (" + deckPenetration + ")");
 		}
-		
+	}
+	
+	private void setShoeParameters(int numDecks, int deckPenetration) {
 		shoe = new ArrayList<PlayingCard>();
 		this.numDecks = numDecks;
 		this.deckPenetration = deckPenetration;
-		initializeShoe();
-	}//end constructor
+	}
 	
-	/**
-	 * Creates an initial shoe where all the cards are in sorted order.
-	 */
 	private void initializeShoe() {
 		for (int i = 0; i < numDecks; i++) {
 			for (int j = 0; j < PlayingCard.NUMBER_OF_SUITS; j++) {
@@ -48,7 +55,7 @@ public class Shoe {
 				}
 			}
 		}
-	}//end method initializeShoe
+	}
 	
 	/**
 	 * Gets the number of cards remaining in the shoe.
@@ -78,7 +85,7 @@ public class Shoe {
 		}
 		
 		return newShoe;
-	}//end method isNewShoe
+	}
 	
 	/**
 	 * Shuffles a shoe.

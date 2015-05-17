@@ -11,7 +11,8 @@ import enumerations.CardRank;
 import enumerations.CardSuit;
 import exceptions.InvalidConfigFileException;
 import exceptions.InvalidShoeException;
-import exceptions.TableOperationException;
+import exceptions.TableSeatNumberInvalidException;
+import exceptions.TableSeatTakenException;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackDealer;
 import modelObjects.BlackjackPlayer;
@@ -55,8 +56,8 @@ public class Main {
 		System.out.println("WELCOME TO BLACKJACK SIMULATOR");
 		try {
 			openFile();
-			setUpShoe();
 			setUpRules();
+			setUpShoe();
 			setUpTable();
 			setUpDealer();
 			setUpPlayers();
@@ -87,40 +88,6 @@ public class Main {
 			}
 		} while (invalidFile);
 	}//end method acquireParameters
-	
-	/**
-	 * Reads the opened configuration file to read the shoe parameters.
-	 * @throws Exception
-	 */
-	private static void setUpShoe() throws InvalidConfigFileException {
-		String heading;
-		
-		//read the heading
-		heading = configFileReader.next();
-		if (!heading.equals(ConfigFileHeading.SHOE_CONFIG_HEADING)) {
-			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.SHOE_CONFIG_HEADING);
-		}
-		
-		//read the number of decks
-		heading = configFileReader.next();
-		if (!heading.equals(ConfigFileHeading.NUM_DECKS)) {
-			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.NUM_DECKS);
-		}
-		numDecks = configFileReader.nextInt();
-		
-		//read the deck penetration
-		heading = configFileReader.next();
-		if (!heading.equals(ConfigFileHeading.DECK_PENETRATION_IN_PERCENT)) {
-			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.DECK_PENETRATION_IN_PERCENT);
-		}
-		deckPenetration = configFileReader.nextInt();
-		
-		try {
-			shoe = new Shoe(numDecks, deckPenetration);
-		} catch (InvalidShoeException e) {
-			e.printStackTrace();
-		}
-	}//end method setUpShoe
 	
 	/**
 	 * Reads the opened configuration file to read the shoe parameters.
@@ -171,13 +138,44 @@ public class Main {
 		resplitAces = Boolean.parseBoolean(heading);
 		
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setMaxHands(maxHands);
-		rulesBuilder.setBlackjackPayout(blackjackPayout);
-		rulesBuilder.setDoubleAfterSplit(doubleAfterSplit);
+		rulesBuilder.setMaxHandsAfterSplits(maxHands);
+		rulesBuilder.setBlackjackPayoutMultiple(blackjackPayout);
+		rulesBuilder.setDoubleAfterSplitAllowed(doubleAfterSplit);
 		rulesBuilder.setDealerHitsSoft17(dealerHitsSoft17);
-		rulesBuilder.setResplitAces(resplitAces);
+		rulesBuilder.setCanResplitAces(resplitAces);
 		rules = rulesBuilder.build();
 	}//end method setUpRules
+	
+	/**
+	 * Reads the opened configuration file to read the shoe parameters.
+	 * @throws Exception
+	 */
+	private static void setUpShoe() throws InvalidConfigFileException {
+		String heading;
+		
+		heading = configFileReader.next();
+		if (!heading.equals(ConfigFileHeading.SHOE_CONFIG_HEADING)) {
+			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.SHOE_CONFIG_HEADING);
+		}
+		
+		heading = configFileReader.next();
+		if (!heading.equals(ConfigFileHeading.NUM_DECKS)) {
+			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.NUM_DECKS);
+		}
+		numDecks = configFileReader.nextInt();
+		
+		heading = configFileReader.next();
+		if (!heading.equals(ConfigFileHeading.DECK_PENETRATION_IN_PERCENT)) {
+			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.DECK_PENETRATION_IN_PERCENT);
+		}
+		deckPenetration = configFileReader.nextInt();
+		
+		try {
+			shoe = new Shoe(numDecks, deckPenetration);
+		} catch (InvalidShoeException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Reads the opened configuration file to read the table parameters.
@@ -198,7 +196,7 @@ public class Main {
 		numHands = configFileReader.nextInt();
 		
 		blackjackTable = new BlackjackTable(numHands, shoe, rules);
-	}//end method setUpTable
+	}
 	
 	/**
 	 * Creates the blackjack dealer.
@@ -249,7 +247,9 @@ public class Main {
 			
 			try {
 				blackjackTable.addPlayer(player, seat);
-			} catch (TableOperationException e) {
+			} catch (TableSeatTakenException e) {
+				e.printStackTrace();
+			} catch (TableSeatNumberInvalidException e) {
 				e.printStackTrace();
 			}
 		}
