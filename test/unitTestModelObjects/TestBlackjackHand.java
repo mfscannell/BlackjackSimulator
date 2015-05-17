@@ -446,5 +446,56 @@ public class TestBlackjackHand {
 		
 		assertFalse(hand.isBlackjack());
 	}
+	
+	@Test
+	public void testHasExactlyTwoCards() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		
+		assertTrue(hand.hasExactlyTwoCards());
+	}
+	
+	@Test
+	public void testHasExactlyTwoCardsFails() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+		BlackjackCard thirdCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		hand.addCard(thirdCard);
+		
+		assertFalse(hand.hasExactlyTwoCards());
+	}
+	
+	@Test
+	public void testIsHand() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		
+		assertTrue(hand.isHand(CardRank.EIGHT, CardRank.THREE));
+		assertTrue(hand.isHand(CardRank.THREE, CardRank.EIGHT));
+	}
+	
+	@Test
+	public void testIsHandFalse() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		
+		assertFalse(hand.isHand(CardRank.EIGHT, CardRank.FIVE));
+	}
 
 }

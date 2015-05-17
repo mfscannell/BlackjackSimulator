@@ -159,11 +159,7 @@ public class BlackjackHand {
 		return pairAces;
 	}
 	
-	/**
-	 * Checks if the hand has exactly two cards in it.
-	 * @return  True if the hand consists exactly two cards.
-	 */
-	public boolean isTwoCards() {
+	public boolean hasExactlyTwoCards() {
 		boolean twoCards = false;
 		
 		if (cards.size() == 2) {
