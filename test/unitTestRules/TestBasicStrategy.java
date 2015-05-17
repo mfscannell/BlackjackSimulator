@@ -1,4 +1,4 @@
-package unitTestModelObjects;
+package unitTestRules;
 
 import static org.junit.Assert.*;
 import modelObjects.BlackjackCard;
@@ -18,11 +18,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testChart() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		int numDecks = 6;
@@ -48,11 +48,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testChartDAS() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(true);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(true);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		int numDecks = 6;
@@ -78,11 +78,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testChartSoft17() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(true);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		int numDecks = 6;
@@ -108,11 +108,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testChart2Deck() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		int numDecks = 2;
@@ -138,11 +138,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testChart1Deck() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		int numDecks = 1;
@@ -168,11 +168,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testPairAcesCantResplit() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		try {
@@ -199,11 +199,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testPairAcesCantResplit2() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(true);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		try {
@@ -230,11 +230,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testSplitAceMustStand() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(2);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(2);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		try {
@@ -261,11 +261,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testPairMaxResplitReached() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		try {
@@ -292,11 +292,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testCantDAS() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(true);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		try {
@@ -323,11 +323,11 @@ public class TestBasicStrategy {
 	@Test
 	public void testMultiCantDouble() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(true);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(true);
+		rulesBuilder.setDoubleAfterSplitAllowed(true);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		try {

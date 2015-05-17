@@ -48,7 +48,7 @@ public class BasicStrategy {
 				switch (i) {//switch on the value of the paired card
 				case 2:		if (4 <= j && j <= 7) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
-							} else if ((j == 2 || j == 3) && (rules.canDoubleAfterSplit())){
+							} else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
 								pairChart[i][j] = BlackjackMove.SPLIT;
 							} else if (j == 3 && numDecks == 1) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
@@ -58,13 +58,13 @@ public class BasicStrategy {
 							break;
 				case 3:		if (4 <= j && j <= 7) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
-							} else if ((j == 2 || j == 3) && (rules.canDoubleAfterSplit())){
+							} else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
 								pairChart[i][j] = BlackjackMove.SPLIT;
 							} else {
 								pairChart[i][j] = BlackjackMove.HIT;
 							}
 							break;
-				case 4:		if ((rules.canDoubleAfterSplit() || numDecks == 1) && (5 <= j && j <= 6)) {
+				case 4:		if ((rules.isDoubleAfterSplitAllowed() || numDecks == 1) && (5 <= j && j <= 6)) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
 							} else {
 								pairChart[i][j] = BlackjackMove.HIT;
@@ -78,7 +78,7 @@ public class BasicStrategy {
 							break;
 				case 6:		if (3 <= j && j <= 6) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
-							} else if (j == 2 && (rules.canDoubleAfterSplit() || numDecks <= 2)) {
+							} else if (j == 2 && (rules.isDoubleAfterSplitAllowed() || numDecks <= 2)) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
 							} else {
 								pairChart[i][j] = BlackjackMove.HIT;
@@ -154,7 +154,7 @@ public class BasicStrategy {
 								totalChart[i][j] = BlackjackMove.HIT;
 							}
 							break;
-				case 11:	if (rules.canDealerHitSoft17() || numDecks <= 2) {
+				case 11:	if (rules.mustDealerHitSoft17() || numDecks <= 2) {
 								totalChart[i][j] = BlackjackMove.DOUBLE;
 							} else if (j != 1) {
 								totalChart[i][j] = BlackjackMove.DOUBLE;
@@ -262,7 +262,7 @@ public class BasicStrategy {
 								softChart[i][j] = BlackjackMove.HIT;
 							}
 							break;	
-				case 8:		if ((rules.canDealerHitSoft17() || numDecks == 1) && j == 6) {
+				case 8:		if ((rules.mustDealerHitSoft17() || numDecks == 1) && j == 6) {
 								softChart[i][j] = BlackjackMove.DOUBLE;
 							} else {
 								softChart[i][j] = BlackjackMove.STAND;
@@ -331,20 +331,20 @@ public class BasicStrategy {
 			move = BlackjackMove.HIT;
 		}
 		
-		if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHands()) {
+		if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHandsAfterSplits()) {
 			move = totalChart[handTotal][dealerCardValue];
 		}
 		
 		if (move == BlackjackMove.DOUBLE && 
 			hand.getNumCards() == 2 && 
 			hand.wasFromSplit() && 
-			!rules.canDoubleAfterSplit()) {
+			!rules.isDoubleAfterSplitAllowed()) {
 			move = BlackjackMove.HIT;
 		}
 		
 		if (hand.isPairAces() && 
 			hand.wasFromSplit() && 
-			(!rules.canResplitAces() || numHands >= rules.getMaxHands())) {
+			(!rules.isResplitAcesAllowed() || numHands >= rules.getMaxHandsAfterSplits())) {
 			move = BlackjackMove.STAND;
 		}
 		

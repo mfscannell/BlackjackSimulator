@@ -96,7 +96,7 @@ public class KISSIStrategy extends CompositionStrategy {
 		
 		if (move == BlackjackMove.DOUBLE && 
 			hand.wasFromSplit() && 
-			!rules.canDoubleAfterSplit()) {
+			!rules.isDoubleAfterSplitAllowed()) {
 			move = BlackjackMove.HIT;
 		}
 		

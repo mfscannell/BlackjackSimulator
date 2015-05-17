@@ -56,8 +56,8 @@ public class Main {
 		System.out.println("WELCOME TO BLACKJACK SIMULATOR");
 		try {
 			openFile();
-			setUpShoe();
 			setUpRules();
+			setUpShoe();
 			setUpTable();
 			setUpDealer();
 			setUpPlayers();
@@ -88,37 +88,6 @@ public class Main {
 			}
 		} while (invalidFile);
 	}//end method acquireParameters
-	
-	/**
-	 * Reads the opened configuration file to read the shoe parameters.
-	 * @throws Exception
-	 */
-	private static void setUpShoe() throws InvalidConfigFileException {
-		String heading;
-		
-		heading = configFileReader.next();
-		if (!heading.equals(ConfigFileHeading.SHOE_CONFIG_HEADING)) {
-			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.SHOE_CONFIG_HEADING);
-		}
-		
-		heading = configFileReader.next();
-		if (!heading.equals(ConfigFileHeading.NUM_DECKS)) {
-			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.NUM_DECKS);
-		}
-		numDecks = configFileReader.nextInt();
-		
-		heading = configFileReader.next();
-		if (!heading.equals(ConfigFileHeading.DECK_PENETRATION_IN_PERCENT)) {
-			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.DECK_PENETRATION_IN_PERCENT);
-		}
-		deckPenetration = configFileReader.nextInt();
-		
-		try {
-			shoe = new Shoe(numDecks, deckPenetration);
-		} catch (InvalidShoeException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	/**
 	 * Reads the opened configuration file to read the shoe parameters.
@@ -169,13 +138,44 @@ public class Main {
 		resplitAces = Boolean.parseBoolean(heading);
 		
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setMaxHands(maxHands);
-		rulesBuilder.setBlackjackPayout(blackjackPayout);
-		rulesBuilder.setDoubleAfterSplit(doubleAfterSplit);
+		rulesBuilder.setMaxHandsAfterSplits(maxHands);
+		rulesBuilder.setBlackjackPayoutMultiple(blackjackPayout);
+		rulesBuilder.setDoubleAfterSplitAllowed(doubleAfterSplit);
 		rulesBuilder.setDealerHitsSoft17(dealerHitsSoft17);
-		rulesBuilder.setResplitAces(resplitAces);
+		rulesBuilder.setCanResplitAces(resplitAces);
 		rules = rulesBuilder.build();
 	}//end method setUpRules
+	
+	/**
+	 * Reads the opened configuration file to read the shoe parameters.
+	 * @throws Exception
+	 */
+	private static void setUpShoe() throws InvalidConfigFileException {
+		String heading;
+		
+		heading = configFileReader.next();
+		if (!heading.equals(ConfigFileHeading.SHOE_CONFIG_HEADING)) {
+			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.SHOE_CONFIG_HEADING);
+		}
+		
+		heading = configFileReader.next();
+		if (!heading.equals(ConfigFileHeading.NUM_DECKS)) {
+			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.NUM_DECKS);
+		}
+		numDecks = configFileReader.nextInt();
+		
+		heading = configFileReader.next();
+		if (!heading.equals(ConfigFileHeading.DECK_PENETRATION_IN_PERCENT)) {
+			throw new InvalidConfigFileException("Expected " + ConfigFileHeading.DECK_PENETRATION_IN_PERCENT);
+		}
+		deckPenetration = configFileReader.nextInt();
+		
+		try {
+			shoe = new Shoe(numDecks, deckPenetration);
+		} catch (InvalidShoeException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Reads the opened configuration file to read the table parameters.

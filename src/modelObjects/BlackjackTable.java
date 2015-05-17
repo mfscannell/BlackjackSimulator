@@ -430,7 +430,7 @@ public class BlackjackTable {
 				}
 				
 				final double betAmount = players.get(i).getBetAmount();
-				final double insuranceWinnings = BlackjackRules.INSURANCE_PAYOUT * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
+				final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
 				final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
 					
 				//adjust the players cash total based upon the insurance bet.
@@ -459,7 +459,7 @@ public class BlackjackTable {
 				final double losings = playerBet * -1.0;
 				final double doubleWinnings = 2.0 * playerBet;
 				final double doubleLosings = -2.0 * playerBet;
-				final double blackjackWinnings = rules.getBlackjackPayout() * playerBet;
+				final double blackjackWinnings = rules.getBlackjackPayoutMultiple() * playerBet;
 				
 				if (playersHands.get(i).get(0).isBlackjack()) {
 					System.out.println("" + i + " Player Blackjack");

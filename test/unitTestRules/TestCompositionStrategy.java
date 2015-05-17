@@ -1,4 +1,4 @@
-package unitTestModelObjects;
+package unitTestRules;
 
 import static org.junit.Assert.*;
 import modelObjects.BlackjackCard;
@@ -18,11 +18,11 @@ public class TestCompositionStrategy {
 	@Test
 	public void test102vs4() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BlackjackHand hand = new BlackjackHand();
@@ -47,11 +47,11 @@ public class TestCompositionStrategy {
 	@Test
 	public void test84vs4() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BlackjackHand hand = new BlackjackHand();
@@ -76,11 +76,11 @@ public class TestCompositionStrategy {
 	@Test
 	public void test16vs10with4() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BlackjackHand hand = new BlackjackHand();
@@ -107,11 +107,11 @@ public class TestCompositionStrategy {
 	@Test
 	public void test16vs10with5() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BlackjackHand hand = new BlackjackHand();
@@ -138,11 +138,11 @@ public class TestCompositionStrategy {
 	@Test
 	public void test16vsnon10with5() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplit(false);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BlackjackHand hand = new BlackjackHand();

@@ -1,4 +1,4 @@
-package unitTestModelObjects;
+package unitTestRules;
 
 import static org.junit.Assert.*;
 import modelObjects.BlackjackCard;
@@ -19,11 +19,11 @@ public class TestKISSIStrategy {
 	@Test
 	public void testMultiCantDouble() {
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayout(1.5);
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(true);
-		rulesBuilder.setDoubleAfterSplit(true);
-		rulesBuilder.setMaxHands(4);
-		rulesBuilder.setResplitAces(false);
+		rulesBuilder.setDoubleAfterSplitAllowed(true);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		try {
