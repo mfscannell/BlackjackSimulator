@@ -12,10 +12,6 @@ public class DiscardTray {
 		discardTray = new ArrayList<PlayingCard>();
 	}
 	
-	/**
-	 * Adds the card to the discard tray.
-	 * @param card  The card being added to the discard tray.
-	 */
 	public void addCard(final PlayingCard card) {
 		discardTray.add(card);
 	}
@@ -30,10 +26,6 @@ public class DiscardTray {
 		return card;
 	}
 	
-	/**
-	 * Get the number of cards in the discard tray.
-	 * @return  The number of cards in the discard tray.
-	 */
 	public int getNumCards() {
 		return discardTray.size();
 	}

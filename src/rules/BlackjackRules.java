@@ -59,9 +59,9 @@ public class BlackjackRules {
 	public BlackjackMove getDealersMove(final BlackjackHand dealersHand) {
 		BlackjackMove dealersMove = BlackjackMove.STAND;
 		
-		if (dealersHand.getTotal() == 17 && dealersHand.isSoft() && dealerHitsSoft17) {
+		if (dealersHand.getBlackjackTotal() == 17 && dealersHand.isSoft() && dealerHitsSoft17) {
 			dealersMove = BlackjackMove.HIT;
-		} else if (dealersHand.getTotal() < DEALER_MIN_HARD_COUNT) {
+		} else if (dealersHand.getBlackjackTotal() < DEALER_MIN_HARD_COUNT) {
 			dealersMove = BlackjackMove.HIT;
 		}
 		

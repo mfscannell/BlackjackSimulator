@@ -30,10 +30,6 @@ public class BlackjackPlayer extends Gambler {
 		return insurance;
 	}
 	
-	/**
-	 * Sets whether the blackjack player is counting cards.
-	 * @param countsCards  True if the player counts cards.
-	 */
 	public void setCountsCards(boolean countsCards) {
 		this.countsCards = countsCards;
 	}
