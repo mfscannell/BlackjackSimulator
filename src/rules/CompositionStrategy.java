@@ -8,6 +8,7 @@ import enumerations.CardRank;
 import exceptions.InvalidNumDecksException;
 
 public class CompositionStrategy extends BasicStrategy {
+	private BlackjackRules rules;
 
 	/**
 	 * Constructor
@@ -18,20 +19,19 @@ public class CompositionStrategy extends BasicStrategy {
 	 */
 	public CompositionStrategy(BlackjackRules rules, int numDecks) throws InvalidNumDecksException {
 		super(rules, numDecks);
+		this.rules = rules;
 	}
 	
 	/**
 	 * Refer to the basic strategy chart to select a move based upon the table conditions.
 	 * @param dealerUpCard  The dealer's exposed card.
 	 * @param hand  The player's hand.
-	 * @param rules  The specific rules at the table.
 	 * @param numHands  The number of hands the player has based upon the number of splits 
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
 	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
 								   final BlackjackHand hand,
-								   final BlackjackRules rules,
 								   int numHands) {
 		BlackjackMove move = BlackjackMove.HIT;
 		
@@ -45,7 +45,7 @@ public class CompositionStrategy extends BasicStrategy {
 					dealerUpCard.getValue() == 4) {
 			move = BlackjackMove.HIT;
 		} else {
-			move = super.getAction(dealerUpCard, hand, rules, numHands);
+			move = super.getAction(dealerUpCard, hand, numHands);
 		}
 		
 		return move;

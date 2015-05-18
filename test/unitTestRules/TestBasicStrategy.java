@@ -188,7 +188,7 @@ public class TestBasicStrategy {
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, rules, 2);
+			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
 			
 			assertTrue(move == BlackjackMove.STAND);
 		} catch (InvalidNumDecksException e) {
@@ -219,7 +219,7 @@ public class TestBasicStrategy {
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, rules, 4);
+			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 4);
 			
 			assertTrue(move == BlackjackMove.STAND);
 		} catch (InvalidNumDecksException e) {
@@ -250,7 +250,7 @@ public class TestBasicStrategy {
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, rules, 2);
+			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
 			
 			assertTrue(move == BlackjackMove.STAND);
 		} catch (InvalidNumDecksException e) {
@@ -281,7 +281,7 @@ public class TestBasicStrategy {
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
 			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, rules, 4);
+			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 4);
 			
 			assertTrue(move == BlackjackMove.HIT);
 		} catch (InvalidNumDecksException e) {
@@ -312,7 +312,7 @@ public class TestBasicStrategy {
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, rules, 2);
+			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
 			
 			assertTrue(move == BlackjackMove.HIT);
 		} catch (InvalidNumDecksException e) {
@@ -345,7 +345,7 @@ public class TestBasicStrategy {
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, rules, 2);
+			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
 			
 			assertTrue(move == BlackjackMove.HIT);
 		} catch (InvalidNumDecksException e) {

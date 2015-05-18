@@ -286,9 +286,9 @@ public class BlackjackTable {
 			final int numHands = playersHands.get(seat).size();
 			
 			if (players.get(seat).doesCountsCards()) {
-				move = kissIStrategy.getAction(dealerUpCard, playerHand, rules, numHands);
+				move = kissIStrategy.getAction(dealerUpCard, playerHand, numHands);
 			} else {
-				move = compositionStrategy.getAction(dealerUpCard, playerHand, rules, numHands);
+				move = compositionStrategy.getAction(dealerUpCard, playerHand, numHands);
 			}
 			
 			if (playerHand.getNumCards() < 2) {
