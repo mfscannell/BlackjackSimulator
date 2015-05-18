@@ -18,10 +18,7 @@ public class BlackjackHand {
 	public BlackjackHand() {
 		containsAce = false;
 		total = 0;
-		cards = new ArrayList<PlayingCard>();	/**
-		 * Checks if the hand contains at least one ace.
-		 * @return   True if at least one of the cards is an ace.
-		 */
+		cards = new ArrayList<PlayingCard>();
 		fromSplit = false;
 		doubleDown = false;
 	}
