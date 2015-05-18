@@ -15,6 +15,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	public static final int[] WALK_AWAY = {14, 14, 14, 12, 10, 8, 6, 4, 2};
 	private int initialCount;
 	private int count;
+	private BlackjackRules rules;
 	public static int KISS_COUNT = 20;
 
 	/**
@@ -26,6 +27,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	 */
 	public KISSIStrategy(BlackjackRules rules, int numDecks) throws InvalidNumDecksException {
 		super(rules, numDecks);
+		this.rules = rules;
 		
 		initialCount = INITIAL_COUNTS[numDecks];
 		count = initialCount;
@@ -59,14 +61,12 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * Refer to the KISS I strategy chart to select a move based upon the table conditions.
 	 * @param dealerUpCard  The dealer's exposed card.
 	 * @param hand  The player's hand.
-	 * @param rules  The specific rules at the table.
 	 * @param numHands  The number of hands the player has based upon the number of splits 
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
 	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
 								   final BlackjackHand hand,
-								   final BlackjackRules rules,
 								   int numHands) {
 		BlackjackMove move = BlackjackMove.STAND;
 		
@@ -84,10 +84,10 @@ public class KISSIStrategy extends CompositionStrategy {
 			} else if (hand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 6) {
 				move = BlackjackMove.DOUBLE;
 			} else {
-				move = super.getAction(dealerUpCard, hand, rules, numHands);
+				move = super.getAction(dealerUpCard, hand, numHands);
 			}
 		} else {
-			move = super.getAction(dealerUpCard, hand, rules, numHands);
+			move = super.getAction(dealerUpCard, hand, numHands);
 		}
 		
 		if (move == BlackjackMove.DOUBLE && 

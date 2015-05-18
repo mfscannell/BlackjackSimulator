@@ -3,6 +3,7 @@ package unitTestRules;
 import static org.junit.Assert.*;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
+import modelObjects.PlayingCard;
 
 import org.junit.Test;
 
@@ -359,8 +360,159 @@ public class TestKISSIStrategy {
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.DIAMONDS);
 			
-			BlackjackMove move = kissIStrategy.getAction(dealerUpCard, hand, rules, 2);
+			BlackjackMove move = kissIStrategy.getAction(dealerUpCard, hand, 2);
 			
+			assertTrue(move == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetAction9vs2() {
+		beforeEach(2);
+		PlayingCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
+		
+		PlayingCard playersFirstCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		PlayingCard playersSecondCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand();
+		hand.addCard(playersFirstCard);
+		hand.addCard(playersSecondCard);
+		
+		try {
+			KISSIStrategy strategy = new KISSIStrategy(rules, 2);
+			
+			strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
+			
+			BlackjackMove move = strategy.getAction(dealerUpCard, hand, 1);
+			assertTrue(move == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetAction11vsA() {
+		beforeEach(2);
+		PlayingCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		
+		PlayingCard playersFirstCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		PlayingCard playersSecondCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand();
+		hand.addCard(playersFirstCard);
+		hand.addCard(playersSecondCard);
+		
+		try {
+			KISSIStrategy strategy = new KISSIStrategy(rules, 2);
+			
+			strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
+			BlackjackMove move = strategy.getAction(dealerUpCard, hand, 1);
+			assertTrue(move == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetAction16vs10() {
+		beforeEach(2);
+		PlayingCard dealerUpCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
+		
+		PlayingCard playersFirstCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		PlayingCard playersSecondCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand();
+		hand.addCard(playersFirstCard);
+		hand.addCard(playersSecondCard);
+		
+		try {
+			KISSIStrategy strategy = new KISSIStrategy(rules, 2);
+			
+			strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
+			BlackjackMove move = strategy.getAction(dealerUpCard, hand, 1);
+			assertTrue(move == BlackjackMove.STAND);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetActionA7vs2() {
+		beforeEach(2);
+		PlayingCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
+		
+		PlayingCard playersFirstCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		PlayingCard playersSecondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand();
+		hand.addCard(playersFirstCard);
+		hand.addCard(playersSecondCard);
+		
+		try {
+			KISSIStrategy strategy = new KISSIStrategy(rules, 2);
+			
+			strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
+			BlackjackMove move = strategy.getAction(dealerUpCard, hand, 1);
+			assertTrue(move == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetActionA8vs5() {
+		beforeEach(2);
+		PlayingCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+		
+		PlayingCard playersFirstCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		PlayingCard playersSecondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand();
+		hand.addCard(playersFirstCard);
+		hand.addCard(playersSecondCard);
+		
+		try {
+			KISSIStrategy strategy = new KISSIStrategy(rules, 2);
+			
+			strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
+			BlackjackMove move = strategy.getAction(dealerUpCard, hand, 1);
+			assertTrue(move == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetActionA8vs6() {
+		beforeEach(2);
+		PlayingCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+		
+		PlayingCard playersFirstCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		PlayingCard playersSecondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand();
+		hand.addCard(playersFirstCard);
+		hand.addCard(playersSecondCard);
+		
+		try {
+			KISSIStrategy strategy = new KISSIStrategy(rules, 2);
+			
+			strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
+			strategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
+			BlackjackMove move = strategy.getAction(dealerUpCard, hand, 1);
 			assertTrue(move == BlackjackMove.DOUBLE);
 		} catch (InvalidNumDecksException e) {
 			e.printStackTrace();

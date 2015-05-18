@@ -14,6 +14,7 @@ public class BasicStrategy {
 	private BlackjackMove[][] pairChart;
 	private BlackjackMove[][] totalChart;
 	private BlackjackMove[][] softChart;
+	private BlackjackRules rules;
 	
 	/**
 	 * Constructor
@@ -32,6 +33,8 @@ public class BasicStrategy {
 			updatePairChart(rules, numDecks);
 			updateTotalChart(rules, numDecks);
 			updateSoftChart(rules, numDecks);
+			
+			this.rules = rules;
 		} else {
 			throw new InvalidNumDecksException("" + numDecks + " is invalid number of decks");
 		}
@@ -283,14 +286,12 @@ public class BasicStrategy {
 	 * Refer to the basic strategy chart to select a moinsuranceve based upon the table conditions.
 	 * @param dealerUpCard  The dealer's exposed card.
 	 * @param hand  The player's hand.
-	 * @param rules  The specific rules at the table.
 	 * @param numHands  The number of hands the player has based upon the number of splits 
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
 	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
 								   final BlackjackHand hand,
-								   final BlackjackRules rules,
 								   int numHands) {
 		BlackjackMove move;
 		int handTotal = hand.getTotal();
