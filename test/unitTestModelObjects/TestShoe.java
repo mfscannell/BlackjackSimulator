@@ -10,6 +10,45 @@ import org.junit.Test;
 import exceptions.InvalidShoeException;
 
 public class TestShoe {
+	@Test
+	public void testValidNumDecks() {
+		Shoe shoe;
+		try {
+			shoe = new Shoe(3, 50);
+		} catch (InvalidShoeException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected=InvalidShoeException.class)
+	public void testInvalidNumDecksTooLow() throws InvalidShoeException {
+		Shoe shoe = new Shoe(0, 50);
+	}
+	
+	@Test(expected=InvalidShoeException.class)
+	public void testInvalidNumDecksTooHigh() throws InvalidShoeException {
+		Shoe shoe = new Shoe(9, 50);
+	}
+	
+	@Test
+	public void testValidPenetration() {
+		Shoe shoe;
+		try {
+			shoe = new Shoe(6, 2);
+		} catch (InvalidShoeException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected=InvalidShoeException.class)
+	public void testInvalidPenetrationTooLow() throws InvalidShoeException {
+		Shoe shoe = new Shoe(6, 0);
+	}
+	
+	@Test(expected=InvalidShoeException.class)
+	public void testInvalidPenetrationTooHigh() throws InvalidShoeException {
+		Shoe shoe = new Shoe(6, 100);
+	}
 
 	@Test
 	public void testWasCutCardMetBound() {
