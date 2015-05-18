@@ -18,7 +18,10 @@ public class BlackjackHand {
 	public BlackjackHand() {
 		containsAce = false;
 		total = 0;
-		cards = new ArrayList<PlayingCard>();
+		cards = new ArrayList<PlayingCard>();	/**
+		 * Checks if the hand contains at least one ace.
+		 * @return   True if at least one of the cards is an ace.
+		 */
 		fromSplit = false;
 		doubleDown = false;
 	}
@@ -42,10 +45,6 @@ public class BlackjackHand {
 		doubleDown = false;
 	}
 	
-	/**
-	 * Adds the specified card to the hand.
-	 * @param card The card to be added to the hand.
-	 */
 	public void addCard(final PlayingCard card) {
 		total = total + card.getValue();
 		
@@ -77,10 +76,6 @@ public class BlackjackHand {
 		return card;
 	}
 	
-	/**
-	 * Gets the number of cards used to make up the hand.
-	 * @return  The number of cards used to make up  the hand.
-	 */
 	public int getNumCards() {
 		return cards.size();
 	}
@@ -89,7 +84,7 @@ public class BlackjackHand {
 	 * Gets the total value of the hand.
 	 * @return The total value of the hand.
 	 */
-	public int getTotal() {
+	public int getBlackjackTotal() {
 		int total = this.total;
 		
 		if (total <= 11 && containsAce) {
@@ -99,26 +94,16 @@ public class BlackjackHand {
 		return total;
 	}
 	
-	/**
-	 * Checks if the hand is blackjack.  Blackjack is when a hand consists of only two
-	 * cards, the hand total is exactly 21, and the hand has not been split.
-	 * @return  True if the hand is blackjack.
-	 */
 	public boolean isBlackjack() {
 		boolean blackjack = false;
 		
-		if (getNumCards() == 2 && getTotal() == 21 && !wasFromSplit()) {
+		if (getNumCards() == 2 && getBlackjackTotal() == 21 && !wasFromSplit()) {
 			blackjack = true;
 		}
 		
 		return blackjack;
 	}
 	
-	/**
-	 * Checks if the hand is a bust, where it is a bust if the hand total is greater
-	 * than 21.
-	 * @return True if the hand is a bust.
-	 */
 	public boolean isBust() {
 		boolean bust = false;
 		
@@ -287,20 +272,11 @@ public class BlackjackHand {
 		return cards.get(1);
 	}
 	
-	/**
-	 * Checks if the hand contains at least one ace.
-	 * @return   True if at least one of the cards is an ace.
-	 */
 	public boolean hasAce() {
 		return containsAce;
 	}
 	
-	/**
-	 * Checks if the hand has a card of the specified rank.
-	 * @param rank  The specific rank (Ace, 2, 3, ..., 10, J, Q, K)
-	 * @return  True if the hand has the specified rank.
-	 */
-	public boolean hasCard(CardRank rank) {
+	public boolean hasCardOfRank(CardRank rank) {
 		boolean hasRank = false;
 		
 		for (int i = 0; i < cards.size(); i++) {

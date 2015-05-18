@@ -35,11 +35,11 @@ public class CompositionStrategy extends BasicStrategy {
 								   int numHands) {
 		BlackjackMove move = BlackjackMove.HIT;
 		
-		if (hand.getTotal() == 16 && 
-			(hand.hasCard(CardRank.FOUR) || hand.hasCard(CardRank.FIVE)) &&
+		if (hand.getBlackjackTotal() == 16 && 
+			(hand.hasCardOfRank(CardRank.FOUR) || hand.hasCardOfRank(CardRank.FIVE)) &&
 			dealerUpCard.getValue() == 10) {
 			move = BlackjackMove.STAND;
-		} else if (hand.getTotal() == 12 && 
+		} else if (hand.getBlackjackTotal() == 12 && 
 				   ((hand.getFirstCardValue() == 10 && hand.getSecondCardValue() == 2) || 
 					(hand.getFirstCardValue() == 2 && hand.getSecondCardValue() == 10)) && 
 					dealerUpCard.getValue() == 4) {

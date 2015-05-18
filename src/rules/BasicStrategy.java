@@ -294,13 +294,13 @@ public class BasicStrategy {
 								   final BlackjackHand hand,
 								   int numHands) {
 		BlackjackMove move;
-		int handTotal = hand.getTotal();
+		int handTotal = hand.getBlackjackTotal();
 		int dealerCardValue = dealerUpCard.getValue();
 		
 		//acquire the recommended move
 		if (hand.isMultiCard()) {
 			if (hand.isSoft()) {
-				if (hand.getTotal() <= 17) {
+				if (hand.getBlackjackTotal() <= 17) {
 					move = BlackjackMove.HIT;
 				} else {
 					move = BlackjackMove.STAND;

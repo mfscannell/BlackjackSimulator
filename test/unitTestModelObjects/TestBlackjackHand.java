@@ -58,7 +58,7 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		assertTrue(hand.getTotal() == 9);
+		assertTrue(hand.getBlackjackTotal() == 9);
 	}
 	
 	@Test
@@ -72,7 +72,7 @@ public class TestBlackjackHand {
 		hand.addCard(secondCard);
 		hand.addCard(thirdCard);
 		
-		assertTrue(hand.getTotal() == 23);
+		assertTrue(hand.getBlackjackTotal() == 23);
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		assertTrue(hand.getTotal() == 15);
+		assertTrue(hand.getBlackjackTotal() == 15);
 	}
 	
 	@Test
@@ -96,7 +96,7 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		assertTrue(hand.getTotal() == 12);
+		assertTrue(hand.getBlackjackTotal() == 12);
 	}
 	
 	@Test
@@ -110,7 +110,7 @@ public class TestBlackjackHand {
 		hand.addCard(secondCard);
 		hand.addCard(thirdCard);
 		
-		assertTrue(hand.getTotal() == 16);
+		assertTrue(hand.getBlackjackTotal() == 16);
 	}
 	
 	@Test
@@ -126,7 +126,7 @@ public class TestBlackjackHand {
 		hand.addCard(thirdCard);
 		hand.addCard(fourthCard);
 		
-		assertTrue(hand.getTotal() == 25);
+		assertTrue(hand.getBlackjackTotal() == 25);
 	}
 	
 	@Test
@@ -396,7 +396,7 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		assertTrue(hand.hasCard(CardRank.NINE));
+		assertTrue(hand.hasCardOfRank(CardRank.NINE));
 	}
 	
 	@Test
@@ -408,7 +408,7 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		assertFalse(hand.hasCard(CardRank.SEVEN));
+		assertFalse(hand.hasCardOfRank(CardRank.SEVEN));
 	}
 	
 	@Test

@@ -119,7 +119,7 @@ public class BlackjackTable {
 	 * Play one round of blackjack.
 	 */
 	public void playRound() {
-		if (shoe.wasCutCardMet() || kissIStrategy.walkAway(shoe.getNumDecks())) {
+		if (doesShoeNeedRefill()) {
 			System.out.println("***CUT CARD MET***");
 			refillShoe();
 		}
@@ -150,9 +150,17 @@ public class BlackjackTable {
 		collectAllCards();
 	}
 	
-	/**
-	 * Refills the shoe with all the cards from the discard tray.
-	 */
+	private boolean doesShoeNeedRefill() {
+		boolean shoeNeedsRefill = false;
+		int numDecksInShoe = shoe.getNumDecks();
+		
+		if (shoe.wasCutCardMet() || kissIStrategy.walkAway(numDecksInShoe)) {
+			shoeNeedsRefill = true;
+		}
+		
+		return shoeNeedsRefill;
+	}
+	
 	private void refillShoe() {
 		while (discardTray.getNumCards() > 0) {
 			PlayingCard card = discardTray.removeCard();
@@ -408,7 +416,7 @@ public class BlackjackTable {
 					final double handLosings = betAmount * -1.0;
 				
 					//adjust the players cash total if the dealer has blackjack and the player doesn't
-					if (playersHands.get(i).get(0).getTotal() != 21) {
+					if (playersHands.get(i).get(0).getBlackjackTotal() != 21) {
 						players.get(i).adjustCashTotal(handLosings);
 					}
 				}
@@ -467,7 +475,7 @@ public class BlackjackTable {
 						
 						if (hand.wasDoubleDown() && 
 							!hand.isBust() && 
-							hand.getTotal() > dealerHand.getTotal()) {
+							hand.getBlackjackTotal() > dealerHand.getBlackjackTotal()) {
 							players.get(i).adjustCashTotal(doubleWinnings);
 							//System.out.println("Double win 1");
 						} else if (hand.wasDoubleDown() && 
@@ -480,20 +488,20 @@ public class BlackjackTable {
 							players.get(i).adjustCashTotal(doubleLosings);
 							//System.out.println("Double lose 1");
 						} else if (hand.wasDoubleDown() && 
-								   hand.getTotal() < dealerHand.getTotal() && 
+								   hand.getBlackjackTotal() < dealerHand.getBlackjackTotal() && 
 								   !dealerHand.isBust()) {
 							players.get(i).adjustCashTotal(doubleLosings);
 							//System.out.println("Double lose 2");
 						} else if (hand.isBust()) {
 							players.get(i).adjustCashTotal(losings);
 							//System.out.println("lose bust");
-						} else if (hand.getTotal() < dealerHand.getTotal() && !dealerHand.isBust()) {
+						} else if (hand.getBlackjackTotal() < dealerHand.getBlackjackTotal() && !dealerHand.isBust()) {
 							players.get(i).adjustCashTotal(losings);
 							//System.out.println("lose 2");
 						} else if (!hand.isBust() && dealerHand.isBust()) {
 							players.get(i).adjustCashTotal(winnings);
 							//System.out.println("win 1");
-						} else if (hand.getTotal() > dealerHand.getTotal() && !hand.isBust()) {
+						} else if (hand.getBlackjackTotal() > dealerHand.getBlackjackTotal() && !hand.isBust()) {
 							players.get(i).adjustCashTotal(winnings);
 							//System.out.println("win 2");
 						}
@@ -503,27 +511,15 @@ public class BlackjackTable {
 		}
 	}//end method payoutPlayers
 	
-	/**
-	 * Collects all the remaining cards from the players.
-	 */
 	private void collectAllCards() {
-		//collect the players' cards
 		for (int i = 0; i < playersHands.size(); i++) {
-			collectPlayerCards(i);
-			
-			//collect the dealer's cards
-			while (dealerHand.getNumCards() > 0) {
-				PlayingCard card = dealerHand.removeCard();
-				discardTray.addCard(card);
-			}
+			collectPlayerCardsAtSeat(i);
 		}
-	}//end method collectAllCards
+		
+		collectDealerCards();
+	}
 	
-	/**
-	 * Collect all the cards from the player at the specified seat.
-	 * @param seat  The seat of the player to collect the cards from.
-	 */
-	private void collectPlayerCards(final int seat) {
+	private void collectPlayerCardsAtSeat(final int seat) {
 		while (playersHands.get(seat) != null && playersHands.get(seat).size() > 0) {
 			BlackjackHand hand = playersHands.get(seat).remove(playersHands.get(seat).size() - 1);
 			
@@ -531,6 +527,13 @@ public class BlackjackTable {
 				PlayingCard card = hand.removeCard();
 				discardTray.addCard(card);
 			}
+		}
+	}
+	
+	private void collectDealerCards() {
+		while (dealerHand.getNumCards() > 0) {
+			PlayingCard card = dealerHand.removeCard();
+			discardTray.addCard(card);
 		}
 	}
 	

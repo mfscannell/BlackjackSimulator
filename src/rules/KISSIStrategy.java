@@ -71,11 +71,11 @@ public class KISSIStrategy extends CompositionStrategy {
 		BlackjackMove move = BlackjackMove.STAND;
 		
 		if (count >= KISS_COUNT) {
-			if (hand.getTotal() == 9 && !hand.isSoft() && dealerUpCard.getValue() == 2) {
+			if (hand.getBlackjackTotal() == 9 && !hand.isSoft() && dealerUpCard.getValue() == 2) {
 				move = BlackjackMove.DOUBLE;
-			} else if (hand.getTotal() == 11 && dealerUpCard.isAce()) {
+			} else if (hand.getBlackjackTotal() == 11 && dealerUpCard.isAce()) {
 				move = BlackjackMove.DOUBLE;
-			} else if (hand.getTotal() == 16 && dealerUpCard.getValue() == 10) {
+			} else if (hand.getBlackjackTotal() == 16 && dealerUpCard.getValue() == 10) {
 				move = BlackjackMove.STAND;
 			} else if (hand.isHand(CardRank.ACE, CardRank.SEVEN) && dealerUpCard.getValue() == 2) {
 				move = BlackjackMove.DOUBLE;

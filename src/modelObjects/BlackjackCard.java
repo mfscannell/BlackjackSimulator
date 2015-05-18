@@ -17,21 +17,10 @@ public class BlackjackCard extends PlayingCard {
 		value = BlackjackRules.getCardValue(rank);
 	}
 	
-	/**
-	 * Get the value of the card.  
-	 * Aces have value 1.
-	 * 2s through 10s have their rank as their value.
-	 * Face cards have value 10.
-	 * @return The value of the card.
-	 */
 	public int getValue() {
 		return value;
 	}
 	
-	/**
-	 * Checks if the card is a ten value.
-	 * @return  True if the card is ten, Jack, Queen, or King; otherwise false.
-	 */
 	public boolean isTenValue() {
 		boolean tenValue = false;
 		
