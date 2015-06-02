@@ -58,34 +58,30 @@ public class BlackjackPlayer extends Gambler {
 		return countsCards;
 	}
 	
-	/**
-	 * Converts the player to a string
-	 */
 	public String toString() {
-		String string = "";
+		StringBuilder stringBuilder = new StringBuilder();
 		
 		for (int i = 0; i < hands.size(); i++) {
-			string = string.concat(hands.get(i).toString());
-			string = string.concat("\n");
+			stringBuilder.append(hands.get(i).toString());
+			stringBuilder.append("\n");
 		}
 		
-		string = string.concat("Cash:" + getCashTotal() + "\n");
-		string = string.concat("Current bet:" + getBetAmount() + "\n");
+		stringBuilder.append("Cash:" + getCashTotal() + "\n");
+		stringBuilder.append("Current bet:" + getBetAmount() + "\n");
 		
 		if (countsCards) {
-			string = string.concat(COUNTS_CARDS);
+			stringBuilder.append(COUNTS_CARDS);
 		} else {
-			string = string.concat(DOESNT_COUNTS_CARDS);
+			stringBuilder.append(DOESNT_COUNTS_CARDS);
 		}
-		string = string.concat("\n");
+		stringBuilder.append("\n");
 		
 		if (insurance) {
-			string = string.concat("Does Takes Insurance\n");
+			stringBuilder.append("Does Takes Insurance\n");
 		} else {
-			string = string.concat("Doesn't Takes Insurance\n");
+			stringBuilder.append("Doesn't Takes Insurance\n");
 		}
 		
-		return string;
-	}//end method toString
-
+		return stringBuilder.toString();
+	}
 }
