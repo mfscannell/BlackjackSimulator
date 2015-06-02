@@ -22,15 +22,13 @@ public class BlackjackDealer extends Gambler {
 		this.hand = hand;
 	}
 	
-	/**
-	 * Converts the player to a string
-	 */
 	public String toString() {
-		String string = "Dealer\n";
+		StringBuilder stringBuilder = new StringBuilder();
 		
-		string = string.concat(hand.toString());
+		stringBuilder.append("Dealer\n");
 		
-		return string;
-	}//end method toString
-
+		stringBuilder.append(hand.toString());
+		
+		return stringBuilder.toString();
+	}
 }

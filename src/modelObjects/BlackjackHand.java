@@ -347,13 +347,13 @@ public class BlackjackHand {
 	 * Converts the hand to a string.
 	 */
 	public String toString() {
-		String string = "";
+		StringBuilder stringBuilder = new StringBuilder();
 		
 		for (int i = 0; i < cards.size(); i++) {
-			string = string.concat(cards.get(i).toString());
+			stringBuilder.append(cards.get(i).toString());
 		}
 		
-		return string;
+		return stringBuilder.toString();
 	}
 
 }

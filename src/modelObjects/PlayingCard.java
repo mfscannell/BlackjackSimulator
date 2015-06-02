@@ -42,10 +42,6 @@ public abstract class PlayingCard {
 		this.suit = suit;
 	}
 	
-	/**
-	 * Checks if the card is a face card.
-	 * @return  True if the card is a Jack, Queen, or King; otherwise returns false;
-	 */
 	public boolean isFaceCard() {
 		boolean faceCard = false;
 		
@@ -56,10 +52,6 @@ public abstract class PlayingCard {
 		return faceCard;
 	}
 	
-	/**
-	 * Checks if the card is an Ace.
-	 * @return  True if the card is an Ace; otherwise false.
-	 */
 	public boolean isAce() {
 		boolean ace = false;
 		
@@ -84,28 +76,23 @@ public abstract class PlayingCard {
 		return redCard;
 	}
 	
-	/**
-	 * Converts the playing card to a string.
-	 * @return The playing card represented as a string.
-	 */
 	public String toString() {
-		return "[" + rank + " " + suit + "]";
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("[");
+		stringBuilder.append(rank);
+		stringBuilder.append(" ");
+		stringBuilder.append(suit);
+		stringBuilder.append("]");
+		
+		return stringBuilder.toString();
 	}
 	
 	public abstract int getValue();
 	
-	/**
-	 * Gets the cards rank (Ace, Two, Queen, etc.).
-	 * @return The rank of the card.
-	 */
 	public CardRank getRank() {
 		return rank;
 	}
 	
-	/**
-	 * Gets the card's suit (Hearts, Spades, Diamonds, Clubs).
-	 * @return The suit of the card.
-	 */
 	public CardSuit getSuit() {
 		return suit;
 	}
