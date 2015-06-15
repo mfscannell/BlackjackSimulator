@@ -179,11 +179,22 @@ public class BlackjackTable {
 	
 	private void setInsuranceFalseForAllPlayers() {
 		insuranceOffered = false;
+		
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i) != null) {
+			if (hasPlayerAtSeat(i)) {
 				players.get(i).setsTakesInsurance(false);
 			}
 		}
+	}
+	
+	private boolean hasPlayerAtSeat(int seat) {
+		boolean seatOccupied = false;
+		
+		if (players.get(seat) != null) {
+			seatOccupied = true;
+		}
+		
+		return seatOccupied;
 	}
 	
 	/**
@@ -191,7 +202,7 @@ public class BlackjackTable {
 	 */
 	private void setBetAmounts() {
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i) != null) {
+			if (hasPlayerAtSeat(i)) {
 				if (players.get(i).doesCountsCards()) {
 					players.get(i).setBetAmount(kissIStrategy.getBetSize(shoe.getNumDecks()));
 				} else {
@@ -207,7 +218,7 @@ public class BlackjackTable {
 	private void dealInitialCards() {
 		for (int i = 0; i < BlackjackRules.NUM_CARDS_PER_INITIAL_DEAL; i++) {
 			for (int j = 0; j < players.size(); j++) {
-				if (players.get(j) != null) {
+				if (hasPlayerAtSeat(j)) {
 					dealCardToPlayer(j);
 				}
 			}
@@ -246,7 +257,7 @@ public class BlackjackTable {
 		insuranceOffered = true;
 		
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i) != null) {
+			if (hasPlayerAtSeat(i)) {
 				offerInsuranceToPlayer(i);
 			}
 		}
@@ -273,7 +284,7 @@ public class BlackjackTable {
 	 */
 	private void playPlayersTurns() {
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i) != null) {
+			if (hasPlayerAtSeat(i)) {
 				playPlayerTurn(i);
 			}
 		}
@@ -348,7 +359,7 @@ public class BlackjackTable {
 	private void playDealersTurn() {
 		boolean dealerStands = false;
 		
-		if (dealerPlayable()) {
+		if (hasPlayerHandRemaining()) {
 			while (!dealerStands) {
 				BlackjackMove dealersMove = rules.getDealersMove(dealerHand);
 				
@@ -369,7 +380,7 @@ public class BlackjackTable {
 	 * players' cards are not blackjack and are not busted.
 	 * @return  True if any players' hands are not busts nor blackjack.
 	 */
-	private boolean dealerPlayable() {
+	private boolean hasPlayerHandRemaining() {
 		boolean playable = false;
 		
 		for (int i = 0; i < players.size(); i++) {
@@ -411,11 +422,10 @@ public class BlackjackTable {
 	private void checkDealerBlackjack() {
 		if (dealerHand.isBlackjack()) {
 			for (int i = 0; i < players.size(); i++) {
-				if (players.get(i) != null) {
+				if (hasPlayerAtSeat(i)) {
 					final double betAmount = players.get(i).getBetAmount();
 					final double handLosings = betAmount * -1.0;
 				
-					//adjust the players cash total if the dealer has blackjack and the player doesn't
 					if (playersHands.get(i).get(0).getBlackjackTotal() != 21) {
 						players.get(i).adjustCashTotal(handLosings);
 					}
@@ -430,19 +440,17 @@ public class BlackjackTable {
 	private void checkIfInsuranceOffered() {
 		if (insuranceOffered) {
 			for (int i = 0; i < players.size(); i++) {
-				if (players.get(i) == null) {
-					continue;
-				}
-				
-				final double betAmount = players.get(i).getBetAmount();
-				final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
-				final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
-					
-				//adjust the players cash total based upon the insurance bet.
-				if (dealerHand.isBlackjack() && players.get(i).takesInsurance()) {
-					players.get(i).adjustCashTotal(insuranceWinnings);
-				} else if (!dealerHand.isBlackjack() && players.get(i).takesInsurance()) {
-					players.get(i).adjustCashTotal(insuranceLosings);
+				if (hasPlayerAtSeat(i)) {
+					final double betAmount = players.get(i).getBetAmount();
+					final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
+					final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
+						
+					//adjust the players cash total based upon the insurance bet.
+					if (dealerHand.isBlackjack() && players.get(i).takesInsurance()) {
+						players.get(i).adjustCashTotal(insuranceWinnings);
+					} else if (!dealerHand.isBlackjack() && players.get(i).takesInsurance()) {
+						players.get(i).adjustCashTotal(insuranceLosings);
+					}
 				}
 			}
 		}
@@ -455,61 +463,32 @@ public class BlackjackTable {
 	private void payoutPlayers() {
 		if (!dealerHand.isBlackjack()) {
 			for (int i = 0; i < players.size(); i++) {
-				if (playersHands.get(i) == null && players.get(i) == null) {
-					continue;
-				}
-				
-				final double playerBet = players.get(i).getBetAmount();
-				final double winnings = playerBet;
-				final double losings = playerBet * -1.0;
-				final double doubleWinnings = 2.0 * playerBet;
-				final double doubleLosings = -2.0 * playerBet;
-				final double blackjackWinnings = rules.getBlackjackPayoutMultiple() * playerBet;
-				
-				if (playersHands.get(i).get(0).isBlackjack()) {
-					System.out.println("" + i + " Player Blackjack");
-					players.get(i).adjustCashTotal(blackjackWinnings);
-				} else {
-					for (int j = 0; j < playersHands.get(i).size(); j++) {
-						BlackjackHand hand = playersHands.get(i).get(j);
-						
-						if (hand.wasDoubleDown() && 
-							!hand.isBust() && 
-							hand.getBlackjackTotal() > dealerHand.getBlackjackTotal()) {
-							players.get(i).adjustCashTotal(doubleWinnings);
-							//System.out.println("Double win 1");
-						} else if (hand.wasDoubleDown() && 
-								   !hand.isBust() && 
-								   dealerHand.isBust()) {
-							players.get(i).adjustCashTotal(doubleWinnings);
-							//System.out.println("Double win 2");
-						} else if (hand.wasDoubleDown() && 
-								   hand.isBust()) {
-							players.get(i).adjustCashTotal(doubleLosings);
-							//System.out.println("Double lose 1");
-						} else if (hand.wasDoubleDown() && 
-								   hand.getBlackjackTotal() < dealerHand.getBlackjackTotal() && 
-								   !dealerHand.isBust()) {
-							players.get(i).adjustCashTotal(doubleLosings);
-							//System.out.println("Double lose 2");
-						} else if (hand.isBust()) {
-							players.get(i).adjustCashTotal(losings);
-							//System.out.println("lose bust");
-						} else if (hand.getBlackjackTotal() < dealerHand.getBlackjackTotal() && !dealerHand.isBust()) {
-							players.get(i).adjustCashTotal(losings);
-							//System.out.println("lose 2");
-						} else if (!hand.isBust() && dealerHand.isBust()) {
-							players.get(i).adjustCashTotal(winnings);
-							//System.out.println("win 1");
-						} else if (hand.getBlackjackTotal() > dealerHand.getBlackjackTotal() && !hand.isBust()) {
-							players.get(i).adjustCashTotal(winnings);
-							//System.out.println("win 2");
-						}
-					}
+				if (hasPlayerAtSeat(i)) {
+					payoutPlayer(i);
 				}
 			}
 		}
-	}//end method payoutPlayers
+	}
+	
+	private void payoutPlayer(int seat) {
+		final double playerBet = players.get(seat).getBetAmount();
+		final double winnings = playerBet;
+		final double losings = playerBet * BlackjackRules.PAYOUT_HAND_LOSE;
+		final double doubleWinnings = playerBet * BlackjackRules.PAYOUT_DOUBLE_DOWN_WIN;
+		final double doubleLosings = playerBet * BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE;
+		final double blackjackWinnings = playerBet * rules.getBlackjackPayoutMultiple();
+		
+		if (playersHands.get(seat).get(0).isBlackjack()) {
+			System.out.println("" + seat + " Player Blackjack");
+			players.get(seat).adjustCashTotal(blackjackWinnings);
+		} else {
+			for (int i = 0; i < playersHands.get(seat).size(); i++) {
+				final BlackjackHand hand = playersHands.get(seat).get(i);
+				final double playerPayout = rules.getPayoutAdjustment(hand, dealerHand);
+				players.get(seat).adjustCashTotal(playerPayout);
+			}
+		}
+	}
 	
 	private void collectAllCards() {
 		for (int i = 0; i < playersHands.size(); i++) {
@@ -562,7 +541,7 @@ public class BlackjackTable {
 	 */
 	private void printPlayers() {
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i) != null) {
+			if (hasPlayerAtSeat(i)) {
 				System.out.println("Seat #" + i);
 				System.out.println(players.get(i).toString());
 			}

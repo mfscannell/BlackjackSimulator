@@ -81,7 +81,9 @@ public class BasicStrategy {
 							break;
 				case 6:		if (3 <= j && j <= 6) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
-							} else if (j == 2 && (rules.isDoubleAfterSplitAllowed() || numDecks <= 2)) {
+							} else if (j == 2 && rules.isDoubleAfterSplitAllowed()) {
+								pairChart[i][j] = BlackjackMove.SPLIT;
+							} else if (j == 2 && numDecks <= 2) {
 								pairChart[i][j] = BlackjackMove.SPLIT;
 							} else {
 								pairChart[i][j] = BlackjackMove.HIT;
@@ -105,7 +107,7 @@ public class BasicStrategy {
 							break;
 				case 10:	pairChart[i][j] = BlackjackMove.STAND;
 							break;
-				case 1:		pairChart[i][j] = BlackjackMove.DOUBLE;
+				case 1:		pairChart[i][j] = BlackjackMove.SPLIT;
 							break;
 				default:	pairChart[i][j] = BlackjackMove.STAND;
 							break;
@@ -296,6 +298,7 @@ public class BasicStrategy {
 		BlackjackMove move;
 		int handTotal = hand.getBlackjackTotal();
 		int dealerCardValue = dealerUpCard.getValue();
+		int firstCardValue = hand.getFirstCardValue();
 		
 		//acquire the recommended move
 		if (hand.isMultiCard()) {
@@ -310,8 +313,7 @@ public class BasicStrategy {
 			}
 		} else {
 			if (hand.isPair()) {
-				
-				move = pairChart[hand.getFirstCardValue()][dealerCardValue];
+				move = pairChart[firstCardValue][dealerCardValue];
 			} else if (hand.isSoft()) {
 				int nonAceValue;
 				
