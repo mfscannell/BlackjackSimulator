@@ -1,6 +1,6 @@
 package modelObjects;
 
-public class Gambler {
+public abstract class Gambler {
 	private double cashTotal;
 	private double betAmount;
 	

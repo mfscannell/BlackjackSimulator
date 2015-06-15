@@ -68,6 +68,30 @@ public class BlackjackRules {
 		return dealersMove;
 	}
 	
+	public double getPayoutAdjustment(BlackjackHand hand, BlackjackHand dealerHand) {
+		double payoutAdjustment = 1.0;
+		
+		if (hand.wasDoubleDown() && !hand.isBust() && hand.getBlackjackTotal() > dealerHand.getBlackjackTotal()) {
+			payoutAdjustment = PAYOUT_DOUBLE_DOWN_WIN;
+		} else if (hand.wasDoubleDown() && !hand.isBust() && dealerHand.isBust()) {
+			payoutAdjustment = PAYOUT_DOUBLE_DOWN_WIN;
+		} else if (hand.wasDoubleDown() && hand.isBust()) {
+			payoutAdjustment = PAYOUT_DOUBLE_DOWN_LOSE;
+		} else if (hand.wasDoubleDown() && hand.getBlackjackTotal() < dealerHand.getBlackjackTotal() && !dealerHand.isBust()) {
+			payoutAdjustment = PAYOUT_DOUBLE_DOWN_LOSE;
+		} else if (hand.isBust()) {
+			payoutAdjustment = PAYOUT_HAND_LOSE;
+		} else if (hand.getBlackjackTotal() < dealerHand.getBlackjackTotal() && !dealerHand.isBust()) {
+			payoutAdjustment = PAYOUT_HAND_LOSE;
+		} else if (!hand.isBust() && dealerHand.isBust()) {
+			payoutAdjustment = PAYOUT_HAND_WIN;
+		} else if (hand.getBlackjackTotal() > dealerHand.getBlackjackTotal() && !hand.isBust()) {
+			payoutAdjustment = PAYOUT_HAND_WIN;
+		}
+		
+		return payoutAdjustment;
+	}
+	
 	/**
 	 * Builder class to build a set of rules for blackjack.
 	 * @author mscannell
