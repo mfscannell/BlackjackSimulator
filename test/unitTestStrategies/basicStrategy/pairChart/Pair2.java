@@ -3,6 +3,8 @@ package unitTestStrategies.basicStrategy.pairChart;
 import static org.junit.Assert.*;
 import static org.junit.AfterClass.*;
 import static org.junit.BeforeClass.*;
+import mockData.BlackjackHandPairs;
+import mockData.DefaultRulesSingleton;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 
@@ -25,26 +27,16 @@ import exceptions.InvalidNumDecksException;
  */
 public class Pair2 {
 	private static BlackjackRules rules;
+	private static BlackjackHand hand;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayoutMultiple(1.5);
-		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplitAllowed(false);
-		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(false);
-		rules = rulesBuilder.build();
+		rules = DefaultRulesSingleton.getDefaultRules();
+		hand = BlackjackHandPairs.getPair2();
 	}
 
 	@Test
 	public void testPair2vs2() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -60,12 +52,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs3() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -81,12 +67,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs4() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -102,12 +82,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs5() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -123,12 +97,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs6() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -144,12 +112,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs7() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -165,12 +127,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs8() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -186,12 +142,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs9() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -207,12 +157,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs10() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -228,12 +172,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vsA() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -256,12 +194,6 @@ public class Pair2 {
 		rulesBuilder.setMaxHandsAfterSplits(4);
 		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
-		
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
 		
@@ -286,12 +218,6 @@ public class Pair2 {
 		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
 		
 		int numDecks = 4;
@@ -307,12 +233,6 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs2SingleDeck() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
 		
 		int numDecks = 1;
