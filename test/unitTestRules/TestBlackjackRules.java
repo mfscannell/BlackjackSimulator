@@ -102,7 +102,7 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerFirstCard);
 		dealerHand.addCard(dealerSecondCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_WIN);
 	}
@@ -126,7 +126,7 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerSecondCard);
 		dealerHand.addCard(dealerThirdCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_WIN);
 	}
@@ -150,7 +150,31 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerSecondCard);
 		dealerHand.addCard(dealerThirdCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+		
+		assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE);
+	}
+	
+	@Test
+	public void testDoubleDownLoseBothBust() {
+		BlackjackHand playerHand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
+		playerHand.addCard(firstCard);
+		playerHand.addCard(secondCard);
+		playerHand.setWasDoubleDown(true);
+		BlackjackCard thirdCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		playerHand.addCard(thirdCard);
+		
+		BlackjackHand dealerHand = new BlackjackHand();
+		BlackjackCard dealerFirstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard dealerSecondCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+		BlackjackCard dealerThirdCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		dealerHand.addCard(dealerFirstCard);
+		dealerHand.addCard(dealerSecondCard);
+		dealerHand.addCard(dealerThirdCard);
+		
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE);
 	}
@@ -174,13 +198,13 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerSecondCard);
 		dealerHand.addCard(dealerThirdCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE);
 	}
 	
 	@Test
-	public void testLoseBust() {
+	public void testLosePlayerBust() {
 		BlackjackHand playerHand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
@@ -197,7 +221,30 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerSecondCard);
 		dealerHand.addCard(dealerThirdCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+		
+		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
+	}
+	
+	@Test
+	public void testLoseBothBust() {
+		BlackjackHand playerHand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard thirdCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		playerHand.addCard(firstCard);
+		playerHand.addCard(secondCard);
+		playerHand.addCard(thirdCard);
+		
+		BlackjackHand dealerHand = new BlackjackHand();
+		BlackjackCard dealerFirstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard dealerSecondCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+		BlackjackCard dealerThirdCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		dealerHand.addCard(dealerFirstCard);
+		dealerHand.addCard(dealerSecondCard);
+		dealerHand.addCard(dealerThirdCard);
+		
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
 	}
@@ -220,7 +267,7 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerSecondCard);
 		dealerHand.addCard(dealerThirdCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
 	}
@@ -243,7 +290,7 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerSecondCard);
 		dealerHand.addCard(dealerThirdCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_WIN);
 	}
@@ -266,9 +313,108 @@ public class TestBlackjackRules {
 		dealerHand.addCard(dealerSecondCard);
 		dealerHand.addCard(dealerThirdCard);
 		
-		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand);
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
 		
 		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_WIN);
+	}
+	
+	@Test
+	public void testPush() {
+		BlackjackHand playerHand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		playerHand.addCard(firstCard);
+		playerHand.addCard(secondCard);
+		
+		BlackjackHand dealerHand = new BlackjackHand();
+		BlackjackCard dealerFirstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard dealerSecondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
+		dealerHand.addCard(dealerFirstCard);
+		dealerHand.addCard(dealerSecondCard);
+		
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+		
+		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_PUSH);
+	}
+	
+	@Test
+	public void testPush21() {
+		BlackjackHand playerHand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard thirdCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+		playerHand.addCard(firstCard);
+		playerHand.addCard(secondCard);
+		playerHand.addCard(thirdCard);
+		
+		BlackjackHand dealerHand = new BlackjackHand();
+		BlackjackCard dealerFirstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard dealerSecondCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+		BlackjackCard dealerThirdCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+		dealerHand.addCard(dealerFirstCard);
+		dealerHand.addCard(dealerSecondCard);
+		dealerHand.addCard(dealerThirdCard);
+		
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+		
+		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_PUSH);
+	}
+	
+	@Test
+	public void testBlackjackWin() {
+		BlackjackHand playerHand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		playerHand.addCard(firstCard);
+		playerHand.addCard(secondCard);
+		
+		BlackjackHand dealerHand = new BlackjackHand();
+		BlackjackCard dealerFirstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard dealerSecondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
+		dealerHand.addCard(dealerFirstCard);
+		dealerHand.addCard(dealerSecondCard);
+		
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+		
+		assertTrue(payoutRate == rules.getBlackjackPayoutMultiple());
+	}
+	
+	@Test
+	public void testBlackjackPush() {
+		BlackjackHand playerHand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		playerHand.addCard(firstCard);
+		playerHand.addCard(secondCard);
+		
+		BlackjackHand dealerHand = new BlackjackHand();
+		BlackjackCard dealerFirstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard dealerSecondCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		dealerHand.addCard(dealerFirstCard);
+		dealerHand.addCard(dealerSecondCard);
+		
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+		
+		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_PUSH);
+	}
+	
+	@Test
+	public void testDealerBlackjackLose() {
+		BlackjackHand playerHand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
+		playerHand.addCard(firstCard);
+		playerHand.addCard(secondCard);
+		
+		BlackjackHand dealerHand = new BlackjackHand();
+		BlackjackCard dealerFirstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard dealerSecondCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		dealerHand.addCard(dealerFirstCard);
+		dealerHand.addCard(dealerSecondCard);
+		
+		double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+		
+		assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
 	}
 
 }

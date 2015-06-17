@@ -68,10 +68,16 @@ public class BlackjackRules {
 		return dealersMove;
 	}
 	
-	public double getPayoutAdjustment(BlackjackHand hand, BlackjackHand dealerHand) {
-		double payoutAdjustment = 1.0;
+	public double getPayoutAdjustment(BlackjackHand hand, BlackjackHand dealerHand, int numPlayerHands) {
+		double payoutAdjustment = PAYOUT_HAND_PUSH;
 		
-		if (hand.wasDoubleDown() && !hand.isBust() && hand.getBlackjackTotal() > dealerHand.getBlackjackTotal()) {
+		if (hand.isBlackjack() && !dealerHand.isBlackjack() && numPlayerHands == 1) {
+			payoutAdjustment = blackjackPayoutMultiple;
+		} else if (hand.isBlackjack() && dealerHand.isBlackjack() && numPlayerHands == 1) {
+			payoutAdjustment = PAYOUT_HAND_PUSH;
+		} else if (!hand.isBlackjack() && dealerHand.isBlackjack() && numPlayerHands == 1) {
+			payoutAdjustment = PAYOUT_HAND_LOSE;
+		} else if (hand.wasDoubleDown() && !hand.isBust() && hand.getBlackjackTotal() > dealerHand.getBlackjackTotal()) {
 			payoutAdjustment = PAYOUT_DOUBLE_DOWN_WIN;
 		} else if (hand.wasDoubleDown() && !hand.isBust() && dealerHand.isBust()) {
 			payoutAdjustment = PAYOUT_DOUBLE_DOWN_WIN;
@@ -87,6 +93,8 @@ public class BlackjackRules {
 			payoutAdjustment = PAYOUT_HAND_WIN;
 		} else if (hand.getBlackjackTotal() > dealerHand.getBlackjackTotal() && !hand.isBust()) {
 			payoutAdjustment = PAYOUT_HAND_WIN;
+		} else if (hand.getBlackjackTotal() == dealerHand.getBlackjackTotal() && !hand.isBust() && !hand.isBlackjack()) {
+			payoutAdjustment = PAYOUT_HAND_PUSH;
 		}
 		
 		return payoutAdjustment;

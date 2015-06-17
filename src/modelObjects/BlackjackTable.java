@@ -138,12 +138,9 @@ public class BlackjackTable {
 		}
 		
 		exposeDealersHoleCard();
-		
-		if (!dealerHand.isBlackjack()) {
-			playDealersTurn();
-		}
-		
-		comparePlayersToDealer();
+		playDealersTurn();
+		adjustAllPlayersChipsForInsurance();
+		payoutPlayers();
 		printTable();
 		printPlayers();
 		printCardCount();
@@ -182,7 +179,7 @@ public class BlackjackTable {
 		
 		for (int i = 0; i < players.size(); i++) {
 			if (hasPlayerAtSeat(i)) {
-				players.get(i).setsTakesInsurance(false);
+				players.get(i).setTakesInsurance(false);
 			}
 		}
 	}
@@ -276,7 +273,7 @@ public class BlackjackTable {
 			insurance = compositionStrategy.getInsuranceMove();
 		}
 		
-		players.get(seat).setsTakesInsurance(insurance);
+		players.get(seat).setTakesInsurance(insurance);
 	}
 	
 	/**
@@ -377,7 +374,7 @@ public class BlackjackTable {
 	
 	/**
 	 * Checks if the dealers hand is playable.  The dealer's hand is playable if any of the
-	 * players' cards are not blackjack and are not busted.
+	 * players' hands are neither blackjack nor busted.
 	 * @return  True if any players' hands are not busts nor blackjack.
 	 */
 	private boolean hasPlayerHandRemaining() {
@@ -407,52 +404,28 @@ public class BlackjackTable {
 	}
 	
 	/**
-	 * Adjusts the player's chip stacks according to what they have vs the dealer.
+	 * Adjust the players chip counts if insurance was offered.
 	 */
-	private void comparePlayersToDealer() {
-		checkDealerBlackjack();
-		checkIfInsuranceOffered();
-		payoutPlayers();
-	}
-	
-	/**
-	 * Adjust the players chip counts if the dealer has blackjack.  Any player who does not
-	 * have blackjack will lose money.  Any player with blackjack will push.
-	 */
-	private void checkDealerBlackjack() {
-		if (dealerHand.isBlackjack()) {
+	private void adjustAllPlayersChipsForInsurance() {
+		if (insuranceOffered) {
 			for (int i = 0; i < players.size(); i++) {
 				if (hasPlayerAtSeat(i)) {
-					final double betAmount = players.get(i).getBetAmount();
-					final double handLosings = betAmount * -1.0;
-				
-					if (playersHands.get(i).get(0).getBlackjackTotal() != 21) {
-						players.get(i).adjustCashTotal(handLosings);
-					}
+					adjustPlayerChipsForInsurance(i);
 				}
 			}
 		}
 	}
 	
-	/**
-	 * Adjust the players chip counts if insurance was offered.
-	 */
-	private void checkIfInsuranceOffered() {
-		if (insuranceOffered) {
-			for (int i = 0; i < players.size(); i++) {
-				if (hasPlayerAtSeat(i)) {
-					final double betAmount = players.get(i).getBetAmount();
-					final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
-					final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
-						
-					//adjust the players cash total based upon the insurance bet.
-					if (dealerHand.isBlackjack() && players.get(i).takesInsurance()) {
-						players.get(i).adjustCashTotal(insuranceWinnings);
-					} else if (!dealerHand.isBlackjack() && players.get(i).takesInsurance()) {
-						players.get(i).adjustCashTotal(insuranceLosings);
-					}
-				}
-			}
+	private void adjustPlayerChipsForInsurance(int seat) {
+		final double betAmount = players.get(seat).getBetAmount();
+		final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
+		final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
+		
+		//adjust the players cash total based upon the insurance bet.
+		if (dealerHand.isBlackjack() && players.get(seat).takesInsurance()) {
+			players.get(seat).adjustCashTotal(insuranceWinnings);
+		} else if (!dealerHand.isBlackjack() && players.get(seat).takesInsurance()) {
+			players.get(seat).adjustCashTotal(insuranceLosings);
 		}
 	}
 	
@@ -461,32 +434,21 @@ public class BlackjackTable {
 	 * or when insurance was offered.
 	 */
 	private void payoutPlayers() {
-		if (!dealerHand.isBlackjack()) {
-			for (int i = 0; i < players.size(); i++) {
-				if (hasPlayerAtSeat(i)) {
-					payoutPlayer(i);
-				}
+		for (int i = 0; i < players.size(); i++) {
+			if (hasPlayerAtSeat(i)) {
+				payoutPlayer(i);
 			}
 		}
 	}
 	
 	private void payoutPlayer(int seat) {
 		final double playerBet = players.get(seat).getBetAmount();
-		final double winnings = playerBet;
-		final double losings = playerBet * BlackjackRules.PAYOUT_HAND_LOSE;
-		final double doubleWinnings = playerBet * BlackjackRules.PAYOUT_DOUBLE_DOWN_WIN;
-		final double doubleLosings = playerBet * BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE;
-		final double blackjackWinnings = playerBet * rules.getBlackjackPayoutMultiple();
 		
-		if (playersHands.get(seat).get(0).isBlackjack()) {
-			System.out.println("" + seat + " Player Blackjack");
-			players.get(seat).adjustCashTotal(blackjackWinnings);
-		} else {
-			for (int i = 0; i < playersHands.get(seat).size(); i++) {
-				final BlackjackHand hand = playersHands.get(seat).get(i);
-				final double playerPayout = rules.getPayoutAdjustment(hand, dealerHand);
-				players.get(seat).adjustCashTotal(playerPayout);
-			}
+		for (int i = 0; i < playersHands.get(seat).size(); i++) {
+			final BlackjackHand hand = playersHands.get(seat).get(i);
+			final int numPlayerHands = playersHands.get(seat).size();
+			final double playerPayout = rules.getPayoutAdjustment(hand, dealerHand, numPlayerHands) * playerBet;
+			players.get(seat).adjustCashTotal(playerPayout);
 		}
 	}
 	
