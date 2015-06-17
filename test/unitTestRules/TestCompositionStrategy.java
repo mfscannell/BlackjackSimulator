@@ -1,9 +1,12 @@
 package unitTestRules;
 
 import static org.junit.Assert.*;
+import mockData.BlackjackHandHard;
+import mockData.DefaultRulesSingleton;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import rules.BlackjackRules;
@@ -14,17 +17,15 @@ import enumerations.CardSuit;
 import exceptions.InvalidNumDecksException;
 
 public class TestCompositionStrategy {
+	private static BlackjackRules rules;
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		rules = DefaultRulesSingleton.getDefaultRules();
+	}
 
 	@Test
 	public void test102vs4() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayoutMultiple(1.5);
-		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplitAllowed(false);
-		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(false);
-		BlackjackRules rules = rulesBuilder.build();
-		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
@@ -42,18 +43,10 @@ public class TestCompositionStrategy {
 		} catch (InvalidNumDecksException e) {
 			e.printStackTrace();
 		}
-	}//end method test102vs4
+	}
 	
 	@Test
 	public void test84vs4() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayoutMultiple(1.5);
-		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplitAllowed(false);
-		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(false);
-		BlackjackRules rules = rulesBuilder.build();
-		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
@@ -71,18 +64,10 @@ public class TestCompositionStrategy {
 		} catch (InvalidNumDecksException e) {
 			e.printStackTrace();
 		}
-	}//end method test84vs4
+	}
 	
 	@Test
 	public void test16vs10with4() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayoutMultiple(1.5);
-		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplitAllowed(false);
-		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(false);
-		BlackjackRules rules = rulesBuilder.build();
-		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
@@ -102,18 +87,10 @@ public class TestCompositionStrategy {
 		} catch (InvalidNumDecksException e) {
 			e.printStackTrace();
 		}
-	}//end method test16vs10with4
+	}
 	
 	@Test
 	public void test16vs10with5() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayoutMultiple(1.5);
-		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplitAllowed(false);
-		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(false);
-		BlackjackRules rules = rulesBuilder.build();
-		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -133,18 +110,10 @@ public class TestCompositionStrategy {
 		} catch (InvalidNumDecksException e) {
 			e.printStackTrace();
 		}
-	}//end method test16vs10with4
+	}
 	
 	@Test
 	public void test16vsnon10with5() {
-		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-		rulesBuilder.setBlackjackPayoutMultiple(1.5);
-		rulesBuilder.setDealerHitsSoft17(false);
-		rulesBuilder.setDoubleAfterSplitAllowed(false);
-		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(false);
-		BlackjackRules rules = rulesBuilder.build();
-		
 		BlackjackHand hand = new BlackjackHand();
 		BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -164,6 +133,5 @@ public class TestCompositionStrategy {
 		} catch (InvalidNumDecksException e) {
 			e.printStackTrace();
 		}
-	}//end method test16vsnon10with5
-
+	}
 }

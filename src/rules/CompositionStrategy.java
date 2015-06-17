@@ -1,6 +1,5 @@
 package rules;
 
-import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
 import enumerations.BlackjackMove;
@@ -8,7 +7,6 @@ import enumerations.CardRank;
 import exceptions.InvalidNumDecksException;
 
 public class CompositionStrategy extends BasicStrategy {
-	private BlackjackRules rules;
 
 	/**
 	 * Constructor
@@ -19,7 +17,6 @@ public class CompositionStrategy extends BasicStrategy {
 	 */
 	public CompositionStrategy(BlackjackRules rules, int numDecks) throws InvalidNumDecksException {
 		super(rules, numDecks);
-		this.rules = rules;
 	}
 	
 	/**
@@ -30,9 +27,7 @@ public class CompositionStrategy extends BasicStrategy {
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
-	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
-								   final BlackjackHand hand,
-								   int numHands) {
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand hand, int numHands) {
 		BlackjackMove move = BlackjackMove.HIT;
 		
 		if (hand.getBlackjackTotal() == 16 && 
@@ -49,6 +44,6 @@ public class CompositionStrategy extends BasicStrategy {
 		}
 		
 		return move;
-	}//end method getAction
+	}
 
 }

@@ -253,7 +253,9 @@ public class BasicStrategy {
 								softChart[i][j] = BlackjackMove.HIT;
 							}
 							break;
-				case 6:		if (3 <= j && j <= 6) {
+				case 6:		if (j == 2 && numDecks == 1) {
+								softChart[i][j] = BlackjackMove.DOUBLE;
+							} else if (3 <= j && j <= 6) {
 								softChart[i][j] = BlackjackMove.DOUBLE;
 							} else {
 								softChart[i][j] = BlackjackMove.HIT;

@@ -175,5 +175,20 @@ public class Total8 {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testTotal8vs5SingleDeck() {
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
+		
+		int numDecks = 1;
+		
+		try {
+			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+			
+			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

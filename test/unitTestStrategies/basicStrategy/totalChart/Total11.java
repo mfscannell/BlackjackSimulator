@@ -175,5 +175,58 @@ public class Total11 {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testTotal11vsADealerHitSoft17() {
+		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+		rulesBuilder.setBlackjackPayoutMultiple(1.5);
+		rulesBuilder.setDealerHitsSoft17(true);
+		rulesBuilder.setDoubleAfterSplitAllowed(false);
+		rulesBuilder.setMaxHandsAfterSplits(4);
+		rulesBuilder.setCanResplitAces(false);
+		BlackjackRules rules = rulesBuilder.build();
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		
+		int numDecks = 4;
+		
+		try {
+			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+			
+			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testTotal11vsADoubleDeck() {
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		
+		int numDecks = 2;
+		
+		try {
+			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+			
+			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testTotal11vsASingleDeck() {
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		
+		int numDecks = 1;
+		
+		try {
+			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+			
+			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		} catch (InvalidNumDecksException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
