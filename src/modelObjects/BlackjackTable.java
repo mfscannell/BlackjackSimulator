@@ -300,17 +300,17 @@ public class BlackjackTable {
 			final BlackjackHand playerHand = playersHands.get(seat).get(j);
 			final int numHands = playersHands.get(seat).size();
 			
-			if (players.get(seat).doesCountsCards()) {
-				move = kissIStrategy.getAction(dealerUpCard, playerHand, numHands);
-			} else {
-				move = compositionStrategy.getAction(dealerUpCard, playerHand, numHands);
-			}
-			
 			if (playerHand.getNumCards() < 2) {
 				dealtCard = shoe.dealCard();
 				adjustCount(dealtCard);
 				playersHands.get(seat).get(j).addCard(dealtCard);
 			} else {
+				if (players.get(seat).doesCountsCards()) {
+					move = kissIStrategy.getAction(dealerUpCard, playerHand, numHands);
+				} else {
+					move = compositionStrategy.getAction(dealerUpCard, playerHand, numHands);
+				}
+				
 				switch (move) {
 					case STAND:		//System.out.println("" + seat + " stands");
 									j++;

@@ -18,24 +18,16 @@ false
 
 #TABLE_PARAMETERS
 #numHandsToSimulate
-10000
+1000000
 
 #PLAYER_PARAMETERS
 #numPlayers
-4
+2
 #tableSeat
 0
 #playerCardCounter
 true
 #tableSeat
 1
-#playerCardCounter
-false
-#tableSeat
-2
-#playerCardCounter
-false
-#tableSeat
-3
 #playerCardCounter
 false
