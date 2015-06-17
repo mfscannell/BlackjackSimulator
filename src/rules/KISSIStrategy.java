@@ -1,6 +1,5 @@
 package rules;
 
-import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
 import modelObjects.Shoe;
@@ -67,9 +66,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * and resplits.
 	 * @return  The recommended blackjack move.
 	 */
-	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
-								   final BlackjackHand hand,
-								   int numHands) {
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand hand, int numHands) {
 		BlackjackMove move = BlackjackMove.STAND;
 		
 		if (count >= KISS_COUNT) {
@@ -99,11 +96,10 @@ public class KISSIStrategy extends CompositionStrategy {
 		}
 		
 		return move;
-	}//end method getAction
+	}
 	
 	/**
 	 * Checks KISS I if it recommends the player to take insurance.
-	 * @param numDecks  The number of decks in the shoe.
 	 * @return  True if KISS I recommends to take insurance.
 	 * @throws InvalidShoeException  Thrown if the number of decks specified is less than
 	 * the minimum number of decks in a shoe or greater than the maximum number of decks in the shoe.
@@ -124,11 +120,10 @@ public class KISSIStrategy extends CompositionStrategy {
 		}
 		
 		return insurance;
-	}//end method getInsuranceMove
+	}
 	
 	/**
 	 * Get the bet size based upon the KISS I strategy.
-	 * @param numDecks  The number of decks in the shoe.
 	 * @return  The ratio of the recommended bet size to the minimum bet size.
 	 */
 	public int getBetSize() {
@@ -157,11 +152,10 @@ public class KISSIStrategy extends CompositionStrategy {
 		}
 		
 		return betSize;
-	}//end method getBetSize
+	}
 	
 	/**
 	 * Check to see if the card counter should walk away from an unfavorable table.
-	 * @param numDecks  The number of decks used in the shoe.
 	 * @return  True if the player should walk away.
 	 */
 	public boolean shouldWalkAway() {
