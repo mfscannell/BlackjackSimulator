@@ -296,73 +296,95 @@ public class BasicStrategy {
 								   final BlackjackHand hand,
 								   int numHands) {
 		BlackjackMove move;
-		int handTotal = hand.getBlackjackTotal();
 		int dealerCardValue = dealerUpCard.getValue();
-		int firstCardValue = hand.getFirstCardValue();
 		
-		//acquire the recommended move
 		if (hand.isMultiCard()) {
-			if (hand.isSoft()) {
-				if (hand.getBlackjackTotal() <= 17) {
-					move = BlackjackMove.HIT;
-				} else {
-					move = BlackjackMove.STAND;
-				}
-			} else {
-				move = totalChart[handTotal][dealerCardValue];
+			move = getMultiCardAction(hand, dealerCardValue);
+		} else {
+			move = getTwoCardAction(hand, dealerCardValue);
+		}
+		
+		move = correctActionForSpecialCases(move, hand, dealerCardValue, numHands);
+		
+		return move;
+	}
+	
+	private BlackjackMove getMultiCardAction(final BlackjackHand hand, int dealerCardValue) {
+		BlackjackMove move = BlackjackMove.STAND;
+		int handTotal = hand.getBlackjackTotal();
+		
+		if (hand.isSoft()) {
+			if (hand.getBlackjackTotal() <= 17) {
+				move = BlackjackMove.HIT;
+			} else if (hand.getBlackjackTotal() == 18 && 
+					   (dealerCardValue == 9 || dealerCardValue == 10 || dealerCardValue == 1)) {
+				move = BlackjackMove.HIT;
 			}
 		} else {
-			if (hand.isPair()) {
-				move = pairChart[firstCardValue][dealerCardValue];
-			} else if (hand.isSoft()) {
-				int nonAceValue;
-				
-				if (hand.isFirstCardAce()) {
-					nonAceValue = hand.getSecondCardValue();
-				} else {
-					nonAceValue = hand.getFirstCardValue();
-				}
-				
-				move = softChart[nonAceValue][dealerCardValue];
-			} else {
-				move = totalChart[handTotal][dealerCardValue];
-			}
-		}
-		
-		//correct the recommended move based upon special cases
-		if (hand.isMultiCard() && move == BlackjackMove.DOUBLE) {
-			move = BlackjackMove.HIT;
-		}
-		
-		if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHandsAfterSplits()) {
 			move = totalChart[handTotal][dealerCardValue];
-		}
-		
-		if (move == BlackjackMove.DOUBLE && 
-			hand.getNumCards() == 2 && 
-			hand.wasFromSplit() && 
-			!rules.isDoubleAfterSplitAllowed()) {
-			move = BlackjackMove.HIT;
-		}
-		
-		if (hand.isPairAces() && 
-			hand.wasFromSplit() && 
-			(!rules.isResplitAcesAllowed() || numHands >= rules.getMaxHandsAfterSplits())) {
-			move = BlackjackMove.STAND;
-		}
-		
-		if (hand.isFirstCardAce() && hand.wasFromSplit()) {
-			move = BlackjackMove.STAND;
+			
+			if (move == BlackjackMove.DOUBLE) {
+				move = BlackjackMove.HIT;
+			}
 		}
 		
 		return move;
-	}//end method getAction
+	}
+	
+	private BlackjackMove getTwoCardAction(final BlackjackHand hand, int dealerCardValue) {
+		BlackjackMove move = BlackjackMove.STAND;
+		int firstCardValue = hand.getFirstCardValue();
+		int handTotal = hand.getBlackjackTotal();
+		
+		if (hand.isPair()) {
+			move = pairChart[firstCardValue][dealerCardValue];
+		} else if (hand.isSoft()) {
+			int nonAceValue;
+			
+			if (hand.isFirstCardAce()) {
+				nonAceValue = hand.getSecondCardValue();
+			} else {
+				nonAceValue = hand.getFirstCardValue();
+			}
+			
+			move = softChart[nonAceValue][dealerCardValue];
+		} else {
+			move = totalChart[handTotal][dealerCardValue];
+		}
+		
+		return move;
+	}
+	
+	private BlackjackMove correctActionForSpecialCases(BlackjackMove move, final BlackjackHand hand, int dealerCardValue, int numHands) {
+		BlackjackMove correctedMove = move;
+		int handTotal = hand.getBlackjackTotal();
+		
+		if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHandsAfterSplits()) {
+			correctedMove = totalChart[handTotal][dealerCardValue];
+		}
+		
+		if (move == BlackjackMove.DOUBLE && 
+				hand.wasFromSplit() && 
+				!rules.isDoubleAfterSplitAllowed()) {
+			correctedMove = BlackjackMove.HIT;
+		}
+		
+		if (hand.isPairAces() && hand.wasFromSplit() && !rules.isResplitAcesAllowed()) {
+			correctedMove = BlackjackMove.STAND;
+		}
+		
+		if (hand.hasCardOfRank(CardRank.ACE) && !hand.isPair() && hand.wasFromSplit()) {
+			correctedMove = BlackjackMove.STAND;
+		}
+		
+		return correctedMove;
+	}
 	
 	/**
 	 * Get the recommend insurance move when it is offered.
 	 * @return  True if the player should take insurance.
 	 */
-	public boolean getInsuranceMove() {
+	public boolean getInsuranceAction() {
 		return false;
 	}
 	

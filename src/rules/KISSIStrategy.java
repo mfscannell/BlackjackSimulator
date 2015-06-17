@@ -118,7 +118,7 @@ public class KISSIStrategy extends CompositionStrategy {
 		} else if (numDecks < Shoe.MIN_NUM_DECKS || numDecks > Shoe.MAX_NUM_DECKS) {
 			throw new InvalidShoeException("Invalid number of decks specified");
 		} else {
-			insurance = super.getInsuranceMove();
+			insurance = super.getInsuranceAction();
 		}
 		
 		return insurance;

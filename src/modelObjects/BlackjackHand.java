@@ -24,22 +24,21 @@ public class BlackjackHand {
 	}
 	
 	/**
-	 * Constructor.  Creates a new blackjack hand that consists of the card.
+	 * Constructor.  Creates a new blackjack hand that consists of the card.  This hand was
+	 * split from a hand containing the card being added to the hand.
 	 * @param card  The first card of the new hand.
-	 * @param fromSplit  True if the hand was created from another hand that was split.
 	 */
-	public BlackjackHand(final PlayingCard card, boolean fromSplit) {
+	public BlackjackHand(final PlayingCard card) {
 		cards = new ArrayList<PlayingCard>();
 		cards.add(card);
 		total = card.getValue();
+		containsAce = false;
+		this.fromSplit = true;
+		doubleDown = false;
 		
 		if (card.isAce()) {
 			containsAce = true;
-		} else {
-			containsAce = false;
 		}
-		this.fromSplit = fromSplit;
-		doubleDown = false;
 	}
 	
 	public void addCard(final PlayingCard card) {
@@ -200,28 +199,6 @@ public class BlackjackHand {
 	}
 	
 	/**
-	 * Checks if the hand is splitable.  A hand is splitable if it is a pair, and the number
-	 * of hands a player has after splits/resplits is less than the maximum number of hands
-	 * a player can have after splits/resplits.
-	 * @param maxHands  The maximum number of hands a player can have after splits/resplits.
-	 * @param numHands  The number of hands a player currently has based upon the number 
-	 * of splits/resplits.
-	 * @param resplitAces  True if resplitting aces is allowed.
-	 * @return  True if the hand can be split based upon the rules.
-	 */
-	public boolean isSplitable(int maxHands, int numHands, boolean resplitAces) {
-		boolean splitable = false;
-		
-		if (isPairAces() && resplitAces && numHands < maxHands) {
-			splitable = true;
-		} else if (isPair() && numHands < maxHands) {
-			splitable = true;
-		}
-		
-		return splitable;
-	}
-	
-	/**
 	 * Checks if the first card dealt in the hand is an ace.
 	 * @return  True if the first card dealt in the hand is an ace.
 	 */
@@ -269,10 +246,6 @@ public class BlackjackHand {
 		return cards.get(1);
 	}
 	
-	public boolean hasAce() {
-		return containsAce;
-	}
-	
 	public boolean hasCardOfRank(CardRank rank) {
 		boolean hasRank = false;
 		
@@ -284,7 +257,7 @@ public class BlackjackHand {
 		}
 		
 		return hasRank;
-	}//end method hasCard
+	}
 	
 	/**
 	 * Splits the hand by removing one of the cards and returns it to the caller.
@@ -301,14 +274,6 @@ public class BlackjackHand {
 		resetTotal();
 		
 		return returnCard;
-	}
-	
-	/**
-	 * Sets whether or not the had was from a split hand.
-	 * @param fromSplit  True if the hand originated from a split hand.
-	 */
-	public void setFromSplit(boolean fromSplit) {
-		this.fromSplit = fromSplit;
 	}
 	
 	/**

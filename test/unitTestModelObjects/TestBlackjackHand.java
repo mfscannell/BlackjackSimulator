@@ -12,30 +12,6 @@ import enumerations.CardSuit;
 import exceptions.InvalidMoveException;
 
 public class TestBlackjackHand {
-
-	@Test
-	public void testHasAce() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
-		
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
-		assertTrue(hand.hasAce());
-	}
-	
-	@Test
-	public void testDoesntHaveAce() {
-		BlackjackHand hand = new BlackjackHand();
-		BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
-		BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
-		
-		hand.addCard(firstCard);
-		hand.addCard(secondCard);
-		
-		assertFalse(hand.hasAce());
-	}
 	
 	@Test
 	public void testGetNumCards() {
@@ -433,6 +409,29 @@ public class TestBlackjackHand {
 		hand.addCard(secondCard);
 		
 		assertFalse(hand.isBlackjack());
+	}
+	
+	@Test
+	public void testIsNotBlackjackSplit() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		
+		PlayingCard card = hand.split();
+		
+		BlackjackHand secondHand = new BlackjackHand(card);
+		
+		BlackjackCard thirdCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
+		BlackjackCard fourthCard = new BlackjackCard(CardRank.TEN, CardSuit.HEARTS);
+		
+		hand.addCard(thirdCard);
+		secondHand.addCard(fourthCard);
+		
+		assertFalse(hand.isBlackjack());
+		assertFalse(secondHand.isBlackjack());
 	}
 	
 	@Test

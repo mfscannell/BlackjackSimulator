@@ -356,7 +356,6 @@ public class TestKISSIStrategy {
 			BlackjackHand hand = new BlackjackHand();
 			hand.addCard(firstCard);
 			hand.addCard(secondCard);
-			hand.setFromSplit(false);
 			
 			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.DIAMONDS);
 			

@@ -270,7 +270,7 @@ public class BlackjackTable {
 				e.printStackTrace();
 			}
 		} else {
-			insurance = compositionStrategy.getInsuranceMove();
+			insurance = compositionStrategy.getInsuranceAction();
 		}
 		
 		players.get(seat).setTakesInsurance(insurance);
@@ -328,9 +328,7 @@ public class BlackjackTable {
 									break;
 					case SPLIT:		//System.out.println("" + seat + " splits hand");
 									PlayingCard splitCard = playersHands.get(seat).get(j).split();
-									BlackjackHand splitHand = new BlackjackHand(splitCard, true);
-									playersHands.get(seat).get(j).setFromSplit(true);
-									splitHand.setFromSplit(true);
+									BlackjackHand splitHand = new BlackjackHand(splitCard);
 									playersHands.get(seat).add(j + 1, splitHand);
 									break;
 					case DOUBLE:	//System.out.println("" + seat + " double downs");
@@ -380,8 +378,8 @@ public class BlackjackTable {
 	private boolean hasPlayerHandRemaining() {
 		boolean playable = false;
 		
-		for (int i = 0; i < players.size(); i++) {
-			for (int j = 0; j < playersHands.get(i).size(); j++) {
+		for (int i = 0; i < players.size() && !playable; i++) {
+			for (int j = 0; j < playersHands.get(i).size() && !playable; j++) {
 				if (!playersHands.get(i).get(j).isBust()) {
 					playable = true;
 				}
@@ -389,14 +387,6 @@ public class BlackjackTable {
 				if (!playersHands.get(i).get(j).isBlackjack()) {
 					playable = true;
 				}
-				
-				if (playable) {
-					break;
-				}
-			}
-			
-			if (playable) {
-				break;
 			}
 		}
 		
@@ -509,7 +499,7 @@ public class BlackjackTable {
 			}
 		}
 		System.out.println(dealer.toString());
-	}//end method printPlayers
+	}
 	
 	private void printCardCount() {
 		System.out.println("Card count:" + kissIStrategy.getCount());
