@@ -16,6 +16,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	private int initialCount;
 	private int count;
 	private BlackjackRules rules;
+	private int numDecks;
 	public static int KISS_COUNT = 20;
 
 	/**
@@ -28,6 +29,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	public KISSIStrategy(BlackjackRules rules, int numDecks) throws InvalidNumDecksException {
 		super(rules, numDecks);
 		this.rules = rules;
+		this.numDecks = numDecks;
 		
 		initialCount = INITIAL_COUNTS[numDecks];
 		count = initialCount;
@@ -106,7 +108,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * @throws InvalidShoeException  Thrown if the number of decks specified is less than
 	 * the minimum number of decks in a shoe or greater than the maximum number of decks in the shoe.
 	 */
-	public boolean getInsuranceMove(int numDecks) throws InvalidShoeException {
+	public boolean getInsuranceMove() throws InvalidShoeException {
 		boolean insurance = false;
 		
 		if (numDecks == 1 && count >= 21) {
@@ -129,7 +131,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * @param numDecks  The number of decks in the shoe.
 	 * @return  The ratio of the recommended bet size to the minimum bet size.
 	 */
-	public int getBetSize(int numDecks) {
+	public int getBetSize() {
 		int betSize = 1;
 		
 		if (numDecks <= 2) {
@@ -162,7 +164,7 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * @param numDecks  The number of decks used in the shoe.
 	 * @return  True if the player should walk away.
 	 */
-	public boolean walkAway(final int numDecks) {
+	public boolean shouldWalkAway() {
 		boolean walk = false;
 		
 		if (count <= WALK_AWAY[numDecks]) {

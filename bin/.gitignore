@@ -1,8 +1,5 @@
-/configFile/
-/unitTestRules/
-/unitTestModelObjects/
-/unitTestStrategies/
-/rules/
 /modelObjects/
-/commonSetup/
+/rules/
+/unitTestRules/
 /mockData/
+/unitTestStrategies/

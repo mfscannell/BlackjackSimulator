@@ -138,7 +138,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.HEARTS));
 		
 		try {
-			assertFalse(kissIStrategy.getInsuranceMove(numDecks));
+			assertFalse(kissIStrategy.getInsuranceMove());
 		} catch (InvalidShoeException e) {
 			e.printStackTrace();
 		}
@@ -156,7 +156,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS));
 		
 		try {
-			assertTrue(kissIStrategy.getInsuranceMove(numDecks));
+			assertTrue(kissIStrategy.getInsuranceMove());
 		} catch (InvalidShoeException e) {
 			e.printStackTrace();
 		}
@@ -179,7 +179,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
 		
 		try {
-			assertFalse(kissIStrategy.getInsuranceMove(numDecks));
+			assertFalse(kissIStrategy.getInsuranceMove());
 		} catch (InvalidShoeException e) {
 			e.printStackTrace();
 		}
@@ -203,7 +203,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
 		
 		try {
-			assertTrue(kissIStrategy.getInsuranceMove(numDecks));
+			assertTrue(kissIStrategy.getInsuranceMove());
 		} catch (InvalidShoeException e) {
 			e.printStackTrace();
 		}
@@ -217,7 +217,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.SPADES));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.SPADES));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 1);
+		assertTrue(kissIStrategy.getBetSize() == 1);
 	}
 	
 	@Test
@@ -229,7 +229,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.SPADES));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.SPADES));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 2);
+		assertTrue(kissIStrategy.getBetSize() == 2);
 	}
 	
 	@Test
@@ -242,7 +242,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.SPADES));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.HEARTS));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 4);
+		assertTrue(kissIStrategy.getBetSize() == 4);
 	}
 	
 	@Test
@@ -256,7 +256,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.HEARTS));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 6);
+		assertTrue(kissIStrategy.getBetSize() == 6);
 	}
 	
 	@Test
@@ -274,7 +274,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.DIAMONDS));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.DIAMONDS));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 1);
+		assertTrue(kissIStrategy.getBetSize() == 1);
 	}
 	
 	@Test
@@ -293,7 +293,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.DIAMONDS));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 2);
+		assertTrue(kissIStrategy.getBetSize() == 2);
 	}
 	
 	@Test
@@ -313,7 +313,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 4);
+		assertTrue(kissIStrategy.getBetSize() == 4);
 	}
 	
 	@Test
@@ -334,7 +334,7 @@ public class TestKISSIStrategy {
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
 		kissIStrategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
 		
-		assertTrue(kissIStrategy.getBetSize(numDecks) == 6);
+		assertTrue(kissIStrategy.getBetSize() == 6);
 	}
 
 	@Test
