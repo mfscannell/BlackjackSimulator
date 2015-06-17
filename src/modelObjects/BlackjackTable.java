@@ -149,9 +149,8 @@ public class BlackjackTable {
 	
 	private boolean doesShoeNeedRefill() {
 		boolean shoeNeedsRefill = false;
-		int numDecksInShoe = shoe.getNumDecks();
 		
-		if (shoe.wasCutCardMet() || kissIStrategy.walkAway(numDecksInShoe)) {
+		if (shoe.wasCutCardMet() || kissIStrategy.shouldWalkAway()) {
 			shoeNeedsRefill = true;
 		}
 		
@@ -201,7 +200,7 @@ public class BlackjackTable {
 		for (int i = 0; i < players.size(); i++) {
 			if (hasPlayerAtSeat(i)) {
 				if (players.get(i).doesCountsCards()) {
-					players.get(i).setBetAmount(kissIStrategy.getBetSize(shoe.getNumDecks()));
+					players.get(i).setBetAmount(kissIStrategy.getBetSize());
 				} else {
 					players.get(i).setBetAmount(1);
 				}
@@ -265,7 +264,7 @@ public class BlackjackTable {
 		
 		if (players.get(seat).doesCountsCards()) {
 			try {
-				insurance = kissIStrategy.getInsuranceMove(shoe.getNumDecks());
+				insurance = kissIStrategy.getInsuranceMove();
 			} catch (InvalidShoeException e) {
 				e.printStackTrace();
 			}
