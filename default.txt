@@ -14,7 +14,7 @@ false
 #numDecks
 2
 #deckPenetration
-55
+60
 
 #TABLE_PARAMETERS
 #numHandsToSimulate
@@ -22,12 +22,24 @@ false
 
 #PLAYER_PARAMETERS
 #numPlayers
-2
+5
 #tableSeat
 0
 #playerCardCounter
 true
 #tableSeat
 1
+#playerCardCounter
+false
+#tableSeat
+2
+#playerCardCounter
+false
+#tableSeat
+3
+#playerCardCounter
+false
+#tableSeat
+4
 #playerCardCounter
 false

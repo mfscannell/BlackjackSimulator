@@ -101,10 +101,8 @@ public class KISSIStrategy extends CompositionStrategy {
 	/**
 	 * Checks KISS I if it recommends the player to take insurance.
 	 * @return  True if KISS I recommends to take insurance.
-	 * @throws InvalidShoeException  Thrown if the number of decks specified is less than
-	 * the minimum number of decks in a shoe or greater than the maximum number of decks in the shoe.
 	 */
-	public boolean getInsuranceMove() throws InvalidShoeException {
+	public boolean getInsuranceAction() {
 		boolean insurance = false;
 		
 		if (numDecks == 1 && count >= 21) {
@@ -113,8 +111,6 @@ public class KISSIStrategy extends CompositionStrategy {
 			insurance = true;
 		} else if (4 <= numDecks && numDecks <= 8 && count >= 25) {
 			insurance = true;
-		} else if (numDecks < Shoe.MIN_NUM_DECKS || numDecks > Shoe.MAX_NUM_DECKS) {
-			throw new InvalidShoeException("Invalid number of decks specified");
 		} else {
 			insurance = super.getInsuranceAction();
 		}
@@ -137,7 +133,7 @@ public class KISSIStrategy extends CompositionStrategy {
 			} else if (count == 21) {
 				betSize = 4;
 			} else if (count >= 22) {
-				betSize = 6;
+				betSize = 4;
 			}
 		} else if (4 <= numDecks && numDecks <= 8) {
 			if (count <= 19) {

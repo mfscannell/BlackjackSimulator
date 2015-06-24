@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import enumerations.BlackjackMove;
 import exceptions.InvalidNumDecksException;
-import exceptions.InvalidShoeException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
 import rules.BasicStrategy;
@@ -16,7 +15,6 @@ public class BlackjackTable {
 	public static final int MIN_PLAYERS = 1;
 	public static final int MAX_PLAYERS = 7;
 	
-	private int numPlayers;
 	private Shoe shoe;
 	private DiscardTray discardTray;
 	private BlackjackRules rules;
@@ -35,7 +33,6 @@ public class BlackjackTable {
 	 * @param rules  The rules for the table.
 	 */
 	public BlackjackTable(Shoe shoe, BlackjackRules rules) {
-		numPlayers = 0;
 		this.shoe = shoe;
 		this.rules = rules;
 		players = new ArrayList<BlackjackPlayer>();
@@ -102,7 +99,6 @@ public class BlackjackTable {
 		playersHands.set(seat, hands);
 		blackjackPlayer.setHands(hands);
 		players.set(seat, blackjackPlayer);
-		numPlayers++;
 	}
 	
 	/**
@@ -122,23 +118,19 @@ public class BlackjackTable {
 		if (doesShoeNeedRefill()) {
 			System.out.println("***CUT CARD MET***");
 			refillShoe();
+			shuffleShoe();
 		}
 		
-		checkIfNewShoe();
-		setInsuranceFalseForAllPlayers();
-		setBetAmounts();
+		setBetAmountForAllPlayers();
 		dealInitialCards();
-		
-		if (dealerHand.isFirstCardAce()) {
-			offerInsuranceToAllPlayers();
-		}
+		checkInsuranceScenario();
 		
 		if (!dealerHand.isBlackjack()) {
 			playPlayersTurns();
 		}
 		
-		exposeDealersHoleCard();
-		playDealersTurn();
+		exposeDealerHoleCard();
+		playDealerTurn();
 		adjustAllPlayersChipsForInsurance();
 		payoutPlayers();
 		printTable();
@@ -164,23 +156,11 @@ public class BlackjackTable {
 		}
 	}
 	
-	private void checkIfNewShoe() {
-		if (shoe.isNewShoe()) {
-			shoe.shuffleShoe();
-			PlayingCard initialCard = shoe.dealCard();
-			discardTray.addCard(initialCard);
-			kissIStrategy.resetCount();
-		}
-	}
-	
-	private void setInsuranceFalseForAllPlayers() {
-		insuranceOffered = false;
-		
-		for (int i = 0; i < players.size(); i++) {
-			if (hasPlayerAtSeat(i)) {
-				players.get(i).setTakesInsurance(false);
-			}
-		}
+	private void shuffleShoe() {
+		shoe.shuffleShoe();
+		PlayingCard initialCard = shoe.dealCard();
+		discardTray.addCard(initialCard);
+		kissIStrategy.resetCount();
 	}
 	
 	private boolean hasPlayerAtSeat(int seat) {
@@ -193,10 +173,7 @@ public class BlackjackTable {
 		return seatOccupied;
 	}
 	
-	/**
-	 * Sets each player's bet amount at the start of the round as a reference to the minimum bet.
-	 */
-	private void setBetAmounts() {
+	private void setBetAmountForAllPlayers() {
 		for (int i = 0; i < players.size(); i++) {
 			if (hasPlayerAtSeat(i)) {
 				if (players.get(i).doesCountsCards()) {
@@ -208,9 +185,6 @@ public class BlackjackTable {
 		}
 	}
 	
-	/**
-	 * Deal two cards to each player and the dealer.
-	 */
 	private void dealInitialCards() {
 		for (int i = 0; i < BlackjackRules.NUM_CARDS_PER_INITIAL_DEAL; i++) {
 			for (int j = 0; j < players.size(); j++) {
@@ -245,34 +219,32 @@ public class BlackjackTable {
 		dealerHand.addCard(dealersCard);
 	}
 	
-	/**
-	 * Offer insurance to the players.
-	 * @precond This can only be done if the dealer's up-card is an ace.
-	 */
-	private void offerInsuranceToAllPlayers() {
-		insuranceOffered = true;
+	private void checkInsuranceScenario() {
+		insuranceOffered = false;
+		
+		if (dealerHand.isFirstCardAce()) {
+			insuranceOffered = true;
+		}
 		
 		for (int i = 0; i < players.size(); i++) {
 			if (hasPlayerAtSeat(i)) {
-				offerInsuranceToPlayer(i);
+				setInsuranceTakenForPlayer(i);
 			}
 		}
 	}
 	
-	private void offerInsuranceToPlayer(int seat) {
-		boolean insurance = false;
+	private void setInsuranceTakenForPlayer(int seat) {
+		boolean insuranceTaken = false;
 		
-		if (players.get(seat).doesCountsCards()) {
-			try {
-				insurance = kissIStrategy.getInsuranceMove();
-			} catch (InvalidShoeException e) {
-				e.printStackTrace();
+		if (insuranceOffered) {
+			if (players.get(seat).doesCountsCards()) {
+				insuranceTaken = kissIStrategy.getInsuranceAction();
+			} else {
+				insuranceTaken = compositionStrategy.getInsuranceAction();
 			}
-		} else {
-			insurance = compositionStrategy.getInsuranceAction();
 		}
 		
-		players.get(seat).setTakesInsurance(insurance);
+		players.get(seat).setTakesInsurance(insuranceTaken);
 	}
 	
 	/**
@@ -343,14 +315,11 @@ public class BlackjackTable {
 		}
 	}
 	
-	private void exposeDealersHoleCard() {
+	private void exposeDealerHoleCard() {
 		adjustCount(dealerHand.getSecondCard());
 	}
 	
-	/**
-	 * Play the dealers turn.
-	 */
-	private void playDealersTurn() {
+	private void playDealerTurn() {
 		boolean dealerStands = false;
 		
 		if (hasPlayerHandRemaining()) {
