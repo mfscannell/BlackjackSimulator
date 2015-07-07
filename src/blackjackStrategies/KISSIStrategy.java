@@ -1,5 +1,6 @@
-package rules;
+package blackjackStrategies;
 
+import rules.BlackjackRules;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
 import modelObjects.Shoe;
@@ -8,7 +9,8 @@ import enumerations.CardRank;
 import exceptions.InvalidNumDecksException;
 import exceptions.InvalidShoeException;
 
-public class KISSIStrategy extends CompositionStrategy {
+public class KISSIStrategy extends BlackjackStrategyDecorator {
+	BlackjackStrategy blackjackStrategy;
 	/**Initial Card Counts at the start of a new shoe based upon the number of decks used. */
 	public static final int[] INITIAL_COUNTS = {20, 18, 17, 15, 14, 12, 10, 8, 6};
 	public static final int[] WALK_AWAY = {14, 14, 14, 12, 10, 8, 6, 4, 2};
@@ -25,8 +27,8 @@ public class KISSIStrategy extends CompositionStrategy {
 	 * @throws InvalidNumDecksException  The number of decks specified must be between
 	 * 1 and 8.
 	 */
-	public KISSIStrategy(BlackjackRules rules, int numDecks) throws InvalidNumDecksException {
-		super(rules, numDecks);
+	public KISSIStrategy(BlackjackStrategy blackjackStrategy, BlackjackRules rules, int numDecks) {
+		this.blackjackStrategy = blackjackStrategy;
 		this.rules = rules;
 		this.numDecks = numDecks;
 		
@@ -83,10 +85,10 @@ public class KISSIStrategy extends CompositionStrategy {
 			} else if (hand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 6) {
 				move = BlackjackMove.DOUBLE;
 			} else {
-				move = super.getAction(dealerUpCard, hand, numHands);
+				move = blackjackStrategy.getAction(dealerUpCard, hand, numHands);
 			}
 		} else {
-			move = super.getAction(dealerUpCard, hand, numHands);
+			move = blackjackStrategy.getAction(dealerUpCard, hand, numHands);
 		}
 		
 		if (move == BlackjackMove.DOUBLE && 
@@ -112,7 +114,7 @@ public class KISSIStrategy extends CompositionStrategy {
 		} else if (4 <= numDecks && numDecks <= 8 && count >= 25) {
 			insurance = true;
 		} else {
-			insurance = super.getInsuranceAction();
+			insurance = blackjackStrategy.getInsuranceAction();
 		}
 		
 		return insurance;

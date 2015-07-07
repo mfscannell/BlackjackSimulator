@@ -2,10 +2,18 @@ package modelObjects;
 
 import java.util.ArrayList;
 
+import enumerations.BlackjackMove;
+import rules.BlackjackRules;
+import blackjackStrategies.BasicStrategy;
+import blackjackStrategies.BlackjackStrategy;
+import blackjackStrategies.CompositionStrategy;
+import blackjackStrategies.KISSIStrategy;
+
 public class BlackjackPlayer extends Gambler {
 	private boolean countsCards;
 	private ArrayList<BlackjackHand> hands;
 	private boolean insurance;
+	private BlackjackStrategy blackjackStrategy;
 	
 	private static final String COUNTS_CARDS = "Counts cards";
 	private static final String DOESNT_COUNTS_CARDS = "Doesn't counts cards";
@@ -50,12 +58,43 @@ public class BlackjackPlayer extends Gambler {
 		this.insurance = insurance;
 	}
 	
+	public void setTakesInsurance() {
+		this.insurance = blackjackStrategy.getInsuranceAction();
+	}
+	
+	public BlackjackMove getAction(PlayingCard dealerUpCard, BlackjackHand playerHand, int numHands) {
+		return blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
+	}
+	
 	/**
 	 * Checks whether or not the player is counting cards.
 	 * @return  True if the player counts cards.
 	 */
 	public boolean doesCountsCards() {
 		return countsCards;
+	}
+	
+	public void notify(BlackjackRules rules, int numDecks) {
+		if (countsCards) {
+			blackjackStrategy = new BasicStrategy(rules, numDecks);
+			blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+			blackjackStrategy = new KISSIStrategy(blackjackStrategy, rules, numDecks);
+		} else {
+			blackjackStrategy = new BasicStrategy(rules, numDecks);
+			blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+		}
+	}
+	
+	public void resetCount() {
+		blackjackStrategy.resetCount();
+	}
+	
+	public void adjustCount(PlayingCard dealtCard) {
+		blackjackStrategy.adjustCount(dealtCard);
+	}
+	
+	public void setBetAmount() {
+		super.setBetAmount(blackjackStrategy.getBetSize());
 	}
 	
 	public String toString() {

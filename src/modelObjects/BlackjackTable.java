@@ -2,14 +2,14 @@ package modelObjects;
 
 import java.util.ArrayList;
 
+import blackjackStrategies.BasicStrategy;
+import blackjackStrategies.CompositionStrategy;
+import blackjackStrategies.KISSIStrategy;
 import enumerations.BlackjackMove;
 import exceptions.InvalidNumDecksException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
-import rules.BasicStrategy;
 import rules.BlackjackRules;
-import rules.CompositionStrategy;
-import rules.KISSIStrategy;
 
 public class BlackjackTable {
 	public static final int MIN_PLAYERS = 1;
@@ -22,8 +22,8 @@ public class BlackjackTable {
 	private ArrayList<ArrayList<BlackjackHand>> playersHands;
 	private BlackjackHand dealerHand;
 	private BlackjackDealer dealer;
-	private CompositionStrategy compositionStrategy;
-	private KISSIStrategy kissIStrategy;
+//	private CompositionStrategy compositionStrategy;
+//	private KISSIStrategy kissIStrategy;
 	private boolean insuranceOffered;
 	
 	/**
@@ -45,12 +45,12 @@ public class BlackjackTable {
 		
 		discardTray = new DiscardTray();
 		dealer = null;
-		try {
-			compositionStrategy = new CompositionStrategy(rules, shoe.getNumDecks());
-			kissIStrategy = new KISSIStrategy(rules, shoe.getNumDecks());
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			compositionStrategy = new CompositionStrategy(rules, shoe.getNumDecks());
+//			kissIStrategy = new KISSIStrategy(rules, shoe.getNumDecks());
+//		} catch (InvalidNumDecksException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	/**
@@ -99,6 +99,7 @@ public class BlackjackTable {
 		playersHands.set(seat, hands);
 		blackjackPlayer.setHands(hands);
 		players.set(seat, blackjackPlayer);
+		blackjackPlayer.notify(rules, shoe.getNumDecks());
 	}
 	
 	/**
@@ -142,7 +143,7 @@ public class BlackjackTable {
 	private boolean doesShoeNeedRefill() {
 		boolean shoeNeedsRefill = false;
 		
-		if (shoe.wasCutCardMet() || kissIStrategy.shouldWalkAway()) {
+		if (shoe.wasCutCardMet()) {
 			shoeNeedsRefill = true;
 		}
 		
@@ -160,7 +161,12 @@ public class BlackjackTable {
 		shoe.shuffleShoe();
 		PlayingCard initialCard = shoe.dealCard();
 		discardTray.addCard(initialCard);
-		kissIStrategy.resetCount();
+		
+		for (int i = 0; i < players.size(); i++) {
+			if (hasPlayerAtSeat(i)) {
+				players.get(i).resetCount();
+			}
+		}
 	}
 	
 	private boolean hasPlayerAtSeat(int seat) {
@@ -176,11 +182,7 @@ public class BlackjackTable {
 	private void setBetAmountForAllPlayers() {
 		for (int i = 0; i < players.size(); i++) {
 			if (hasPlayerAtSeat(i)) {
-				if (players.get(i).doesCountsCards()) {
-					players.get(i).setBetAmount(kissIStrategy.getBetSize());
-				} else {
-					players.get(i).setBetAmount(1);
-				}
+				players.get(i).setBetAmount();
 			}
 		}
 	}
@@ -234,17 +236,11 @@ public class BlackjackTable {
 	}
 	
 	private void setInsuranceTakenForPlayer(int seat) {
-		boolean insuranceTaken = false;
-		
 		if (insuranceOffered) {
-			if (players.get(seat).doesCountsCards()) {
-				insuranceTaken = kissIStrategy.getInsuranceAction();
-			} else {
-				insuranceTaken = compositionStrategy.getInsuranceAction();
-			}
+			players.get(seat).setTakesInsurance();
+		} else {
+			players.get(seat).setTakesInsurance(false);
 		}
-		
-		players.get(seat).setTakesInsurance(insuranceTaken);
 	}
 	
 	/**
@@ -270,11 +266,7 @@ public class BlackjackTable {
 			if (playerHand.getNumCards() < 2) {
 				dealCardFromShoeToPlayer(playerHand);
 			} else {
-				if (players.get(seat).doesCountsCards()) {
-					move = kissIStrategy.getAction(dealerUpCard, playerHand, numHands);
-				} else {
-					move = compositionStrategy.getAction(dealerUpCard, playerHand, numHands);
-				}
+				move = players.get(seat).getAction(dealerUpCard, playerHand, numHands);
 				
 				switch (move) {
 					case STAND:		j++;
@@ -421,7 +413,11 @@ public class BlackjackTable {
 	 * @param dealtCard  The card dealt from the shoe.
 	 */
 	private void adjustCount(final PlayingCard dealtCard) {
-		kissIStrategy.adjustCount(dealtCard);
+		for (int i = 0; i < players.size(); i++) {
+			if (hasPlayerAtSeat(i)) {
+				players.get(i).adjustCount(dealtCard);
+			}
+		}
 	}
 	
 	private void printTable() {
@@ -450,6 +446,6 @@ public class BlackjackTable {
 	}
 	
 	private void printCardCount() {
-		System.out.println("Card count:" + kissIStrategy.getCount());
+		//System.out.println("Card count:" + kissIStrategy.getCount());
 	}
 }

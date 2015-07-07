@@ -11,9 +11,8 @@ import modelObjects.BlackjackHand;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import rules.BasicStrategy;
+import blackjackStrategies.BasicStrategy;
 import rules.BlackjackRules;
-import rules.BasicStrategy;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
@@ -41,13 +40,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -56,13 +51,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -71,13 +62,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -86,13 +73,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -101,13 +84,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -116,13 +95,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -131,13 +106,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -146,13 +117,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -161,14 +128,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			System.out.println("testPair4vs10:" + strategy.getAction(dealerUpCard, hand, numDecks));
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -177,13 +139,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -200,13 +158,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -223,13 +177,9 @@ public class Pair4 {
 		
 		int numDecks = 4;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -238,13 +188,9 @@ public class Pair4 {
 		
 		int numDecks = 1;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -253,12 +199,8 @@ public class Pair4 {
 		
 		int numDecks = 1;
 		
-		try {
-			BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 }

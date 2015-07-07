@@ -1,5 +1,6 @@
-package rules;
+package blackjackStrategies;
 
+import rules.BlackjackRules;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
@@ -10,7 +11,7 @@ import modelObjects.BlackjackTable;
 import modelObjects.PlayingCard;
 import modelObjects.Shoe;
 
-public class BasicStrategy {
+public class BasicStrategy extends BlackjackStrategy {
 	private BlackjackMove[][] pairChart;
 	private BlackjackMove[][] totalChart;
 	private BlackjackMove[][] softChart;
@@ -23,22 +24,17 @@ public class BasicStrategy {
 	 * @throws InvalidNumDecksException  The number of decks specified must be between
 	 * 1 and 8.
 	 */
-	public BasicStrategy(final BlackjackRules rules, int numDecks) throws InvalidNumDecksException {
+	public BasicStrategy(final BlackjackRules rules, int numDecks) {
+		pairChart = new BlackjackMove[11][11];
+		totalChart = new BlackjackMove[22][11];
+		softChart = new BlackjackMove[11][11];
 		
-		if (Shoe.MIN_NUM_DECKS <= numDecks && numDecks <= Shoe.MAX_NUM_DECKS) {
-			pairChart = new BlackjackMove[11][11];
-			totalChart = new BlackjackMove[22][11];
-			softChart = new BlackjackMove[11][11];
+		updatePairChart(rules, numDecks);
+		updateTotalChart(rules, numDecks);
+		updateSoftChart(rules, numDecks);
 		
-			updatePairChart(rules, numDecks);
-			updateTotalChart(rules, numDecks);
-			updateSoftChart(rules, numDecks);
-			
-			this.rules = rules;
-		} else {
-			throw new InvalidNumDecksException("" + numDecks + " is invalid number of decks");
-		}
-	}//end constructor
+		this.rules = rules;
+	}
 	
 	/**
 	 * Updates the basic strategy chart for hands that are pairs.
@@ -382,6 +378,22 @@ public class BasicStrategy {
 		return correctedMove;
 	}
 	
+	public int getBetSize() {
+		return 1;
+	}
+	
+	public void resetCount() {
+		//do nothing
+	}
+	
+	public void adjustCount(PlayingCard dealtCard) {
+		//do nothing
+	}
+	
+	public int getCount() {
+		return 0;
+	}
+	
 	/**
 	 * Get the recommend insurance move when it is offered.
 	 * @return  True if the player should take insurance.
@@ -389,47 +401,4 @@ public class BasicStrategy {
 	public boolean getInsuranceAction() {
 		return false;
 	}
-	
-	public void printPairChart() {
-		for (int i = 0; i < pairChart.length; i++) {
-			System.out.printf("%2d: ", i);
-			for (int j = 1; j < pairChart[i].length; j++) {
-				if (i == 0) {
-					System.out.printf("%3d", j);
-				} else {
-					System.out.printf("%3s", pairChart[i][j].toString());
-				}
-			}
-			System.out.println("");
-		}
-	}
-	
-	public void printTotalChart() {
-		for (int i = 0; i < totalChart.length; i++) {
-			System.out.printf("%2d: ", i);
-			for (int j = 1; j < totalChart[i].length; j++) {
-				if (i == 0) {
-					System.out.printf("%3d", j);
-				} else {
-					System.out.printf("%3s", totalChart[i][j].toString());
-				}
-			}
-			System.out.println("");
-		}
-	}
-	
-	public void printSoftChart() {
-		for (int i = 0; i < softChart.length; i++) {
-			System.out.printf("%2d: ", i);
-			for (int j = 1; j < softChart[i].length; j++) {
-				if (i == 0) {
-					System.out.printf("%3d", j);
-				} else {
-					System.out.printf("%3s", softChart[i][j].toString());
-				}
-			}
-			System.out.println("");
-		}
-	}
-
 }

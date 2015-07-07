@@ -1,12 +1,14 @@
-package rules;
+package blackjackStrategies;
 
+import rules.BlackjackRules;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import exceptions.InvalidNumDecksException;
 
-public class CompositionStrategy extends BasicStrategy {
+public class CompositionStrategy extends BlackjackStrategyDecorator {
+	BlackjackStrategy blackjackStrategy;
 
 	/**
 	 * Constructor
@@ -15,8 +17,8 @@ public class CompositionStrategy extends BasicStrategy {
 	 * @throws InvalidNumDecksException  The number of decks specified must be between
 	 * 1 and 8.
 	 */
-	public CompositionStrategy(BlackjackRules rules, int numDecks) throws InvalidNumDecksException {
-		super(rules, numDecks);
+	public CompositionStrategy(BlackjackStrategy blackjackStrategy) {
+		this.blackjackStrategy = blackjackStrategy;
 	}
 	
 	/**
@@ -40,10 +42,30 @@ public class CompositionStrategy extends BasicStrategy {
 					dealerUpCard.getValue() == 4) {
 			move = BlackjackMove.HIT;
 		} else {
-			move = super.getAction(dealerUpCard, hand, numHands);
+			move = blackjackStrategy.getAction(dealerUpCard, hand, numHands);
 		}
 		
 		return move;
+	}
+	
+	public int getBetSize() {
+		return 1;
+	}
+	
+	public void resetCount() {
+		//do nothing
+	}
+	
+	public int getCount() {
+		return blackjackStrategy.getCount();
+	}
+	
+	public boolean getInsuranceAction() {
+		return blackjackStrategy.getInsuranceAction();
+	}
+	
+	public void adjustCount(PlayingCard dealtCard) {
+		blackjackStrategy.adjustCount(dealtCard);
 	}
 
 }
