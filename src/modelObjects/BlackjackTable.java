@@ -45,12 +45,6 @@ public class BlackjackTable {
 		
 		discardTray = new DiscardTray();
 		dealer = null;
-//		try {
-//			compositionStrategy = new CompositionStrategy(rules, shoe.getNumDecks());
-//			kissIStrategy = new KISSIStrategy(rules, shoe.getNumDecks());
-//		} catch (InvalidNumDecksException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	/**
@@ -120,6 +114,7 @@ public class BlackjackTable {
 			System.out.println("***CUT CARD MET***");
 			refillShoe();
 			shuffleShoe();
+			resetPlayersCardCounts();
 		}
 		
 		setBetAmountForAllPlayers();
@@ -161,7 +156,9 @@ public class BlackjackTable {
 		shoe.shuffleShoe();
 		PlayingCard initialCard = shoe.dealCard();
 		discardTray.addCard(initialCard);
-		
+	}
+	
+	private void resetPlayersCardCounts() {
 		for (int i = 0; i < players.size(); i++) {
 			if (hasPlayerAtSeat(i)) {
 				players.get(i).resetCount();
@@ -200,15 +197,22 @@ public class BlackjackTable {
 	}
 	
 	private void dealCardToPlayer(int seat) {
-		PlayingCard dealtCard = shoe.dealCard();
-		adjustCount(dealtCard);
+		BlackjackHand hand;
 		
 		if (playersHands.get(seat).size() == 0) {
-			BlackjackHand hand = new BlackjackHand();
+			hand = new BlackjackHand();
 			playersHands.get(seat).add(hand);
+		} else {
+			hand = playersHands.get(seat).get(0);
 		}
-			
-		playersHands.get(seat).get(0).addCard(dealtCard);
+		
+		dealCardFromShoeToHand(hand);
+	}
+	
+	private void dealCardFromShoeToHand(BlackjackHand hand) {
+		PlayingCard dealtCard = shoe.dealCard();
+		adjustCount(dealtCard);
+		hand.addCard(dealtCard);
 	}
 	
 	private void dealCardToDealer(int cardPosition) {
@@ -264,14 +268,14 @@ public class BlackjackTable {
 			final int numHands = playersHands.get(seat).size();
 			
 			if (playerHand.getNumCards() < 2) {
-				dealCardFromShoeToPlayer(playerHand);
+				dealCardFromShoeToHand(playerHand);
 			} else {
 				move = players.get(seat).getAction(dealerUpCard, playerHand, numHands);
 				
 				switch (move) {
 					case STAND:		j++;
 									break;
-					case HIT:		dealCardFromShoeToPlayer(playerHand);
+					case HIT:		dealCardFromShoeToHand(playerHand);
 									
 									if (playerHand.isBust()) {
 										j++;
@@ -282,7 +286,7 @@ public class BlackjackTable {
 									BlackjackHand splitHand = new BlackjackHand(splitCard);
 									playersHands.get(seat).add(j + 1, splitHand);
 									break;
-					case DOUBLE:	dealCardFromShoeToPlayer(playerHand);
+					case DOUBLE:	dealCardFromShoeToHand(playerHand);
 									playerHand.setWasDoubleDown(true);
 									j++;
 									break;
@@ -292,12 +296,6 @@ public class BlackjackTable {
 		}
 	}
 	
-	private void dealCardFromShoeToPlayer(BlackjackHand hand) {
-		PlayingCard dealtCard = shoe.dealCard();
-		adjustCount(dealtCard);
-		hand.addCard(dealtCard);
-	}
-	
 	private void exposeDealerHoleCard() {
 		adjustCount(dealerHand.getSecondCard());
 	}
@@ -305,7 +303,7 @@ public class BlackjackTable {
 	private void playDealerTurn() {
 		if (hasPlayerHandRemaining()) {
 			while (rules.getDealersMove(dealerHand) != BlackjackMove.STAND) {
-				dealCardFromShoeToPlayer(dealerHand);
+				dealCardFromShoeToHand(dealerHand);
 			}
 		}
 	}
