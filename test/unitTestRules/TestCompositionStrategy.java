@@ -9,8 +9,10 @@ import modelObjects.BlackjackHand;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import blackjackStrategies.BasicStrategy;
+import blackjackStrategies.BlackjackStrategy;
+import blackjackStrategies.CompositionStrategy;
 import rules.BlackjackRules;
-import rules.CompositionStrategy;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
@@ -36,13 +38,10 @@ public class TestCompositionStrategy {
 		
 		int numDecks = 2;
 		
-		try {
-			CompositionStrategy strategy = new CompositionStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+		strategy = new CompositionStrategy(strategy);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -57,13 +56,10 @@ public class TestCompositionStrategy {
 		
 		int numDecks = 2;
 		
-		try {
-			CompositionStrategy strategy = new CompositionStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+		strategy = new CompositionStrategy(strategy);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
 	}
 	
 	@Test
@@ -80,13 +76,10 @@ public class TestCompositionStrategy {
 		
 		int numDecks = 2;
 		
-		try {
-			CompositionStrategy strategy = new CompositionStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+		strategy = new CompositionStrategy(strategy);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
 	}
 	
 	@Test
@@ -103,13 +96,10 @@ public class TestCompositionStrategy {
 		
 		int numDecks = 2;
 		
-		try {
-			CompositionStrategy strategy = new CompositionStrategy(rules, numDecks);
-			
-			assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+		strategy = new CompositionStrategy(strategy);
+		
+		assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
 	}
 	
 	@Test
@@ -126,12 +116,9 @@ public class TestCompositionStrategy {
 		
 		int numDecks = 2;
 		
-		try {
-			CompositionStrategy strategy = new CompositionStrategy(rules, numDecks);
+		BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+		strategy = new CompositionStrategy(strategy);
 			
-			assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
 	}
 }

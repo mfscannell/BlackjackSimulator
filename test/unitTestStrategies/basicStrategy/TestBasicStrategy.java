@@ -6,11 +6,11 @@ import modelObjects.BlackjackHand;
 
 import org.junit.Test;
 
+import blackjackStrategies.BasicStrategy;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
 import exceptions.InvalidNumDecksException;
-import rules.BasicStrategy;
 import rules.BlackjackRules;
 
 public class TestBasicStrategy {
@@ -24,23 +24,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
-			
-			assertTrue(move == BlackjackMove.STAND);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
+		
+		assertTrue(move == BlackjackMove.STAND);
 	}
 	
 	@Test
@@ -53,23 +49,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
-			
-			assertTrue(move == BlackjackMove.SPLIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
+		
+		assertTrue(move == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -82,23 +74,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 4);
-			
-			assertTrue(move == BlackjackMove.STAND);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 4);
+		
+		assertTrue(move == BlackjackMove.STAND);
 	}
 	
 	@Test
@@ -111,23 +99,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 3);
-			
-			assertTrue(move == BlackjackMove.SPLIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 3);
+		
+		assertTrue(move == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -140,23 +124,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
-			
-			assertTrue(move == BlackjackMove.STAND);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
+		
+		assertTrue(move == BlackjackMove.STAND);
 	}
 	
 	@Test
@@ -169,23 +149,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 4);
-			
-			assertTrue(move == BlackjackMove.STAND);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 4);
+		
+		assertTrue(move == BlackjackMove.STAND);
 	}
 	
 	@Test
@@ -198,23 +174,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
-			
-			assertTrue(move == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
+		
+		assertTrue(move == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -227,23 +199,19 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand(firstCard);
-			hand.addCard(secondCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
-			
-			assertTrue(move == BlackjackMove.DOUBLE);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand(firstCard);
+		hand.addCard(secondCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
+		
+		assertTrue(move == BlackjackMove.DOUBLE);
 	}
 	
 	@Test
@@ -256,26 +224,22 @@ public class TestBasicStrategy {
 		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
-		try {
-			BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
-			
-			BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
-			BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-			BlackjackCard thirdCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-			
-			BlackjackHand hand = new BlackjackHand();
-			hand.addCard(firstCard);
-			hand.addCard(secondCard);
-			hand.addCard(thirdCard);
-			
-			BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-			
-			BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
-			
-			assertTrue(move == BlackjackMove.HIT);
-		} catch (InvalidNumDecksException e) {
-			e.printStackTrace();
-		}
+		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+		
+		BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
+		BlackjackCard thirdCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+		
+		BlackjackHand hand = new BlackjackHand();
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		hand.addCard(thirdCard);
+		
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+		
+		BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
+		
+		assertTrue(move == BlackjackMove.HIT);
 	}
 
 }
