@@ -22,8 +22,6 @@ public class BlackjackTable {
 	private ArrayList<ArrayList<BlackjackHand>> playersHands;
 	private BlackjackHand dealerHand;
 	private BlackjackDealer dealer;
-//	private CompositionStrategy compositionStrategy;
-//	private KISSIStrategy kissIStrategy;
 	private boolean insuranceOffered;
 	
 	/**
@@ -113,7 +111,7 @@ public class BlackjackTable {
 		if (doesShoeNeedRefill()) {
 			System.out.println("***CUT CARD MET***");
 			refillShoe();
-			shuffleShoe();
+			shuffleShoeAndDiscardFirstCard();
 			resetPlayersCardCounts();
 		}
 		
@@ -152,7 +150,7 @@ public class BlackjackTable {
 		}
 	}
 	
-	private void shuffleShoe() {
+	private void shuffleShoeAndDiscardFirstCard() {
 		shoe.shuffleShoe();
 		PlayingCard initialCard = shoe.dealCard();
 		discardTray.addCard(initialCard);
@@ -188,7 +186,7 @@ public class BlackjackTable {
 		for (int i = 0; i < BlackjackRules.NUM_CARDS_PER_INITIAL_DEAL; i++) {
 			for (int j = 0; j < players.size(); j++) {
 				if (hasPlayerAtSeat(j)) {
-					dealCardToPlayer(j);
+					dealCardToPlayerInitialHand(j);
 				}
 			}
 			
@@ -196,7 +194,12 @@ public class BlackjackTable {
 		}
 	}
 	
-	private void dealCardToPlayer(int seat) {
+	private void dealCardToPlayerInitialHand(int seat) {
+		BlackjackHand hand = retrievePlayerFirstHand(seat);
+		dealCardFromShoeToHand(hand);
+	}
+	
+	private BlackjackHand retrievePlayerFirstHand(int seat) {
 		BlackjackHand hand;
 		
 		if (playersHands.get(seat).size() == 0) {
@@ -206,7 +209,7 @@ public class BlackjackTable {
 			hand = playersHands.get(seat).get(0);
 		}
 		
-		dealCardFromShoeToHand(hand);
+		return hand;
 	}
 	
 	private void dealCardFromShoeToHand(BlackjackHand hand) {
@@ -247,9 +250,6 @@ public class BlackjackTable {
 		}
 	}
 	
-	/**
-	 * Play each of the players turns.
-	 */
 	private void playPlayersTurns() {
 		for (int i = 0; i < players.size(); i++) {
 			if (hasPlayerAtSeat(i)) {
@@ -349,7 +349,6 @@ public class BlackjackTable {
 		final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
 		final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
 		
-		//adjust the players cash total based upon the insurance bet.
 		if (dealerHand.isBlackjack() && players.get(seat).takesInsurance()) {
 			players.get(seat).adjustCashTotal(insuranceWinnings);
 		} else if (!dealerHand.isBlackjack() && players.get(seat).takesInsurance()) {
