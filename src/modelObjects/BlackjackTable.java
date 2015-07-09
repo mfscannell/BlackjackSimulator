@@ -98,9 +98,7 @@ public class BlackjackTable implements Observable {
 		playersHands.set(seat, hands);
 		blackjackPlayer.setHands(hands);
 		players.set(seat, blackjackPlayer);
-		//TODO replace .notify with .update
-		//blackjackPlayer.update(this, null);
-		blackjackPlayer.notify(rules, shoe.getNumDecks());
+		blackjackPlayer.update(this, null);
 	}
 	
 	public void addObserver(Observer obj) {
@@ -125,6 +123,7 @@ public class BlackjackTable implements Observable {
 	 */
 	public void setDealer(BlackjackDealer dealer) {
 		this.dealer = dealer;
+		this.dealer.setHand(dealerHand);
 	}
 	
 	/**

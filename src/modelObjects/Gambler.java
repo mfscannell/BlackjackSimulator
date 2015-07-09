@@ -43,11 +43,4 @@ public abstract class Gambler implements Observer {
 	public double getCashTotal() {
 		return cashTotal;
 	}
-	
-	public void update(final Observable observable, final Object[] addlArgs) {
-		if (true) {
-			
-		}
-	}
-
 }

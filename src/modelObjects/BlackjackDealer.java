@@ -19,6 +19,10 @@ public class BlackjackDealer extends Gambler {
 		
 		return stringBuilder.toString();
 	}
+	
+	public void setHand(BlackjackHand hand) {
+		this.hand = hand;
+	}
 
 	@Override
 	public void update(Observable observable, Object args) {

@@ -75,19 +75,7 @@ public class BlackjackPlayer extends Gambler {
 		return countsCards;
 	}
 	
-	public void notify(BlackjackRules rules, int numDecks) {
-		if (countsCards) {
-			blackjackStrategy = new BasicStrategy(rules, numDecks);
-			blackjackStrategy = new CompositionStrategy(blackjackStrategy);
-			blackjackStrategy = new KISSIStrategy(blackjackStrategy, rules, numDecks);
-		} else {
-			blackjackStrategy = new BasicStrategy(rules, numDecks);
-			blackjackStrategy = new CompositionStrategy(blackjackStrategy);
-		}
-	}
-	
 	public void update(final Observable observable, final Object args) {
-		//TODO create strategy based upon rules and number of cards in deck
 		if (observable instanceof BlackjackTable) {
 			BlackjackTable blackjackTable = (BlackjackTable)observable;
 			BlackjackRules rules = blackjackTable.getRules();
