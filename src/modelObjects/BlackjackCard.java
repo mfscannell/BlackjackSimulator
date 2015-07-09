@@ -1,8 +1,8 @@
 package modelObjects;
 
 import rules.BlackjackRules;
-import enumerations.CardSuit;
 import enumerations.CardRank;
+import enumerations.CardSuit;
 
 public class BlackjackCard extends PlayingCard {
 	private int value;

@@ -1,7 +1,7 @@
 package unitTestModelObjects;
 
-import static org.junit.Assert.*;
-import modelObjects.BlackjackCard;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import modelObjects.PlayingCard;
 import modelObjects.Shoe;
 

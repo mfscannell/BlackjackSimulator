@@ -1,23 +1,20 @@
-package unitTestRules;
+package unitTestStrategies;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
 
 import org.junit.Test;
 
+import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
 import blackjackStrategies.BlackjackStrategy;
-import blackjackStrategies.CompositionStrategy;
 import blackjackStrategies.KISSIStrategy;
-import rules.BlackjackRules;
-import rules.BlackjackRules.Builder;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
-import exceptions.InvalidNumDecksException;
-import exceptions.InvalidShoeException;
 
 public class TestKISSIStrategy {
 	private BlackjackRules.Builder rulesBuilder;

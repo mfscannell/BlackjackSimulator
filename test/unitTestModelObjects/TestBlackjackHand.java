@@ -1,6 +1,7 @@
 package unitTestModelObjects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
@@ -9,7 +10,6 @@ import org.junit.Test;
 
 import enumerations.CardRank;
 import enumerations.CardSuit;
-import exceptions.InvalidMoveException;
 
 public class TestBlackjackHand {
 	
@@ -495,6 +495,45 @@ public class TestBlackjackHand {
 		hand.addCard(secondCard);
 		
 		assertFalse(hand.isHand(CardRank.EIGHT, CardRank.FIVE));
+	}
+	
+	@Test
+	public void testIsHandFalseMultiCard() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+		BlackjackCard thirdCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		hand.addCard(thirdCard);
+		
+		assertFalse(hand.isHand(CardRank.EIGHT, CardRank.THREE));
+		assertFalse(hand.isHand(CardRank.THREE, CardRank.EIGHT));
+	}
+	
+	@Test
+	public void testGetFirstCard() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		
+		assertTrue(hand.getFirstCard().equals(firstCard));
+	}
+	
+	@Test
+	public void testGetSecondCard() {
+		BlackjackHand hand = new BlackjackHand();
+		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+		BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+		
+		hand.addCard(firstCard);
+		hand.addCard(secondCard);
+		
+		assertTrue(hand.getSecondCard().equals(secondCard));
 	}
 
 }

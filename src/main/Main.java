@@ -4,20 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import configFile.ConfigFileHeading;
-
-import rules.BlackjackRules;
-import enumerations.CardRank;
-import enumerations.CardSuit;
-import exceptions.InvalidConfigFileException;
-import exceptions.InvalidShoeException;
-import exceptions.TableSeatNumberInvalidException;
-import exceptions.TableSeatTakenException;
-import modelObjects.BlackjackCard;
 import modelObjects.BlackjackDealer;
 import modelObjects.BlackjackPlayer;
 import modelObjects.BlackjackTable;
 import modelObjects.Shoe;
+import rules.BlackjackRules;
+import configFile.ConfigFileHeading;
+import exceptions.InvalidConfigFileException;
+import exceptions.InvalidShoeException;
+import exceptions.TableSeatNumberInvalidException;
+import exceptions.TableSeatTakenException;
 
 public class Main {
 	

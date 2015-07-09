@@ -2,14 +2,10 @@ package modelObjects;
 
 import java.util.ArrayList;
 
-import blackjackStrategies.BasicStrategy;
-import blackjackStrategies.CompositionStrategy;
-import blackjackStrategies.KISSIStrategy;
+import rules.BlackjackRules;
 import enumerations.BlackjackMove;
-import exceptions.InvalidNumDecksException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
-import rules.BlackjackRules;
 
 public class BlackjackTable {
 	public static final int MIN_PLAYERS = 1;
@@ -35,6 +31,7 @@ public class BlackjackTable {
 		this.rules = rules;
 		players = new ArrayList<BlackjackPlayer>();
 		playersHands = new ArrayList<ArrayList<BlackjackHand>>();
+		dealerHand = new BlackjackHand();
 		
 		for (int i = 0; i < MAX_PLAYERS; i++) {
 			players.add(null);
@@ -99,8 +96,6 @@ public class BlackjackTable {
 	 * @param dealer  The blackjack dealer.
 	 */
 	public void setDealer(BlackjackDealer dealer) {
-		dealerHand = new BlackjackHand();
-		dealer.setHand(dealerHand);
 		this.dealer = dealer;
 	}
 	

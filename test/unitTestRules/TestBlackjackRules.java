@@ -1,6 +1,6 @@
 package unitTestRules;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 

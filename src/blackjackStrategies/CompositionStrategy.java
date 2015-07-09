@@ -1,11 +1,9 @@
 package blackjackStrategies;
 
-import rules.BlackjackRules;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
-import exceptions.InvalidNumDecksException;
 
 public class CompositionStrategy extends BlackjackStrategyDecorator {
 	BlackjackStrategy blackjackStrategy;
@@ -36,10 +34,7 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
 			(hand.hasCardOfRank(CardRank.FOUR) || hand.hasCardOfRank(CardRank.FIVE)) &&
 			dealerUpCard.getValue() == 10) {
 			move = BlackjackMove.STAND;
-		} else if (hand.getBlackjackTotal() == 12 && 
-				   ((hand.getFirstCardValue() == 10 && hand.getSecondCardValue() == 2) || 
-					(hand.getFirstCardValue() == 2 && hand.getSecondCardValue() == 10)) && 
-					dealerUpCard.getValue() == 4) {
+		} else if (hand.isHand(CardRank.TEN, CardRank.TWO) && dealerUpCard.getValue() == 4) {
 			move = BlackjackMove.HIT;
 		} else {
 			move = blackjackStrategy.getAction(dealerUpCard, hand, numHands);

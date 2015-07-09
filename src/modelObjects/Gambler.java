@@ -22,7 +22,7 @@ public abstract class Gambler {
 	}
 	
 	/**
-	 * Sets how much the gamber will bet.
+	 * Sets how much the gambler will bet.
 	 * @param betAmount  How much a gambler will bet.
 	 */
 	public void setBetAmount(double betAmount) {
