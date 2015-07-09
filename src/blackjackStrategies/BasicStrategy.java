@@ -1,15 +1,10 @@
 package blackjackStrategies;
 
+import modelObjects.BlackjackHand;
+import modelObjects.PlayingCard;
 import rules.BlackjackRules;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
-import enumerations.CardSuit;
-import exceptions.InvalidNumDecksException;
-import modelObjects.BlackjackCard;
-import modelObjects.BlackjackHand;
-import modelObjects.BlackjackTable;
-import modelObjects.PlayingCard;
-import modelObjects.Shoe;
 
 public class BasicStrategy extends BlackjackStrategy {
 	private BlackjackMove[][] pairChart;

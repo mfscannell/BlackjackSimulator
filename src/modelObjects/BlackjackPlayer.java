@@ -2,12 +2,12 @@ package modelObjects;
 
 import java.util.ArrayList;
 
-import enumerations.BlackjackMove;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
 import blackjackStrategies.BlackjackStrategy;
 import blackjackStrategies.CompositionStrategy;
 import blackjackStrategies.KISSIStrategy;
+import enumerations.BlackjackMove;
 
 public class BlackjackPlayer extends Gambler {
 	private boolean countsCards;

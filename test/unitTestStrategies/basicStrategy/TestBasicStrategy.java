@@ -1,17 +1,16 @@
 package unitTestStrategies.basicStrategy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
 
 import org.junit.Test;
 
+import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
-import exceptions.InvalidNumDecksException;
-import rules.BlackjackRules;
 
 public class TestBasicStrategy {
 	@Test

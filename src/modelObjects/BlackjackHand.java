@@ -3,7 +3,6 @@ package modelObjects;
 import java.util.ArrayList;
 
 import enumerations.CardRank;
-import exceptions.InvalidMoveException;
 
 public class BlackjackHand {
 	private ArrayList<PlayingCard> cards;

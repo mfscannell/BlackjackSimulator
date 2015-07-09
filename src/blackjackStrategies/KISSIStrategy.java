@@ -1,13 +1,10 @@
 package blackjackStrategies;
 
-import rules.BlackjackRules;
 import modelObjects.BlackjackHand;
 import modelObjects.PlayingCard;
-import modelObjects.Shoe;
+import rules.BlackjackRules;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
-import exceptions.InvalidNumDecksException;
-import exceptions.InvalidShoeException;
 
 public class KISSIStrategy extends BlackjackStrategyDecorator {
 	BlackjackStrategy blackjackStrategy;

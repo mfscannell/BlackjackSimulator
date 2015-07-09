@@ -1,9 +1,9 @@
 package mockData;
 
-import enumerations.CardRank;
-import enumerations.CardSuit;
 import modelObjects.BlackjackCard;
 import modelObjects.BlackjackHand;
+import enumerations.CardRank;
+import enumerations.CardSuit;
 
 public class BlackjackHandHard {
 	private static BlackjackHand handHard8;

@@ -1,16 +1,15 @@
 package unitTestModelObjects;
 
-import static org.junit.Assert.*;
 import modelObjects.BlackjackPlayer;
 import modelObjects.BlackjackTable;
 import modelObjects.Shoe;
 
 import org.junit.Test;
 
+import rules.BlackjackRules;
 import exceptions.InvalidShoeException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
-import rules.BlackjackRules;
 
 public class TestBlackjackTable {
 	private Shoe shoe;
@@ -59,6 +58,14 @@ public class TestBlackjackTable {
 		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
 		
 		blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), -1);
+	}
+	
+	@Test(expected=TableSeatNumberInvalidException.class)
+	public void cantAddPlayerInvalidSeatHigh() throws TableSeatTakenException, TableSeatNumberInvalidException {
+		beforeEach();
+		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
+		
+		blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 7);
 	}
 
 }

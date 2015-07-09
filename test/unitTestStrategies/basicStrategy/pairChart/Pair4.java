@@ -1,8 +1,6 @@
 package unitTestStrategies.basicStrategy.pairChart;
 
-import static org.junit.Assert.*;
-import static org.junit.AfterClass.*;
-import static org.junit.BeforeClass.*;
+import static org.junit.Assert.assertTrue;
 import mockData.BlackjackHandPairs;
 import mockData.DefaultRulesSingleton;
 import modelObjects.BlackjackCard;
@@ -11,12 +9,11 @@ import modelObjects.BlackjackHand;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import blackjackStrategies.BasicStrategy;
 import rules.BlackjackRules;
+import blackjackStrategies.BasicStrategy;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
-import exceptions.InvalidNumDecksException;
 
 /**
  * Tests the Basic Strategy Chart when the player has a pair of 4s and the player has not split his hand 
