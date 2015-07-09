@@ -1,6 +1,9 @@
 package modelObjects;
 
-public abstract class Gambler {
+import util.Observable;
+import util.Observer;
+
+public abstract class Gambler implements Observer {
 	private double cashTotal;
 	private double betAmount;
 	
@@ -39,6 +42,12 @@ public abstract class Gambler {
 	
 	public double getCashTotal() {
 		return cashTotal;
+	}
+	
+	public void update(final Observable observable, final Object[] addlArgs) {
+		if (true) {
+			
+		}
 	}
 
 }

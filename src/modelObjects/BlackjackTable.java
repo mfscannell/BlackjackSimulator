@@ -3,11 +3,13 @@ package modelObjects;
 import java.util.ArrayList;
 
 import rules.BlackjackRules;
+import util.Observable;
+import util.Observer;
 import enumerations.BlackjackMove;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
 
-public class BlackjackTable {
+public class BlackjackTable implements Observable {
 	public static final int MIN_PLAYERS = 1;
 	public static final int MAX_PLAYERS = 7;
 	
@@ -78,9 +80,17 @@ public class BlackjackTable {
 	}
 	
 	private boolean isSeatOccupied(int seat) {
-		boolean seatOccupied = players.get(seat) != null || playersHands.get(seat) != null;
+		boolean seatOccupied = players.get(seat) != null;
 		
 		return seatOccupied;
+	}
+	
+	public BlackjackRules getRules() {
+		return rules;
+	}
+	
+	public int getNumDecksInShoe() {
+		return shoe.getNumDecks();
 	}
 	
 	private void seatPlayerAndAssociateHands(BlackjackPlayer blackjackPlayer, int seat) {
@@ -88,7 +98,25 @@ public class BlackjackTable {
 		playersHands.set(seat, hands);
 		blackjackPlayer.setHands(hands);
 		players.set(seat, blackjackPlayer);
+		//TODO replace .notify with .update
+		//blackjackPlayer.update(this, null);
 		blackjackPlayer.notify(rules, shoe.getNumDecks());
+	}
+	
+	public void addObserver(Observer obj) {
+	}
+	
+	public void deleteObserver(Observer obj) {
+	}
+	
+	public void notifyObservers() {
+		Object [] addlArgs = {rules, shoe.getNumDecks()};
+		
+		for (Observer observer: players) {
+			if (observer != null) {
+				observer.update(this, addlArgs);
+			}
+		}
 	}
 	
 	/**
@@ -159,7 +187,7 @@ public class BlackjackTable {
 		}
 	}
 	
-	private boolean hasPlayerAtSeat(int seat) {
+	public boolean hasPlayerAtSeat(int seat) {
 		boolean seatOccupied = false;
 		
 		if (players.get(seat) != null) {

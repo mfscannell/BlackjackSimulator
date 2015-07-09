@@ -3,6 +3,7 @@ package modelObjects;
 import java.util.ArrayList;
 
 import rules.BlackjackRules;
+import util.Observable;
 import blackjackStrategies.BasicStrategy;
 import blackjackStrategies.BlackjackStrategy;
 import blackjackStrategies.CompositionStrategy;
@@ -82,6 +83,24 @@ public class BlackjackPlayer extends Gambler {
 		} else {
 			blackjackStrategy = new BasicStrategy(rules, numDecks);
 			blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+		}
+	}
+	
+	public void update(final Observable observable, final Object args) {
+		//TODO create strategy based upon rules and number of cards in deck
+		if (observable instanceof BlackjackTable) {
+			BlackjackTable blackjackTable = (BlackjackTable)observable;
+			BlackjackRules rules = blackjackTable.getRules();
+			int numDecks = blackjackTable.getNumDecksInShoe();
+			
+			if (countsCards) {
+				blackjackStrategy = new BasicStrategy(rules, numDecks);
+				blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+				blackjackStrategy = new KISSIStrategy(blackjackStrategy, rules, numDecks);
+			} else {
+				blackjackStrategy = new BasicStrategy(rules, numDecks);
+				blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+			}
 		}
 	}
 	
