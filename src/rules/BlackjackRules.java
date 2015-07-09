@@ -106,11 +106,11 @@ public class BlackjackRules {
 	 *
 	 */
 	public static class Builder {
-		private static int maxHands;
+		private static int maxHands = 4;
 		private static double blackjackPayoutMultiple = 1.5;
-		private static boolean doubleAfterSplitAllowed;
-		private static boolean dealerHitsSoft17;
-		private static boolean resplitAces;
+		private static boolean doubleAfterSplitAllowed = true;
+		private static boolean dealerHitsSoft17 = true;
+		private static boolean resplitAces = true;
 		
 		public Builder() {
 		}
