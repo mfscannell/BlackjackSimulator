@@ -1,7 +1,10 @@
-package modelObjects;
+package casino.gambler;
 
 import java.util.ArrayList;
 
+import casino.blackjack.BlackjackHand;
+import casino.blackjack.BlackjackTable;
+import casino.playingCard.PlayingCard;
 import rules.BlackjackRules;
 import util.Observable;
 import blackjackStrategies.BasicStrategy;
@@ -82,12 +85,12 @@ public class BlackjackPlayer extends Gambler {
 			int numDecks = blackjackTable.getNumDecksInShoe();
 			
 			if (countsCards) {
-				blackjackStrategy = new BasicStrategy(rules, numDecks);
-				blackjackStrategy = new CompositionStrategy(blackjackStrategy);
-				blackjackStrategy = new KISSIStrategy(blackjackStrategy, rules, numDecks);
+				BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
+				BlackjackStrategy compositionStrategy = new CompositionStrategy(basicStrategy);
+				blackjackStrategy = new KISSIStrategy(compositionStrategy, rules, numDecks);
 			} else {
-				blackjackStrategy = new BasicStrategy(rules, numDecks);
-				blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+			    BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
+				blackjackStrategy = new CompositionStrategy(basicStrategy);
 			}
 		}
 	}
@@ -112,8 +115,8 @@ public class BlackjackPlayer extends Gambler {
 			stringBuilder.append("\n");
 		}
 		
-		stringBuilder.append("Cash:" + getCashTotal() + "\n");
-		stringBuilder.append("Current bet:" + getBetAmount() + "\n");
+		stringBuilder.append("Cash:" + cashTotal + "\n");
+		stringBuilder.append("Current bet:" + betAmount + "\n");
 		
 		if (countsCards) {
 			stringBuilder.append(COUNTS_CARDS);

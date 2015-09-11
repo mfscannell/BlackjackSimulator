@@ -2,12 +2,12 @@ package unitTestStrategies;
 
 import static org.junit.Assert.assertTrue;
 import mockData.DefaultRulesSingleton;
-import modelObjects.BlackjackCard;
-import modelObjects.BlackjackHand;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import casino.blackjack.BlackjackHand;
+import casino.playingCard.BlackjackCard;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
 import blackjackStrategies.BlackjackStrategy;

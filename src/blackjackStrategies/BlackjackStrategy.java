@@ -1,7 +1,7 @@
 package blackjackStrategies;
 
-import modelObjects.BlackjackHand;
-import modelObjects.PlayingCard;
+import casino.blackjack.BlackjackHand;
+import casino.playingCard.PlayingCard;
 import enumerations.BlackjackMove;
 
 public abstract class BlackjackStrategy {

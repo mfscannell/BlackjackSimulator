@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import modelObjects.BlackjackDealer;
-import modelObjects.BlackjackPlayer;
-import modelObjects.BlackjackTable;
-import modelObjects.Shoe;
+import casino.blackjack.BlackjackTable;
+import casino.blackjack.Shoe;
+import casino.gambler.BlackjackDealer;
+import casino.gambler.BlackjackPlayer;
 import rules.BlackjackRules;
 import configFile.ConfigFileHeading;
 import exceptions.InvalidConfigFileException;
@@ -191,7 +191,7 @@ public class Main {
 		}
 		numHandsToSimulate = configFileReader.nextInt();
 		
-		blackjackTable = new BlackjackTable(shoe, rules);
+        blackjackTable = new BlackjackTable(numDecks, deckPenetration, rules);
 	}
 	
 	/**

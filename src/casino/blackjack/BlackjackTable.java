@@ -1,11 +1,15 @@
-package modelObjects;
+package casino.blackjack;
 
 import java.util.ArrayList;
 
+import casino.gambler.BlackjackDealer;
+import casino.gambler.BlackjackPlayer;
+import casino.playingCard.PlayingCard;
 import rules.BlackjackRules;
 import util.Observable;
 import util.Observer;
 import enumerations.BlackjackMove;
+import exceptions.InvalidShoeException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
 
@@ -25,11 +29,17 @@ public class BlackjackTable implements Observable {
 	/**
 	 * Constructor
 	 * @param numHandsToSimulate  The number of hands to simulate.
-	 * @param shoe  The shoe containing the cards.
+	 * @param numDecks  The number of decks of cards in the shoe.
+	 * @param deckPenetration  The percentage of cards dealt out before the shoe is refilled.
 	 * @param rules  The rules for the table.
 	 */
-	public BlackjackTable(Shoe shoe, BlackjackRules rules) {
-		this.shoe = shoe;
+	public BlackjackTable(int numDecks, int deckPenetration, BlackjackRules rules) {
+		try {
+            this.shoe = new Shoe(numDecks, deckPenetration);
+        } catch (InvalidShoeException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 		this.rules = rules;
 		players = new ArrayList<BlackjackPlayer>();
 		playersHands = new ArrayList<ArrayList<BlackjackHand>>();

@@ -1,4 +1,4 @@
-package modelObjects;
+package casino.playingCard;
 
 import enumerations.CardRank;
 import enumerations.CardSuit;
@@ -9,8 +9,8 @@ import enumerations.CardSuit;
  *
  */
 public abstract class PlayingCard {
-	private CardSuit suit;
-	private CardRank rank;
+	protected CardSuit suit;
+	protected CardRank rank;
 	
 	public static final CardSuit[] SUITS = {CardSuit.CLUBS, 
 											CardSuit.DIAMONDS, 

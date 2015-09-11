@@ -1,7 +1,7 @@
 package mockData;
 
-import modelObjects.BlackjackCard;
-import modelObjects.BlackjackHand;
+import casino.blackjack.BlackjackHand;
+import casino.playingCard.BlackjackCard;
 import enumerations.CardRank;
 import enumerations.CardSuit;
 

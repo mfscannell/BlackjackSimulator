@@ -2,12 +2,12 @@ package unitTestModelObjects;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import modelObjects.BlackjackCard;
-import modelObjects.BlackjackHand;
-import modelObjects.PlayingCard;
 
 import org.junit.Test;
 
+import casino.blackjack.BlackjackHand;
+import casino.playingCard.BlackjackCard;
+import casino.playingCard.PlayingCard;
 import enumerations.CardRank;
 import enumerations.CardSuit;
 

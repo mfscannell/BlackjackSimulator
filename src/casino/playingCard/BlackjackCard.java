@@ -1,4 +1,4 @@
-package modelObjects;
+package casino.playingCard;
 
 import rules.BlackjackRules;
 import enumerations.CardRank;
@@ -24,12 +24,10 @@ public class BlackjackCard extends PlayingCard {
 	public boolean isTenValue() {
 		boolean tenValue = false;
 		
-		if (getRank() == CardRank.TEN || getRank() == CardRank.JACK || 
-			getRank() == CardRank.QUEEN || getRank() == CardRank.KING) {
+		if (rank == CardRank.TEN || rank == CardRank.JACK || rank == CardRank.QUEEN || rank == CardRank.KING) {
 			tenValue = true;
 		}
 		
 		return tenValue;
 	}
-
 }
