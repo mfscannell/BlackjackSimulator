@@ -12,34 +12,18 @@ false
 
 #SHOE_PARAMETERS
 #numDecks
-2
+1
 #deckPenetration
 60
 
 #TABLE_PARAMETERS
 #numHandsToSimulate
-100000
+1000000
 
 #PLAYER_PARAMETERS
 #numPlayers
-5
+1
 #tableSeat
 0
-#playerCardCounter
-true
-#tableSeat
-1
-#playerCardCounter
-false
-#tableSeat
-2
-#playerCardCounter
-false
-#tableSeat
-3
-#playerCardCounter
-false
-#tableSeat
-4
 #playerCardCounter
 false
