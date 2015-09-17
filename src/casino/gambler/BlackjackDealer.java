@@ -1,5 +1,6 @@
-package modelObjects;
+package casino.gambler;
 
+import casino.blackjack.BlackjackHand;
 import util.Observable;
 
 public class BlackjackDealer extends Gambler {

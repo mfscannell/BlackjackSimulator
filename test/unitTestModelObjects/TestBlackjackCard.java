@@ -1,10 +1,10 @@
 package unitTestModelObjects;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import modelObjects.BlackjackCard;
 
 import org.junit.Test;
 
+import casino.playingCard.BlackjackCard;
 import rules.BlackjackRules;
 import enumerations.CardRank;
 import enumerations.CardSuit;

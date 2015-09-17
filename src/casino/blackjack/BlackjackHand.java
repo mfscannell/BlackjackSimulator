@@ -1,7 +1,8 @@
-package modelObjects;
+package casino.blackjack;
 
 import java.util.ArrayList;
 
+import casino.playingCard.PlayingCard;
 import enumerations.CardRank;
 
 public class BlackjackHand {

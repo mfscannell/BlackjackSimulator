@@ -1,32 +1,22 @@
 package unitTestModelObjects;
 
 import static org.junit.Assert.*;
-import mockData.BlackjackHandHard;
-import mockData.DefaultRulesSingleton;
-import modelObjects.BlackjackPlayer;
-import modelObjects.BlackjackTable;
-import modelObjects.Shoe;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import casino.blackjack.BlackjackTable;
+import casino.gambler.BlackjackPlayer;
 import rules.BlackjackRules;
-import exceptions.InvalidShoeException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
 
 public class TestBlackjackTable {
-	private static Shoe shoe;
 	private static BlackjackRules.Builder rulesBuilder;
 	private static BlackjackRules blackjackRules;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		try {
-			shoe = new Shoe(2, 55);
-		} catch (InvalidShoeException e) {
-			e.printStackTrace();
-		}
 		rulesBuilder = new BlackjackRules.Builder();
 		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
@@ -38,7 +28,7 @@ public class TestBlackjackTable {
 	
 	@Test
 	public void hasPlayerAtSeatTrue() {
-		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
+		BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
 		
 		try {
 			blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
@@ -51,7 +41,7 @@ public class TestBlackjackTable {
 	
 	@Test
 	public void hasPlayerAtSeatFalse() {
-		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
+		BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
 		
 		try {
 			blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 2);
@@ -64,7 +54,7 @@ public class TestBlackjackTable {
 	
 	@Test
 	public void canAddPlayer() {
-		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
+		BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
 		
 		try {
 			blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
@@ -75,7 +65,7 @@ public class TestBlackjackTable {
 	
 	@Test(expected=TableSeatTakenException.class)
 	public void cantAddPlayerSeatTaken() throws TableSeatTakenException, TableSeatNumberInvalidException {
-		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
+		BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
 		
 		blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
 		blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
@@ -83,14 +73,14 @@ public class TestBlackjackTable {
 	
 	@Test(expected=TableSeatNumberInvalidException.class)
 	public void cantAddPlayerInvalidSeat() throws TableSeatTakenException, TableSeatNumberInvalidException {
-		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
+		BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
 		
 		blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), -1);
 	}
 	
 	@Test(expected=TableSeatNumberInvalidException.class)
 	public void cantAddPlayerInvalidSeatHigh() throws TableSeatTakenException, TableSeatNumberInvalidException {
-		BlackjackTable blackjackTable = new BlackjackTable(shoe, blackjackRules);
+		BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
 		
 		blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 7);
 	}

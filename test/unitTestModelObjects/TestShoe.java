@@ -2,11 +2,11 @@ package unitTestModelObjects;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import modelObjects.PlayingCard;
-import modelObjects.Shoe;
 
 import org.junit.Test;
 
+import casino.blackjack.Shoe;
+import casino.playingCard.PlayingCard;
 import exceptions.InvalidShoeException;
 
 public class TestShoe {

@@ -1,6 +1,8 @@
-package modelObjects;
+package casino.blackjack;
 
 import java.util.ArrayList;
+
+import casino.playingCard.PlayingCard;
 
 public class DiscardTray {
 	ArrayList<PlayingCard> discardTray;

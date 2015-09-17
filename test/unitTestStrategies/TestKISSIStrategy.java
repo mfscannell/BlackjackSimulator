@@ -2,12 +2,12 @@ package unitTestStrategies;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import modelObjects.BlackjackCard;
-import modelObjects.BlackjackHand;
-import modelObjects.PlayingCard;
 
 import org.junit.Test;
 
+import casino.blackjack.BlackjackHand;
+import casino.playingCard.BlackjackCard;
+import casino.playingCard.PlayingCard;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
 import blackjackStrategies.BlackjackStrategy;
@@ -31,8 +31,8 @@ public class TestKISSIStrategy {
 		rulesBuilder.setCanResplitAces(true);
 		rules = rulesBuilder.build();
 		
-		strategy = new BasicStrategy(rules, numDecks);
-		strategy = new KISSIStrategy(strategy, rules, numDecks);
+		BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
+		strategy = new KISSIStrategy(basicStrategy, rules, numDecks);
 	}
 	
 	@Test

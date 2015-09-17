@@ -1,11 +1,11 @@
-package modelObjects;
+package casino.gambler;
 
 import util.Observable;
 import util.Observer;
 
 public abstract class Gambler implements Observer {
-	private double cashTotal;
-	private double betAmount;
+	protected double cashTotal;
+	protected double betAmount;
 	
 	/**
 	 * Constructor

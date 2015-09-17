@@ -1,7 +1,9 @@
-package modelObjects;
+package casino.blackjack;
 
 import java.util.ArrayList;
 
+import casino.playingCard.BlackjackCard;
+import casino.playingCard.PlayingCard;
 import exceptions.InvalidShoeException;
 
 public class Shoe {

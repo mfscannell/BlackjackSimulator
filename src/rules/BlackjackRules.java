@@ -2,7 +2,7 @@ package rules;
 
 import java.util.HashMap;
 
-import modelObjects.BlackjackHand;
+import casino.blackjack.BlackjackHand;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 
