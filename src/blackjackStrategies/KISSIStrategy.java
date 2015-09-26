@@ -57,39 +57,31 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
 		return count;
 	}
 	
-	/**
-	 * Refer to the KISS I strategy chart to select a move based upon the table conditions.
-	 * @param dealerUpCard  The dealer's exposed card.
-	 * @param hand  The player's hand.
-	 * @param numHands  The number of hands the player has based upon the number of splits 
-	 * and resplits.
-	 * @return  The recommended blackjack move.
-	 */
-	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand hand, int numHands) {
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
 		BlackjackMove move = BlackjackMove.STAND;
 		
 		if (count >= KISS_COUNT) {
-			if (hand.getBlackjackTotal() == 9 && !hand.isSoft() && dealerUpCard.getValue() == 2) {
+			if (playerHand.getBlackjackTotal() == 9 && !playerHand.isSoft() && dealerUpCard.getValue() == 2) {
 				move = BlackjackMove.DOUBLE;
-			} else if (hand.getBlackjackTotal() == 11 && dealerUpCard.isAce()) {
+			} else if (playerHand.getBlackjackTotal() == 11 && dealerUpCard.isAce()) {
 				move = BlackjackMove.DOUBLE;
-			} else if (hand.getBlackjackTotal() == 16 && dealerUpCard.getValue() == 10) {
+			} else if (playerHand.getBlackjackTotal() == 16 && dealerUpCard.getValue() == 10) {
 				move = BlackjackMove.STAND;
-			} else if (hand.isHand(CardRank.ACE, CardRank.SEVEN) && dealerUpCard.getValue() == 2) {
+			} else if (playerHand.isHand(CardRank.ACE, CardRank.SEVEN) && dealerUpCard.getValue() == 2) {
 				move = BlackjackMove.DOUBLE;
-			} else if (hand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 5) {
+			} else if (playerHand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 5) {
 				move = BlackjackMove.DOUBLE;
-			} else if (hand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 6) {
+			} else if (playerHand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 6) {
 				move = BlackjackMove.DOUBLE;
 			} else {
-				move = blackjackStrategy.getAction(dealerUpCard, hand, numHands);
+				move = blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
 			}
 		} else {
-			move = blackjackStrategy.getAction(dealerUpCard, hand, numHands);
+			move = blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
 		}
 		
 		if (move == BlackjackMove.DOUBLE && 
-			hand.wasFromSplit() && 
+			playerHand.wasFromSplit() && 
 			!rules.isDoubleAfterSplitAllowed()) {
 			move = BlackjackMove.HIT;
 		}

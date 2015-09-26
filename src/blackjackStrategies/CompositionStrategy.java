@@ -19,25 +19,17 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
 		this.blackjackStrategy = blackjackStrategy;
 	}
 	
-	/**
-	 * Refer to the basic strategy chart to select a move based upon the table conditions.
-	 * @param dealerUpCard  The dealer's exposed card.
-	 * @param hand  The player's hand.
-	 * @param numHands  The number of hands the player has based upon the number of splits 
-	 * and resplits.
-	 * @return  The recommended blackjack move.
-	 */
-	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand hand, int numHands) {
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
 		BlackjackMove move = BlackjackMove.HIT;
 		
-		if (hand.getBlackjackTotal() == 16 && 
-			(hand.hasCardOfRank(CardRank.FOUR) || hand.hasCardOfRank(CardRank.FIVE)) &&
+		if (playerHand.getBlackjackTotal() == 16 && 
+			(playerHand.hasCardOfRank(CardRank.FOUR) || playerHand.hasCardOfRank(CardRank.FIVE)) &&
 			dealerUpCard.getValue() == 10) {
 			move = BlackjackMove.STAND;
-		} else if (hand.isHand(CardRank.TEN, CardRank.TWO) && dealerUpCard.getValue() == 4) {
+		} else if (playerHand.isHand(CardRank.TEN, CardRank.TWO) && dealerUpCard.getValue() == 4) {
 			move = BlackjackMove.HIT;
 		} else {
-			move = blackjackStrategy.getAction(dealerUpCard, hand, numHands);
+			move = blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
 		}
 		
 		return move;

@@ -1,7 +1,6 @@
 package casino.gambler;
 
-import util.Observable;
-import util.Observer;
+import java.util.Observer;
 
 public abstract class Gambler implements Observer {
 	protected double cashTotal;

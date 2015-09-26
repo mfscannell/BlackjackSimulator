@@ -1,19 +1,18 @@
 package casino.blackjack;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import casino.gambler.BlackjackDealer;
 import casino.gambler.BlackjackPlayer;
 import casino.playingCard.PlayingCard;
 import rules.BlackjackRules;
-import util.Observable;
-import util.Observer;
 import enumerations.BlackjackMove;
 import exceptions.InvalidShoeException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
 
-public class BlackjackTable implements Observable {
+public class BlackjackTable extends Observable {
 	public static final int MIN_PLAYERS = 1;
 	public static final int MAX_PLAYERS = 7;
 	
@@ -36,31 +35,23 @@ public class BlackjackTable implements Observable {
 	public BlackjackTable(int numDecks, int deckPenetration, BlackjackRules rules) {
 		try {
             this.shoe = new Shoe(numDecks, deckPenetration);
+            this.rules = rules;
+    		players = new ArrayList<BlackjackPlayer>();
+    		playersHands = new ArrayList<ArrayList<BlackjackHand>>();
+    		dealerHand = new BlackjackHand();
+    		
+    		for (int i = 0; i < MAX_PLAYERS; i++) {
+    			players.add(null);
+    			playersHands.add(null);
+    		}
+    		
+    		discardTray = new DiscardTray();
+    		dealer = null;
         } catch (InvalidShoeException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-		this.rules = rules;
-		players = new ArrayList<BlackjackPlayer>();
-		playersHands = new ArrayList<ArrayList<BlackjackHand>>();
-		dealerHand = new BlackjackHand();
-		
-		for (int i = 0; i < MAX_PLAYERS; i++) {
-			players.add(null);
-			playersHands.add(null);
-		}
-		
-		discardTray = new DiscardTray();
-		dealer = null;
 	}
 	
-	/**
-	 * Add a player to the table at the specified seat.
-	 * @param blackjackPlayer
-	 * @param seat
-	 * @throws TableSeatTakenException Thrown if the seat is already taken.
-	 * @throws TableSeatNumberInvalidException Thrown if the seat is an invalid seat number.
-	 */
 	public void addPlayerAtSeat(BlackjackPlayer blackjackPlayer, int seat) throws TableSeatTakenException, TableSeatNumberInvalidException {
 		checkIfValidSeat(seat);
 		checkIfSeatOccupied(seat);
@@ -95,36 +86,13 @@ public class BlackjackTable implements Observable {
 		return seatOccupied;
 	}
 	
-	public BlackjackRules getRules() {
-		return rules;
-	}
-	
-	public int getNumDecksInShoe() {
-		return shoe.getNumDecks();
-	}
-	
 	private void seatPlayerAndAssociateHands(BlackjackPlayer blackjackPlayer, int seat) {
 		ArrayList<BlackjackHand> hands = new ArrayList<BlackjackHand>();
 		playersHands.set(seat, hands);
-		blackjackPlayer.setHands(hands);
 		players.set(seat, blackjackPlayer);
-		blackjackPlayer.update(this, null);
-	}
-	
-	public void addObserver(Observer obj) {
-	}
-	
-	public void deleteObserver(Observer obj) {
-	}
-	
-	public void notifyObservers() {
-		Object [] addlArgs = {rules, shoe.getNumDecks()};
-		
-		for (Observer observer: players) {
-			if (observer != null) {
-				observer.update(this, addlArgs);
-			}
-		}
+		blackjackPlayer.setHands(hands);
+		blackjackPlayer.updateStrategy(rules, shoe.getNumDecks());
+		addObserver(blackjackPlayer);
 	}
 	
 	/**
@@ -246,7 +214,7 @@ public class BlackjackTable implements Observable {
 	
 	private void dealCardFromShoeToHand(BlackjackHand hand) {
 		PlayingCard dealtCard = shoe.dealCard();
-		adjustCount(dealtCard);
+		notifyObservers(dealtCard);
 		hand.addCard(dealtCard);
 	}
 	
@@ -254,7 +222,7 @@ public class BlackjackTable implements Observable {
 		PlayingCard dealersCard = shoe.dealCard();
 		
 		if (cardPosition == 0) {
-			adjustCount(dealersCard);
+			notifyObservers(dealersCard);
 		}
 		
 		dealerHand.addCard(dealersCard);
@@ -329,7 +297,7 @@ public class BlackjackTable implements Observable {
 	}
 	
 	private void exposeDealerHoleCard() {
-		adjustCount(dealerHand.getSecondCard());
+		notifyObservers(dealerHand.getSecondCard());
 	}
 	
 	private void playDealerTurn() {
@@ -434,18 +402,6 @@ public class BlackjackTable implements Observable {
 		while (dealerHand.getNumCards() > 0) {
 			PlayingCard card = dealerHand.removeCard();
 			discardTray.addCard(card);
-		}
-	}
-	
-	/**
-	 * Adjust all of the card counting methods according to the dealt card.
-	 * @param dealtCard  The card dealt from the shoe.
-	 */
-	private void adjustCount(final PlayingCard dealtCard) {
-		for (int i = 0; i < players.size(); i++) {
-			if (hasPlayerAtSeat(i)) {
-				players.get(i).adjustCount(dealtCard);
-			}
 		}
 	}
 	

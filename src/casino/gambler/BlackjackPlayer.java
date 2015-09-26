@@ -1,12 +1,12 @@
 package casino.gambler;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import casino.blackjack.BlackjackHand;
 import casino.blackjack.BlackjackTable;
 import casino.playingCard.PlayingCard;
 import rules.BlackjackRules;
-import util.Observable;
 import blackjackStrategies.BasicStrategy;
 import blackjackStrategies.BlackjackStrategy;
 import blackjackStrategies.CompositionStrategy;
@@ -78,29 +78,8 @@ public class BlackjackPlayer extends Gambler {
 		return countsCards;
 	}
 	
-	public void update(final Observable observable, final Object args) {
-		if (observable instanceof BlackjackTable) {
-			BlackjackTable blackjackTable = (BlackjackTable)observable;
-			BlackjackRules rules = blackjackTable.getRules();
-			int numDecks = blackjackTable.getNumDecksInShoe();
-			
-			if (countsCards) {
-				BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
-				BlackjackStrategy compositionStrategy = new CompositionStrategy(basicStrategy);
-				blackjackStrategy = new KISSIStrategy(compositionStrategy, rules, numDecks);
-			} else {
-			    BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
-				blackjackStrategy = new CompositionStrategy(basicStrategy);
-			}
-		}
-	}
-	
 	public void resetCount() {
 		blackjackStrategy.resetCount();
-	}
-	
-	public void adjustCount(PlayingCard dealtCard) {
-		blackjackStrategy.adjustCount(dealtCard);
 	}
 	
 	public void setBetAmount() {
@@ -132,5 +111,24 @@ public class BlackjackPlayer extends Gambler {
 		}
 		
 		return stringBuilder.toString();
+	}
+	
+	public void updateStrategy(BlackjackRules rules, int numDecks) {
+		if (countsCards) {
+			BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
+			BlackjackStrategy compositionStrategy = new CompositionStrategy(basicStrategy);
+			blackjackStrategy = new KISSIStrategy(compositionStrategy, rules, numDecks);
+		} else {
+		    BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
+			blackjackStrategy = new CompositionStrategy(basicStrategy);
+		}
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if (arg1 instanceof PlayingCard) {
+			PlayingCard card = (PlayingCard)arg1;
+			blackjackStrategy.adjustCount(card);
+		}
 	}
 }

@@ -277,27 +277,17 @@ public class BasicStrategy extends BlackjackStrategy {
 		}
 	}//end method updateSoftChart
 	
-	/**
-	 * Refer to the basic strategy chart to select a moinsuranceve based upon the table conditions.
-	 * @param dealerUpCard  The dealer's exposed card.
-	 * @param hand  The player's hand.
-	 * @param numHands  The number of hands the player has based upon the number of splits 
-	 * and resplits.
-	 * @return  The recommended blackjack move.
-	 */
-	public BlackjackMove getAction(final PlayingCard dealerUpCard, 
-								   final BlackjackHand hand,
-								   int numHands) {
+	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
 		BlackjackMove move;
 		int dealerCardValue = dealerUpCard.getValue();
 		
-		if (hand.isMultiCard()) {
-			move = getMultiCardAction(hand, dealerCardValue);
+		if (playerHand.isMultiCard()) {
+			move = getMultiCardAction(playerHand, dealerCardValue);
 		} else {
-			move = getTwoCardAction(hand, dealerCardValue);
+			move = getTwoCardAction(playerHand, dealerCardValue);
 		}
 		
-		move = correctActionForSpecialCases(move, hand, dealerCardValue, numHands);
+		move = correctActionForSpecialCases(move, playerHand, dealerCardValue, numPlayerHands);
 		
 		return move;
 	}

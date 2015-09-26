@@ -1,7 +1,8 @@
 package casino.gambler;
 
+import java.util.Observable;
+
 import casino.blackjack.BlackjackHand;
-import util.Observable;
 
 public class BlackjackDealer extends Gambler {
 	private double chipCount;
