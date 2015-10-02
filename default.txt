@@ -18,7 +18,7 @@ false
 
 #TABLE_PARAMETERS
 #numHandsToSimulate
-1000000
+10000
 
 #PLAYER_PARAMETERS
 #numPlayers
