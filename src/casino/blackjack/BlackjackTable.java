@@ -214,19 +214,21 @@ public class BlackjackTable extends Observable {
 	
 	private void dealCardFromShoeToHand(BlackjackHand hand) {
 		PlayingCard dealtCard = shoe.dealCard();
-		setChanged();
-		notifyObservers(dealtCard);
-		clearChanged();
+		notifyCardValueToPlayers(dealtCard);
 		hand.addCard(dealtCard);
+	}
+	
+	private void notifyCardValueToPlayers(PlayingCard card) {
+		setChanged();
+		notifyObservers(card);
+		clearChanged();
 	}
 	
 	private void dealCardToDealer(int cardPosition) {
 		PlayingCard dealersCard = shoe.dealCard();
 		
 		if (cardPosition == 0) {
-			setChanged();
-			notifyObservers(dealersCard);
-			clearChanged();
+			notifyCardValueToPlayers(dealersCard);
 		}
 		
 		dealerHand.addCard(dealersCard);
@@ -301,9 +303,7 @@ public class BlackjackTable extends Observable {
 	}
 	
 	private void exposeDealerHoleCard() {
-		setChanged();
-		notifyObservers(dealerHand.getSecondCard());
-		clearChanged();
+		notifyCardValueToPlayers(dealerHand.getSecondCard());
 	}
 	
 	private void playDealerTurn() {

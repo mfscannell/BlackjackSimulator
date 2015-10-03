@@ -70,7 +70,7 @@ public class TestBasicStrategy {
 		rulesBuilder.setDealerHitsSoft17(false);
 		rulesBuilder.setDoubleAfterSplitAllowed(false);
 		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(true);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
@@ -95,7 +95,7 @@ public class TestBasicStrategy {
 		rulesBuilder.setDealerHitsSoft17(false);
 		rulesBuilder.setDoubleAfterSplitAllowed(false);
 		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(true);
+		rulesBuilder.setCanResplitAces(false);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
