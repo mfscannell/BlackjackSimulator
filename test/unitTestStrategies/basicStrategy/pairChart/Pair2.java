@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import casino.blackjack.BlackjackHand;
+import casino.gambler.BlackjackPlayer;
 import casino.playingCard.BlackjackCard;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
@@ -24,11 +25,13 @@ import enumerations.CardSuit;
 public class Pair2 {
 	private static BlackjackRules rules;
 	private static BlackjackHand hand;
+	private static BlackjackPlayer player;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		rules = DefaultRulesSingleton.getDefaultRules();
 		hand = BlackjackHandPairs.getPair2();
+		player = new BlackjackPlayer(0, false);
 	}
 
 	@Test
@@ -37,31 +40,40 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void testPair2vs3() {
-		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+	    BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+	    
+	    int numDecks = 4;
+        
+        player.updateStrategy(rules, numDecks);
+        
+        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void testPair2vs4() {
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
 		
-		int numDecks = 4;
-		
+	    int numDecks = 4;
+	        
+	    player.updateStrategy(rules, numDecks);
+	        
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -70,9 +82,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -81,9 +96,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -92,9 +110,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -103,9 +124,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -114,9 +138,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -125,9 +152,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -136,9 +166,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
@@ -155,9 +188,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -174,9 +210,12 @@ public class Pair2 {
 		
 		int numDecks = 4;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
@@ -185,8 +224,11 @@ public class Pair2 {
 		
 		int numDecks = 1;
 		
+		player.updateStrategy(rules, numDecks);
+		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 }

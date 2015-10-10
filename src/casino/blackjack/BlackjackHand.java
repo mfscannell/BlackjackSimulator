@@ -28,7 +28,7 @@ public class BlackjackHand {
 	 * split from a hand containing the card being added to the hand.
 	 * @param card  The first card of the new hand.
 	 */
-	public BlackjackHand(final PlayingCard card) {
+	private BlackjackHand(final PlayingCard card) {
 		cards = new ArrayList<PlayingCard>();
 		cards.add(card);
 		total = card.getValue();
@@ -39,6 +39,10 @@ public class BlackjackHand {
 		if (card.isAce()) {
 			containsAce = true;
 		}
+	}
+	
+	public static BlackjackHand createSecondHandFromSplit(final PlayingCard card) {
+	    return new BlackjackHand(card);
 	}
 	
 	public void addCard(final PlayingCard card) {
@@ -320,5 +324,4 @@ public class BlackjackHand {
 		
 		return stringBuilder.toString();
 	}
-
 }

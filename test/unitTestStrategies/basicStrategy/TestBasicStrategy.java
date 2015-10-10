@@ -28,7 +28,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -53,7 +53,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -78,7 +78,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -95,7 +95,7 @@ public class TestBasicStrategy {
 		rulesBuilder.setDealerHitsSoft17(false);
 		rulesBuilder.setDoubleAfterSplitAllowed(false);
 		rulesBuilder.setMaxHandsAfterSplits(4);
-		rulesBuilder.setCanResplitAces(false);
+		rulesBuilder.setCanResplitAces(true);
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
@@ -103,7 +103,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -128,7 +128,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -153,7 +153,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -178,7 +178,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -203,7 +203,7 @@ public class TestBasicStrategy {
 		BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
 		BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
 		
-		BlackjackHand hand = new BlackjackHand(firstCard);
+		BlackjackHand hand = BlackjackHand.createSecondHandFromSplit(firstCard);
 		hand.addCard(secondCard);
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);

@@ -422,7 +422,8 @@ public class TestBlackjackHand {
 		
 		PlayingCard card = hand.split();
 		
-		BlackjackHand secondHand = new BlackjackHand(card);
+		//BlackjackHand secondHand = new BlackjackHand(card);
+		BlackjackHand secondHand = BlackjackHand.createSecondHandFromSplit(card);
 		
 		BlackjackCard thirdCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
 		BlackjackCard fourthCard = new BlackjackCard(CardRank.TEN, CardSuit.HEARTS);

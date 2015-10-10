@@ -78,8 +78,6 @@ public class TestShoe {
 		} catch (InvalidShoeException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	@Test
@@ -122,17 +120,15 @@ public class TestShoe {
 		try {
 			shoe = new Shoe(1, 66);
 			
-			System.out.println("************************************************");
-			System.out.println("TestShoe.testShuffleOneDeck");
-			System.out.println("---------------------------");
+//			System.out.println("************************************************");
+//			System.out.println("TestShoe.testShuffleOneDeck");
+//			System.out.println("---------------------------");
 			shoe.shuffleShoe();
-			shoe.print();
-			System.out.println("************************************************");
+//			shoe.print();
+//			System.out.println("************************************************");
 		} catch (InvalidShoeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	@Test
@@ -140,14 +136,13 @@ public class TestShoe {
 		Shoe shoe;
 		try {
 			shoe = new Shoe(2, 66);
-			System.out.println("************************************************");
-			System.out.println("TestShoe.testShuffleTwoDeck");
-			System.out.println("---------------------------");
+//			System.out.println("************************************************");
+//			System.out.println("TestShoe.testShuffleTwoDeck");
+//			System.out.println("---------------------------");
 			shoe.shuffleShoe();
-			shoe.print();
-			System.out.println("************************************************");
+//			shoe.print();
+//			System.out.println("************************************************");
 		} catch (InvalidShoeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -157,25 +152,24 @@ public class TestShoe {
 		Shoe shoe;
 		try {
 			shoe = new Shoe(1, 66);
-			System.out.println("************************************************");
-			System.out.println("TestShoe.testRemainingCards");
-			System.out.println("---------------------------");
-			System.out.println("Starting cards");
+//			System.out.println("************************************************");
+//			System.out.println("TestShoe.testRemainingCards");
+//			System.out.println("---------------------------");
+//			System.out.println("Starting cards");
 			shoe.print();
 			shoe.shuffleShoe();
-			System.out.println("Starting cards");
-			shoe.print();
+//			System.out.println("Starting cards");
+//			shoe.print();
 			
 			for (int i = 0; i < 10; i++) {
 				PlayingCard card = shoe.dealCard();
 				System.out.println("Dealt card:" + card);
 			}
 			
-			System.out.println("Remaining cards");
-			shoe.print();
-			System.out.println("************************************************");
+//			System.out.println("Remaining cards");
+//			shoe.print();
+//			System.out.println("************************************************");
 		} catch (InvalidShoeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

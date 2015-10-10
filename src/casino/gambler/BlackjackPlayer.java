@@ -70,14 +70,6 @@ public class BlackjackPlayer extends Gambler {
 		return blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
 	}
 	
-	/**
-	 * Checks whether or not the player is counting cards.
-	 * @return  True if the player counts cards.
-	 */
-	public boolean doesCountsCards() {
-		return countsCards;
-	}
-	
 	public void resetCount() {
 		blackjackStrategy.resetCount();
 	}

@@ -289,7 +289,7 @@ public class BlackjackTable extends Observable {
 									
 									break;
 					case SPLIT:		PlayingCard splitCard = playerHand.split();
-									BlackjackHand splitHand = new BlackjackHand(splitCard);
+					                BlackjackHand splitHand = BlackjackHand.createSecondHandFromSplit(splitCard);
 									playersHands.get(seat).add(j + 1, splitHand);
 									break;
 					case DOUBLE:	dealCardFromShoeToHand(playerHand);
