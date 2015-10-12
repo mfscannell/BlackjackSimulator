@@ -36,13 +36,12 @@ public class Pair2 {
 
 	@Test
 	public void testPair2vs2() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
@@ -50,13 +49,12 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs3() {
-	    BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-	    
 	    int numDecks = 4;
-        
+	    
+	    BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+	    BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+	    
         player.updateStrategy(rules, numDecks);
-        
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
         assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
@@ -64,27 +62,25 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs4() {
-		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
-		
 	    int numDecks = 4;
+	    
+		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 	        
 	    player.updateStrategy(rules, numDecks);
-	        
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-		
+	    
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 	}
 	
 	@Test
 	public void testPair2vs5() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
@@ -92,13 +88,12 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs6() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
@@ -106,13 +101,12 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs7() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
@@ -120,13 +114,12 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs8() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
@@ -134,13 +127,12 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs9() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
@@ -148,27 +140,25 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs10() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
-		player.updateStrategy(rules, numDecks);
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void testPair2vsA() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
@@ -176,6 +166,8 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs2DAS() {
+	    int numDecks = 4;
+	    
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
 		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
@@ -185,12 +177,9 @@ public class Pair2 {
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
@@ -198,6 +187,8 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs3DAS() {
+	    int numDecks = 4;
+	    
 		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
 		rulesBuilder.setBlackjackPayoutMultiple(1.5);
 		rulesBuilder.setDealerHitsSoft17(false);
@@ -207,12 +198,9 @@ public class Pair2 {
 		BlackjackRules rules = rulesBuilder.build();
 		
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
@@ -220,13 +208,12 @@ public class Pair2 {
 	
 	@Test
 	public void testPair2vs2SingleDeck() {
+	    int numDecks = 1;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-		
-		int numDecks = 1;
+		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		player.updateStrategy(rules, numDecks);
-		
-		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
 		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.SPLIT);
