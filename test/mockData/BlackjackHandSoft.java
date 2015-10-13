@@ -49,7 +49,7 @@ public class BlackjackHandSoft {
 			handAce4.addCard(secondCard);
 		}
 		
-		return handAce5;
+		return handAce4;
 	}
 	
 	public static BlackjackHand getHandAce5() {

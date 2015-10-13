@@ -41,10 +41,6 @@ public class BlackjackHand {
 		}
 	}
 	
-	public static BlackjackHand createSecondHandFromSplit(final PlayingCard card) {
-	    return new BlackjackHand(card);
-	}
-	
 	public void addCard(final PlayingCard card) {
 		total = total + card.getValue();
 		
@@ -264,12 +260,12 @@ public class BlackjackHand {
 	}
 	
 	/**
-	 * Splits the hand by removing one of the cards and returns it to the caller.
+	 * Splits the hand by removing one of the cards and returns a new hand only containing the split card.
 	 * 
-	 * @return  The second card in the hand after splitting the hand.
+	 * @return  The second hand created from splitting the hand.
 	 * @precondition The method call BlackjackHand.isSplitable() returns true.
 	 */
-	public PlayingCard split() {
+	public BlackjackHand split() {
 		PlayingCard returnCard = null;
 		
 		returnCard = cards.remove(1);
@@ -277,7 +273,7 @@ public class BlackjackHand {
 		
 		resetTotal();
 		
-		return returnCard;
+		return new BlackjackHand(returnCard);
 	}
 	
 	/**

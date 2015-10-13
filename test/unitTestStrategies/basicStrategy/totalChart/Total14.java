@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import casino.blackjack.BlackjackHand;
+import casino.gambler.BlackjackPlayer;
 import casino.playingCard.BlackjackCard;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
@@ -18,121 +19,142 @@ import enumerations.CardSuit;
 public class Total14 {
 	private static BlackjackRules rules;
 	private static BlackjackHand hand;
+	private static BlackjackPlayer player;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		rules = DefaultRulesSingleton.getDefaultRules();
 		hand = BlackjackHandHard.getHandHard14();
+		player = new BlackjackPlayer(0, false);
 	}
 
 	@Test
 	public void testTotal14vs2() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
 	}
 	
 	@Test
 	public void testTotal14vs3() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
 	}
 	
 	@Test
 	public void testTotal14vs4() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
 	}
 	
 	@Test
 	public void testTotal14vs5() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
 	}
 	
 	@Test
 	public void testTotal14vs6() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
 	}
 	
 	@Test
 	public void testTotal14vs7() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void testTotal14vs8() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void testTotal14vs9() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void testTotal14vs10() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.KING, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void testTotal14vsA() {
+        int numDecks = 4;
+        
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
-
 }

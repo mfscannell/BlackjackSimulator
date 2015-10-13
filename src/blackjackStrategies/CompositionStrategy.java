@@ -22,7 +22,8 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
 	public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
 		BlackjackMove move = BlackjackMove.HIT;
 		
-		if (playerHand.getBlackjackTotal() == 16 && 
+		if (!playerHand.isSoft() && 
+		    playerHand.getBlackjackTotal() == 16 && 
 			(playerHand.hasCardOfRank(CardRank.FOUR) || playerHand.hasCardOfRank(CardRank.FIVE)) &&
 			dealerUpCard.getValue() == 10) {
 			move = BlackjackMove.STAND;

@@ -268,11 +268,13 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		PlayingCard returnCard = null;
+		BlackjackHand secondHand = null;
 		
-		returnCard = hand.split();
+		secondHand = hand.split();
 		
-		assertTrue(returnCard.equals(secondCard) && hand.getNumCards() == 1);
+		assertTrue(secondHand.getNumCards() == 1 && hand.getNumCards() == 1);
+		assertTrue(hand.getBlackjackTotal() == 9);
+		assertTrue(secondHand.getBlackjackTotal() == 9);
 	}
 	
 	@Test
@@ -420,10 +422,7 @@ public class TestBlackjackHand {
 		hand.addCard(firstCard);
 		hand.addCard(secondCard);
 		
-		PlayingCard card = hand.split();
-		
-		//BlackjackHand secondHand = new BlackjackHand(card);
-		BlackjackHand secondHand = BlackjackHand.createSecondHandFromSplit(card);
+		BlackjackHand secondHand = hand.split();
 		
 		BlackjackCard thirdCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
 		BlackjackCard fourthCard = new BlackjackCard(CardRank.TEN, CardSuit.HEARTS);

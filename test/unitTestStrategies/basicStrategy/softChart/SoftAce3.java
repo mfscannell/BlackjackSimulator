@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import casino.blackjack.BlackjackHand;
+import casino.gambler.BlackjackPlayer;
 import casino.playingCard.BlackjackCard;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
@@ -18,143 +19,169 @@ import enumerations.CardSuit;
 public class SoftAce3 {
 	private static BlackjackRules rules;
 	private static BlackjackHand hand;
+	private static BlackjackPlayer player;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		rules = DefaultRulesSingleton.getDefaultRules();
 		hand = BlackjackHandSoft.getHandAce3();
+		player = new BlackjackPlayer(0, false);
 	}
 
 	@Test
 	public void test3vs2() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vs3() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vs4() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vs5() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
 	}
 	
 	@Test
 	public void test3vs6() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
 	}
 	
 	@Test
 	public void test3vs7() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vs8() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vs9() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vs10() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vsA() {
+	    int numDecks = 4;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-		
-		int numDecks = 4;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
-		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+	    player.updateStrategy(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
 	}
 	
 	@Test
 	public void test3vs4DoubleDeck() {
+	    int numDecks = 2;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
-		
-		int numDecks = 2;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
 	}
 	
 	@Test
 	public void test3vs4SingleDeck() {
+	    int numDecks = 1;
+	    
 		BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
-		
-		int numDecks = 1;
-		
 		BasicStrategy strategy = new BasicStrategy(rules, numDecks);
 		
+		player.updateStrategy(rules, numDecks);
+		
 		assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+		assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
 	}
 
 }
