@@ -279,16 +279,16 @@ public class BlackjackTable extends Observable {
                 move = players.get(seat).getAction(dealerUpCard, playerHand, numHands);
                 
                 switch (move) {
-                    case STAND:        j++;
+                    case STAND:     j++;
                                     break;
-                    case HIT:        dealCardFromShoeToHand(playerHand);
+                    case HIT:       dealCardFromShoeToHand(playerHand);
                                     
                                     if (playerHand.isBust()) {
                                         j++;
                                     }
                                     
                                     break;
-                    case SPLIT:        BlackjackHand splitHand = playerHand.split();
+                    case SPLIT:     BlackjackHand splitHand = playerHand.split();
                                     playersHands.get(seat).add(j + 1, splitHand);
                                     break;
                     case DOUBLE:    dealCardFromShoeToHand(playerHand);

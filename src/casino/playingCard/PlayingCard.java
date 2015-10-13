@@ -12,23 +12,27 @@ public abstract class PlayingCard {
     protected CardSuit suit;
     protected CardRank rank;
     
-    public static final CardSuit[] SUITS = {CardSuit.CLUBS, 
-                                            CardSuit.DIAMONDS, 
-                                            CardSuit.HEARTS, 
-                                            CardSuit.SPADES};
-    public static final CardRank[] RANKS = {CardRank.ACE, 
-                                            CardRank.TWO,
-                                            CardRank.THREE,
-                                            CardRank.FOUR,
-                                            CardRank.FIVE,
-                                            CardRank.SIX,
-                                            CardRank.SEVEN,
-                                            CardRank.EIGHT,
-                                            CardRank.NINE,
-                                            CardRank.TEN,
-                                            CardRank.JACK,
-                                            CardRank.QUEEN,
-                                            CardRank.KING};
+    public static final CardSuit[] SUITS = {
+        CardSuit.CLUBS, 
+        CardSuit.DIAMONDS, 
+        CardSuit.HEARTS, 
+        CardSuit.SPADES
+    };
+    public static final CardRank[] RANKS = {
+        CardRank.ACE, 
+        CardRank.TWO,
+        CardRank.THREE,
+        CardRank.FOUR,
+        CardRank.FIVE,
+        CardRank.SIX,
+        CardRank.SEVEN,
+        CardRank.EIGHT,
+        CardRank.NINE,
+        CardRank.TEN,
+        CardRank.JACK,
+        CardRank.QUEEN,
+        CardRank.KING
+    };
     public static final int NUMBER_OF_SUITS = 4;
     public static final int NUMBER_OF_RANKS = 13;
     
