@@ -25,5 +25,6 @@ false
 1
 #tableSeat
 0
-#playerCardCounter
+#playerStrategy
+3
 false

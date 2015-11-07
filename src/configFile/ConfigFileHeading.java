@@ -17,6 +17,6 @@ public class ConfigFileHeading {
     
     public static final String PLAYER_PARAMETERS_HEADING = "#PLAYER_PARAMETERS";
     public static final String NUM_PLAYERS = "#numPlayers";
-    public static final String PLAYER_CARD_COUNTER = "#playerCardCounter";
+    public static final String PLAYER_STRATEGY = "#playerStrategy";
     public static final String SEAT_AT_TABLE = "#tableSeat";
 }

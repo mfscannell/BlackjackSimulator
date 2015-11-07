@@ -233,10 +233,17 @@ public class Main {
             int seat = Integer.parseInt(heading);
             
             heading = configFileReader.next();
-            if (!heading.equals(ConfigFileHeading.PLAYER_CARD_COUNTER)) {
-                throw new InvalidConfigFileException("Expected " + ConfigFileHeading.PLAYER_CARD_COUNTER);
+            if (!heading.equals(ConfigFileHeading.PLAYER_STRATEGY)) {
+                throw new InvalidConfigFileException("Expected " + ConfigFileHeading.PLAYER_STRATEGY);
             }
             heading = configFileReader.next();
+            int numStrategies = Integer.parseInt(heading);
+            
+            for (int j = 0; i < numStrategies; i++) {
+                heading = configFileReader.next();
+                String strategy = heading;
+            }
+            
             boolean cardCounter = Boolean.parseBoolean(heading);
             
             BlackjackPlayer player = new BlackjackPlayer(0, cardCounter);
