@@ -22,9 +22,16 @@ false
 
 #PLAYER_PARAMETERS
 #numPlayers
-1
+2
 #tableSeat
 0
 #playerStrategy
 3
-false
+101
+201
+202
+#tableSeat
+1
+#playerStrategy
+1
+101

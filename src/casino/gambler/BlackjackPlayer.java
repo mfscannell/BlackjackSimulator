@@ -22,7 +22,6 @@ public class BlackjackPlayer extends Gambler {
     /**
      * Constructor.
      * @param cashTotal  The total amount of cash a player has.
-     * @param countsCards  True if the player counts cards.
      */
     public BlackjackPlayer(double cashTotal) {
         super(cashTotal);
@@ -90,6 +89,14 @@ public class BlackjackPlayer extends Gambler {
         }
         
         return stringBuilder.toString();
+    }
+    
+    public void addStrategyLayer(int strategyDescription) {
+        if (strategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
+            resetBaseStrategy(strategyDescription);
+        } else {
+            enhanceStrategy(strategyDescription);
+        }
     }
     
     public void resetBaseStrategy(int basicStrategyDescription) {
