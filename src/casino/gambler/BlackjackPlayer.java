@@ -11,6 +11,7 @@ import blackjackStrategies.BasicStrategy;
 import blackjackStrategies.BlackjackStrategy;
 import blackjackStrategies.CompositionStrategy;
 import blackjackStrategies.KISSIStrategy;
+import blackjackStrategies.NullStrategy;
 import enumerations.BlackjackMove;
 
 public class BlackjackPlayer extends Gambler {
@@ -27,6 +28,7 @@ public class BlackjackPlayer extends Gambler {
         super(cashTotal);
         hands = null;
         insurance = false;
+        blackjackStrategy = new NullStrategy();
     }
     
     /**

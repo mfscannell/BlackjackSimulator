@@ -12,6 +12,7 @@ import casino.gambler.BlackjackPlayer;
 import casino.playingCard.BlackjackCard;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
+import blackjackStrategies.BlackjackStrategy;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
@@ -26,6 +27,7 @@ public class Total8 {
         rules = DefaultRulesSingleton.getDefaultRules();
         hand = BlackjackHandHard.getHandHard8();
         player = new BlackjackPlayer(0);
+        player.resetBaseStrategy(BlackjackStrategy.BASIC_STRATEGY);
     }
 
     @Test

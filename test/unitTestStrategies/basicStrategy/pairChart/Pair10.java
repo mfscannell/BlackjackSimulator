@@ -13,6 +13,7 @@ import casino.gambler.Gambler;
 import casino.playingCard.BlackjackCard;
 import rules.BlackjackRules;
 import blackjackStrategies.BasicStrategy;
+import blackjackStrategies.BlackjackStrategy;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 import enumerations.CardSuit;
@@ -34,6 +35,7 @@ public class Pair10 {
         rules = DefaultRulesSingleton.getDefaultRules();
         hand = BlackjackHandPairs.getPair10();
         player = new BlackjackPlayer(0);
+        player.resetBaseStrategy(BlackjackStrategy.BASIC_STRATEGY);
         numDecks = 2;
         player.initializeStrategy(rules, numDecks);
     }
