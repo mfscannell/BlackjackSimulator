@@ -162,6 +162,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     public void initialize(BlackjackRules rules, int numDecks) {
         //TODO
         this.rules = rules;
+        this.numDecks = numDecks;
         this.blackjackStrategy.initialize(rules, numDecks);
     }
 
