@@ -12,6 +12,10 @@ public class BasicStrategy extends BlackjackStrategy {
     private BlackjackMove[][] softChart;
     private BlackjackRules rules;
     
+    public BasicStrategy() {
+        
+    }
+    
     /**
      * Constructor
      * @param rules  The rules at the table.
@@ -20,6 +24,18 @@ public class BasicStrategy extends BlackjackStrategy {
      * 1 and 8.
      */
     public BasicStrategy(final BlackjackRules rules, int numDecks) {
+        pairChart = new BlackjackMove[11][11];
+        totalChart = new BlackjackMove[22][11];
+        softChart = new BlackjackMove[11][11];
+        
+        updatePairChart(rules, numDecks);
+        updateTotalChart(rules, numDecks);
+        updateSoftChart(rules, numDecks);
+        
+        this.rules = rules;
+    }
+    
+    public void initialize(BlackjackRules rules, int numDecks) {
         pairChart = new BlackjackMove[11][11];
         totalChart = new BlackjackMove[22][11];
         softChart = new BlackjackMove[11][11];
@@ -386,4 +402,6 @@ public class BasicStrategy extends BlackjackStrategy {
     public boolean getInsuranceAction() {
         return false;
     }
+    
+    
 }

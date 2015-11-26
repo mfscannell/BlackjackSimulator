@@ -246,7 +246,7 @@ public class Main {
             
             boolean cardCounter = Boolean.parseBoolean(heading);
             
-            BlackjackPlayer player = new BlackjackPlayer(0, cardCounter);
+            BlackjackPlayer player = new BlackjackPlayer(0);
             
             try {
                 blackjackTable.addPlayerAtSeat(player, seat);

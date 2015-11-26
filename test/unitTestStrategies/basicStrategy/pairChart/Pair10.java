@@ -33,9 +33,9 @@ public class Pair10 {
     public static void setUpBeforeClass() {
         rules = DefaultRulesSingleton.getDefaultRules();
         hand = BlackjackHandPairs.getPair10();
-        player = new BlackjackPlayer(0, false);
+        player = new BlackjackPlayer(0);
         numDecks = 2;
-        player.updateStrategy(rules, numDecks);
+        player.initializeStrategy(rules, numDecks);
     }
 
     @Test

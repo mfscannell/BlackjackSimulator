@@ -1,5 +1,6 @@
 package blackjackStrategies;
 
+import rules.BlackjackRules;
 import casino.blackjack.BlackjackHand;
 import casino.playingCard.PlayingCard;
 import enumerations.BlackjackMove;
@@ -54,6 +55,11 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
     
     public void adjustCount(PlayingCard dealtCard) {
         blackjackStrategy.adjustCount(dealtCard);
+    }
+    
+    public void initialize(BlackjackRules rules, int numDecks) {
+        //TODO
+        this.blackjackStrategy.initialize(rules, numDecks);
     }
 
 }

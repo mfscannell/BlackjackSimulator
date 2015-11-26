@@ -31,7 +31,7 @@ public class TestBlackjackTable {
         BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
         
         try {
-            blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
+            blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0), 1);
             
             assertTrue(blackjackTable.hasPlayerAtSeat(1));
         } catch (TableSeatTakenException | TableSeatNumberInvalidException e) {
@@ -44,7 +44,7 @@ public class TestBlackjackTable {
         BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
         
         try {
-            blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 2);
+            blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0), 2);
             
             assertFalse(blackjackTable.hasPlayerAtSeat(1));
         } catch (TableSeatTakenException | TableSeatNumberInvalidException e) {
@@ -57,7 +57,7 @@ public class TestBlackjackTable {
         BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
         
         try {
-            blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
+            blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0), 1);
         } catch (TableSeatTakenException | TableSeatNumberInvalidException e) {
             e.printStackTrace();
         }
@@ -67,21 +67,21 @@ public class TestBlackjackTable {
     public void cantAddPlayerSeatTaken() throws TableSeatTakenException, TableSeatNumberInvalidException {
         BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
         
-        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
-        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 1);
+        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0), 1);
+        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0), 1);
     }
     
     @Test(expected=TableSeatNumberInvalidException.class)
     public void cantAddPlayerInvalidSeat() throws TableSeatTakenException, TableSeatNumberInvalidException {
         BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
         
-        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), -1);
+        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0), -1);
     }
     
     @Test(expected=TableSeatNumberInvalidException.class)
     public void cantAddPlayerInvalidSeatHigh() throws TableSeatTakenException, TableSeatNumberInvalidException {
         BlackjackTable blackjackTable = new BlackjackTable(2, 55, blackjackRules);
         
-        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0, true), 7);
+        blackjackTable.addPlayerAtSeat(new BlackjackPlayer(0), 7);
     }
 }

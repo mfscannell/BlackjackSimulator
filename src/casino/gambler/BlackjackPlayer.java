@@ -14,22 +14,17 @@ import blackjackStrategies.KISSIStrategy;
 import enumerations.BlackjackMove;
 
 public class BlackjackPlayer extends Gambler {
-    private boolean countsCards;
     private ArrayList<BlackjackHand> hands;
     private boolean insurance;
     private BlackjackStrategy blackjackStrategy;
-    
-    private static final String COUNTS_CARDS = "Counts cards";
-    private static final String DOESNT_COUNTS_CARDS = "Doesn't counts cards";
 
     /**
      * Constructor.
      * @param cashTotal  The total amount of cash a player has.
      * @param countsCards  True if the player counts cards.
      */
-    public BlackjackPlayer(double cashTotal, boolean countsCards) {
+    public BlackjackPlayer(double cashTotal) {
         super(cashTotal);
-        this.countsCards = countsCards;
         hands = null;
         insurance = false;
     }
@@ -40,10 +35,6 @@ public class BlackjackPlayer extends Gambler {
      */
     public boolean takesInsurance() {
         return insurance;
-    }
-    
-    public void setCountsCards(boolean countsCards) {
-        this.countsCards = countsCards;
     }
     
     /**
@@ -88,12 +79,6 @@ public class BlackjackPlayer extends Gambler {
         
         stringBuilder.append("Cash:" + cashTotal + "\n");
         stringBuilder.append("Current bet:" + betAmount + "\n");
-        
-        if (countsCards) {
-            stringBuilder.append(COUNTS_CARDS);
-        } else {
-            stringBuilder.append(DOESNT_COUNTS_CARDS);
-        }
         stringBuilder.append("\n");
         
         if (insurance) {
@@ -105,18 +90,40 @@ public class BlackjackPlayer extends Gambler {
         return stringBuilder.toString();
     }
     
-    public void updateStrategy(BlackjackRules rules, int numDecks) {
-        if (countsCards) {
-            BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
-            BlackjackStrategy compositionStrategy = new CompositionStrategy(basicStrategy);
-            blackjackStrategy = new KISSIStrategy(compositionStrategy, rules, numDecks);
-        } else {
-            BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
-            blackjackStrategy = new CompositionStrategy(basicStrategy);
+    public void resetBaseStrategy(int basicStrategyDescription) {
+        if (basicStrategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
+            blackjackStrategy = new BasicStrategy();
         }
+    }
+    
+    public void enhanceStrategy(int strategyDecoratorDescription) {
+        switch (strategyDecoratorDescription) {
+            case BlackjackStrategy.COMPOSITION_STRATEGY:
+                blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+                break;
+            case BlackjackStrategy.KISS_I_STRATEGY:
+                blackjackStrategy = new KISSIStrategy(blackjackStrategy);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    /**
+     * 
+     * @param rules
+     * @param numDecks
+     */
+    public void initializeStrategy(BlackjackRules rules, int numDecks) {
+        this.blackjackStrategy.initialize(rules, numDecks);
     }
 
     @Override
+    /**
+     * Notifies the player of the playing card that was dealt so they can adjust their card count.
+     * @param arg0 The BlackjackTable
+     * @param arg1 The Playing card that was dealt from the shoe and exposed to the players.
+     */
     public void update(Observable arg0, Object arg1) {
         if (arg1 instanceof PlayingCard) {
             PlayingCard card = (PlayingCard)arg1;
