@@ -60,5 +60,4 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
     public void initialize(BlackjackRules rules, int numDecks) {
         this.blackjackStrategy.initialize(rules, numDecks);
     }
-
 }

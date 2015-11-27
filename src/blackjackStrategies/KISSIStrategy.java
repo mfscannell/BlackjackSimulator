@@ -37,6 +37,12 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         count = initialCount;
     }
     
+    public void initialize(BlackjackRules rules, int numDecks) {
+        this.rules = rules;
+        this.numDecks = numDecks;
+        this.blackjackStrategy.initialize(rules, numDecks);
+    }
+    
     /**
      * Resets the card-counting count to the initial count.
      */
@@ -158,12 +164,4 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         
         return walk;
     }
-    
-    public void initialize(BlackjackRules rules, int numDecks) {
-        //TODO
-        this.rules = rules;
-        this.numDecks = numDecks;
-        this.blackjackStrategy.initialize(rules, numDecks);
-    }
-
 }

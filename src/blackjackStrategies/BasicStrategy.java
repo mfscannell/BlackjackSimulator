@@ -402,6 +402,4 @@ public class BasicStrategy extends BlackjackStrategy {
     public boolean getInsuranceAction() {
         return false;
     }
-    
-    
 }

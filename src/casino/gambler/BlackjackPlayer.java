@@ -119,9 +119,10 @@ public class BlackjackPlayer extends Gambler {
     }
     
     /**
-     * 
-     * @param rules
-     * @param numDecks
+     * Sets up the blackjack move strategy based upon the rules at the table and the number of decks
+     * in the shoe at the table.
+     * @param rules The rules at the table.
+     * @param numDecks  The number of decks in the shoe at the table.
      */
     public void initializeStrategy(BlackjackRules rules, int numDecks) {
         this.blackjackStrategy.initialize(rules, numDecks);
