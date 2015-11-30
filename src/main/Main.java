@@ -229,17 +229,25 @@ public class Main {
             if (!heading.equals(ConfigFileHeading.SEAT_AT_TABLE)) {
                 throw new InvalidConfigFileException("Expected " + ConfigFileHeading.SEAT_AT_TABLE);
             }
+            
             heading = configFileReader.next();
             int seat = Integer.parseInt(heading);
             
             heading = configFileReader.next();
-            if (!heading.equals(ConfigFileHeading.PLAYER_CARD_COUNTER)) {
-                throw new InvalidConfigFileException("Expected " + ConfigFileHeading.PLAYER_CARD_COUNTER);
+            if (!heading.equals(ConfigFileHeading.PLAYER_STRATEGY)) {
+                throw new InvalidConfigFileException("Expected " + ConfigFileHeading.PLAYER_STRATEGY);
             }
-            heading = configFileReader.next();
-            boolean cardCounter = Boolean.parseBoolean(heading);
             
-            BlackjackPlayer player = new BlackjackPlayer(0, cardCounter);
+            heading = configFileReader.next();
+            int numStrategies = Integer.parseInt(heading);
+            
+            BlackjackPlayer player = new BlackjackPlayer(0);
+            
+            for (int j = 0; j < numStrategies; j++) {
+                heading = configFileReader.next();
+                int strategy = Integer.parseInt(heading);
+                player.addStrategyLayer(strategy);
+            }
             
             try {
                 blackjackTable.addPlayerAtSeat(player, seat);

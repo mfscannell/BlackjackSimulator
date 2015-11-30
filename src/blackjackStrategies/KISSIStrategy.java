@@ -16,6 +16,10 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     private BlackjackRules rules;
     private int numDecks;
     public static int KISS_COUNT = 20;
+    
+    public KISSIStrategy(BlackjackStrategy blackjackStrategy) {
+        this.blackjackStrategy = blackjackStrategy;
+    }
 
     /**
      * Constructor
@@ -31,6 +35,12 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         
         initialCount = INITIAL_COUNTS[numDecks];
         count = initialCount;
+    }
+    
+    public void initialize(BlackjackRules rules, int numDecks) {
+        this.rules = rules;
+        this.numDecks = numDecks;
+        this.blackjackStrategy.initialize(rules, numDecks);
     }
     
     /**
@@ -154,5 +164,4 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         
         return walk;
     }
-
 }

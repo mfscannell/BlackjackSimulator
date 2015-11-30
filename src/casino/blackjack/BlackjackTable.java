@@ -91,7 +91,7 @@ public class BlackjackTable extends Observable {
         playersHands.set(seat, hands);
         players.set(seat, blackjackPlayer);
         blackjackPlayer.setHands(hands);
-        blackjackPlayer.updateStrategy(rules, shoe.getNumDecks());
+        blackjackPlayer.initializeStrategy(rules, shoe.getNumDecks());
         addObserver(blackjackPlayer);
     }
     
