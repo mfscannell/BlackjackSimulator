@@ -31,7 +31,7 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
         } else if (playerHand.isHand(CardRank.TEN, CardRank.TWO) && dealerUpCard.getValue() == 4) {
             move = BlackjackMove.HIT;
         } else {
-            move = blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
+            move = this.blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
         }
         
         return move;
@@ -46,15 +46,15 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
     }
     
     public int getCount() {
-        return blackjackStrategy.getCount();
+        return this.blackjackStrategy.getCount();
     }
     
     public boolean getInsuranceAction() {
-        return blackjackStrategy.getInsuranceAction();
+        return this.blackjackStrategy.getInsuranceAction();
     }
     
     public void adjustCount(PlayingCard dealtCard) {
-        blackjackStrategy.adjustCount(dealtCard);
+        this.blackjackStrategy.adjustCount(dealtCard);
     }
     
     public void initialize(BlackjackRules rules, int numDecks) {

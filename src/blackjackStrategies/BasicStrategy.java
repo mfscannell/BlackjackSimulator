@@ -24,27 +24,25 @@ public class BasicStrategy extends BlackjackStrategy {
      * 1 and 8.
      */
     public BasicStrategy(final BlackjackRules rules, int numDecks) {
-        pairChart = new BlackjackMove[11][11];
-        totalChart = new BlackjackMove[22][11];
-        softChart = new BlackjackMove[11][11];
+        this.pairChart = new BlackjackMove[11][11];
+        this.totalChart = new BlackjackMove[22][11];
+        this.softChart = new BlackjackMove[11][11];
+        this.rules = rules;
         
         updatePairChart(rules, numDecks);
         updateTotalChart(rules, numDecks);
         updateSoftChart(rules, numDecks);
-        
-        this.rules = rules;
     }
     
     public void initialize(BlackjackRules rules, int numDecks) {
-        pairChart = new BlackjackMove[11][11];
-        totalChart = new BlackjackMove[22][11];
-        softChart = new BlackjackMove[11][11];
+        this.pairChart = new BlackjackMove[11][11];
+        this.totalChart = new BlackjackMove[22][11];
+        this.softChart = new BlackjackMove[11][11];
+        this.rules = rules;
         
         updatePairChart(rules, numDecks);
         updateTotalChart(rules, numDecks);
         updateSoftChart(rules, numDecks);
-        
-        this.rules = rules;
     }
     
     /**
@@ -56,68 +54,79 @@ public class BasicStrategy extends BlackjackStrategy {
         for (int i = 0; i < 11; i++) {//loop on pair
             for (int j = 0; j < 11; j++) {//loop on dealer's up card value
                 switch (i) {//switch on the value of the paired card
-                    case 2:     if (4 <= j && j <= 7) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else if (j == 3 && numDecks == 1) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else {
-                                    pairChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 3:     if (4 <= j && j <= 7) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else {
-                                    pairChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 4:     if ((rules.isDoubleAfterSplitAllowed() || numDecks == 1) && (5 <= j && j <= 6)) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else {
-                                    pairChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 5:     if (j == 10 || j == 1) {
-                                    pairChart[i][j] = BlackjackMove.HIT;
-                                } else {
-                                    pairChart[i][j] = BlackjackMove.DOUBLE;
-                                }
-                                break;
-                    case 6:     if (3 <= j && j <= 6) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else if (j == 2 && rules.isDoubleAfterSplitAllowed()) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else if (j == 2 && numDecks <= 2) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else {
-                                    pairChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 7:     if (j == 10 && numDecks == 1) {
-                                    pairChart[i][j] = BlackjackMove.STAND;
-                                } else if (2 <= j && j <= 7) {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                } else {
-                                    pairChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 8:     pairChart[i][j] = BlackjackMove.SPLIT;
-                                break;
-                    case 9:     if (j == 7 || j == 10 || j == 1) {
-                                    pairChart[i][j] = BlackjackMove.STAND;
-                                } else {
-                                    pairChart[i][j] = BlackjackMove.SPLIT;
-                                }
-                                break;
-                    case 10:    pairChart[i][j] = BlackjackMove.STAND;
-                                break;
-                    case 1:     pairChart[i][j] = BlackjackMove.SPLIT;
-                                break;
-                    default:    pairChart[i][j] = BlackjackMove.STAND;
-                                break;
+                    case 2:
+                        if (4 <= j && j <= 7) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else if (j == 3 && numDecks == 1) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else {
+                            this.pairChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 3:
+                        if (4 <= j && j <= 7) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else {
+                            this.pairChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 4:
+                        if ((rules.isDoubleAfterSplitAllowed() || numDecks == 1) && (5 <= j && j <= 6)) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else {
+                            this.pairChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 5:
+                        if (j == 10 || j == 1) {
+                            this.pairChart[i][j] = BlackjackMove.HIT;
+                        } else {
+                            this.pairChart[i][j] = BlackjackMove.DOUBLE;
+                        }
+                        break;
+                    case 6:
+                        if (3 <= j && j <= 6) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else if (j == 2 && rules.isDoubleAfterSplitAllowed()) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else if (j == 2 && numDecks <= 2) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else {
+                            this.pairChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 7:
+                        if (j == 10 && numDecks == 1) {
+                            this.pairChart[i][j] = BlackjackMove.STAND;
+                        } else if (2 <= j && j <= 7) {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        } else {
+                            this.pairChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 8:
+                        pairChart[i][j] = BlackjackMove.SPLIT;
+                        break;
+                    case 9:
+                        if (j == 7 || j == 10 || j == 1) {
+                            this.pairChart[i][j] = BlackjackMove.STAND;
+                        } else {
+                            this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        }
+                        break;
+                    case 10:
+                        this.pairChart[i][j] = BlackjackMove.STAND;
+                        break;
+                    case 1:
+                        this.pairChart[i][j] = BlackjackMove.SPLIT;
+                        break;
+                    default:
+                        this.pairChart[i][j] = BlackjackMove.STAND;
+                        break;
                 }
             }
         }
@@ -132,90 +141,112 @@ public class BasicStrategy extends BlackjackStrategy {
         for (int i = 0; i < 22; i++) {//loop on Total
             for (int j = 0; j < 11; j++) {//loop on dealer's up card
                 switch (i) {//switch on the hand total
-                    case 1:     totalChart[i][j] = BlackjackMove.HIT;
-                                break;
-                    case 2:     totalChart[i][j] = BlackjackMove.HIT;
-                                break;
-                    case 3:     totalChart[i][j] = BlackjackMove.HIT;
-                                break;
-                    case 4:     totalChart[i][j] = BlackjackMove.HIT;
-                                break;
-                    case 5:     totalChart[i][j] = BlackjackMove.HIT;
-                                break;
-                    case 6:     totalChart[i][j] = BlackjackMove.HIT;
-                                break;
-                    case 7:     totalChart[i][j] = BlackjackMove.HIT;
-                                break;
-                    case 8:     if (numDecks == 1 && j == 5) {
-                                    totalChart[i][j] = BlackjackMove.DOUBLE;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 9:     if (3 <= j && j <= 6) {
-                                    totalChart[i][j] = BlackjackMove.DOUBLE;
-                                } else if (j == 2 && (numDecks <= 2)) {
-                                    totalChart[i][j] = BlackjackMove.DOUBLE;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 10:    if (2 <= j && j <= 9) {
-                                    totalChart[i][j] = BlackjackMove.DOUBLE;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 11:    if (rules.mustDealerHitSoft17() || numDecks <= 2) {
-                                    totalChart[i][j] = BlackjackMove.DOUBLE;
-                                } else if (j != 1) {
-                                    totalChart[i][j] = BlackjackMove.DOUBLE;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 12:    if (4 <= j && j <= 6) {
-                                    totalChart[i][j] = BlackjackMove.STAND;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 13:    if (2 <= j && j <= 6) {
-                                    totalChart[i][j] = BlackjackMove.STAND;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 14:    if (2 <= j && j <= 6) {
-                                    totalChart[i][j] = BlackjackMove.STAND;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 15:    if (2 <= j && j <= 6) {
-                                    totalChart[i][j] = BlackjackMove.STAND;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 16:    if (2 <= j && j <= 6) {
-                                    totalChart[i][j] = BlackjackMove.STAND;
-                                } else {
-                                    totalChart[i][j] = BlackjackMove.HIT;
-                                }
-                                break;
-                    case 17:    totalChart[i][j] = BlackjackMove.STAND;
-                                break;
-                    case 18:    totalChart[i][j] = BlackjackMove.STAND;
-                                break;
-                    case 19:    totalChart[i][j] = BlackjackMove.STAND;
-                                break;
-                    case 20:    totalChart[i][j] = BlackjackMove.STAND;
-                                break;
-                    case 21:    totalChart[i][j] = BlackjackMove.STAND;
-                                break;
-                    default:    totalChart[i][j] = BlackjackMove.STAND;
-                                break;
+                    case 1:
+                        this.totalChart[i][j] = BlackjackMove.HIT;
+                        break;
+                    case 2:
+                        this.totalChart[i][j] = BlackjackMove.HIT;
+                        break;
+                    case 3:
+                        this.totalChart[i][j] = BlackjackMove.HIT;
+                        break;
+                    case 4:
+                        this.totalChart[i][j] = BlackjackMove.HIT;
+                        break;
+                    case 5:
+                        this.totalChart[i][j] = BlackjackMove.HIT;
+                        break;
+                    case 6:
+                        this.totalChart[i][j] = BlackjackMove.HIT;
+                        break;
+                    case 7:
+                        this.totalChart[i][j] = BlackjackMove.HIT;
+                        break;
+                    case 8:
+                        if (numDecks == 1 && j == 5) {
+                            this.totalChart[i][j] = BlackjackMove.DOUBLE;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 9:
+                        if (3 <= j && j <= 6) {
+                            this.totalChart[i][j] = BlackjackMove.DOUBLE;
+                        } else if (j == 2 && (numDecks <= 2)) {
+                            this.totalChart[i][j] = BlackjackMove.DOUBLE;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 10:
+                        if (2 <= j && j <= 9) {
+                            this.totalChart[i][j] = BlackjackMove.DOUBLE;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 11:
+                        if (rules.mustDealerHitSoft17() || numDecks <= 2) {
+                            this.totalChart[i][j] = BlackjackMove.DOUBLE;
+                        } else if (j != 1) {
+                            this.totalChart[i][j] = BlackjackMove.DOUBLE;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 12:
+                        if (4 <= j && j <= 6) {
+                            this.totalChart[i][j] = BlackjackMove.STAND;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 13:
+                        if (2 <= j && j <= 6) {
+                            this.totalChart[i][j] = BlackjackMove.STAND;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 14:
+                        if (2 <= j && j <= 6) {
+                            this.totalChart[i][j] = BlackjackMove.STAND;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 15:
+                        if (2 <= j && j <= 6) {
+                            this.totalChart[i][j] = BlackjackMove.STAND;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 16:
+                        if (2 <= j && j <= 6) {
+                            this.totalChart[i][j] = BlackjackMove.STAND;
+                        } else {
+                            this.totalChart[i][j] = BlackjackMove.HIT;
+                        }
+                        break;
+                    case 17:
+                        this.totalChart[i][j] = BlackjackMove.STAND;
+                        break;
+                    case 18:
+                        this.totalChart[i][j] = BlackjackMove.STAND;
+                        break;
+                    case 19:
+                        this.totalChart[i][j] = BlackjackMove.STAND;
+                        break;
+                    case 20:
+                        this.totalChart[i][j] = BlackjackMove.STAND;
+                        break;
+                    case 21:
+                        this.totalChart[i][j] = BlackjackMove.STAND;
+                        break;
+                    default:
+                        this.totalChart[i][j] = BlackjackMove.STAND;
+                        break;
                 }
             }
         }
@@ -230,64 +261,75 @@ public class BasicStrategy extends BlackjackStrategy {
         for (int i = 0; i < 11; i++) {//loop on Non-ace
             for (int j = 0; j < 11; j++) {//loop on dealer's up card
                 switch (i) {//switch on the value of the non-ace card.
-                case 1:     softChart[i][j] = BlackjackMove.SPLIT;
-                            break;
-                case 2:     if (5 <= j && j <= 6) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else if (j == 4 && numDecks == 1) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else {
-                                softChart[i][j] = BlackjackMove.HIT;
-                            }
-                            break;
-                case 3:     if (5 <= j && j <= 6) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else if (j == 4 && numDecks <= 2) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else {
-                                softChart[i][j] = BlackjackMove.HIT;
-                            }
-                            break;
-                case 4:     if (4 <= j && j <= 6) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else {
-                                softChart[i][j] = BlackjackMove.HIT;
-                            }
-                            break;
-                case 5:     if (4 <= j && j <= 6) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else {
-                                softChart[i][j] = BlackjackMove.HIT;
-                            }
-                            break;
-                case 6:     if (j == 2 && numDecks == 1) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else if (3 <= j && j <= 6) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else {
-                                softChart[i][j] = BlackjackMove.HIT;
-                            }
-                            break;
-                case 7:     if (3 <= j && j <= 6) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else if (j == 2 || j == 7 || j == 8) {
-                                softChart[i][j] = BlackjackMove.STAND;
-                            } else {
-                                softChart[i][j] = BlackjackMove.HIT;
-                            }
-                            break;    
-                case 8:     if ((rules.mustDealerHitSoft17() || numDecks == 1) && j == 6) {
-                                softChart[i][j] = BlackjackMove.DOUBLE;
-                            } else {
-                                softChart[i][j] = BlackjackMove.STAND;
-                            }
-                            break;
-                case 9:     softChart[i][j] = BlackjackMove.STAND;
-                            break;
-                case 10:    softChart[i][j] = BlackjackMove.STAND;
-                            break;
-                default:    softChart[i][j] = BlackjackMove.STAND;
-                            break;
+                case 1:
+                    this.softChart[i][j] = BlackjackMove.SPLIT;
+                    break;
+                case 2:
+                    if (5 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (j == 4 && numDecks == 1) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 3:
+                    if (5 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (j == 4 && numDecks <= 2) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 4:
+                    if (4 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 5:
+                    if (4 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 6:
+                    if (j == 2 && numDecks == 1) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (3 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 7:
+                    if (3 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (j == 2 || j == 7 || j == 8) {
+                        this.softChart[i][j] = BlackjackMove.STAND;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;    
+                case 8:
+                    if ((rules.mustDealerHitSoft17() || numDecks == 1) && j == 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.STAND;
+                    }
+                    break;
+                case 9:
+                    this.softChart[i][j] = BlackjackMove.STAND;
+                    break;
+                case 10:
+                    this.softChart[i][j] = BlackjackMove.STAND;
+                    break;
+                default:
+                    this.softChart[i][j] = BlackjackMove.STAND;
+                    break;
                 }
             }
         }
@@ -320,7 +362,7 @@ public class BasicStrategy extends BlackjackStrategy {
                 move = BlackjackMove.HIT;
             }
         } else {
-            move = totalChart[handTotal][dealerCardValue];
+            move = this.totalChart[handTotal][dealerCardValue];
             
             if (move == BlackjackMove.DOUBLE) {
                 move = BlackjackMove.HIT;
@@ -336,7 +378,7 @@ public class BasicStrategy extends BlackjackStrategy {
         int handTotal = hand.getBlackjackTotal();
         
         if (hand.isPair()) {
-            move = pairChart[firstCardValue][dealerCardValue];
+            move = this.pairChart[firstCardValue][dealerCardValue];
         } else if (hand.isSoft()) {
             int nonAceValue;
             
@@ -346,9 +388,9 @@ public class BasicStrategy extends BlackjackStrategy {
                 nonAceValue = hand.getFirstCardValue();
             }
             
-            move = softChart[nonAceValue][dealerCardValue];
+            move = this.softChart[nonAceValue][dealerCardValue];
         } else {
-            move = totalChart[handTotal][dealerCardValue];
+            move = this.totalChart[handTotal][dealerCardValue];
         }
         
         return move;
@@ -359,16 +401,14 @@ public class BasicStrategy extends BlackjackStrategy {
         int handTotal = hand.getBlackjackTotal();
         
         if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHandsAfterSplits()) {
-            correctedMove = totalChart[handTotal][dealerCardValue];
+            correctedMove = this.totalChart[handTotal][dealerCardValue];
         }
         
-        if (move == BlackjackMove.DOUBLE && 
-                hand.wasFromSplit() && 
-                !rules.isDoubleAfterSplitAllowed()) {
+        if (move == BlackjackMove.DOUBLE && hand.wasFromSplit() && !this.rules.isDoubleAfterSplitAllowed()) {
             correctedMove = BlackjackMove.HIT;
         }
         
-        if (hand.isPairAces() && hand.wasFromSplit() && !rules.isResplitAcesAllowed()) {
+        if (hand.isPairAces() && hand.wasFromSplit() && !this.rules.isResplitAcesAllowed()) {
             correctedMove = BlackjackMove.STAND;
         }
         

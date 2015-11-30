@@ -33,8 +33,8 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         this.rules = rules;
         this.numDecks = numDecks;
         
-        initialCount = INITIAL_COUNTS[numDecks];
-        count = initialCount;
+        this.initialCount = INITIAL_COUNTS[numDecks];
+        this.count = initialCount;
     }
     
     public void initialize(BlackjackRules rules, int numDecks) {
@@ -47,7 +47,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
      * Resets the card-counting count to the initial count.
      */
     public void resetCount() {
-        count = initialCount;
+        this.count = this.initialCount;
     }
     
     public void adjustCount(PlayingCard card) {
@@ -57,20 +57,20 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
             cardValue == 4 || 
             cardValue == 5 || 
             cardValue == 6) {
-            count++;
+            this.count++;
         } else if (card.isFaceCard()) {
-            count--;
+            this.count--;
         }
     }
     
     public int getCount() {
-        return count;
+        return this.count;
     }
     
     public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
         BlackjackMove move = BlackjackMove.STAND;
         
-        if (count >= KISS_COUNT) {
+        if (this.count >= KISS_COUNT) {
             if (playerHand.getBlackjackTotal() == 9 && !playerHand.isSoft() && dealerUpCard.getValue() == 2) {
                 move = BlackjackMove.DOUBLE;
             } else if (playerHand.getBlackjackTotal() == 11 && dealerUpCard.isAce()) {
@@ -84,15 +84,13 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
             } else if (playerHand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 6) {
                 move = BlackjackMove.DOUBLE;
             } else {
-                move = blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
+                move = this.blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
             }
         } else {
-            move = blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
+            move = this.blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
         }
         
-        if (move == BlackjackMove.DOUBLE && 
-            playerHand.wasFromSplit() && 
-            !rules.isDoubleAfterSplitAllowed()) {
+        if (move == BlackjackMove.DOUBLE && playerHand.wasFromSplit() && !this.rules.isDoubleAfterSplitAllowed()) {
             move = BlackjackMove.HIT;
         }
         
@@ -106,14 +104,14 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     public boolean getInsuranceAction() {
         boolean insurance = false;
         
-        if (numDecks == 1 && count >= 21) {
+        if (this.numDecks == 1 && this.count >= 21) {
             insurance = true;
-        } else if (numDecks == 2 && count >= 22) {
+        } else if (this.numDecks == 2 && this.count >= 22) {
             insurance = true;
-        } else if (4 <= numDecks && numDecks <= 8 && count >= 25) {
+        } else if (4 <= this.numDecks && this.numDecks <= 8 && this.count >= 25) {
             insurance = true;
         } else {
-            insurance = blackjackStrategy.getInsuranceAction();
+            insurance = this.blackjackStrategy.getInsuranceAction();
         }
         
         return insurance;
@@ -126,24 +124,24 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     public int getBetSize() {
         int betSize = 1;
         
-        if (numDecks <= 2) {
-            if (count <= 19) {
+        if (this.numDecks <= 2) {
+            if (this.count <= 19) {
                 betSize = 1;
-            } else if (count == 20) {
+            } else if (this.count == 20) {
                 betSize = 2;
-            } else if (count == 21) {
+            } else if (this.count == 21) {
                 betSize = 4;
-            } else if (count >= 22) {
+            } else if (this.count >= 22) {
                 betSize = 4;
             }
-        } else if (4 <= numDecks && numDecks <= 8) {
-            if (count <= 19) {
+        } else if (4 <= this.numDecks && this.numDecks <= 8) {
+            if (this.count <= 19) {
                 betSize = 1;
-            } else if (count == 20) {
+            } else if (this.count == 20) {
                 betSize = 2;
-            } else if (count == 21) {
+            } else if (this.count == 21) {
                 betSize = 4;
-            } else if (count >= 22) {
+            } else if (this.count >= 22) {
                 betSize = 6;
             }
         }
@@ -158,7 +156,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     public boolean shouldWalkAway() {
         boolean walk = false;
         
-        if (count <= WALK_AWAY[numDecks]) {
+        if (this.count <= WALK_AWAY[this.numDecks]) {
             walk = true;
         }
         
