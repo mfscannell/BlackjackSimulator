@@ -37,29 +37,29 @@ public class BlackjackRules {
     }
     
     public int getMaxHandsAfterSplits() {
-        return maxHands;
+        return this.maxHands;
     }
     
     public double getBlackjackPayoutMultiple() {
-        return blackjackPayoutMultiple;
+        return this.blackjackPayoutMultiple;
     }
     
     public boolean isDoubleAfterSplitAllowed() {
-        return doubleAfterSplitAllowed;
+        return this.doubleAfterSplitAllowed;
     }
     
     public boolean mustDealerHitSoft17() {
-        return dealerHitsSoft17;
+        return this.dealerHitsSoft17;
     }
     
     public boolean isResplitAcesAllowed() {
-        return resplitAces;
+        return this.resplitAces;
     }
     
     public BlackjackMove getDealersMove(final BlackjackHand dealersHand) {
         BlackjackMove dealersMove = BlackjackMove.STAND;
         
-        if (dealersHand.getBlackjackTotal() == 17 && dealersHand.isSoft() && dealerHitsSoft17) {
+        if (dealersHand.getBlackjackTotal() == 17 && dealersHand.isSoft() && this.dealerHitsSoft17) {
             dealersMove = BlackjackMove.HIT;
         } else if (dealersHand.getBlackjackTotal() < DEALER_MIN_HARD_COUNT) {
             dealersMove = BlackjackMove.HIT;
@@ -72,7 +72,7 @@ public class BlackjackRules {
         double payoutAdjustment = PAYOUT_HAND_PUSH;
         
         if (hand.isBlackjack() && !dealerHand.isBlackjack() && numPlayerHands == 1) {
-            payoutAdjustment = blackjackPayoutMultiple;
+            payoutAdjustment = this.blackjackPayoutMultiple;
         } else if (hand.isBlackjack() && dealerHand.isBlackjack() && numPlayerHands == 1) {
             payoutAdjustment = PAYOUT_HAND_PUSH;
         } else if (!hand.isBlackjack() && dealerHand.isBlackjack() && numPlayerHands == 1) {
@@ -152,19 +152,19 @@ public class BlackjackRules {
         this.dealerHitsSoft17 = builder.dealerHitsSoft17;
         this.resplitAces = builder.resplitAces;
         
-        blackjackCardValues = new HashMap<CardRank, Integer>();
-        blackjackCardValues.put(CardRank.ACE, 1);
-        blackjackCardValues.put(CardRank.TWO, 2);
-        blackjackCardValues.put(CardRank.THREE, 3);
-        blackjackCardValues.put(CardRank.FOUR, 4);
-        blackjackCardValues.put(CardRank.FIVE, 5);
-        blackjackCardValues.put(CardRank.SIX, 6);
-        blackjackCardValues.put(CardRank.SEVEN, 7);
-        blackjackCardValues.put(CardRank.EIGHT, 8);
-        blackjackCardValues.put(CardRank.NINE, 9);
-        blackjackCardValues.put(CardRank.TEN, 10);
-        blackjackCardValues.put(CardRank.JACK, 10);
-        blackjackCardValues.put(CardRank.QUEEN, 10);
-        blackjackCardValues.put(CardRank.KING, 10);
+        this.blackjackCardValues = new HashMap<CardRank, Integer>();
+        this.blackjackCardValues.put(CardRank.ACE, 1);
+        this.blackjackCardValues.put(CardRank.TWO, 2);
+        this.blackjackCardValues.put(CardRank.THREE, 3);
+        this.blackjackCardValues.put(CardRank.FOUR, 4);
+        this.blackjackCardValues.put(CardRank.FIVE, 5);
+        this.blackjackCardValues.put(CardRank.SIX, 6);
+        this.blackjackCardValues.put(CardRank.SEVEN, 7);
+        this.blackjackCardValues.put(CardRank.EIGHT, 8);
+        this.blackjackCardValues.put(CardRank.NINE, 9);
+        this.blackjackCardValues.put(CardRank.TEN, 10);
+        this.blackjackCardValues.put(CardRank.JACK, 10);
+        this.blackjackCardValues.put(CardRank.QUEEN, 10);
+        this.blackjackCardValues.put(CardRank.KING, 10);
     }
 }

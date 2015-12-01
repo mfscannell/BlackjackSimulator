@@ -49,7 +49,7 @@ public abstract class PlayingCard {
     public boolean isFaceCard() {
         boolean faceCard = false;
         
-        if (rank == CardRank.JACK || rank == CardRank.QUEEN || rank == CardRank.KING) {
+        if (this.rank == CardRank.JACK || this.rank == CardRank.QUEEN || this.rank == CardRank.KING) {
             faceCard = true;
         }
         
@@ -59,7 +59,7 @@ public abstract class PlayingCard {
     public boolean isAce() {
         boolean ace = false;
         
-        if (rank == CardRank.ACE) {
+        if (this.rank == CardRank.ACE) {
             ace = true;
         }
         
@@ -73,7 +73,7 @@ public abstract class PlayingCard {
     public boolean isRedCard() {
         boolean redCard = false;
         
-        if (suit == CardSuit.HEARTS || suit == CardSuit.DIAMONDS) {
+        if (this.suit == CardSuit.HEARTS || this.suit == CardSuit.DIAMONDS) {
             redCard = true;
         }
         
@@ -94,11 +94,10 @@ public abstract class PlayingCard {
     public abstract int getValue();
     
     public CardRank getRank() {
-        return rank;
+        return this.rank;
     }
     
     public CardSuit getSuit() {
-        return suit;
+        return this.suit;
     }
-
 }

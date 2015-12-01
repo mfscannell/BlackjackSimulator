@@ -27,22 +27,30 @@ public enum BlackjackMove {
         String string;
         
         switch (this) {
-            case HIT:                   string = hit;
-                                        break;
-            case STAND:                 string = stand;
-                                        break;
-            case DOUBLE:                string = doubleDown;
-                                        break;
-            case SPLIT:                 string = split;
-                                        break;
-            case TAKE_INSURANCE:        string = takeInsurance;
-                                        break;
-            case DONT_TAKE_INSURANCE:   string = dontTakeInsurance;
-                                        break;
-            case SURRENDER:             string = surrender;
-                                        break;
-            default:                    string = "";
-                                        break;
+            case HIT:
+                string = hit;
+                break;
+            case STAND:
+                string = stand;
+                break;
+            case DOUBLE:
+                string = doubleDown;
+                break;
+            case SPLIT:
+                string = split;
+                break;
+            case TAKE_INSURANCE:
+                string = takeInsurance;
+                break;
+            case DONT_TAKE_INSURANCE:
+                string = dontTakeInsurance;
+                break;
+            case SURRENDER:
+                string = surrender;
+                break;
+            default:
+                string = "";
+                break;
         }
         
         return string;

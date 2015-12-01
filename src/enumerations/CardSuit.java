@@ -17,24 +17,26 @@ public enum CardSuit {
         this.suit = suit;
     }
     
-    /**
-     * Converts the suit to a printable string.
-     */
     public String toString() {
         String string;
         
         switch (this) {
-            case SPADES:    string = spades;
-                            break;
-            case CLUBS:        string = clubs;
-                            break;
-            case HEARTS:    string = hearts;
-                            break;
-            case DIAMONDS:    string = diamonds;
-                            break;
-            default:        string = "";
-                            break;
+            case SPADES:
+                string = spades;
+                break;
+            case CLUBS:
+                string = clubs;
+                break;
+            case HEARTS:
+                string = hearts;
+                break;
+            case DIAMONDS:
+                string = diamonds;
+                break;
+            default:
+                string = "";
+                break;
         }
         return string;
-    }//end method toString
+    }
 }

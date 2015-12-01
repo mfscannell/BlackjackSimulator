@@ -35,44 +35,54 @@ public enum CardRank {
         this.rank = rank;
     }
     
-    /**
-     * Returns the enumeration as a string.
-     */
     public String toString() {
         String string = "";
         
         switch (this) {
-        case ACE:    string = ace;
-                    break;
-        case TWO:    string = two;
-                    break;
-        case THREE:    string = three;
-                    break;
-        case FOUR:    string = four;
-                    break;
-        case FIVE:    string = five;
-                    break;
-        case SIX:    string = six;
-                    break;
-        case SEVEN:    string = seven;
-                    break;
-        case EIGHT:    string = eight;
-                    break;
-        case NINE:    string = nine;
-                    break;
-        case TEN:    string = ten;
-                    break;
-        case JACK:    string = jack;
-                    break;
-        case QUEEN:    string = queen;
-                    break;
-        case KING:    string = king;
-                    break;
-        default:    string = "";
-                    break;
+            case ACE:
+                string = ace;
+                break;
+            case TWO:
+                string = two;
+                break;
+            case THREE:
+                string = three;
+                break;
+            case FOUR:
+                string = four;
+                break;
+            case FIVE:
+                string = five;
+                break;
+            case SIX:
+                string = six;
+                break;
+            case SEVEN:
+                string = seven;
+                break;
+            case EIGHT:
+                string = eight;
+                break;
+            case NINE:
+                string = nine;
+                break;
+            case TEN:
+                string = ten;
+                break;
+            case JACK:
+                string = jack;
+                break;
+            case QUEEN:
+                string = queen;
+                break;
+            case KING:
+                string = king;
+                break;
+            default:
+                string = "";
+                break;
         }
         
         return string;
-    }//end method toString
-
+    }
 }

@@ -36,17 +36,17 @@ public class BlackjackTable extends Observable {
         try {
             this.shoe = new Shoe(numDecks, deckPenetration);
             this.rules = rules;
-            players = new ArrayList<BlackjackPlayer>();
-            playersHands = new ArrayList<ArrayList<BlackjackHand>>();
-            dealerHand = new BlackjackHand();
+            this.players = new ArrayList<BlackjackPlayer>();
+            this.playersHands = new ArrayList<ArrayList<BlackjackHand>>();
+            this.dealerHand = new BlackjackHand();
             
             for (int i = 0; i < MAX_PLAYERS; i++) {
-                players.add(null);
-                playersHands.add(null);
+                this.players.add(null);
+                this.playersHands.add(null);
             }
             
-            discardTray = new DiscardTray();
-            dealer = null;
+            this.discardTray = new DiscardTray();
+            this.dealer = null;
         } catch (InvalidShoeException e) {
             e.printStackTrace();
         }
@@ -81,17 +81,17 @@ public class BlackjackTable extends Observable {
     }
     
     private boolean isSeatOccupied(int seat) {
-        boolean seatOccupied = players.get(seat) != null;
+        boolean seatOccupied = this.players.get(seat) != null;
         
         return seatOccupied;
     }
     
     private void seatPlayerAndAssociateHands(BlackjackPlayer blackjackPlayer, int seat) {
         ArrayList<BlackjackHand> hands = new ArrayList<BlackjackHand>();
-        playersHands.set(seat, hands);
-        players.set(seat, blackjackPlayer);
+        this.playersHands.set(seat, hands);
+        this.players.set(seat, blackjackPlayer);
         blackjackPlayer.setHands(hands);
-        blackjackPlayer.initializeStrategy(rules, shoe.getNumDecks());
+        blackjackPlayer.initializeStrategy(this.rules, this.shoe.getNumDecks());
         addObserver(blackjackPlayer);
     }
     
@@ -101,7 +101,7 @@ public class BlackjackTable extends Observable {
      */
     public void setDealer(BlackjackDealer dealer) {
         this.dealer = dealer;
-        this.dealer.setHand(dealerHand);
+        this.dealer.setHand(this.dealerHand);
     }
     
     /**
@@ -119,7 +119,7 @@ public class BlackjackTable extends Observable {
         dealInitialCards();
         checkInsuranceScenario();
         
-        if (!dealerHand.isBlackjack()) {
+        if (!this.dealerHand.isBlackjack()) {
             playPlayersTurns();
         }
         
@@ -136,7 +136,7 @@ public class BlackjackTable extends Observable {
     private boolean doesShoeNeedRefill() {
         boolean shoeNeedsRefill = false;
         
-        if (shoe.wasCutCardMet()) {
+        if (this.shoe.wasCutCardMet()) {
             shoeNeedsRefill = true;
         }
         
@@ -144,22 +144,22 @@ public class BlackjackTable extends Observable {
     }
     
     private void refillShoe() {
-        while (discardTray.getNumCards() > 0) {
-            PlayingCard card = discardTray.removeCard();
-            shoe.addCard(card);
+        while (this.discardTray.getNumCards() > 0) {
+            PlayingCard card = this.discardTray.removeCard();
+            this.shoe.addCard(card);
         }
     }
     
     private void shuffleShoeAndDiscardFirstCard() {
-        shoe.shuffleShoe();
-        PlayingCard initialCard = shoe.dealCard();
-        discardTray.addCard(initialCard);
+        this.shoe.shuffleShoe();
+        PlayingCard initialCard = this.shoe.dealCard();
+        this.discardTray.addCard(initialCard);
     }
     
     private void resetPlayersCardCounts() {
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
-                players.get(i).resetCount();
+                this.players.get(i).resetCount();
             }
         }
     }
@@ -167,7 +167,7 @@ public class BlackjackTable extends Observable {
     public boolean hasPlayerAtSeat(int seat) {
         boolean seatOccupied = false;
         
-        if (players.get(seat) != null) {
+        if (this.players.get(seat) != null) {
             seatOccupied = true;
         }
         
@@ -175,16 +175,16 @@ public class BlackjackTable extends Observable {
     }
     
     private void setBetAmountForAllPlayers() {
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
-                players.get(i).setBetAmount();
+                this.players.get(i).setBetAmount();
             }
         }
     }
     
     private void dealInitialCards() {
         for (int i = 0; i < BlackjackRules.NUM_CARDS_PER_INITIAL_DEAL; i++) {
-            for (int j = 0; j < players.size(); j++) {
+            for (int j = 0; j < this.players.size(); j++) {
                 if (hasPlayerAtSeat(j)) {
                     dealCardToPlayerInitialHand(j);
                 }
@@ -202,18 +202,18 @@ public class BlackjackTable extends Observable {
     private BlackjackHand retrievePlayerFirstHand(int seat) {
         BlackjackHand hand;
         
-        if (playersHands.get(seat).size() == 0) {
+        if (this.playersHands.get(seat).size() == 0) {
             hand = new BlackjackHand();
-            playersHands.get(seat).add(hand);
+            this.playersHands.get(seat).add(hand);
         } else {
-            hand = playersHands.get(seat).get(0);
+            hand = this.playersHands.get(seat).get(0);
         }
         
         return hand;
     }
     
     private void dealCardFromShoeToHand(BlackjackHand hand) {
-        PlayingCard dealtCard = shoe.dealCard();
+        PlayingCard dealtCard = this.shoe.dealCard();
         notifyCardValueToPlayers(dealtCard);
         hand.addCard(dealtCard);
     }
@@ -225,23 +225,23 @@ public class BlackjackTable extends Observable {
     }
     
     private void dealCardToDealer(int cardPosition) {
-        PlayingCard dealersCard = shoe.dealCard();
+        PlayingCard dealersCard = this.shoe.dealCard();
         
         if (cardPosition == 0) {
             notifyCardValueToPlayers(dealersCard);
         }
         
-        dealerHand.addCard(dealersCard);
+        this.dealerHand.addCard(dealersCard);
     }
     
     private void checkInsuranceScenario() {
-        insuranceOffered = false;
+        this.insuranceOffered = false;
         
-        if (dealerHand.isFirstCardAce()) {
-            insuranceOffered = true;
+        if (this.dealerHand.isFirstCardAce()) {
+            this.insuranceOffered = true;
         }
         
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
                 setInsuranceTakenForPlayer(i);
             }
@@ -249,15 +249,15 @@ public class BlackjackTable extends Observable {
     }
     
     private void setInsuranceTakenForPlayer(int seat) {
-        if (insuranceOffered) {
-            players.get(seat).setTakesInsurance();
+        if (this.insuranceOffered) {
+            this.players.get(seat).setTakesInsurance();
         } else {
-            players.get(seat).setTakesInsurance(false);
+            this.players.get(seat).setTakesInsurance(false);
         }
     }
     
     private void playPlayersTurns() {
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
                 playPlayerTurn(i);
             }
@@ -266,49 +266,54 @@ public class BlackjackTable extends Observable {
     
     private void playPlayerTurn(final int seat) {
         int j = 0;
-        final PlayingCard dealerUpCard = dealerHand.getFirstCard();
+        final PlayingCard dealerUpCard = this.dealerHand.getFirstCard();
         
-        while (j < playersHands.get(seat).size()) {
+        while (j < this.playersHands.get(seat).size()) {
             BlackjackMove move;
-            final BlackjackHand playerHand = playersHands.get(seat).get(j);
-            final int numHands = playersHands.get(seat).size();
+            final BlackjackHand playerHand = this.playersHands.get(seat).get(j);
+            final int numHands = this.playersHands.get(seat).size();
             
             if (playerHand.getNumCards() < 2) {
                 dealCardFromShoeToHand(playerHand);
             } else {
-                move = players.get(seat).getAction(dealerUpCard, playerHand, numHands);
+                move = this.players.get(seat).getAction(dealerUpCard, playerHand, numHands);
                 
                 switch (move) {
-                    case STAND:     j++;
-                                    break;
-                    case HIT:       dealCardFromShoeToHand(playerHand);
+                    case STAND:
+                        j++;
+                        break;
+                    case HIT:
+                        dealCardFromShoeToHand(playerHand);
                                     
-                                    if (playerHand.isBust()) {
-                                        j++;
-                                    }
-                                    
-                                    break;
-                    case SPLIT:     BlackjackHand splitHand = playerHand.split();
-                                    playersHands.get(seat).add(j + 1, splitHand);
-                                    break;
-                    case DOUBLE:    dealCardFromShoeToHand(playerHand);
-                                    playerHand.setWasDoubleDown(true);
-                                    j++;
-                                    break;
-                    default:        break;
+                        if (playerHand.isBust()) {
+                            j++;
+                        }
+                        
+                        break;
+                    case SPLIT:
+                        BlackjackHand splitHand = playerHand.split();
+                        this.playersHands.get(seat).add(j + 1, splitHand);
+                        break;
+                    case DOUBLE:
+                        dealCardFromShoeToHand(playerHand);
+                        playerHand.setWasDoubleDown(true);
+                        j++;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
     }
     
     private void exposeDealerHoleCard() {
-        notifyCardValueToPlayers(dealerHand.getSecondCard());
+        notifyCardValueToPlayers(this.dealerHand.getSecondCard());
     }
     
     private void playDealerTurn() {
         if (hasPlayerHandRemaining()) {
-            while (rules.getDealersMove(dealerHand) != BlackjackMove.STAND) {
-                dealCardFromShoeToHand(dealerHand);
+            while (this.rules.getDealersMove(this.dealerHand) != BlackjackMove.STAND) {
+                dealCardFromShoeToHand(this.dealerHand);
             }
         }
     }
@@ -321,13 +326,13 @@ public class BlackjackTable extends Observable {
     private boolean hasPlayerHandRemaining() {
         boolean playable = false;
         
-        for (int i = 0; i < players.size() && !playable; i++) {
-            for (int j = 0; j < playersHands.get(i).size() && !playable; j++) {
-                if (!playersHands.get(i).get(j).isBust()) {
+        for (int i = 0; i < this.players.size() && !playable; i++) {
+            for (int j = 0; j < this.playersHands.get(i).size() && !playable; j++) {
+                if (!this.playersHands.get(i).get(j).isBust()) {
                     playable = true;
                 }
                 
-                if (!playersHands.get(i).get(j).isBlackjack()) {
+                if (!this.playersHands.get(i).get(j).isBlackjack()) {
                     playable = true;
                 }
             }
@@ -340,8 +345,8 @@ public class BlackjackTable extends Observable {
      * Adjust the players chip counts if insurance was offered.
      */
     private void adjustAllPlayersChipsForInsurance() {
-        if (insuranceOffered) {
-            for (int i = 0; i < players.size(); i++) {
+        if (this.insuranceOffered) {
+            for (int i = 0; i < this.players.size(); i++) {
                 if (hasPlayerAtSeat(i)) {
                     adjustPlayerChipsForInsurance(i);
                 }
@@ -350,14 +355,14 @@ public class BlackjackTable extends Observable {
     }
     
     private void adjustPlayerChipsForInsurance(int seat) {
-        final double betAmount = players.get(seat).getBetAmount();
+        final double betAmount = this.players.get(seat).getBetAmount();
         final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
         final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
         
-        if (dealerHand.isBlackjack() && players.get(seat).takesInsurance()) {
-            players.get(seat).adjustCashTotal(insuranceWinnings);
-        } else if (!dealerHand.isBlackjack() && players.get(seat).takesInsurance()) {
-            players.get(seat).adjustCashTotal(insuranceLosings);
+        if (this.dealerHand.isBlackjack() && this.players.get(seat).takesInsurance()) {
+            this.players.get(seat).adjustCashTotal(insuranceWinnings);
+        } else if (!this.dealerHand.isBlackjack() && this.players.get(seat).takesInsurance()) {
+            this.players.get(seat).adjustCashTotal(insuranceLosings);
         }
     }
     
@@ -366,7 +371,7 @@ public class BlackjackTable extends Observable {
      * or when insurance was offered.
      */
     private void payoutPlayers() {
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
                 payoutPlayer(i);
             }
@@ -374,18 +379,18 @@ public class BlackjackTable extends Observable {
     }
     
     private void payoutPlayer(int seat) {
-        final double playerBet = players.get(seat).getBetAmount();
+        final double playerBet = this.players.get(seat).getBetAmount();
         
-        for (int i = 0; i < playersHands.get(seat).size(); i++) {
-            final BlackjackHand hand = playersHands.get(seat).get(i);
-            final int numPlayerHands = playersHands.get(seat).size();
-            final double playerPayout = rules.getPayoutAdjustment(hand, dealerHand, numPlayerHands) * playerBet;
-            players.get(seat).adjustCashTotal(playerPayout);
+        for (int i = 0; i < this.playersHands.get(seat).size(); i++) {
+            final BlackjackHand hand = this.playersHands.get(seat).get(i);
+            final int numPlayerHands = this.playersHands.get(seat).size();
+            final double playerPayout = this.rules.getPayoutAdjustment(hand, this.dealerHand, numPlayerHands) * playerBet;
+            this.players.get(seat).adjustCashTotal(playerPayout);
         }
     }
     
     private void collectAllCards() {
-        for (int i = 0; i < playersHands.size(); i++) {
+        for (int i = 0; i < this.playersHands.size(); i++) {
             collectPlayerCardsAtSeat(i);
         }
         
@@ -393,31 +398,31 @@ public class BlackjackTable extends Observable {
     }
     
     private void collectPlayerCardsAtSeat(final int seat) {
-        while (playersHands.get(seat) != null && playersHands.get(seat).size() > 0) {
-            BlackjackHand hand = playersHands.get(seat).remove(playersHands.get(seat).size() - 1);
+        while (this.playersHands.get(seat) != null && this.playersHands.get(seat).size() > 0) {
+            BlackjackHand hand = this.playersHands.get(seat).remove(this.playersHands.get(seat).size() - 1);
             
             while (hand.getNumCards() > 0) {
                 PlayingCard card = hand.removeCard();
-                discardTray.addCard(card);
+                this.discardTray.addCard(card);
             }
         }
     }
     
     private void collectDealerCards() {
-        while (dealerHand.getNumCards() > 0) {
-            PlayingCard card = dealerHand.removeCard();
-            discardTray.addCard(card);
+        while (this.dealerHand.getNumCards() > 0) {
+            PlayingCard card = this.dealerHand.removeCard();
+            this.discardTray.addCard(card);
         }
     }
     
     private void printTable() {
-        if (insuranceOffered) {
+        if (this.insuranceOffered) {
             System.out.println("Insurance Offered");
         } else {
             System.out.println("Insurance Was Not Offered");
         }
         
-        if (dealerHand.isBlackjack()) {
+        if (this.dealerHand.isBlackjack()) {
             System.out.println("Dealer Blackjack");
         }
     }
@@ -426,13 +431,13 @@ public class BlackjackTable extends Observable {
      * Prints the players to the console
      */
     private void printPlayers() {
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
                 System.out.println("Seat #" + i);
                 System.out.println(players.get(i).toString());
             }
         }
-        System.out.println(dealer.toString());
+        System.out.println(this.dealer.toString());
     }
     
     private void printCardCount() {

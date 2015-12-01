@@ -14,17 +14,17 @@ public class BlackjackCard extends PlayingCard {
      */
     public BlackjackCard(CardRank rank, CardSuit suit) {
         super(rank, suit);
-        value = BlackjackRules.getCardValue(rank);
+        this.value = BlackjackRules.getCardValue(rank);
     }
     
     public int getValue() {
-        return value;
+        return this.value;
     }
     
     public boolean isTenValue() {
         boolean tenValue = false;
         
-        if (rank == CardRank.TEN || rank == CardRank.JACK || rank == CardRank.QUEEN || rank == CardRank.KING) {
+        if (this.rank == CardRank.TEN || this.isFaceCard()) {
             tenValue = true;
         }
         

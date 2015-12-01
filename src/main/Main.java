@@ -5,13 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import casino.blackjack.BlackjackTable;
-import casino.blackjack.Shoe;
 import casino.gambler.BlackjackDealer;
 import casino.gambler.BlackjackPlayer;
 import rules.BlackjackRules;
 import configFile.ConfigFileHeading;
 import exceptions.InvalidConfigFileException;
-import exceptions.InvalidShoeException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
 
@@ -40,7 +38,6 @@ public class Main {
     private static Scanner configFileReader;
     
     private static BlackjackDealer dealer;
-    private static Shoe shoe;
     private static BlackjackRules rules;
     private static BlackjackTable blackjackTable;
     
@@ -165,12 +162,6 @@ public class Main {
             throw new InvalidConfigFileException("Expected " + ConfigFileHeading.DECK_PENETRATION_IN_PERCENT);
         }
         deckPenetration = configFileReader.nextInt();
-        
-        try {
-            shoe = new Shoe(numDecks, deckPenetration);
-        } catch (InvalidShoeException e) {
-            e.printStackTrace();
-        }
     }
     
     /**

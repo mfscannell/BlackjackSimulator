@@ -339,7 +339,7 @@ public class BasicStrategy extends BlackjackStrategy {
         BlackjackMove move;
         int dealerCardValue = dealerUpCard.getValue();
         
-        if (playerHand.isMultiCard()) {
+        if (playerHand.hasMoreThanTwoCards()) {
             move = getMultiCardAction(playerHand, dealerCardValue);
         } else {
             move = getTwoCardAction(playerHand, dealerCardValue);
@@ -435,10 +435,6 @@ public class BasicStrategy extends BlackjackStrategy {
         return 0;
     }
     
-    /**
-     * Get the recommend insurance move when it is offered.
-     * @return  True if the player should take insurance.
-     */
     public boolean getInsuranceAction() {
         return false;
     }

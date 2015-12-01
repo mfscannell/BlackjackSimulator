@@ -11,35 +11,34 @@ public class DiscardTray {
      * Constructor
      */
     public DiscardTray() {
-        discardTray = new ArrayList<PlayingCard>();
+        this.discardTray = new ArrayList<PlayingCard>();
     }
     
     public void addCard(final PlayingCard card) {
-        discardTray.add(card);
+        this.discardTray.add(card);
     }
     
     public PlayingCard removeCard() {
         PlayingCard card = null;
         
-        if (discardTray.size() > 0) {
-            card = discardTray.remove(discardTray.size() - 1);
+        if (this.discardTray.size() > 0) {
+            card = this.discardTray.remove(this.discardTray.size() - 1);
         }
         
         return card;
     }
     
     public int getNumCards() {
-        return discardTray.size();
+        return this.discardTray.size();
     }
     
     public String toString() {
         String string = "";
         
-        for (int i = 0; i < discardTray.size(); i++) {
-            string = string.concat(discardTray.get(i).toString());
+        for (int i = 0; i < this.discardTray.size(); i++) {
+            string = string.concat(this.discardTray.get(i).toString());
         }
         
         return string;
     }
-
 }

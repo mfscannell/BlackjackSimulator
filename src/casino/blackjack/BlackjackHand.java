@@ -16,11 +16,11 @@ public class BlackjackHand {
      * Constructor.  Creates a new blackjack hand that consists of no cards.
      */
     public BlackjackHand() {
-        containsAce = false;
-        total = 0;
-        cards = new ArrayList<PlayingCard>();
-        fromSplit = false;
-        doubleDown = false;
+        this.containsAce = false;
+        this.total = 0;
+        this.cards = new ArrayList<PlayingCard>();
+        this.fromSplit = false;
+        this.doubleDown = false;
     }
     
     /**
@@ -29,25 +29,25 @@ public class BlackjackHand {
      * @param card  The first card of the new hand.
      */
     private BlackjackHand(final PlayingCard card) {
-        cards = new ArrayList<PlayingCard>();
-        cards.add(card);
-        total = card.getValue();
-        containsAce = false;
+        this.cards = new ArrayList<PlayingCard>();
+        this.cards.add(card);
+        this.total = card.getValue();
+        this.containsAce = false;
         this.fromSplit = true;
-        doubleDown = false;
+        this.doubleDown = false;
         
         if (card.isAce()) {
-            containsAce = true;
+            this.containsAce = true;
         }
     }
     
     public void addCard(final PlayingCard card) {
-        total = total + card.getValue();
+        this.total = this.total + card.getValue();
         
         if (card.isAce()) {
-            containsAce = true;
+            this.containsAce = true;
         } else if (cards.size() == 0) {
-            containsAce = false;
+            this.containsAce = false;
         }
         
         cards.add(card);
@@ -60,20 +60,20 @@ public class BlackjackHand {
     public PlayingCard removeCard() {
         PlayingCard card = null;
         
-        if (cards.size() > 0) {
-            card = cards.remove(cards.size() - 1);
+        if (this.cards.size() > 0) {
+            card = this.cards.remove(this.cards.size() - 1);
             resetTotal();
         }
         
-        if (cards.size() == 0) {
-            containsAce = false;
+        if (this.cards.size() == 0) {
+            this.containsAce = false;
         }
         
         return card;
     }
     
     public int getNumCards() {
-        return cards.size();
+        return this.cards.size();
     }
     
     /**
@@ -83,7 +83,7 @@ public class BlackjackHand {
     public int getBlackjackTotal() {
         int total = this.total;
         
-        if (total <= 11 && containsAce) {
+        if (total <= 11 && this.containsAce) {
             total = total + 10;
         }
         
@@ -103,37 +103,28 @@ public class BlackjackHand {
     public boolean isBust() {
         boolean bust = false;
         
-        if (total > 21) {
+        if (this.total > 21) {
             bust = true;
         }
         
         return bust;
     }
     
-    /**
-     * Checks if the hand is a pair.  A pair consists of only two cards.
-     * @return  True if the hand is a pair.
-     */
     public boolean isPair() {
         boolean pair = false;
-        if (cards.size() == 2 && cards.get(0).getRank() == cards.get(1).getRank()) {
+        if (this.cards.size() == 2 && this.cards.get(0).getRank() == this.cards.get(1).getRank()) {
             pair = true;
         }
         
         return pair;
     }
     
-    /**
-     * Checks if the hand is a pair of aces.  A pair of aces consists of only two cards
-     * and both the cards are aces.
-     * @return  True if the hand is a pair of aces.
-     */
     public boolean isPairAces() {
         boolean pairAces = false;
         
-        if (cards.size() == 2 && 
-            cards.get(0).getRank() == CardRank.ACE && 
-            cards.get(1).getRank() == CardRank.ACE) {
+        if (this.cards.size() == 2 && 
+            this.cards.get(0).getRank() == CardRank.ACE && 
+            this.cards.get(1).getRank() == CardRank.ACE) {
             pairAces = true;
         }
         
@@ -143,21 +134,17 @@ public class BlackjackHand {
     public boolean hasExactlyTwoCards() {
         boolean twoCards = false;
         
-        if (cards.size() == 2) {
+        if (this.cards.size() == 2) {
             twoCards = true;
         }
         
         return twoCards;
     }
     
-    /**
-     * Checks if the hand has more than two cards in it.
-     * @return  True if the hand consists of more than two cards.
-     */
-    public boolean isMultiCard() {
+    public boolean hasMoreThanTwoCards() {
         boolean multiCard = false;
         
-        if (cards.size() > 2) {
+        if (this.cards.size() > 2) {
             multiCard = true;
         }
         
@@ -175,8 +162,8 @@ public class BlackjackHand {
         boolean handTrue = false;
         
         if (getNumCards() == 2 && 
-            ((cards.get(0).getRank() == rank1 && cards.get(1).getRank() == rank2) || 
-             (cards.get(0).getRank() == rank2 && cards.get(1).getRank() == rank1))) {
+            ((this.cards.get(0).getRank() == rank1 && this.cards.get(1).getRank() == rank2) || 
+             (this.cards.get(0).getRank() == rank2 && this.cards.get(1).getRank() == rank1))) {
             handTrue = true;
         }
         
@@ -191,7 +178,7 @@ public class BlackjackHand {
     public boolean isSoft() {
         boolean softTotal = false;
         
-        if (total <= 11 && containsAce) {
+        if (this.total <= 11 && this.containsAce) {
             softTotal = true;
         }
         
@@ -205,7 +192,7 @@ public class BlackjackHand {
     public boolean isFirstCardAce() {
         boolean upCardAce = false;
         
-        if (cards.get(0).isAce()) {
+        if (this.cards.get(0).isAce()) {
             upCardAce = true;
         }
         
@@ -218,7 +205,7 @@ public class BlackjackHand {
      * @return  The value of the first card dealt in the hand.
      */
     public int getFirstCardValue() {
-        return cards.get(0).getValue();
+        return this.cards.get(0).getValue();
     }
     
     /**
@@ -227,7 +214,7 @@ public class BlackjackHand {
      * @return  The value of the second card dealt in the hand.
      */
     public int getSecondCardValue() {
-        return cards.get(1).getValue();
+        return this.cards.get(1).getValue();
     }
     
     /**
@@ -235,7 +222,7 @@ public class BlackjackHand {
      * @return
      */
     public final PlayingCard getFirstCard() {
-        return cards.get(0);
+        return this.cards.get(0);
     }
     
     /**
@@ -243,14 +230,14 @@ public class BlackjackHand {
      * @return
      */
     public final PlayingCard getSecondCard() {
-        return cards.get(1);
+        return this.cards.get(1);
     }
     
     public boolean hasCardOfRank(CardRank rank) {
         boolean hasRank = false;
         
-        for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).getRank() == rank) {
+        for (int i = 0; i < this.cards.size(); i++) {
+            if (this.cards.get(i).getRank() == rank) {
                 hasRank = true;
                 break;
             }
@@ -268,8 +255,8 @@ public class BlackjackHand {
     public BlackjackHand split() {
         PlayingCard returnCard = null;
         
-        returnCard = cards.remove(1);
-        fromSplit = true;
+        returnCard = this.cards.remove(1);
+        this.fromSplit = true;
         
         resetTotal();
         
@@ -281,7 +268,7 @@ public class BlackjackHand {
      * @return  True if the hand was not the original hand dealt to the player.
      */
     public boolean wasFromSplit() {
-        return fromSplit;
+        return this.fromSplit;
     }
     
     /**
@@ -289,7 +276,7 @@ public class BlackjackHand {
      * @return  True if the player double downed on the hand.
      */
     public boolean wasDoubleDown() {
-        return doubleDown;
+        return this.doubleDown;
     }
     
     /**
@@ -301,10 +288,10 @@ public class BlackjackHand {
     }
     
     private void resetTotal() {
-        total = 0;
+        this.total = 0;
         
-        for (int i = 0; i < cards.size(); i++) {
-            total = total + cards.get(i).getValue();
+        for (int i = 0; i < this.cards.size(); i++) {
+            this.total = this.total + this.cards.get(i).getValue();
         }
     }
     
@@ -314,8 +301,8 @@ public class BlackjackHand {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         
-        for (int i = 0; i < cards.size(); i++) {
-            stringBuilder.append(cards.get(i).toString());
+        for (int i = 0; i < this.cards.size(); i++) {
+            stringBuilder.append(this.cards.get(i).toString());
         }
         
         return stringBuilder.toString();

@@ -12,7 +12,7 @@ public abstract class Gambler implements Observer {
      */
     public Gambler(double cashTotal) {
         this.cashTotal = cashTotal;
-        betAmount = 0;
+        this.betAmount = 0;
     }
     
     /**
@@ -20,7 +20,7 @@ public abstract class Gambler implements Observer {
      * @return  The amount a gambler bets.
      */
     public double getBetAmount() {
-        return betAmount;
+        return this.betAmount;
     }
     
     /**
@@ -36,10 +36,10 @@ public abstract class Gambler implements Observer {
      * @param amount  The amount to adjust the gambler's cash total.
      */
     public void adjustCashTotal(double amount) {
-        cashTotal = cashTotal + amount;
+        this.cashTotal = this.cashTotal + amount;
     }
     
     public double getCashTotal() {
-        return cashTotal;
+        return this.cashTotal;
     }
 }

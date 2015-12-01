@@ -25,9 +25,9 @@ public class BlackjackPlayer extends Gambler {
      */
     public BlackjackPlayer(double cashTotal) {
         super(cashTotal);
-        hands = null;
-        insurance = false;
-        blackjackStrategy = new NullStrategy();
+        this.hands = null;
+        this.insurance = false;
+        this.blackjackStrategy = new NullStrategy();
     }
     
     /**
@@ -35,7 +35,7 @@ public class BlackjackPlayer extends Gambler {
      * @return  True if a player takes insurance.
      */
     public boolean takesInsurance() {
-        return insurance;
+        return this.insurance;
     }
     
     /**
@@ -55,26 +55,26 @@ public class BlackjackPlayer extends Gambler {
     }
     
     public void setTakesInsurance() {
-        this.insurance = blackjackStrategy.getInsuranceAction();
+        this.insurance = this.blackjackStrategy.getInsuranceAction();
     }
     
     public BlackjackMove getAction(PlayingCard dealerUpCard, BlackjackHand playerHand, int numHands) {
-        return blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
+        return this.blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
     }
     
     public void resetCount() {
-        blackjackStrategy.resetCount();
+        this.blackjackStrategy.resetCount();
     }
     
     public void setBetAmount() {
-        super.setBetAmount(blackjackStrategy.getBetSize());
+        super.setBetAmount(this.blackjackStrategy.getBetSize());
     }
     
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         
-        for (int i = 0; i < hands.size(); i++) {
-            stringBuilder.append(hands.get(i).toString());
+        for (int i = 0; i < this.hands.size(); i++) {
+            stringBuilder.append(this.hands.get(i).toString());
             stringBuilder.append("\n");
         }
         
@@ -82,7 +82,7 @@ public class BlackjackPlayer extends Gambler {
         stringBuilder.append("Current bet:" + betAmount + "\n");
         stringBuilder.append("\n");
         
-        if (insurance) {
+        if (this.insurance) {
             stringBuilder.append("Does Takes Insurance\n");
         } else {
             stringBuilder.append("Doesn't Takes Insurance\n");
@@ -101,17 +101,17 @@ public class BlackjackPlayer extends Gambler {
     
     public void resetBaseStrategy(int basicStrategyDescription) {
         if (basicStrategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
-            blackjackStrategy = new BasicStrategy();
+            this.blackjackStrategy = new BasicStrategy();
         }
     }
     
     public void enhanceStrategy(int strategyDecoratorDescription) {
         switch (strategyDecoratorDescription) {
             case BlackjackStrategy.COMPOSITION_STRATEGY:
-                blackjackStrategy = new CompositionStrategy(blackjackStrategy);
+                this.blackjackStrategy = new CompositionStrategy(this.blackjackStrategy);
                 break;
             case BlackjackStrategy.KISS_I_STRATEGY:
-                blackjackStrategy = new KISSIStrategy(blackjackStrategy);
+                this.blackjackStrategy = new KISSIStrategy(this.blackjackStrategy);
                 break;
             default:
                 break;
@@ -137,7 +137,7 @@ public class BlackjackPlayer extends Gambler {
     public void update(Observable arg0, Object arg1) {
         if (arg1 instanceof PlayingCard) {
             PlayingCard card = (PlayingCard)arg1;
-            blackjackStrategy.adjustCount(card);
+            this.blackjackStrategy.adjustCount(card);
         }
     }
 }

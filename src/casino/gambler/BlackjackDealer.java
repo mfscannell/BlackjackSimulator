@@ -10,14 +10,14 @@ public class BlackjackDealer extends Gambler {
     
     public BlackjackDealer() {
         super(0);
-        chipCount = 0;
-        hand = null;
+        this.chipCount = 0;
+        this.hand = null;
     }
     
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Dealer\n");
-        stringBuilder.append(hand.toString());
+        stringBuilder.append(this.hand.toString());
         
         return stringBuilder.toString();
     }

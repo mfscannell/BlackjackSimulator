@@ -44,27 +44,23 @@ public class Shoe {
     }
     
     private void setShoeParameters(int numDecks, int deckPenetration) {
-        shoe = new ArrayList<PlayingCard>();
+        this.shoe = new ArrayList<PlayingCard>();
         this.numDecks = numDecks;
         this.deckPenetration = deckPenetration;
     }
     
     private void initializeShoe() {
-        for (int i = 0; i < numDecks; i++) {
+        for (int i = 0; i < this.numDecks; i++) {
             for (int j = 0; j < PlayingCard.NUMBER_OF_SUITS; j++) {
                 for (int k = 0; k < PlayingCard.NUMBER_OF_RANKS; k++) {
-                    shoe.add(new BlackjackCard(PlayingCard.RANKS[k], PlayingCard.SUITS[j]));
+                    this.shoe.add(new BlackjackCard(PlayingCard.RANKS[k], PlayingCard.SUITS[j]));
                 }
             }
         }
     }
     
-    /**
-     * Gets the number of cards remaining in the shoe.
-     * @return  The number of cards remaining in the shoe.
-     */
-    public int getNumCards() {
-        return shoe.size();
+    public int getNumCardsRemaining() {
+        return this.shoe.size();
     }
     
     /**
@@ -72,7 +68,7 @@ public class Shoe {
      * @return  The number of decks used to create the shoe.
      */
     public int getNumDecks() {
-        return numDecks;
+        return this.numDecks;
     }
     
     /**
@@ -82,33 +78,26 @@ public class Shoe {
     public boolean isNewShoe() {
         boolean newShoe = false;
         
-        if (shoe.size() == numDecks * NUM_CARDS_PER_DECK) {
+        if (this.shoe.size() == this.numDecks * NUM_CARDS_PER_DECK) {
             newShoe = true;
         }
         
         return newShoe;
     }
     
-    /**
-     * Shuffles a shoe.
-     */
     public void shuffleShoe() {
-        for (int i = 0; i < SHUFFLES_PER_DECK * numDecks; i++) {
-            for (int j = 0; j < shoe.size(); j++) {
-                int swapIndex = (int) (Math.random() * shoe.size());
-                PlayingCard temp = shoe.get(j);
-                shoe.set(j, shoe.get(swapIndex));
-                shoe.set(swapIndex, temp);
+        for (int i = 0; i < SHUFFLES_PER_DECK * this.numDecks; i++) {
+            for (int j = 0; j < this.shoe.size(); j++) {
+                int swapIndex = (int) (Math.random() * this.shoe.size());
+                PlayingCard temp = this.shoe.get(j);
+                this.shoe.set(j, this.shoe.get(swapIndex));
+                this.shoe.set(swapIndex, temp);
             }
         }
     }
     
-    /**
-     * Removes a card from the shoe and deals it out.
-     * @return  A card dealt from the shoe.
-     */
     public PlayingCard dealCard() {
-        PlayingCard dealtCard = shoe.remove(shoe.size() - 1);
+        PlayingCard dealtCard = this.shoe.remove(this.shoe.size() - 1);
         
         return dealtCard;
     }
@@ -118,31 +107,23 @@ public class Shoe {
      * @param card  The card to be added to the shoe.
      */
     public void addCard(final PlayingCard card) {
-        shoe.add(card);
+        this.shoe.add(card);
     }
     
-    /**
-     * Checks if the cut card in the shoe was encountered.
-     * @return  True if the cut card was encountered.
-     */
     public boolean wasCutCardMet() {
         boolean cutCardMet = false;
-        double currentPenetration = 100.0 * (NUM_CARDS_PER_DECK * numDecks - shoe.size()) / (NUM_CARDS_PER_DECK * numDecks);
+        double currentPenetration = 100.0 * (NUM_CARDS_PER_DECK * numDecks - this.shoe.size()) / (NUM_CARDS_PER_DECK * this.numDecks);
         
-        if (currentPenetration >= deckPenetration) {
+        if (currentPenetration >= this.deckPenetration) {
             cutCardMet = true;
         }
         
         return cutCardMet;
     }
     
-    /**
-     * Print all the cards currently in the shoe.
-     */
     public void print() {
-        for (int i = 0; i < shoe.size(); i++) {
-            System.out.println("" + i + ":" + shoe.get(i).toString());
+        for (int i = 0; i < this.shoe.size(); i++) {
+            System.out.println("" + i + ":" + this.shoe.get(i).toString());
         }
     }
-
 }

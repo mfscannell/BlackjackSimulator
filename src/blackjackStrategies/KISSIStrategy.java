@@ -97,10 +97,6 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         return move;
     }
     
-    /**
-     * Checks KISS I if it recommends the player to take insurance.
-     * @return  True if KISS I recommends to take insurance.
-     */
     public boolean getInsuranceAction() {
         boolean insurance = false;
         
