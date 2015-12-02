@@ -23,7 +23,6 @@ public class BlackjackTable extends Observable {
     private ArrayList<ArrayList<BlackjackHand>> playersHands;
     private BlackjackHand dealerHand;
     private BlackjackDealer dealer;
-    private boolean insuranceOffered;
     
     /**
      * Constructor
@@ -402,12 +401,6 @@ public class BlackjackTable extends Observable {
     }
     
     private void printTable() {
-        if (this.insuranceOffered) {
-            System.out.println("Insurance Offered");
-        } else {
-            System.out.println("Insurance Was Not Offered");
-        }
-        
         if (this.dealerHand.isBlackjack()) {
             System.out.println("Dealer Blackjack");
         }
