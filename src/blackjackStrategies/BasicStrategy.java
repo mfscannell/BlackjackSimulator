@@ -24,14 +24,7 @@ public class BasicStrategy extends BlackjackStrategy {
      * 1 and 8.
      */
     public BasicStrategy(final BlackjackRules rules, int numDecks) {
-        this.pairChart = new BlackjackMove[11][11];
-        this.totalChart = new BlackjackMove[22][11];
-        this.softChart = new BlackjackMove[11][11];
-        this.rules = rules;
-        
-        updatePairChart(rules, numDecks);
-        updateTotalChart(rules, numDecks);
-        updateSoftChart(rules, numDecks);
+        initialize(rules, numDecks);
     }
     
     public void initialize(BlackjackRules rules, int numDecks) {
@@ -57,7 +50,7 @@ public class BasicStrategy extends BlackjackStrategy {
                     case 2:
                         if (4 <= j && j <= 7) {
                             this.pairChart[i][j] = BlackjackMove.SPLIT;
-                        } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
+                        } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())) {
                             this.pairChart[i][j] = BlackjackMove.SPLIT;
                         } else if (j == 3 && numDecks == 1) {
                             this.pairChart[i][j] = BlackjackMove.SPLIT;
@@ -68,7 +61,7 @@ public class BasicStrategy extends BlackjackStrategy {
                     case 3:
                         if (4 <= j && j <= 7) {
                             this.pairChart[i][j] = BlackjackMove.SPLIT;
-                        } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())){
+                        } else if ((j == 2 || j == 3) && (rules.isDoubleAfterSplitAllowed())) {
                             this.pairChart[i][j] = BlackjackMove.SPLIT;
                         } else {
                             this.pairChart[i][j] = BlackjackMove.HIT;
