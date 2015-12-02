@@ -46,14 +46,6 @@ public class BlackjackPlayer extends Gambler {
         this.hands = hands;
     }
     
-    /**
-     * Sets whether or not a player takes insurance when the dealer offers insurance.
-     * @param insurance  True if the player takes insurance.
-     */
-    public void setTakesInsurance(boolean insurance) {
-        this.insurance = insurance;
-    }
-    
     public void setTakesInsurance() {
         this.insurance = this.blackjackStrategy.getInsuranceAction();
     }

@@ -117,7 +117,11 @@ public class BlackjackTable extends Observable {
         
         setBetAmountForAllPlayers();
         dealInitialCards();
-        checkInsuranceScenario();
+        
+        if (this.dealerHand.isFirstCardAce()) {
+            setInsuranceForAllPlayers();
+            adjustAllPlayersChipsForInsurance();
+        }
         
         if (!this.dealerHand.isBlackjack()) {
             playPlayersTurns();
@@ -125,7 +129,6 @@ public class BlackjackTable extends Observable {
         
         exposeDealerHoleCard();
         playDealerTurn();
-        adjustAllPlayersChipsForInsurance();
         payoutPlayers();
         printTable();
         printPlayers();
@@ -234,25 +237,31 @@ public class BlackjackTable extends Observable {
         this.dealerHand.addCard(dealersCard);
     }
     
-    private void checkInsuranceScenario() {
-        this.insuranceOffered = false;
-        
-        if (this.dealerHand.isFirstCardAce()) {
-            this.insuranceOffered = true;
-        }
-        
+    private void setInsuranceForAllPlayers() {
         for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
-                setInsuranceTakenForPlayer(i);
+                this.players.get(i).setTakesInsurance();
             }
         }
     }
     
-    private void setInsuranceTakenForPlayer(int seat) {
-        if (this.insuranceOffered) {
-            this.players.get(seat).setTakesInsurance();
-        } else {
-            this.players.get(seat).setTakesInsurance(false);
+    private void adjustAllPlayersChipsForInsurance() {
+        for (int i = 0; i < this.players.size(); i++) {
+            if (hasPlayerAtSeat(i)) {
+                adjustPlayerChipsForInsurance(i);
+            }
+        }
+    }
+    
+    private void adjustPlayerChipsForInsurance(int seat) {
+        final double betAmount = this.players.get(seat).getBetAmount();
+        final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
+        final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
+        
+        if (this.dealerHand.isBlackjack() && this.players.get(seat).takesInsurance()) {
+            this.players.get(seat).adjustCashTotal(insuranceWinnings);
+        } else if (!this.dealerHand.isBlackjack() && this.players.get(seat).takesInsurance()) {
+            this.players.get(seat).adjustCashTotal(insuranceLosings);
         }
     }
     
@@ -341,30 +350,7 @@ public class BlackjackTable extends Observable {
         return playable;
     }
     
-    /**
-     * Adjust the players chip counts if insurance was offered.
-     */
-    private void adjustAllPlayersChipsForInsurance() {
-        if (this.insuranceOffered) {
-            for (int i = 0; i < this.players.size(); i++) {
-                if (hasPlayerAtSeat(i)) {
-                    adjustPlayerChipsForInsurance(i);
-                }
-            }
-        }
-    }
     
-    private void adjustPlayerChipsForInsurance(int seat) {
-        final double betAmount = this.players.get(seat).getBetAmount();
-        final double insuranceWinnings = BlackjackRules.PAYOUT_INSURANCE * BlackjackRules.INSURANCE_BET_SIZE * betAmount;
-        final double insuranceLosings = BlackjackRules.INSURANCE_BET_SIZE * betAmount * -1.0;
-        
-        if (this.dealerHand.isBlackjack() && this.players.get(seat).takesInsurance()) {
-            this.players.get(seat).adjustCashTotal(insuranceWinnings);
-        } else if (!this.dealerHand.isBlackjack() && this.players.get(seat).takesInsurance()) {
-            this.players.get(seat).adjustCashTotal(insuranceLosings);
-        }
-    }
     
     /**
      * Adjust the players chips accordingly with the exception for when the dealer has blackjack 
