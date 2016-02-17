@@ -83,6 +83,12 @@ public class BlackjackPlayer extends Gambler {
         return stringBuilder.toString();
     }
     
+    /**
+     * Add a new layer of blackjack strategy on top of the current layer.  The new blackjack strategy layer
+     * will be referred to when getting a strategy.  If that layer cannot provide a move, the layer will obtain a move
+     * from the next lower layer.
+     * @param strategyDescription The description for the strategy layer.
+     */
     public void addStrategyLayer(int strategyDescription) {
         if (strategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
             resetBaseStrategy(strategyDescription);
