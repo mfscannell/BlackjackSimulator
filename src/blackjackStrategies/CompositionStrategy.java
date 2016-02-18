@@ -20,6 +20,10 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
         this.blackjackStrategy = blackjackStrategy;
     }
     
+    public void adjustCount(PlayingCard dealtCard) {
+        this.blackjackStrategy.adjustCount(dealtCard);
+    }
+    
     public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
         BlackjackMove move = BlackjackMove.HIT;
         
@@ -41,10 +45,6 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
         return 1;
     }
     
-    public void resetCount() {
-        //do nothing
-    }
-    
     public int getCount() {
         return this.blackjackStrategy.getCount();
     }
@@ -53,8 +53,8 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
         return this.blackjackStrategy.getInsuranceAction();
     }
     
-    public void adjustCount(PlayingCard dealtCard) {
-        this.blackjackStrategy.adjustCount(dealtCard);
+    public void resetCount() {
+        //do nothing
     }
     
     public void initialize(BlackjackRules rules, int numDecks) {

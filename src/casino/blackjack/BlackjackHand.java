@@ -287,14 +287,6 @@ public class BlackjackHand {
         this.doubleDown = doubleDown;
     }
     
-    private void resetTotal() {
-        this.total = 0;
-        
-        for (int i = 0; i < this.cards.size(); i++) {
-            this.total = this.total + this.cards.get(i).getValue();
-        }
-    }
-    
     /**
      * Converts the hand to a string.
      */
@@ -306,5 +298,13 @@ public class BlackjackHand {
         }
         
         return stringBuilder.toString();
+    }
+    
+    private void resetTotal() {
+        this.total = 0;
+        
+        for (int i = 0; i < this.cards.size(); i++) {
+            this.total = this.total + this.cards.get(i).getValue();
+        }
     }
 }
