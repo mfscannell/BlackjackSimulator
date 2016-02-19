@@ -31,34 +31,28 @@ public class Shoe {
         initializeShoe();
     }
     
-    private void checkNumDecksIsValid(int numDecks) throws InvalidShoeException {
-        if (numDecks < MIN_NUM_DECKS || numDecks > MAX_NUM_DECKS) {
-            throw new InvalidShoeException("Invalid deck size (" + numDecks + ")");
-        }
+    /**
+     * Add a card to the shoe.
+     * @param card  The card to be added to the shoe.
+     */
+    public void addCard(final PlayingCard card) {
+        this.shoe.add(card);
     }
     
-    private void checkDeckPenetrationIsValid(int deckPenetration) throws InvalidShoeException {
-        if (deckPenetration < MIN_DECK_PENETRATION || deckPenetration > MAX_DECK_PENETRATION) {
-            throw new InvalidShoeException("Invalid deck penetration (" + deckPenetration + ")");
-        }
+    /**
+     * Remove a card from the shoe.
+     * @return  A card from the shoe to be dealt out.
+     */
+    public PlayingCard dealCard() {
+        PlayingCard dealtCard = this.shoe.remove(this.shoe.size() - 1);
+        
+        return dealtCard;
     }
     
-    private void setShoeParameters(int numDecks, int deckPenetration) {
-        this.shoe = new ArrayList<PlayingCard>();
-        this.numDecks = numDecks;
-        this.deckPenetration = deckPenetration;
-    }
-    
-    private void initializeShoe() {
-        for (int i = 0; i < this.numDecks; i++) {
-            for (int j = 0; j < PlayingCard.NUMBER_OF_SUITS; j++) {
-                for (int k = 0; k < PlayingCard.NUMBER_OF_RANKS; k++) {
-                    this.shoe.add(new BlackjackCard(PlayingCard.RANKS[k], PlayingCard.SUITS[j]));
-                }
-            }
-        }
-    }
-    
+    /**
+     * Get the number of cards remaining in the shoe.
+     * @return  The number of cards remaining in the shoe.
+     */
     public int getNumCardsRemaining() {
         return this.shoe.size();
     }
@@ -85,6 +79,15 @@ public class Shoe {
         return newShoe;
     }
     
+    public void print() {
+        for (int i = 0; i < this.shoe.size(); i++) {
+            System.out.println("" + i + ":" + this.shoe.get(i).toString());
+        }
+    }
+    
+    /**
+     * Shuffles the cards in the shoe.
+     */
     public void shuffleShoe() {
         for (int i = 0; i < SHUFFLES_PER_DECK * this.numDecks; i++) {
             for (int j = 0; j < this.shoe.size(); j++) {
@@ -96,20 +99,10 @@ public class Shoe {
         }
     }
     
-    public PlayingCard dealCard() {
-        PlayingCard dealtCard = this.shoe.remove(this.shoe.size() - 1);
-        
-        return dealtCard;
-    }
-    
     /**
-     * Add a card to the shoe.
-     * @param card  The card to be added to the shoe.
+     * Checks if the cut card was encountered in the shoe.
+     * @return  True if the cut card was encountered.
      */
-    public void addCard(final PlayingCard card) {
-        this.shoe.add(card);
-    }
-    
     public boolean wasCutCardMet() {
         boolean cutCardMet = false;
         double currentPenetration = 100.0 * (NUM_CARDS_PER_DECK * numDecks - this.shoe.size()) / (NUM_CARDS_PER_DECK * this.numDecks);
@@ -121,9 +114,31 @@ public class Shoe {
         return cutCardMet;
     }
     
-    public void print() {
-        for (int i = 0; i < this.shoe.size(); i++) {
-            System.out.println("" + i + ":" + this.shoe.get(i).toString());
+    private void checkDeckPenetrationIsValid(int deckPenetration) throws InvalidShoeException {
+        if (deckPenetration < MIN_DECK_PENETRATION || deckPenetration > MAX_DECK_PENETRATION) {
+            throw new InvalidShoeException("Invalid deck penetration (" + deckPenetration + ")");
         }
+    }
+    
+    private void checkNumDecksIsValid(int numDecks) throws InvalidShoeException {
+        if (numDecks < MIN_NUM_DECKS || numDecks > MAX_NUM_DECKS) {
+            throw new InvalidShoeException("Invalid deck size (" + numDecks + ")");
+        }
+    }
+    
+    private void initializeShoe() {
+        for (int i = 0; i < this.numDecks; i++) {
+            for (int j = 0; j < PlayingCard.NUMBER_OF_SUITS; j++) {
+                for (int k = 0; k < PlayingCard.NUMBER_OF_RANKS; k++) {
+                    this.shoe.add(new BlackjackCard(PlayingCard.RANKS[k], PlayingCard.SUITS[j]));
+                }
+            }
+        }
+    }
+    
+    private void setShoeParameters(int numDecks, int deckPenetration) {
+        this.shoe = new ArrayList<PlayingCard>();
+        this.numDecks = numDecks;
+        this.deckPenetration = deckPenetration;
     }
 }

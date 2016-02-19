@@ -41,6 +41,10 @@ public class BlackjackHand {
         }
     }
     
+    /**
+     * Add a card to the hand.
+     * @param card
+     */
     public void addCard(final PlayingCard card) {
         this.total = this.total + card.getValue();
         
@@ -51,29 +55,6 @@ public class BlackjackHand {
         }
         
         cards.add(card);
-    }
-    
-    /**
-     * Remove the last card from the hand.
-     * @return  The last card in the hand.
-     */
-    public PlayingCard removeCard() {
-        PlayingCard card = null;
-        
-        if (this.cards.size() > 0) {
-            card = this.cards.remove(this.cards.size() - 1);
-            resetTotal();
-        }
-        
-        if (this.cards.size() == 0) {
-            this.containsAce = false;
-        }
-        
-        return card;
-    }
-    
-    public int getNumCards() {
-        return this.cards.size();
     }
     
     /**
@@ -90,47 +71,70 @@ public class BlackjackHand {
         return total;
     }
     
-    public boolean isBlackjack() {
-        boolean blackjack = false;
-        
-        if (getNumCards() == 2 && getBlackjackTotal() == 21 && !wasFromSplit()) {
-            blackjack = true;
-        }
-        
-        return blackjack;
+    /**
+     * Inquire the first card dealt in the hand.
+     * @return
+     */
+    public final PlayingCard getFirstCard() {
+        return this.cards.get(0);
     }
     
-    public boolean isBust() {
-        boolean bust = false;
-        
-        if (this.total > 21) {
-            bust = true;
-        }
-        
-        return bust;
+    /**
+     * Get the value of the first card dealt in the hand.  The value ranges from 2 to 10
+     * for numbered cards, 10 for face cards, and 1 for aces.
+     * @return  The value of the first card dealt in the hand.
+     */
+    public int getFirstCardValue() {
+        return this.cards.get(0).getValue();
     }
     
-    public boolean isPair() {
-        boolean pair = false;
-        if (this.cards.size() == 2 && this.cards.get(0).getRank() == this.cards.get(1).getRank()) {
-            pair = true;
-        }
-        
-        return pair;
+    /**
+     * Get the number of cards found in the hand.
+     * @return  The number of cards in the hand.
+     */
+    public int getNumCards() {
+        return this.cards.size();
     }
     
-    public boolean isPairAces() {
-        boolean pairAces = false;
-        
-        if (this.cards.size() == 2 && 
-            this.cards.get(0).getRank() == CardRank.ACE && 
-            this.cards.get(1).getRank() == CardRank.ACE) {
-            pairAces = true;
-        }
-        
-        return pairAces;
+    /**
+     * Inquire the second card dealt in the hand.
+     * @return
+     */
+    public final PlayingCard getSecondCard() {
+        return this.cards.get(1);
     }
     
+    /**
+     * Get the value of the second card dealt in the hand.  The value ranges from 2 to 10
+     * for numbered cards, 10 for face cards, and 1 for aces.
+     * @return  The value of the second card dealt in the hand.
+     */
+    public int getSecondCardValue() {
+        return this.cards.get(1).getValue();
+    }
+    
+    /**
+     * Checks if the hand has at least one card of a specified rank (Ace, King, 9, etc.).
+     * @param rank  The specified rank.
+     * @return  True if the hand has at least one card of a specified rank.
+     */
+    public boolean hasCardOfRank(CardRank rank) {
+        boolean hasRank = false;
+        
+        for (int i = 0; i < this.cards.size(); i++) {
+            if (this.cards.get(i).getRank() == rank) {
+                hasRank = true;
+                break;
+            }
+        }
+        
+        return hasRank;
+    }
+    
+    /**
+     * Checks if the hand has exactly two cards.
+     * @return  True if the hand has exactly two cards.
+     */
     public boolean hasExactlyTwoCards() {
         boolean twoCards = false;
         
@@ -141,6 +145,10 @@ public class BlackjackHand {
         return twoCards;
     }
     
+    /**
+     * Checks if the hand has more than two cards.
+     * @return  True if the hand has more than two cards.
+     */
     public boolean hasMoreThanTwoCards() {
         boolean multiCard = false;
         
@@ -149,6 +157,49 @@ public class BlackjackHand {
         }
         
         return multiCard;
+    }
+    
+    /**
+     * Checks if the hand is a blackjack.  A blackjack is a hand of exactly two cards whose total is exactly 21 and
+     * the hand was not split from another hand.
+     * @return  True if the hand is a blackjack.
+     */
+    public boolean isBlackjack() {
+        boolean blackjack = false;
+        
+        if (getNumCards() == 2 && getBlackjackTotal() == 21 && !wasFromSplit()) {
+            blackjack = true;
+        }
+        
+        return blackjack;
+    }
+    
+    /**
+     * Checks if the hand is a bust in blackjack.  A bust is when the hand's total is greater than 21.
+     * @return
+     */
+    public boolean isBust() {
+        boolean bust = false;
+        
+        if (this.total > 21) {
+            bust = true;
+        }
+        
+        return bust;
+    }
+    
+    /**
+     * Checks if the first card dealt in the hand is an ace.
+     * @return  True if the first card dealt in the hand is an ace.
+     */
+    public boolean isFirstCardAce() {
+        boolean upCardAce = false;
+        
+        if (this.cards.get(0).isAce()) {
+            upCardAce = true;
+        }
+        
+        return upCardAce;
     }
     
     /**
@@ -171,6 +222,35 @@ public class BlackjackHand {
     }
     
     /**
+     * Checks if the hand has exactly two cards and both cards are of the same rank.
+     * @return  True if the hand is a pair.
+     */
+    public boolean isPair() {
+        boolean pair = false;
+        if (this.cards.size() == 2 && this.cards.get(0).getRank() == this.cards.get(1).getRank()) {
+            pair = true;
+        }
+        
+        return pair;
+    }
+    
+    /**
+     * Checks if the hand has exactly two cards and both cards are aces.
+     * @return  True if the hand is a pair of aces.
+     */
+    public boolean isPairAces() {
+        boolean pairAces = false;
+        
+        if (this.cards.size() == 2 && 
+            this.cards.get(0).getRank() == CardRank.ACE && 
+            this.cards.get(1).getRank() == CardRank.ACE) {
+            pairAces = true;
+        }
+        
+        return pairAces;
+    }
+    
+    /**
      * Checks if the hand is a soft hand.  Soft hands are those that contain an ace and the 
      * hand total is 21 or less when the ace is counted as a value of 11.
      * @return  True if the hand is a soft hand.
@@ -186,64 +266,30 @@ public class BlackjackHand {
     }
     
     /**
-     * Checks if the first card dealt in the hand is an ace.
-     * @return  True if the first card dealt in the hand is an ace.
+     * Remove the last card from the hand.
+     * @return  The last card in the hand.
      */
-    public boolean isFirstCardAce() {
-        boolean upCardAce = false;
+    public PlayingCard removeCard() {
+        PlayingCard card = null;
         
-        if (this.cards.get(0).isAce()) {
-            upCardAce = true;
+        if (this.cards.size() > 0) {
+            card = this.cards.remove(this.cards.size() - 1);
+            resetTotal();
         }
         
-        return upCardAce;
-    }
-    
-    /**
-     * Get the value of the first card dealt in the hand.  The value ranges from 2 to 10
-     * for numbered cards, 10 for face cards, and 1 for aces.
-     * @return  The value of the first card dealt in the hand.
-     */
-    public int getFirstCardValue() {
-        return this.cards.get(0).getValue();
-    }
-    
-    /**
-     * Get the value of the second card dealt in the hand.  The value ranges from 2 to 10
-     * for numbered cards, 10 for face cards, and 1 for aces.
-     * @return  The value of the second card dealt in the hand.
-     */
-    public int getSecondCardValue() {
-        return this.cards.get(1).getValue();
-    }
-    
-    /**
-     * Inquire the first card dealt in the hand.
-     * @return
-     */
-    public final PlayingCard getFirstCard() {
-        return this.cards.get(0);
-    }
-    
-    /**
-     * Inquire the second card dealt in the hand.
-     * @return
-     */
-    public final PlayingCard getSecondCard() {
-        return this.cards.get(1);
-    }
-    
-    public boolean hasCardOfRank(CardRank rank) {
-        boolean hasRank = false;
-        
-        for (int i = 0; i < this.cards.size(); i++) {
-            if (this.cards.get(i).getRank() == rank) {
-                hasRank = true;
-                break;
-            }
+        if (this.cards.size() == 0) {
+            this.containsAce = false;
         }
         
-        return hasRank;
+        return card;
+    }
+    
+    /**
+     * Set whether or not the hand was double downed upon.
+     * @param doubleDown  True if the hand was double downed.
+     */
+    public void setWasDoubleDown(boolean doubleDown) {
+        this.doubleDown = doubleDown;
     }
     
     /**
@@ -280,14 +326,6 @@ public class BlackjackHand {
     }
     
     /**
-     * Set whether or not the hand was double downed upon.
-     * @param doubleDown  True if the hand was double downed.
-     */
-    public void setWasDoubleDown(boolean doubleDown) {
-        this.doubleDown = doubleDown;
-    }
-    
-    /**
      * Converts the hand to a string.
      */
     public String toString() {
@@ -300,6 +338,9 @@ public class BlackjackHand {
         return stringBuilder.toString();
     }
     
+    /**
+     * Reset the blackjack total value of the hand.
+     */
     private void resetTotal() {
         this.total = 0;
         
