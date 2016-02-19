@@ -6,6 +6,11 @@ import casino.playingCard.BlackjackCard;
 import casino.playingCard.PlayingCard;
 import exceptions.InvalidShoeException;
 
+/**
+ * A shoe of playing cards used to deal out playing cards at a blackjack table.
+ * @author mscannell
+ *
+ */
 public class Shoe {
     public static final int NUM_CARDS_PER_DECK = 52;
     public static final int SHUFFLES_PER_DECK = 2;
@@ -114,18 +119,32 @@ public class Shoe {
         return cutCardMet;
     }
     
+    /**
+     * Check if the specified deck penetration is neither too small nor too large.  The deck penetration signifies where in the
+     * shoe the cut card will be located.
+     * @param deckPenetration  The specified percentage of the shoe being dealt out prior to the cut card being encountered.
+     * @throws InvalidShoeException
+     */
     private void checkDeckPenetrationIsValid(int deckPenetration) throws InvalidShoeException {
         if (deckPenetration < MIN_DECK_PENETRATION || deckPenetration > MAX_DECK_PENETRATION) {
             throw new InvalidShoeException("Invalid deck penetration (" + deckPenetration + ")");
         }
     }
     
+    /**
+     * Checks if the specified number of decks of cards used to create the shoe is neither too small nor too large.
+     * @param numDecks  The specified number of 52-card decks of playing cards used to create the shoe.
+     * @throws InvalidShoeException
+     */
     private void checkNumDecksIsValid(int numDecks) throws InvalidShoeException {
         if (numDecks < MIN_NUM_DECKS || numDecks > MAX_NUM_DECKS) {
             throw new InvalidShoeException("Invalid deck size (" + numDecks + ")");
         }
     }
     
+    /**
+     * Fill the shoe with all the playing cards in sorted order.
+     */
     private void initializeShoe() {
         for (int i = 0; i < this.numDecks; i++) {
             for (int j = 0; j < PlayingCard.NUMBER_OF_SUITS; j++) {
@@ -136,6 +155,11 @@ public class Shoe {
         }
     }
     
+    /**
+     * Specify the parameters to construct the shoe.
+     * @param numDecks  The number of 52-card decks of playing cards used to create the shoe.
+     * @param deckPenetration  The specified percentage of the shoe being dealt out prior to the cut card being encountered.
+     */
     private void setShoeParameters(int numDecks, int deckPenetration) {
         this.shoe = new ArrayList<PlayingCard>();
         this.numDecks = numDecks;

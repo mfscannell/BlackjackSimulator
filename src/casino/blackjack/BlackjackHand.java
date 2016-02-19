@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import casino.playingCard.PlayingCard;
 import enumerations.CardRank;
 
+/**
+ * A hand owned by a blackjack player at a game of blackjack.
+ * @author mscannell
+ *
+ */
 public class BlackjackHand {
     private ArrayList<PlayingCard> cards;
     private boolean containsAce;

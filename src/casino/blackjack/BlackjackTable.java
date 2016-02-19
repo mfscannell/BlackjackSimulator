@@ -12,6 +12,11 @@ import exceptions.InvalidShoeException;
 import exceptions.TableSeatNumberInvalidException;
 import exceptions.TableSeatTakenException;
 
+/**
+ * A blackjack table used to play a game of blackjack.
+ * @author mscannell
+ *
+ */
 public class BlackjackTable extends Observable {
     public static final int MIN_PLAYERS = 1;
     public static final int MAX_PLAYERS = 7;
@@ -57,50 +62,14 @@ public class BlackjackTable extends Observable {
         seatPlayerAndAssociateHands(blackjackPlayer, seat);
     }
     
-    private void checkIfValidSeat(int seat) throws TableSeatNumberInvalidException {
-        if (!isValidSeat(seat)) {
-            throw new TableSeatNumberInvalidException("Seat number must be between 0 and " + MAX_PLAYERS);
-        }
-    }
-    
-    private boolean isValidSeat(int seat) {
-        boolean validSeat = true;
+    public boolean hasPlayerAtSeat(int seat) {
+        boolean seatOccupied = false;
         
-        if (seat < 0 || seat >= MAX_PLAYERS) {
-            validSeat = false;
+        if (this.players.get(seat) != null) {
+            seatOccupied = true;
         }
-        
-        return validSeat;
-    }
-    
-    private void checkIfSeatOccupied(int seat) throws TableSeatTakenException {
-        if (isSeatOccupied(seat)) {
-            throw new TableSeatTakenException("That seat is already taken");
-        }
-    }
-    
-    private boolean isSeatOccupied(int seat) {
-        boolean seatOccupied = this.players.get(seat) != null;
         
         return seatOccupied;
-    }
-    
-    private void seatPlayerAndAssociateHands(BlackjackPlayer blackjackPlayer, int seat) {
-        ArrayList<BlackjackHand> hands = new ArrayList<BlackjackHand>();
-        this.playersHands.set(seat, hands);
-        this.players.set(seat, blackjackPlayer);
-        blackjackPlayer.setHands(hands);
-        blackjackPlayer.initializeStrategy(this.rules, this.shoe.getNumDecks());
-        addObserver(blackjackPlayer);
-    }
-    
-    /**
-     * Associates a blackjack dealer with the table.
-     * @param dealer  The blackjack dealer.
-     */
-    public void setDealer(BlackjackDealer dealer) {
-        this.dealer = dealer;
-        this.dealer.setHand(this.dealerHand);
     }
     
     /**
@@ -135,55 +104,55 @@ public class BlackjackTable extends Observable {
         collectAllCards();
     }
     
-    private boolean doesShoeNeedRefill() {
-        boolean shoeNeedsRefill = false;
-        
-        if (this.shoe.wasCutCardMet()) {
-            shoeNeedsRefill = true;
-        }
-        
-        return shoeNeedsRefill;
+    /**
+     * Associates a blackjack dealer with the table.
+     * @param dealer  The blackjack dealer.
+     */
+    public void setDealer(BlackjackDealer dealer) {
+        this.dealer = dealer;
+        this.dealer.setHand(this.dealerHand);
     }
     
-    private void refillShoe() {
-        while (this.discardTray.getNumCards() > 0) {
-            PlayingCard card = this.discardTray.removeCard();
-            this.shoe.addCard(card);
-        }
-    }
-    
-    private void shuffleShoeAndDiscardFirstCard() {
-        this.shoe.shuffleShoe();
-        PlayingCard initialCard = this.shoe.dealCard();
-        this.discardTray.addCard(initialCard);
-    }
-    
-    private void resetPlayersCardCounts() {
-        for (int i = 0; i < this.players.size(); i++) {
-            if (hasPlayerAtSeat(i)) {
-                this.players.get(i).resetCount();
-            }
+    /**
+     * Check if a seat at the table is occupied.
+     * @param seat  The seat number to check if the seat is occupied.
+     * @throws TableSeatTakenException
+     */
+    private void checkIfSeatOccupied(int seat) throws TableSeatTakenException {
+        if (isSeatOccupied(seat)) {
+            throw new TableSeatTakenException("That seat is already taken");
         }
     }
     
-    public boolean hasPlayerAtSeat(int seat) {
-        boolean seatOccupied = false;
-        
-        if (this.players.get(seat) != null) {
-            seatOccupied = true;
-        }
-        
-        return seatOccupied;
-    }
-    
-    private void setBetAmountForAllPlayers() {
-        for (int i = 0; i < this.players.size(); i++) {
-            if (hasPlayerAtSeat(i)) {
-                this.players.get(i).setBetAmount();
-            }
+    /**
+     * Check if the specified seat number is a valid seat number.
+     * @param seat  The seat number to check if it is a valid seat.
+     * @throws TableSeatNumberInvalidException
+     */
+    private void checkIfValidSeat(int seat) throws TableSeatNumberInvalidException {
+        if (!isValidSeat(seat)) {
+            throw new TableSeatNumberInvalidException("Seat number must be between 0 and " + MAX_PLAYERS);
         }
     }
     
+    private void dealCardFromShoeToHand(BlackjackHand hand) {
+        PlayingCard dealtCard = this.shoe.dealCard();
+        notifyCardValueToPlayers(dealtCard);
+        hand.addCard(dealtCard);
+    }
+    
+    /**
+     * Deal a card from the shoe to the player at the specified seat for the player's initial hand.
+     * @param seat  The seat of the player to deal the card to.
+     */
+    private void dealCardToPlayerInitialHand(int seat) {
+        BlackjackHand hand = retrievePlayerFirstHand(seat);
+        dealCardFromShoeToHand(hand);
+    }
+    
+    /**
+     * Deal the initial two cards to each player and the dealer.
+     */
     private void dealInitialCards() {
         for (int i = 0; i < BlackjackRules.NUM_CARDS_PER_INITIAL_DEAL; i++) {
             for (int j = 0; j < this.players.size(); j++) {
@@ -196,9 +165,65 @@ public class BlackjackTable extends Observable {
         }
     }
     
-    private void dealCardToPlayerInitialHand(int seat) {
-        BlackjackHand hand = retrievePlayerFirstHand(seat);
-        dealCardFromShoeToHand(hand);
+    /**
+     * Checks if the shoe needs to be refilled.  The shoe needs to be refilled if the cut card in the shoe was encountered.
+     * @return  True if the shoe needs to be refilled.
+     */
+    private boolean doesShoeNeedRefill() {
+        boolean shoeNeedsRefill = false;
+        
+        if (this.shoe.wasCutCardMet()) {
+            shoeNeedsRefill = true;
+        }
+        
+        return shoeNeedsRefill;
+    }
+    
+    /**
+     * Checks if the seat is occupied.
+     * @param seat  The seat number to check if the seat is occupied.
+     * @return  True if the seat is occupied.
+     */
+    private boolean isSeatOccupied(int seat) {
+        boolean seatOccupied = this.players.get(seat) != null;
+        
+        return seatOccupied;
+    }
+    
+    /**
+     * Checks if the seat is a valid seat number.
+     * @param seat  The seat number to check its validity.
+     * @return  True if the seat is a valid seat number.
+     */
+    private boolean isValidSeat(int seat) {
+        boolean validSeat = true;
+        
+        if (seat < 0 || seat >= MAX_PLAYERS) {
+            validSeat = false;
+        }
+        
+        return validSeat;
+    }
+    
+    /**
+     * Refill the shoe with all the cards in the discard tray.
+     */
+    private void refillShoe() {
+        while (this.discardTray.getNumCards() > 0) {
+            PlayingCard card = this.discardTray.removeCard();
+            this.shoe.addCard(card);
+        }
+    }
+    
+    /**
+     * Reset each players card counting strategy card count.
+     */
+    private void resetPlayersCardCounts() {
+        for (int i = 0; i < this.players.size(); i++) {
+            if (hasPlayerAtSeat(i)) {
+                this.players.get(i).resetCount();
+            }
+        }
     }
     
     private BlackjackHand retrievePlayerFirstHand(int seat) {
@@ -214,11 +239,45 @@ public class BlackjackTable extends Observable {
         return hand;
     }
     
-    private void dealCardFromShoeToHand(BlackjackHand hand) {
-        PlayingCard dealtCard = this.shoe.dealCard();
-        notifyCardValueToPlayers(dealtCard);
-        hand.addCard(dealtCard);
+    /**
+     * Seat a player at the table and create his blackjack hand.
+     * @param blackjackPlayer  The player to be added to the table.
+     * @param seat  The seat the player will sit at.
+     */
+    private void seatPlayerAndAssociateHands(BlackjackPlayer blackjackPlayer, int seat) {
+        ArrayList<BlackjackHand> hands = new ArrayList<BlackjackHand>();
+        this.playersHands.set(seat, hands);
+        this.players.set(seat, blackjackPlayer);
+        blackjackPlayer.setHands(hands);
+        blackjackPlayer.initializeStrategy(this.rules, this.shoe.getNumDecks());
+        addObserver(blackjackPlayer);
     }
+    
+    /**
+     * Set how much each player will bet at the start of the round.
+     */
+    private void setBetAmountForAllPlayers() {
+        for (int i = 0; i < this.players.size(); i++) {
+            if (hasPlayerAtSeat(i)) {
+                this.players.get(i).setBetAmount();
+            }
+        }
+    }
+    
+    /**
+     * Shuffle the cards in the shoe and then discard the first card and place that card in the discard tray.
+     */
+    private void shuffleShoeAndDiscardFirstCard() {
+        this.shoe.shuffleShoe();
+        PlayingCard initialCard = this.shoe.dealCard();
+        this.discardTray.addCard(initialCard);
+    }
+    
+    
+    
+    
+    
+    
     
     private void notifyCardValueToPlayers(PlayingCard card) {
         setChanged();
