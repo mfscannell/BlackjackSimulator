@@ -6,6 +6,12 @@ import rules.BlackjackRules;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 
+/**
+ * This class is used to represent the basic strategy in Blackjack that consists of referring to a chart to obtain
+ * the recommended move.
+ * @author mscannell
+ *
+ */
 public class BasicStrategy extends BlackjackStrategy {
     private BlackjackMove[][] pairChart;
     private BlackjackMove[][] totalChart;
@@ -73,6 +79,16 @@ public class BasicStrategy extends BlackjackStrategy {
         //do nothing
     }
     
+    /**
+     * Take an initial recommended move and modify it for special cases and scenarios.  These scenarios include but are not
+     * limited to trying to double after split when the rules do not permit it, trying to resplit a hand when the maximum number
+     * of resplits has been reached.
+     * @param move  The original recommended move.
+     * @param hand  The player's hand the recommended move is for.
+     * @param dealerCardValue  The value of the dealer's exposed card.
+     * @param numHands  The number of hands the player has after splits and re-splits.
+     * @return  The blackjack move corrected based upon the parameters.
+     */
     private BlackjackMove correctActionForSpecialCases(BlackjackMove move, final BlackjackHand hand, int dealerCardValue, int numHands) {
         BlackjackMove correctedMove = move;
         int handTotal = hand.getBlackjackTotal();
@@ -96,6 +112,12 @@ public class BasicStrategy extends BlackjackStrategy {
         return correctedMove;
     }
     
+    /**
+     * Get the recommended action when the hand has more than two cards.
+     * @param hand  The player's multi-card hand to get the recommended action for.
+     * @param dealerCardValue  The blackjack value of the dealer's exposed card.
+     * @return  The recommended move for a hand that has more than two cards.
+     */
     private BlackjackMove getMultiCardAction(final BlackjackHand hand, int dealerCardValue) {
         BlackjackMove move = BlackjackMove.STAND;
         int handTotal = hand.getBlackjackTotal();
@@ -118,6 +140,12 @@ public class BasicStrategy extends BlackjackStrategy {
         return move;
     }
     
+    /**
+     * Get the recommended action when the hand has exactly two cards.
+     * @param hand  The player's hand to get the recommended action for.
+     * @param dealerCardValue  The blackjack value of the dealer's exposed card.
+     * @return  The recommended move for a hand that has exactly two cards.
+     */
     private BlackjackMove getTwoCardAction(final BlackjackHand hand, int dealerCardValue) {
         BlackjackMove move = BlackjackMove.STAND;
         int firstCardValue = hand.getFirstCardValue();

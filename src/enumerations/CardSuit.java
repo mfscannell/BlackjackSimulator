@@ -1,5 +1,10 @@
 package enumerations;
 
+/**
+ * This enumeration represents all possible suits for a playing card (clubs, diamonds, hearts, and spades).
+ * @author mscannell
+ *
+ */
 public enum CardSuit {
     SPADES(1),
     CLUBS(2),

@@ -30,24 +30,46 @@ public class BlackjackRules {
     private boolean resplitAces;
     private static HashMap<CardRank, Integer> blackjackCardValues;
     
+    /**
+     * Get the value of a card for a specific rank of a card.  The rank of a card is either clubs, diamonds, hearts, or
+     * spades.
+     * @param rank  The rank of a card to get its value.
+     * @return  The value of a card according to the rules of blackjack.
+     */
     public static int getCardValue(CardRank rank) {
         int value = blackjackCardValues.get(rank);
         
         return value;
     }
     
+    /**
+     * Get the maximum number of hands allowed after splits and re-splits of a hand or hands.
+     * @return  The maximum number of hands allowed after splits.
+     */
     public int getMaxHandsAfterSplits() {
         return this.maxHands;
     }
     
+    /**
+     * Get the ratio of the payout when a player has blackjack.
+     * @return  The payout ratio when a player has blackjack.
+     */
     public double getBlackjackPayoutMultiple() {
         return this.blackjackPayoutMultiple;
     }
     
+    /**
+     * Refer to the rules as to whether or not double down of a hand after it has been split is allowed.
+     * @return  True if double down of a hand after it has been split is allowed.
+     */
     public boolean isDoubleAfterSplitAllowed() {
         return this.doubleAfterSplitAllowed;
     }
     
+    /**
+     * Refer to the rules as to whether or not the dealer must hit when he has a soft 17.  An example of soft 17 is Ace-6.
+     * @return  True if the dealer must hit when he has a soft 17.
+     */
     public boolean mustDealerHitSoft17() {
         return this.dealerHitsSoft17;
     }

@@ -47,18 +47,26 @@ public abstract class PlayingCard {
     }
     
     /**
-     * Returns true if the card is a face card.
-     * @return True if the card is a face card.
+     * Get the rank (Ace, King, Queen, etc.) of the playing card.
+     * @return  The rank of the playing card.
      */
-    public boolean isFaceCard() {
-        boolean faceCard = false;
-        
-        if (this.rank == CardRank.JACK || this.rank == CardRank.QUEEN || this.rank == CardRank.KING) {
-            faceCard = true;
-        }
-        
-        return faceCard;
+    public CardRank getRank() {
+        return this.rank;
     }
+    
+    /**
+     * Get the suit (clubs, diamonds, hearts, spades) of the playing card.
+     * @return  The suit of the playing card.
+     */
+    public CardSuit getSuit() {
+        return this.suit;
+    }
+    
+    /**
+     * Get the value of the playing card as determined by the game being played.
+     * @return  The value of the playing card.
+     */
+    public abstract int getValue();
     
     /**
      * Returns true if the card is an ace.
@@ -72,6 +80,20 @@ public abstract class PlayingCard {
         }
         
         return ace;
+    }
+    
+    /**
+     * Returns true if the card is a face card.
+     * @return True if the card is a face card.
+     */
+    public boolean isFaceCard() {
+        boolean faceCard = false;
+        
+        if (this.rank == CardRank.JACK || this.rank == CardRank.QUEEN || this.rank == CardRank.KING) {
+            faceCard = true;
+        }
+        
+        return faceCard;
     }
     
     /**
@@ -97,15 +119,5 @@ public abstract class PlayingCard {
         stringBuilder.append("]");
         
         return stringBuilder.toString();
-    }
-    
-    public abstract int getValue();
-    
-    public CardRank getRank() {
-        return this.rank;
-    }
-    
-    public CardSuit getSuit() {
-        return this.suit;
     }
 }

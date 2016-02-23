@@ -1,5 +1,10 @@
 package enumerations;
 
+/**
+ * This enumeration represents all possible ranks of a playing card (Ace, King, Queen, etc.)
+ * @author mscannell
+ *
+ */
 public enum CardRank {
     ACE(1),
     TWO(2),

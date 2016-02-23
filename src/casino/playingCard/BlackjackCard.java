@@ -4,6 +4,11 @@ import rules.BlackjackRules;
 import enumerations.CardRank;
 import enumerations.CardSuit;
 
+/**
+ * This class represents a playing card used in a game of blackjack.
+ * @author mscannell
+ *
+ */
 public class BlackjackCard extends PlayingCard {
     private int value;
 

@@ -1,5 +1,10 @@
 package enumerations;
 
+/**
+ * This enumeration represents all possible moves and actions that can be taken in a game of Blackjack.
+ * @author mscannell
+ *
+ */
 public enum BlackjackMove {
     HIT(1),
     STAND(2),
