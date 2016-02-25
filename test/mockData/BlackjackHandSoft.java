@@ -2,8 +2,8 @@ package mockData;
 
 import casino.blackjack.BlackjackHand;
 import casino.playingCard.BlackjackCard;
-import enumerations.CardRank;
-import enumerations.CardSuit;
+import casino.playingCard.enumerations.CardRank;
+import casino.playingCard.enumerations.CardSuit;
 
 public class BlackjackHandSoft {
     private static BlackjackHand handAce2;

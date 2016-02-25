@@ -1,9 +1,9 @@
-package blackjackStrategies;
+package casino.blackjack.blackjackStrategies;
 
-import rules.BlackjackRules;
+import casino.blackjack.rules.BlackjackRules;
 import casino.blackjack.BlackjackHand;
 import casino.playingCard.PlayingCard;
-import enumerations.BlackjackMove;
+import casino.playingCard.enumerations.BlackjackMove;
 
 public class NullStrategy extends BlackjackStrategy {
 	@Override

@@ -1,10 +1,10 @@
-package blackjackStrategies;
+package casino.blackjack.blackjackStrategies;
 
 import casino.blackjack.BlackjackHand;
 import casino.playingCard.PlayingCard;
-import rules.BlackjackRules;
-import enumerations.BlackjackMove;
-import enumerations.CardRank;
+import casino.blackjack.rules.BlackjackRules;
+import casino.playingCard.enumerations.BlackjackMove;
+import casino.playingCard.enumerations.CardRank;
 
 /**
  * This class is used to represent the basic strategy in Blackjack that consists of referring to a chart to obtain

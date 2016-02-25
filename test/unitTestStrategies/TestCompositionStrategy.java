@@ -8,13 +8,13 @@ import org.junit.Test;
 
 import casino.blackjack.BlackjackHand;
 import casino.playingCard.BlackjackCard;
-import rules.BlackjackRules;
-import blackjackStrategies.BasicStrategy;
-import blackjackStrategies.BlackjackStrategy;
-import blackjackStrategies.CompositionStrategy;
-import enumerations.BlackjackMove;
-import enumerations.CardRank;
-import enumerations.CardSuit;
+import casino.blackjack.rules.BlackjackRules;
+import casino.blackjack.blackjackStrategies.BasicStrategy;
+import casino.blackjack.blackjackStrategies.BlackjackStrategy;
+import casino.blackjack.blackjackStrategies.CompositionStrategy;
+import casino.playingCard.enumerations.BlackjackMove;
+import casino.playingCard.enumerations.CardRank;
+import casino.playingCard.enumerations.CardSuit;
 
 public class TestCompositionStrategy {
     private static BlackjackRules rules;

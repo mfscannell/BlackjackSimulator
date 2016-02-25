@@ -3,7 +3,7 @@ package casino.blackjack;
 import java.util.ArrayList;
 
 import casino.playingCard.PlayingCard;
-import enumerations.CardRank;
+import casino.playingCard.enumerations.CardRank;
 
 /**
  * A hand owned by a blackjack player at a game of blackjack.

@@ -11,12 +11,12 @@ import casino.blackjack.BlackjackHand;
 import casino.gambler.BlackjackPlayer;
 import casino.gambler.Gambler;
 import casino.playingCard.BlackjackCard;
-import rules.BlackjackRules;
-import blackjackStrategies.BasicStrategy;
-import blackjackStrategies.BlackjackStrategy;
-import enumerations.BlackjackMove;
-import enumerations.CardRank;
-import enumerations.CardSuit;
+import casino.blackjack.rules.BlackjackRules;
+import casino.blackjack.blackjackStrategies.BasicStrategy;
+import casino.blackjack.blackjackStrategies.BlackjackStrategy;
+import casino.playingCard.enumerations.BlackjackMove;
+import casino.playingCard.enumerations.CardRank;
+import casino.playingCard.enumerations.CardSuit;
 
 /**
  * Tests the Basic Strategy Chart when the player has a pair of 10s and the player has not split his hand 

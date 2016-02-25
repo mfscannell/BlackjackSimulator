@@ -1,6 +1,6 @@
 package mockData;
 
-import rules.BlackjackRules;
+import casino.blackjack.rules.BlackjackRules;
 
 public class DefaultRulesSingleton {
     private static BlackjackRules rules;

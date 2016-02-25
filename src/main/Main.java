@@ -7,7 +7,7 @@ import java.util.Scanner;
 import casino.blackjack.BlackjackTable;
 import casino.gambler.BlackjackDealer;
 import casino.gambler.BlackjackPlayer;
-import rules.BlackjackRules;
+import casino.blackjack.rules.BlackjackRules;
 import configFile.ConfigFileHeading;
 import exceptions.InvalidConfigFileException;
 import exceptions.TableSeatNumberInvalidException;

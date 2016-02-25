@@ -6,13 +6,13 @@ import java.util.Observable;
 import casino.blackjack.BlackjackHand;
 import casino.blackjack.BlackjackTable;
 import casino.playingCard.PlayingCard;
-import rules.BlackjackRules;
-import blackjackStrategies.BasicStrategy;
-import blackjackStrategies.BlackjackStrategy;
-import blackjackStrategies.CompositionStrategy;
-import blackjackStrategies.KISSIStrategy;
-import blackjackStrategies.NullStrategy;
-import enumerations.BlackjackMove;
+import casino.blackjack.rules.BlackjackRules;
+import casino.blackjack.blackjackStrategies.BasicStrategy;
+import casino.blackjack.blackjackStrategies.BlackjackStrategy;
+import casino.blackjack.blackjackStrategies.CompositionStrategy;
+import casino.blackjack.blackjackStrategies.KISSIStrategy;
+import casino.blackjack.blackjackStrategies.NullStrategy;
+import casino.playingCard.enumerations.BlackjackMove;
 
 public class BlackjackPlayer extends Gambler {
     private ArrayList<BlackjackHand> hands;

@@ -1,4 +1,4 @@
-package enumerations;
+package casino.playingCard.enumerations;
 
 /**
  * This enumeration represents all possible suits for a playing card (clubs, diamonds, hearts, and spades).

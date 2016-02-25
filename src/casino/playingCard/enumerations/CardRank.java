@@ -1,4 +1,4 @@
-package enumerations;
+package casino.playingCard.enumerations;
 
 /**
  * This enumeration represents all possible ranks of a playing card (Ace, King, Queen, etc.)

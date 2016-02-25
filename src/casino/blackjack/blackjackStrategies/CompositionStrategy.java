@@ -1,10 +1,10 @@
-package blackjackStrategies;
+package casino.blackjack.blackjackStrategies;
 
-import rules.BlackjackRules;
+import casino.blackjack.rules.BlackjackRules;
 import casino.blackjack.BlackjackHand;
 import casino.playingCard.PlayingCard;
-import enumerations.BlackjackMove;
-import enumerations.CardRank;
+import casino.playingCard.enumerations.BlackjackMove;
+import casino.playingCard.enumerations.CardRank;
 
 public class CompositionStrategy extends BlackjackStrategyDecorator {
     BlackjackStrategy blackjackStrategy;

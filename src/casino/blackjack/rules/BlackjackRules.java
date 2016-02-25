@@ -1,10 +1,10 @@
-package rules;
+package casino.blackjack.rules;
 
 import java.util.HashMap;
 
 import casino.blackjack.BlackjackHand;
-import enumerations.BlackjackMove;
-import enumerations.CardRank;
+import casino.playingCard.enumerations.BlackjackMove;
+import casino.playingCard.enumerations.CardRank;
 
 /**
  * This class contains the rules of Blackjack.
