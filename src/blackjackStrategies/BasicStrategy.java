@@ -33,10 +33,12 @@ public class BasicStrategy extends BlackjackStrategy {
         initialize(rules, numDecks);
     }
     
+    @Override
     public void adjustCount(PlayingCard dealtCard) {
         //do nothing
     }
     
+    @Override
     public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
         BlackjackMove move;
         int dealerCardValue = dealerUpCard.getValue();
@@ -52,18 +54,22 @@ public class BasicStrategy extends BlackjackStrategy {
         return move;
     }
     
+    @Override
     public int getBetSize() {
         return 1;
     }
     
+    @Override
     public int getCount() {
         return 0;
     }
     
+    @Override
     public boolean getInsuranceAction() {
         return false;
     }
     
+    @Override
     public void initialize(BlackjackRules rules, int numDecks) {
         this.pairChart = new BlackjackMove[11][11];
         this.totalChart = new BlackjackMove[22][11];
@@ -75,6 +81,7 @@ public class BasicStrategy extends BlackjackStrategy {
         updateSoftChart(rules, numDecks);
     }
     
+    @Override
     public void resetCount() {
         //do nothing
     }

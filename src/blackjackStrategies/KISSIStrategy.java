@@ -37,6 +37,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         this.count = initialCount;
     }
     
+    @Override
     public void adjustCount(PlayingCard card) {
         int cardValue = card.getValue();
         
@@ -50,6 +51,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         }
     }
     
+    @Override
     public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
         BlackjackMove move = BlackjackMove.STAND;
         
@@ -80,6 +82,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         return move;
     }
     
+    @Override
     public int getBetSize() {
         int betSize = 1;
         
@@ -108,10 +111,12 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         return betSize;
     }
     
+    @Override
     public int getCount() {
         return this.count;
     }
     
+    @Override
     public boolean getInsuranceAction() {
         boolean insurance = false;
         
@@ -128,12 +133,14 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         return insurance;
     }
     
+    @Override
     public void initialize(BlackjackRules rules, int numDecks) {
         this.rules = rules;
         this.numDecks = numDecks;
         this.blackjackStrategy.initialize(rules, numDecks);
     }
     
+    @Override
     public void resetCount() {
         this.count = this.initialCount;
     }
