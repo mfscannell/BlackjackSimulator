@@ -20,6 +20,12 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
         this.blackjackStrategy = blackjackStrategy;
     }
     
+    @Override
+    public void adjustCount(PlayingCard dealtCard) {
+        this.blackjackStrategy.adjustCount(dealtCard);
+    }
+    
+    @Override
     public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
         BlackjackMove move = BlackjackMove.HIT;
         
@@ -37,26 +43,27 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
         return move;
     }
     
+    @Override
     public int getBetSize() {
         return 1;
     }
     
-    public void resetCount() {
-        //do nothing
-    }
-    
+    @Override
     public int getCount() {
         return this.blackjackStrategy.getCount();
     }
     
+    @Override
     public boolean getInsuranceAction() {
         return this.blackjackStrategy.getInsuranceAction();
     }
     
-    public void adjustCount(PlayingCard dealtCard) {
-        this.blackjackStrategy.adjustCount(dealtCard);
+    @Override
+    public void resetCount() {
+        //do nothing
     }
     
+    @Override
     public void initialize(BlackjackRules rules, int numDecks) {
         this.blackjackStrategy.initialize(rules, numDecks);
     }

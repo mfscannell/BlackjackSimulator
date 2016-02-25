@@ -46,16 +46,32 @@ public abstract class PlayingCard {
         this.suit = suit;
     }
     
-    public boolean isFaceCard() {
-        boolean faceCard = false;
-        
-        if (this.rank == CardRank.JACK || this.rank == CardRank.QUEEN || this.rank == CardRank.KING) {
-            faceCard = true;
-        }
-        
-        return faceCard;
+    /**
+     * Get the rank (Ace, King, Queen, etc.) of the playing card.
+     * @return  The rank of the playing card.
+     */
+    public CardRank getRank() {
+        return this.rank;
     }
     
+    /**
+     * Get the suit (clubs, diamonds, hearts, spades) of the playing card.
+     * @return  The suit of the playing card.
+     */
+    public CardSuit getSuit() {
+        return this.suit;
+    }
+    
+    /**
+     * Get the value of the playing card as determined by the game being played.
+     * @return  The value of the playing card.
+     */
+    public abstract int getValue();
+    
+    /**
+     * Returns true if the card is an ace.
+     * @return True if the card is an ace.
+     */
     public boolean isAce() {
         boolean ace = false;
         
@@ -64,6 +80,20 @@ public abstract class PlayingCard {
         }
         
         return ace;
+    }
+    
+    /**
+     * Returns true if the card is a face card.
+     * @return True if the card is a face card.
+     */
+    public boolean isFaceCard() {
+        boolean faceCard = false;
+        
+        if (this.rank == CardRank.JACK || this.rank == CardRank.QUEEN || this.rank == CardRank.KING) {
+            faceCard = true;
+        }
+        
+        return faceCard;
     }
     
     /**
@@ -83,21 +113,11 @@ public abstract class PlayingCard {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
-        stringBuilder.append(rank);
+        stringBuilder.append(this.rank);
         stringBuilder.append(" ");
-        stringBuilder.append(suit);
+        stringBuilder.append(this.suit);
         stringBuilder.append("]");
         
         return stringBuilder.toString();
-    }
-    
-    public abstract int getValue();
-    
-    public CardRank getRank() {
-        return this.rank;
-    }
-    
-    public CardSuit getSuit() {
-        return this.suit;
     }
 }

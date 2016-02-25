@@ -37,19 +37,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         this.count = initialCount;
     }
     
-    public void initialize(BlackjackRules rules, int numDecks) {
-        this.rules = rules;
-        this.numDecks = numDecks;
-        this.blackjackStrategy.initialize(rules, numDecks);
-    }
-    
-    /**
-     * Resets the card-counting count to the initial count.
-     */
-    public void resetCount() {
-        this.count = this.initialCount;
-    }
-    
+    @Override
     public void adjustCount(PlayingCard card) {
         int cardValue = card.getValue();
         
@@ -63,10 +51,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         }
     }
     
-    public int getCount() {
-        return this.count;
-    }
-    
+    @Override
     public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
         BlackjackMove move = BlackjackMove.STAND;
         
@@ -97,26 +82,7 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         return move;
     }
     
-    public boolean getInsuranceAction() {
-        boolean insurance = false;
-        
-        if (this.numDecks == 1 && this.count >= 21) {
-            insurance = true;
-        } else if (this.numDecks == 2 && this.count >= 22) {
-            insurance = true;
-        } else if (4 <= this.numDecks && this.numDecks <= 8 && this.count >= 25) {
-            insurance = true;
-        } else {
-            insurance = this.blackjackStrategy.getInsuranceAction();
-        }
-        
-        return insurance;
-    }
-    
-    /**
-     * Get the bet size based upon the KISS I strategy.
-     * @return  The ratio of the recommended bet size to the minimum bet size.
-     */
+    @Override
     public int getBetSize() {
         int betSize = 1;
         
@@ -143,6 +109,40 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         }
         
         return betSize;
+    }
+    
+    @Override
+    public int getCount() {
+        return this.count;
+    }
+    
+    @Override
+    public boolean getInsuranceAction() {
+        boolean insurance = false;
+        
+        if (this.numDecks == 1 && this.count >= 21) {
+            insurance = true;
+        } else if (this.numDecks == 2 && this.count >= 22) {
+            insurance = true;
+        } else if (4 <= this.numDecks && this.numDecks <= 8 && this.count >= 25) {
+            insurance = true;
+        } else {
+            insurance = this.blackjackStrategy.getInsuranceAction();
+        }
+        
+        return insurance;
+    }
+    
+    @Override
+    public void initialize(BlackjackRules rules, int numDecks) {
+        this.rules = rules;
+        this.numDecks = numDecks;
+        this.blackjackStrategy.initialize(rules, numDecks);
+    }
+    
+    @Override
+    public void resetCount() {
+        this.count = this.initialCount;
     }
     
     /**

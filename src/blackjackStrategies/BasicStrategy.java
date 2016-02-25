@@ -6,6 +6,12 @@ import rules.BlackjackRules;
 import enumerations.BlackjackMove;
 import enumerations.CardRank;
 
+/**
+ * This class is used to represent the basic strategy in Blackjack that consists of referring to a chart to obtain
+ * the recommended move.
+ * @author mscannell
+ *
+ */
 public class BasicStrategy extends BlackjackStrategy {
     private BlackjackMove[][] pairChart;
     private BlackjackMove[][] totalChart;
@@ -27,6 +33,43 @@ public class BasicStrategy extends BlackjackStrategy {
         initialize(rules, numDecks);
     }
     
+    @Override
+    public void adjustCount(PlayingCard dealtCard) {
+        //do nothing
+    }
+    
+    @Override
+    public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
+        BlackjackMove move;
+        int dealerCardValue = dealerUpCard.getValue();
+        
+        if (playerHand.hasMoreThanTwoCards()) {
+            move = getMultiCardAction(playerHand, dealerCardValue);
+        } else {
+            move = getTwoCardAction(playerHand, dealerCardValue);
+        }
+        
+        move = correctActionForSpecialCases(move, playerHand, dealerCardValue, numPlayerHands);
+        
+        return move;
+    }
+    
+    @Override
+    public int getBetSize() {
+        return 1;
+    }
+    
+    @Override
+    public int getCount() {
+        return 0;
+    }
+    
+    @Override
+    public boolean getInsuranceAction() {
+        return false;
+    }
+    
+    @Override
     public void initialize(BlackjackRules rules, int numDecks) {
         this.pairChart = new BlackjackMove[11][11];
         this.totalChart = new BlackjackMove[22][11];
@@ -36,6 +79,102 @@ public class BasicStrategy extends BlackjackStrategy {
         updatePairChart(rules, numDecks);
         updateTotalChart(rules, numDecks);
         updateSoftChart(rules, numDecks);
+    }
+    
+    @Override
+    public void resetCount() {
+        //do nothing
+    }
+    
+    /**
+     * Take an initial recommended move and modify it for special cases and scenarios.  These scenarios include but are not
+     * limited to trying to double after split when the rules do not permit it, trying to resplit a hand when the maximum number
+     * of resplits has been reached.
+     * @param move  The original recommended move.
+     * @param hand  The player's hand the recommended move is for.
+     * @param dealerCardValue  The value of the dealer's exposed card.
+     * @param numHands  The number of hands the player has after splits and re-splits.
+     * @return  The blackjack move corrected based upon the parameters.
+     */
+    private BlackjackMove correctActionForSpecialCases(BlackjackMove move, final BlackjackHand hand, int dealerCardValue, int numHands) {
+        BlackjackMove correctedMove = move;
+        int handTotal = hand.getBlackjackTotal();
+        
+        if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHandsAfterSplits()) {
+            correctedMove = this.totalChart[handTotal][dealerCardValue];
+        }
+        
+        if (move == BlackjackMove.DOUBLE && hand.wasFromSplit() && !this.rules.isDoubleAfterSplitAllowed()) {
+            correctedMove = BlackjackMove.HIT;
+        }
+        
+        if (hand.isPairAces() && hand.wasFromSplit() && !this.rules.isResplitAcesAllowed()) {
+            correctedMove = BlackjackMove.STAND;
+        }
+        
+        if (hand.hasCardOfRank(CardRank.ACE) && !hand.isPair() && hand.wasFromSplit()) {
+            correctedMove = BlackjackMove.STAND;
+        }
+        
+        return correctedMove;
+    }
+    
+    /**
+     * Get the recommended action when the hand has more than two cards.
+     * @param hand  The player's multi-card hand to get the recommended action for.
+     * @param dealerCardValue  The blackjack value of the dealer's exposed card.
+     * @return  The recommended move for a hand that has more than two cards.
+     */
+    private BlackjackMove getMultiCardAction(final BlackjackHand hand, int dealerCardValue) {
+        BlackjackMove move = BlackjackMove.STAND;
+        int handTotal = hand.getBlackjackTotal();
+        
+        if (hand.isSoft()) {
+            if (hand.getBlackjackTotal() <= 17) {
+                move = BlackjackMove.HIT;
+            } else if (hand.getBlackjackTotal() == 18 && 
+                       (dealerCardValue == 9 || dealerCardValue == 10 || dealerCardValue == 1)) {
+                move = BlackjackMove.HIT;
+            }
+        } else {
+            move = this.totalChart[handTotal][dealerCardValue];
+            
+            if (move == BlackjackMove.DOUBLE) {
+                move = BlackjackMove.HIT;
+            }
+        }
+        
+        return move;
+    }
+    
+    /**
+     * Get the recommended action when the hand has exactly two cards.
+     * @param hand  The player's hand to get the recommended action for.
+     * @param dealerCardValue  The blackjack value of the dealer's exposed card.
+     * @return  The recommended move for a hand that has exactly two cards.
+     */
+    private BlackjackMove getTwoCardAction(final BlackjackHand hand, int dealerCardValue) {
+        BlackjackMove move = BlackjackMove.STAND;
+        int firstCardValue = hand.getFirstCardValue();
+        int handTotal = hand.getBlackjackTotal();
+        
+        if (hand.isPair()) {
+            move = this.pairChart[firstCardValue][dealerCardValue];
+        } else if (hand.isSoft()) {
+            int nonAceValue;
+            
+            if (hand.isFirstCardAce()) {
+                nonAceValue = hand.getSecondCardValue();
+            } else {
+                nonAceValue = hand.getFirstCardValue();
+            }
+            
+            move = this.softChart[nonAceValue][dealerCardValue];
+        } else {
+            move = this.totalChart[handTotal][dealerCardValue];
+        }
+        
+        return move;
     }
     
     /**
@@ -124,6 +263,89 @@ public class BasicStrategy extends BlackjackStrategy {
             }
         }
     }//end method updatePairChart
+    
+    /**
+     * Updates the basic strategy chart for hands that are soft totals.
+     * @param rules  The table rules to make adjustments to the basic strategy.
+     * @param numDecks  The number of decks used in the blackjack shoe.
+     */
+    private void updateSoftChart(final BlackjackRules rules, int numDecks) {
+        for (int i = 0; i < 11; i++) {//loop on Non-ace
+            for (int j = 0; j < 11; j++) {//loop on dealer's up card
+                switch (i) {//switch on the value of the non-ace card.
+                case 1:
+                    this.softChart[i][j] = BlackjackMove.SPLIT;
+                    break;
+                case 2:
+                    if (5 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (j == 4 && numDecks == 1) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 3:
+                    if (5 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (j == 4 && numDecks <= 2) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 4:
+                    if (4 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 5:
+                    if (4 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 6:
+                    if (j == 2 && numDecks == 1) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (3 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;
+                case 7:
+                    if (3 <= j && j <= 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else if (j == 2 || j == 7 || j == 8) {
+                        this.softChart[i][j] = BlackjackMove.STAND;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.HIT;
+                    }
+                    break;    
+                case 8:
+                    if ((rules.mustDealerHitSoft17() || numDecks == 1) && j == 6) {
+                        this.softChart[i][j] = BlackjackMove.DOUBLE;
+                    } else {
+                        this.softChart[i][j] = BlackjackMove.STAND;
+                    }
+                    break;
+                case 9:
+                    this.softChart[i][j] = BlackjackMove.STAND;
+                    break;
+                case 10:
+                    this.softChart[i][j] = BlackjackMove.STAND;
+                    break;
+                default:
+                    this.softChart[i][j] = BlackjackMove.STAND;
+                    break;
+                }
+            }
+        }
+    }//end method updateSoftChart
     
     /**
      * Updates the basic strategy chart for hands based on the hand total.
@@ -244,191 +466,4 @@ public class BasicStrategy extends BlackjackStrategy {
             }
         }
     }//end method updateTotalChart
-    
-    /**
-     * Updates the basic strategy chart for hands that are soft totals.
-     * @param rules  The table rules to make adjustments to the basic strategy.
-     * @param numDecks  The number of decks used in the blackjack shoe.
-     */
-    private void updateSoftChart(final BlackjackRules rules, int numDecks) {
-        for (int i = 0; i < 11; i++) {//loop on Non-ace
-            for (int j = 0; j < 11; j++) {//loop on dealer's up card
-                switch (i) {//switch on the value of the non-ace card.
-                case 1:
-                    this.softChart[i][j] = BlackjackMove.SPLIT;
-                    break;
-                case 2:
-                    if (5 <= j && j <= 6) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else if (j == 4 && numDecks == 1) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else {
-                        this.softChart[i][j] = BlackjackMove.HIT;
-                    }
-                    break;
-                case 3:
-                    if (5 <= j && j <= 6) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else if (j == 4 && numDecks <= 2) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else {
-                        this.softChart[i][j] = BlackjackMove.HIT;
-                    }
-                    break;
-                case 4:
-                    if (4 <= j && j <= 6) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else {
-                        this.softChart[i][j] = BlackjackMove.HIT;
-                    }
-                    break;
-                case 5:
-                    if (4 <= j && j <= 6) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else {
-                        this.softChart[i][j] = BlackjackMove.HIT;
-                    }
-                    break;
-                case 6:
-                    if (j == 2 && numDecks == 1) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else if (3 <= j && j <= 6) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else {
-                        this.softChart[i][j] = BlackjackMove.HIT;
-                    }
-                    break;
-                case 7:
-                    if (3 <= j && j <= 6) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else if (j == 2 || j == 7 || j == 8) {
-                        this.softChart[i][j] = BlackjackMove.STAND;
-                    } else {
-                        this.softChart[i][j] = BlackjackMove.HIT;
-                    }
-                    break;    
-                case 8:
-                    if ((rules.mustDealerHitSoft17() || numDecks == 1) && j == 6) {
-                        this.softChart[i][j] = BlackjackMove.DOUBLE;
-                    } else {
-                        this.softChart[i][j] = BlackjackMove.STAND;
-                    }
-                    break;
-                case 9:
-                    this.softChart[i][j] = BlackjackMove.STAND;
-                    break;
-                case 10:
-                    this.softChart[i][j] = BlackjackMove.STAND;
-                    break;
-                default:
-                    this.softChart[i][j] = BlackjackMove.STAND;
-                    break;
-                }
-            }
-        }
-    }//end method updateSoftChart
-    
-    public BlackjackMove getAction(final PlayingCard dealerUpCard, final BlackjackHand playerHand, int numPlayerHands) {
-        BlackjackMove move;
-        int dealerCardValue = dealerUpCard.getValue();
-        
-        if (playerHand.hasMoreThanTwoCards()) {
-            move = getMultiCardAction(playerHand, dealerCardValue);
-        } else {
-            move = getTwoCardAction(playerHand, dealerCardValue);
-        }
-        
-        move = correctActionForSpecialCases(move, playerHand, dealerCardValue, numPlayerHands);
-        
-        return move;
-    }
-    
-    private BlackjackMove getMultiCardAction(final BlackjackHand hand, int dealerCardValue) {
-        BlackjackMove move = BlackjackMove.STAND;
-        int handTotal = hand.getBlackjackTotal();
-        
-        if (hand.isSoft()) {
-            if (hand.getBlackjackTotal() <= 17) {
-                move = BlackjackMove.HIT;
-            } else if (hand.getBlackjackTotal() == 18 && 
-                       (dealerCardValue == 9 || dealerCardValue == 10 || dealerCardValue == 1)) {
-                move = BlackjackMove.HIT;
-            }
-        } else {
-            move = this.totalChart[handTotal][dealerCardValue];
-            
-            if (move == BlackjackMove.DOUBLE) {
-                move = BlackjackMove.HIT;
-            }
-        }
-        
-        return move;
-    }
-    
-    private BlackjackMove getTwoCardAction(final BlackjackHand hand, int dealerCardValue) {
-        BlackjackMove move = BlackjackMove.STAND;
-        int firstCardValue = hand.getFirstCardValue();
-        int handTotal = hand.getBlackjackTotal();
-        
-        if (hand.isPair()) {
-            move = this.pairChart[firstCardValue][dealerCardValue];
-        } else if (hand.isSoft()) {
-            int nonAceValue;
-            
-            if (hand.isFirstCardAce()) {
-                nonAceValue = hand.getSecondCardValue();
-            } else {
-                nonAceValue = hand.getFirstCardValue();
-            }
-            
-            move = this.softChart[nonAceValue][dealerCardValue];
-        } else {
-            move = this.totalChart[handTotal][dealerCardValue];
-        }
-        
-        return move;
-    }
-    
-    private BlackjackMove correctActionForSpecialCases(BlackjackMove move, final BlackjackHand hand, int dealerCardValue, int numHands) {
-        BlackjackMove correctedMove = move;
-        int handTotal = hand.getBlackjackTotal();
-        
-        if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHandsAfterSplits()) {
-            correctedMove = this.totalChart[handTotal][dealerCardValue];
-        }
-        
-        if (move == BlackjackMove.DOUBLE && hand.wasFromSplit() && !this.rules.isDoubleAfterSplitAllowed()) {
-            correctedMove = BlackjackMove.HIT;
-        }
-        
-        if (hand.isPairAces() && hand.wasFromSplit() && !this.rules.isResplitAcesAllowed()) {
-            correctedMove = BlackjackMove.STAND;
-        }
-        
-        if (hand.hasCardOfRank(CardRank.ACE) && !hand.isPair() && hand.wasFromSplit()) {
-            correctedMove = BlackjackMove.STAND;
-        }
-        
-        return correctedMove;
-    }
-    
-    public int getBetSize() {
-        return 1;
-    }
-    
-    public void resetCount() {
-        //do nothing
-    }
-    
-    public void adjustCount(PlayingCard dealtCard) {
-        //do nothing
-    }
-    
-    public int getCount() {
-        return 0;
-    }
-    
-    public boolean getInsuranceAction() {
-        return false;
-    }
 }
