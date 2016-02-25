@@ -30,6 +30,37 @@ public class BlackjackRules {
     private boolean resplitAces;
     private static HashMap<CardRank, Integer> blackjackCardValues;
     
+    private BlackjackRules(Builder builder) {
+        this.maxHands = builder.maxHands;
+        this.blackjackPayoutMultiple = builder.blackjackPayoutMultiple;
+        this.doubleAfterSplitAllowed = builder.doubleAfterSplitAllowed;
+        this.dealerHitsSoft17 = builder.dealerHitsSoft17;
+        this.resplitAces = builder.resplitAces;
+        
+        this.blackjackCardValues = new HashMap<CardRank, Integer>();
+        this.blackjackCardValues.put(CardRank.ACE, 1);
+        this.blackjackCardValues.put(CardRank.TWO, 2);
+        this.blackjackCardValues.put(CardRank.THREE, 3);
+        this.blackjackCardValues.put(CardRank.FOUR, 4);
+        this.blackjackCardValues.put(CardRank.FIVE, 5);
+        this.blackjackCardValues.put(CardRank.SIX, 6);
+        this.blackjackCardValues.put(CardRank.SEVEN, 7);
+        this.blackjackCardValues.put(CardRank.EIGHT, 8);
+        this.blackjackCardValues.put(CardRank.NINE, 9);
+        this.blackjackCardValues.put(CardRank.TEN, 10);
+        this.blackjackCardValues.put(CardRank.JACK, 10);
+        this.blackjackCardValues.put(CardRank.QUEEN, 10);
+        this.blackjackCardValues.put(CardRank.KING, 10);
+    }
+    
+    /**
+     * Get the ratio of the payout when a player has blackjack.
+     * @return  The payout ratio when a player has blackjack.
+     */
+    public double getBlackjackPayoutMultiple() {
+        return this.blackjackPayoutMultiple;
+    }
+    
     /**
      * Get the value of a card for a specific rank of a card.  The rank of a card is either clubs, diamonds, hearts, or
      * spades.
@@ -43,41 +74,11 @@ public class BlackjackRules {
     }
     
     /**
-     * Get the maximum number of hands allowed after splits and re-splits of a hand or hands.
-     * @return  The maximum number of hands allowed after splits.
+     * Refer to the rules regarding the move the dealer is required to make.  The dealer is required to hit all hands with a 
+     * total less than 17.  The dealer must hit soft 17 if the rules state he must.
+     * @param dealersHand  The dealer's hand.
+     * @return  The move the dealer is required to make.
      */
-    public int getMaxHandsAfterSplits() {
-        return this.maxHands;
-    }
-    
-    /**
-     * Get the ratio of the payout when a player has blackjack.
-     * @return  The payout ratio when a player has blackjack.
-     */
-    public double getBlackjackPayoutMultiple() {
-        return this.blackjackPayoutMultiple;
-    }
-    
-    /**
-     * Refer to the rules as to whether or not double down of a hand after it has been split is allowed.
-     * @return  True if double down of a hand after it has been split is allowed.
-     */
-    public boolean isDoubleAfterSplitAllowed() {
-        return this.doubleAfterSplitAllowed;
-    }
-    
-    /**
-     * Refer to the rules as to whether or not the dealer must hit when he has a soft 17.  An example of soft 17 is Ace-6.
-     * @return  True if the dealer must hit when he has a soft 17.
-     */
-    public boolean mustDealerHitSoft17() {
-        return this.dealerHitsSoft17;
-    }
-    
-    public boolean isResplitAcesAllowed() {
-        return this.resplitAces;
-    }
-    
     public BlackjackMove getDealersMove(final BlackjackHand dealersHand) {
         BlackjackMove dealersMove = BlackjackMove.STAND;
         
@@ -90,6 +91,24 @@ public class BlackjackRules {
         return dealersMove;
     }
     
+    /**
+     * Get the maximum number of hands allowed after splits and re-splits of a hand or hands.
+     * @return  The maximum number of hands allowed after splits.
+     */
+    public int getMaxHandsAfterSplits() {
+        return this.maxHands;
+    }
+    
+    /**
+     * Get the ratio of how much the player's chip stack will be adjusted based upon his hand and the dealer's hand.  The player
+     * will either push (not have his chips adjusted), lose (lose his bet), win (win an amount equal to his bet), win a double 
+     * down (win an amount equal to twice his bet), lose a double down (lose twice his bet), or get a blackjack (win an amount
+     * equal to the blackjack payout multiple).
+     * @param hand  The player's hand.
+     * @param dealerHand  The dealer's hand.
+     * @param numPlayerHands  The number of hands the player has.
+     * @return  The ratio of how much the player's chip stack will be adjusted.
+     */
     public double getPayoutAdjustment(BlackjackHand hand, BlackjackHand dealerHand, int numPlayerHands) {
         double payoutAdjustment = PAYOUT_HAND_PUSH;
         
@@ -120,6 +139,30 @@ public class BlackjackRules {
         }
         
         return payoutAdjustment;
+    }
+    
+    /**
+     * Refer to the rules as to whether or not double down of a hand after it has been split is allowed.
+     * @return  True if double down of a hand after it has been split is allowed.
+     */
+    public boolean isDoubleAfterSplitAllowed() {
+        return this.doubleAfterSplitAllowed;
+    }
+    
+    /**
+     * Refer to the rules as to whether or not re-splitting a pair of aces is allowed.
+     * @return  True if the player can resplit aces.
+     */
+    public boolean isResplitAcesAllowed() {
+        return this.resplitAces;
+    }
+    
+    /**
+     * Refer to the rules as to whether or not the dealer must hit when he has a soft 17.  An example of soft 17 is Ace-6.
+     * @return  True if the dealer must hit when he has a soft 17.
+     */
+    public boolean mustDealerHitSoft17() {
+        return this.dealerHitsSoft17;
     }
     
     /**
@@ -167,26 +210,5 @@ public class BlackjackRules {
         }
     }//end Builder class
     
-    private BlackjackRules(Builder builder) {
-        this.maxHands = builder.maxHands;
-        this.blackjackPayoutMultiple = builder.blackjackPayoutMultiple;
-        this.doubleAfterSplitAllowed = builder.doubleAfterSplitAllowed;
-        this.dealerHitsSoft17 = builder.dealerHitsSoft17;
-        this.resplitAces = builder.resplitAces;
-        
-        this.blackjackCardValues = new HashMap<CardRank, Integer>();
-        this.blackjackCardValues.put(CardRank.ACE, 1);
-        this.blackjackCardValues.put(CardRank.TWO, 2);
-        this.blackjackCardValues.put(CardRank.THREE, 3);
-        this.blackjackCardValues.put(CardRank.FOUR, 4);
-        this.blackjackCardValues.put(CardRank.FIVE, 5);
-        this.blackjackCardValues.put(CardRank.SIX, 6);
-        this.blackjackCardValues.put(CardRank.SEVEN, 7);
-        this.blackjackCardValues.put(CardRank.EIGHT, 8);
-        this.blackjackCardValues.put(CardRank.NINE, 9);
-        this.blackjackCardValues.put(CardRank.TEN, 10);
-        this.blackjackCardValues.put(CardRank.JACK, 10);
-        this.blackjackCardValues.put(CardRank.QUEEN, 10);
-        this.blackjackCardValues.put(CardRank.KING, 10);
-    }
+    
 }
