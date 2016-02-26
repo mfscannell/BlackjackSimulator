@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import casino.playingCard.BlackjackCard;
-import casino.blackjack.rules.BlackjackRules;
+import casino.blackjack.BlackjackRules;
 import casino.playingCard.enumerations.CardRank;
 import casino.playingCard.enumerations.CardSuit;
 

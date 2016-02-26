@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import casino.blackjack.BlackjackHand;
+import casino.blackjack.BlackjackRules;
 import casino.playingCard.BlackjackCard;
-import casino.blackjack.rules.BlackjackRules;
 import casino.blackjack.strategies.BasicStrategy;
 import casino.blackjack.enumerations.BlackjackMove;
 import casino.playingCard.enumerations.CardRank;

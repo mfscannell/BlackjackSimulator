@@ -1,6 +1,6 @@
 package casino.playingCard;
 
-import casino.blackjack.rules.BlackjackRules;
+import casino.blackjack.BlackjackRules;
 import casino.playingCard.enumerations.CardRank;
 import casino.playingCard.enumerations.CardSuit;
 

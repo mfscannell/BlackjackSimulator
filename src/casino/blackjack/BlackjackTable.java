@@ -10,7 +10,6 @@ import casino.blackjack.enumerations.BlackjackMove;
 import casino.blackjack.exceptions.InvalidShoeException;
 import casino.blackjack.exceptions.TableSeatNumberInvalidException;
 import casino.blackjack.exceptions.TableSeatTakenException;
-import casino.blackjack.rules.BlackjackRules;
 
 /**
  * A blackjack table used to play a game of blackjack.

@@ -1,9 +1,9 @@
 package casino.blackjack.strategies;
 
 import casino.blackjack.BlackjackHand;
+import casino.blackjack.BlackjackRules;
 import casino.playingCard.PlayingCard;
 import casino.blackjack.enumerations.BlackjackMove;
-import casino.blackjack.rules.BlackjackRules;
 import casino.playingCard.enumerations.CardRank;
 
 public class KISSIStrategy extends BlackjackStrategyDecorator {

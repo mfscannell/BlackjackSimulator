@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import casino.blackjack.BlackjackRules;
 import casino.blackjack.BlackjackTable;
 import casino.gambler.BlackjackPlayer;
 import casino.blackjack.exceptions.TableSeatNumberInvalidException;
 import casino.blackjack.exceptions.TableSeatTakenException;
-import casino.blackjack.rules.BlackjackRules;
 
 public class TestBlackjackTable {
     private static BlackjackRules.Builder rulesBuilder;

@@ -8,10 +8,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import casino.blackjack.BlackjackHand;
+import casino.blackjack.BlackjackRules;
 import casino.gambler.BlackjackPlayer;
 import casino.gambler.Gambler;
 import casino.playingCard.BlackjackCard;
-import casino.blackjack.rules.BlackjackRules;
 import casino.blackjack.strategies.BasicStrategy;
 import casino.blackjack.strategies.BlackjackStrategy;
 import casino.blackjack.enumerations.BlackjackMove;

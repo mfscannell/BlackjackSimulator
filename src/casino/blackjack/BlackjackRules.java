@@ -1,8 +1,7 @@
-package casino.blackjack.rules;
+package casino.blackjack;
 
 import java.util.HashMap;
 
-import casino.blackjack.BlackjackHand;
 import casino.blackjack.enumerations.BlackjackMove;
 import casino.playingCard.enumerations.CardRank;
 
