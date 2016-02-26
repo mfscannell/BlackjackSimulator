@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import casino.blackjack.BlackjackRules;
 import casino.blackjack.BlackjackTable;
 import casino.gambler.BlackjackDealer;
 import casino.gambler.BlackjackPlayer;
-import rules.BlackjackRules;
+import casino.blackjack.exceptions.TableSeatNumberInvalidException;
+import casino.blackjack.exceptions.TableSeatTakenException;
 import configFile.ConfigFileHeading;
 import exceptions.InvalidConfigFileException;
-import exceptions.TableSeatNumberInvalidException;
-import exceptions.TableSeatTakenException;
 
 public class Main {
     

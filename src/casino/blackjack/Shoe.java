@@ -2,9 +2,9 @@ package casino.blackjack;
 
 import java.util.ArrayList;
 
+import casino.blackjack.exceptions.InvalidShoeException;
 import casino.playingCard.BlackjackCard;
 import casino.playingCard.PlayingCard;
-import exceptions.InvalidShoeException;
 
 /**
  * A shoe of playing cards used to deal out playing cards at a blackjack table.

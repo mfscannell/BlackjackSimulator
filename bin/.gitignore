@@ -1,4 +1,9 @@
-/blackjackStrategies/
 /casino/
-/enumerations/
-/rules/
+/configFile/
+/exceptions/
+/main/
+/mockData/
+/unitTestModelObjects/
+/unitTestRules/
+/unitTestStrategies/
+/unitTest/

@@ -6,11 +6,10 @@ import java.util.Observable;
 import casino.gambler.BlackjackDealer;
 import casino.gambler.BlackjackPlayer;
 import casino.playingCard.PlayingCard;
-import rules.BlackjackRules;
-import enumerations.BlackjackMove;
-import exceptions.InvalidShoeException;
-import exceptions.TableSeatNumberInvalidException;
-import exceptions.TableSeatTakenException;
+import casino.blackjack.enumerations.BlackjackMove;
+import casino.blackjack.exceptions.InvalidShoeException;
+import casino.blackjack.exceptions.TableSeatNumberInvalidException;
+import casino.blackjack.exceptions.TableSeatTakenException;
 
 /**
  * A blackjack table used to play a game of blackjack.

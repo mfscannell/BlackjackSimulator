@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import casino.blackjack.BlackjackHand;
+import casino.blackjack.BlackjackRules;
 import casino.blackjack.BlackjackTable;
 import casino.playingCard.PlayingCard;
-import rules.BlackjackRules;
-import blackjackStrategies.BasicStrategy;
-import blackjackStrategies.BlackjackStrategy;
-import blackjackStrategies.CompositionStrategy;
-import blackjackStrategies.KISSIStrategy;
-import blackjackStrategies.NullStrategy;
-import enumerations.BlackjackMove;
+import casino.blackjack.strategies.BasicStrategy;
+import casino.blackjack.strategies.BlackjackStrategy;
+import casino.blackjack.strategies.CompositionStrategy;
+import casino.blackjack.strategies.KISSIStrategy;
+import casino.blackjack.strategies.NullStrategy;
+import casino.blackjack.enumerations.BlackjackMove;
 
 public class BlackjackPlayer extends Gambler {
     private ArrayList<BlackjackHand> hands;

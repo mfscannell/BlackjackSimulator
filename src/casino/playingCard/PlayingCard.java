@@ -1,7 +1,7 @@
 package casino.playingCard;
 
-import enumerations.CardRank;
-import enumerations.CardSuit;
+import casino.playingCard.enumerations.CardRank;
+import casino.playingCard.enumerations.CardSuit;
 
 /**
  * Represents a standard playing card found in a deck of 52 cards.
