@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import casino.blackjack.Shoe;
+import casino.blackjack.exceptions.InvalidShoeException;
 import casino.playingCard.PlayingCard;
-import exceptions.InvalidShoeException;
 
 public class TestShoe {
     @Test

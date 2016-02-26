@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import casino.blackjack.BlackjackHand;
 import casino.playingCard.BlackjackCard;
+import casino.blackjack.enumerations.BlackjackMove;
 import casino.blackjack.rules.BlackjackRules;
-import casino.playingCard.enumerations.BlackjackMove;
 import casino.playingCard.enumerations.CardRank;
 import casino.playingCard.enumerations.CardSuit;
 

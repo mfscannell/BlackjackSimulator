@@ -9,10 +9,10 @@ import casino.blackjack.BlackjackHand;
 import casino.playingCard.BlackjackCard;
 import casino.playingCard.PlayingCard;
 import casino.blackjack.rules.BlackjackRules;
-import casino.blackjack.blackjackStrategies.BasicStrategy;
-import casino.blackjack.blackjackStrategies.BlackjackStrategy;
-import casino.blackjack.blackjackStrategies.KISSIStrategy;
-import casino.playingCard.enumerations.BlackjackMove;
+import casino.blackjack.strategies.BasicStrategy;
+import casino.blackjack.strategies.BlackjackStrategy;
+import casino.blackjack.strategies.KISSIStrategy;
+import casino.blackjack.enumerations.BlackjackMove;
 import casino.playingCard.enumerations.CardRank;
 import casino.playingCard.enumerations.CardSuit;
 

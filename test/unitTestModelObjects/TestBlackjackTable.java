@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import casino.blackjack.BlackjackTable;
 import casino.gambler.BlackjackPlayer;
+import casino.blackjack.exceptions.TableSeatNumberInvalidException;
+import casino.blackjack.exceptions.TableSeatTakenException;
 import casino.blackjack.rules.BlackjackRules;
-import exceptions.TableSeatNumberInvalidException;
-import exceptions.TableSeatTakenException;
 
 public class TestBlackjackTable {
     private static BlackjackRules.Builder rulesBuilder;

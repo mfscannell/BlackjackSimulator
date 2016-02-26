@@ -1,4 +1,4 @@
-package casino.playingCard.enumerations;
+package casino.blackjack.enumerations;
 
 /**
  * This enumeration represents all possible moves and actions that can be taken in a game of Blackjack.

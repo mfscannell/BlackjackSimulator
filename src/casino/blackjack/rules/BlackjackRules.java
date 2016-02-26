@@ -3,7 +3,7 @@ package casino.blackjack.rules;
 import java.util.HashMap;
 
 import casino.blackjack.BlackjackHand;
-import casino.playingCard.enumerations.BlackjackMove;
+import casino.blackjack.enumerations.BlackjackMove;
 import casino.playingCard.enumerations.CardRank;
 
 /**

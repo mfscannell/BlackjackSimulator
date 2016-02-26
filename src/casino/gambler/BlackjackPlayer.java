@@ -7,12 +7,12 @@ import casino.blackjack.BlackjackHand;
 import casino.blackjack.BlackjackTable;
 import casino.playingCard.PlayingCard;
 import casino.blackjack.rules.BlackjackRules;
-import casino.blackjack.blackjackStrategies.BasicStrategy;
-import casino.blackjack.blackjackStrategies.BlackjackStrategy;
-import casino.blackjack.blackjackStrategies.CompositionStrategy;
-import casino.blackjack.blackjackStrategies.KISSIStrategy;
-import casino.blackjack.blackjackStrategies.NullStrategy;
-import casino.playingCard.enumerations.BlackjackMove;
+import casino.blackjack.strategies.BasicStrategy;
+import casino.blackjack.strategies.BlackjackStrategy;
+import casino.blackjack.strategies.CompositionStrategy;
+import casino.blackjack.strategies.KISSIStrategy;
+import casino.blackjack.strategies.NullStrategy;
+import casino.blackjack.enumerations.BlackjackMove;
 
 public class BlackjackPlayer extends Gambler {
     private ArrayList<BlackjackHand> hands;

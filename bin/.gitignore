@@ -1,6 +1,9 @@
 /casino/
-/unitTestRules/
-/unitTestModelObjects/
-/unitTestStrategies/
+/configFile/
+/exceptions/
 /main/
 /mockData/
+/unitTestBlackjackPlayer/
+/unitTestModelObjects/
+/unitTestRules/
+/unitTestStrategies/

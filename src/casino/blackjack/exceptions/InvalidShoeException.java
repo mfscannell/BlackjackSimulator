@@ -1,4 +1,4 @@
-package exceptions;
+package casino.blackjack.exceptions;
 
 public class InvalidShoeException extends Exception {
     /**

@@ -10,12 +10,12 @@ import org.junit.Test;
 import casino.blackjack.BlackjackHand;
 import casino.gambler.BlackjackPlayer;
 import casino.playingCard.BlackjackCard;
-import rules.BlackjackRules;
-import blackjackStrategies.BasicStrategy;
-import blackjackStrategies.BlackjackStrategy;
-import enumerations.BlackjackMove;
-import enumerations.CardRank;
-import enumerations.CardSuit;
+import casino.blackjack.rules.BlackjackRules;
+import casino.blackjack.strategies.BasicStrategy;
+import casino.blackjack.strategies.BlackjackStrategy;
+import casino.blackjack.enumerations.BlackjackMove;
+import casino.playingCard.enumerations.CardRank;
+import casino.playingCard.enumerations.CardSuit;
 
 /**
  * Tests the Basic Strategy Chart when the player has a pair of 5s and the player has not split his hand 
