@@ -49,6 +49,21 @@ public class TestShoe {
     public void testInvalidPenetrationTooHigh() throws InvalidShoeException {
         Shoe shoe = new Shoe(6, 100);
     }
+    
+    @Test
+    public void testGetNumCardsRemaining() {
+        Shoe shoe;
+        try {
+            shoe = new Shoe(1, 66);
+            for (int i = 0; i < 10; i++) {
+                shoe.dealCard();
+            }
+            
+            assertTrue(shoe.getNumCardsRemaining() == 42);
+        } catch (InvalidShoeException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testWasCutCardMetBound() {
@@ -110,8 +125,32 @@ public class TestShoe {
         } catch (InvalidShoeException e) {
             e.printStackTrace();
         }
-        
-        
+    }
+    
+    @Test
+    public void testIsNewShoe() {
+        Shoe shoe;
+        try {
+            shoe = new Shoe(6, 66);
+            
+            assertTrue(shoe.isNewShoe());
+        } catch (InvalidShoeException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @Test
+    public void testIsNotNewShoe() {
+        Shoe shoe;
+        try {
+            shoe = new Shoe(6, 66);
+            
+            shoe.dealCard();
+            
+            assertFalse(shoe.isNewShoe());
+        } catch (InvalidShoeException e) {
+            e.printStackTrace();
+        }
     }
     
     @Test

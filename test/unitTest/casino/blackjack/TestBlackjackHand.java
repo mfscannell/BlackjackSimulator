@@ -495,6 +495,8 @@ public class TestBlackjackHand {
         hand.addCard(secondCard);
         
         assertFalse(hand.isHand(CardRank.EIGHT, CardRank.FIVE));
+        assertFalse(hand.isHand(CardRank.NINE, CardRank.THREE));
+        assertFalse(hand.isHand(CardRank.NINE, CardRank.FIVE));
     }
     
     @Test
