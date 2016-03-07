@@ -91,7 +91,6 @@ public class BlackjackTable extends Observable {
         dealInitialCards();
         
         if (this.dealerHand.isFirstCardAce()) {
-            setInsuranceForAllPlayers();
             adjustAllPlayersChipsForInsurance();
         }
         
@@ -511,17 +510,6 @@ public class BlackjackTable extends Observable {
         for (int i = 0; i < this.players.size(); i++) {
             if (hasPlayerAtSeat(i)) {
                 this.players.get(i).setBetAmount();
-            }
-        }
-    }
-    
-    /**
-     * Set whether or not each player takes insurance.
-     */
-    private void setInsuranceForAllPlayers() {
-        for (int i = 0; i < this.players.size(); i++) {
-            if (hasPlayerAtSeat(i)) {
-                this.players.get(i).setTakesInsurance();
             }
         }
     }

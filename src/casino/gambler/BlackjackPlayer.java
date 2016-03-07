@@ -35,7 +35,7 @@ public class BlackjackPlayer extends Gambler {
      * @return  True if a player takes insurance.
      */
     public boolean takesInsurance() {
-        return this.insurance;
+        return this.blackjackStrategy.getInsuranceAction();
     }
     
     /**
@@ -44,13 +44,6 @@ public class BlackjackPlayer extends Gambler {
      */
     public void setHands(final ArrayList<BlackjackHand> hands) {
         this.hands = hands;
-    }
-    
-    /**
-     * Sets whether or not the player takes insurance based upon his strategy.
-     */
-    public void setTakesInsurance() {
-        this.insurance = this.blackjackStrategy.getInsuranceAction();
     }
     
     public BlackjackMove getAction(PlayingCard dealerUpCard, BlackjackHand playerHand, int numHands) {
