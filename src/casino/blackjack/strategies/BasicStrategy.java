@@ -26,17 +26,6 @@ public class BasicStrategy extends BlackjackStrategy {
         
     }
     
-    /**
-     * Constructor.
-     * @param rules  The rules at the table.
-     * @param numDecks  The number of decks used in the shoe.
-     * @throws InvalidNumDecksException  The number of decks specified must be between
-     * 1 and 8.
-     */
-    public BasicStrategy(final BlackjackRules rules, int numDecks) {
-        initialize(rules, numDecks);
-    }
-    
     @Override
     public void adjustCount(PlayingCard dealtCard) {
         //do nothing

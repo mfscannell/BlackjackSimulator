@@ -36,7 +36,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -49,7 +50,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -62,7 +64,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -75,7 +78,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -88,7 +92,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -101,7 +106,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -114,9 +120,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
-        
-        
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
         assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.HIT);
@@ -127,7 +132,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -141,7 +147,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -154,7 +161,8 @@ public class SoftAce4 {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         

@@ -26,22 +26,6 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     public KISSIStrategy(BlackjackStrategy blackjackStrategy) {
         this.blackjackStrategy = blackjackStrategy;
     }
-
-    /**
-     * Constructor
-     * @param rules  The specific rules at the table.
-     * @param numDecks  The number of decks used in the shoe.
-     * @throws InvalidNumDecksException  The number of decks specified must be between
-     * 1 and 8.
-     */
-    public KISSIStrategy(BlackjackStrategy blackjackStrategy, BlackjackRules rules, int numDecks) {
-        this.blackjackStrategy = blackjackStrategy;
-        this.rules = rules;
-        this.numDecks = numDecks;
-        
-        this.initialCount = INITIAL_COUNTS[numDecks];
-        this.count = initialCount;
-    }
     
     @Override
     public void adjustCount(PlayingCard card) {
@@ -143,6 +127,9 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     public void initialize(BlackjackRules rules, int numDecks) {
         this.rules = rules;
         this.numDecks = numDecks;
+        this.initialCount = INITIAL_COUNTS[numDecks];
+        this.count = initialCount;
+        
         this.blackjackStrategy.initialize(rules, numDecks);
     }
     

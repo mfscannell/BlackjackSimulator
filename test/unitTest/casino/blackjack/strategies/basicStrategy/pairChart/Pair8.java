@@ -42,7 +42,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -55,7 +56,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -68,7 +70,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -81,7 +84,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -94,7 +98,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -107,7 +112,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -120,7 +126,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -133,7 +140,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -146,7 +154,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         
@@ -159,7 +168,8 @@ public class Pair8 {
         int numDecks = 2;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
-        BasicStrategy strategy = new BasicStrategy(rules, numDecks);
+        BasicStrategy strategy = new BasicStrategy();
+        strategy.initialize(rules, numDecks);
         
         player.initializeStrategy(rules, numDecks);
         

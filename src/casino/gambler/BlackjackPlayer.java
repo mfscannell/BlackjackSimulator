@@ -46,6 +46,9 @@ public class BlackjackPlayer extends Gambler {
         this.hands = hands;
     }
     
+    /**
+     * Sets whether or not the player takes insurance based upon his strategy.
+     */
     public void setTakesInsurance() {
         this.insurance = this.blackjackStrategy.getInsuranceAction();
     }
@@ -98,6 +101,10 @@ public class BlackjackPlayer extends Gambler {
         }
     }
     
+    /**
+     * Add an additional layer of blackjack strategy to the player's strategy.
+     * @param strategyDecoratorDescription
+     */
     public void enhanceStrategy(int strategyDecoratorDescription) {
         switch (strategyDecoratorDescription) {
             case BlackjackStrategy.COMPOSITION_STRATEGY:
@@ -111,14 +118,6 @@ public class BlackjackPlayer extends Gambler {
         }
     }
     
-    public void resetBaseStrategy(int basicStrategyDescription) {
-        if (basicStrategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
-            this.blackjackStrategy = new BasicStrategy();
-        }
-    }
-    
-    
-    
     /**
      * Sets up the blackjack move strategy based upon the rules at the table and the number of decks
      * in the shoe at the table.
@@ -127,6 +126,16 @@ public class BlackjackPlayer extends Gambler {
      */
     public void initializeStrategy(BlackjackRules rules, int numDecks) {
         this.blackjackStrategy.initialize(rules, numDecks);
+    }
+    
+    /**
+     * Remove all layers of the player's strategy and replace it with a base strategy.
+     * @param basicStrategyDescription  The base strategy to rese the player's strategy to.
+     */
+    public void resetBaseStrategy(int basicStrategyDescription) {
+        if (basicStrategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
+            this.blackjackStrategy = new BasicStrategy();
+        }
     }
 
     @Override

@@ -31,8 +31,9 @@ public class TestKISSIStrategy {
         rulesBuilder.setCanResplitAces(true);
         rules = rulesBuilder.build();
         
-        BlackjackStrategy basicStrategy = new BasicStrategy(rules, numDecks);
-        strategy = new KISSIStrategy(basicStrategy, rules, numDecks);
+        BlackjackStrategy basicStrategy = new BasicStrategy();
+        strategy = new KISSIStrategy(basicStrategy);
+        strategy.initialize(rules, numDecks);
     }
     
     @Test
@@ -327,8 +328,9 @@ public class TestKISSIStrategy {
         rulesBuilder.setCanResplitAces(false);
         BlackjackRules rules = rulesBuilder.build();
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, 2);
-        strategy = new KISSIStrategy(strategy, rules, 2);
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new KISSIStrategy(strategy);
+        strategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.HEARTS);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.DIAMONDS);
@@ -356,8 +358,9 @@ public class TestKISSIStrategy {
         hand.addCard(playersFirstCard);
         hand.addCard(playersSecondCard);
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, 2);
-        strategy = new KISSIStrategy(strategy, rules, 2);
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new KISSIStrategy(strategy);
+        strategy.initialize(rules, 2);
         
         strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
         strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
@@ -379,8 +382,9 @@ public class TestKISSIStrategy {
         hand.addCard(playersFirstCard);
         hand.addCard(playersSecondCard);
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, 2);
-        strategy = new KISSIStrategy(strategy, rules, 2);
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new KISSIStrategy(strategy);
+        strategy.initialize(rules, 2);
         
         strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
         strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
@@ -401,8 +405,9 @@ public class TestKISSIStrategy {
         hand.addCard(playersFirstCard);
         hand.addCard(playersSecondCard);
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, 2);
-        strategy = new KISSIStrategy(strategy, rules, 2);
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new KISSIStrategy(strategy);
+        strategy.initialize(rules, 2);
         
         strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
         strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
@@ -423,8 +428,9 @@ public class TestKISSIStrategy {
         hand.addCard(playersFirstCard);
         hand.addCard(playersSecondCard);
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, 2);
-        strategy = new KISSIStrategy(strategy, rules, 2);
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new KISSIStrategy(strategy);
+        strategy.initialize(rules, 2);
         
         strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
         strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
@@ -445,8 +451,9 @@ public class TestKISSIStrategy {
         hand.addCard(playersFirstCard);
         hand.addCard(playersSecondCard);
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, 2);
-        strategy = new KISSIStrategy(strategy, rules, 2);
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new KISSIStrategy(strategy);
+        strategy.initialize(rules, 2);
         
         strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
         strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));
@@ -467,8 +474,9 @@ public class TestKISSIStrategy {
         hand.addCard(playersFirstCard);
         hand.addCard(playersSecondCard);
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, 2);
-        strategy = new KISSIStrategy(strategy, rules, 2);
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new KISSIStrategy(strategy);
+        strategy.initialize(rules, 2);
         
         strategy.adjustCount(new BlackjackCard(CardRank.SIX, CardSuit.CLUBS));
         strategy.adjustCount(new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS));

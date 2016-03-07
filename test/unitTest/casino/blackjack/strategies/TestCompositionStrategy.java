@@ -36,8 +36,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
     }
@@ -54,8 +55,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
     }
@@ -72,8 +74,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
     }
@@ -90,8 +93,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
     }
@@ -108,8 +112,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
     }
@@ -128,8 +133,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
     }
@@ -148,8 +154,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.STAND);
     }
@@ -168,8 +175,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
         
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
     }
@@ -188,8 +196,9 @@ public class TestCompositionStrategy {
         
         int numDecks = 2;
         
-        BlackjackStrategy strategy = new BasicStrategy(rules, numDecks);
+        BlackjackStrategy strategy = new BasicStrategy();
         strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
             
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
     }

@@ -23,7 +23,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(false);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
@@ -59,7 +60,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(true);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
@@ -95,7 +97,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(false);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
@@ -129,7 +132,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(true);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
@@ -163,7 +167,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(false);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
@@ -197,7 +202,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(false);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -230,7 +236,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(true);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -263,7 +270,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(true);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -296,7 +304,8 @@ public class TestBasicStrategy {
         rulesBuilder.setCanResplitAces(true);
         BlackjackRules rules = rulesBuilder.build();
         
-        BasicStrategy basicStrategy = new BasicStrategy(rules, 2);
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
         
         BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
