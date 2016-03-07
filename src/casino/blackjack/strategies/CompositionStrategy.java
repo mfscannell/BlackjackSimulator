@@ -10,11 +10,10 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
     BlackjackStrategy blackjackStrategy;
 
     /**
-     * Constructor
-     * @param rules  The specific rules at the table.
-     * @param numDecks  The number of decks used in the shoe.
-     * @throws InvalidNumDecksException  The number of decks specified must be between
-     * 1 and 8.
+     * Constructor.  The BasicStrategy.initialize method must be called after using this constructor to 
+     * initialize the class.
+     * @param blackjackStrategy  The blackjack strategy that will be referred to if this strategy cannot result in a 
+     * recommended action.
      */
     public CompositionStrategy(BlackjackStrategy blackjackStrategy) {
         this.blackjackStrategy = blackjackStrategy;

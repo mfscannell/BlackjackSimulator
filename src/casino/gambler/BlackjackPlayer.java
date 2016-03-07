@@ -84,22 +84,17 @@ public class BlackjackPlayer extends Gambler {
     }
     
     /**
-     * Add a new layer of blackjack strategy on top of the current layer.  The new blackjack strategy layer
-     * will be referred to when getting a strategy.  If that layer cannot provide a move, the layer will obtain a move
-     * from the next lower layer.
+     * Add a new layer of blackjack strategy on top of the current layer.  If the strategy layer is a base layer, then the
+     * player's strategy will reset to the base layer and there will be no other layers of strategy.  The new blackjack 
+     * strategy layer will be referred to when getting a strategy.  If that layer cannot provide a move, the layer will 
+     * obtain a move from the next lower layer.
      * @param strategyDescription The description for the strategy layer.
      */
     public void addStrategyLayer(int strategyDescription) {
         if (strategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
-            resetBaseStrategy(strategyDescription);
+            this.resetBaseStrategy(strategyDescription);
         } else {
-            enhanceStrategy(strategyDescription);
-        }
-    }
-    
-    public void resetBaseStrategy(int basicStrategyDescription) {
-        if (basicStrategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
-            this.blackjackStrategy = new BasicStrategy();
+            this.enhanceStrategy(strategyDescription);
         }
     }
     
@@ -115,6 +110,14 @@ public class BlackjackPlayer extends Gambler {
                 break;
         }
     }
+    
+    public void resetBaseStrategy(int basicStrategyDescription) {
+        if (basicStrategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
+            this.blackjackStrategy = new BasicStrategy();
+        }
+    }
+    
+    
     
     /**
      * Sets up the blackjack move strategy based upon the rules at the table and the number of decks
