@@ -322,5 +322,208 @@ public class TestBasicStrategy {
         
         assertTrue(move == BlackjackMove.HIT);
     }
+    
+    @Test
+    public void testMultiSoft17() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.HIT);
+    }
+    
+    @Test
+    public void testMultiSoft18vs8() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.STAND);
+    }
+    
+    @Test
+    public void testMultiSoft18vs9() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.HIT);
+    }
+    
+    @Test
+    public void testMultiSoft18vs10() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.HIT);
+    }
+    
+    @Test
+    public void testMultiSoft18vsAce() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.HIT);
+    }
+    
+    @Test
+    public void testMultiSoft19vsEight() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.STAND);
+    }
+    
+    @Test
+    public void testMultiSoft19vsAce() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.STAND);
+    }
 
 }
