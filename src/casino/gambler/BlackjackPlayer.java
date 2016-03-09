@@ -13,6 +13,7 @@ import casino.blackjack.strategies.CompositionStrategy;
 import casino.blackjack.strategies.KISSIStrategy;
 import casino.blackjack.strategies.NullStrategy;
 import casino.blackjack.enumerations.BlackjackMove;
+import casino.blackjack.enumerations.Strategy;
 
 public class BlackjackPlayer extends Gambler {
     private ArrayList<BlackjackHand> hands;
@@ -86,8 +87,8 @@ public class BlackjackPlayer extends Gambler {
      * obtain a move from the next lower layer.
      * @param strategyDescription The description for the strategy layer.
      */
-    public void addStrategyLayer(int strategyDescription) {
-        if (strategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
+    public void addStrategyLayer(Strategy strategyDescription) {
+        if (strategyDescription == Strategy.BASIC_STRATEGY) {
             this.resetBaseStrategy(strategyDescription);
         } else {
             this.enhanceStrategy(strategyDescription);
@@ -98,17 +99,12 @@ public class BlackjackPlayer extends Gambler {
      * Add an additional layer of blackjack strategy to the player's strategy.
      * @param strategyDecoratorDescription
      */
-    public void enhanceStrategy(int strategyDecoratorDescription) {
-        switch (strategyDecoratorDescription) {
-            case BlackjackStrategy.COMPOSITION_STRATEGY:
-                this.blackjackStrategy = new CompositionStrategy(this.blackjackStrategy);
-                break;
-            case BlackjackStrategy.KISS_I_STRATEGY:
-                this.blackjackStrategy = new KISSIStrategy(this.blackjackStrategy);
-                break;
-            default:
-                break;
-        }
+    public void enhanceStrategy(Strategy strategyDecoratorDescription) {
+    	if (strategyDecoratorDescription == Strategy.COMPOSITION_STRATEGY) {
+    		this.blackjackStrategy = new CompositionStrategy(this.blackjackStrategy);
+    	} else if (strategyDecoratorDescription == Strategy.KISS_I_STRATEGY) {
+    		this.blackjackStrategy = new KISSIStrategy(this.blackjackStrategy);
+    	}
     }
     
     /**
@@ -125,8 +121,8 @@ public class BlackjackPlayer extends Gambler {
      * Remove all layers of the player's strategy and replace it with a base strategy.
      * @param basicStrategyDescription  The base strategy to rese the player's strategy to.
      */
-    public void resetBaseStrategy(int basicStrategyDescription) {
-        if (basicStrategyDescription == BlackjackStrategy.BASIC_STRATEGY) {
+    public void resetBaseStrategy(Strategy basicStrategyDescription) {
+        if (basicStrategyDescription == Strategy.BASIC_STRATEGY) {
             this.blackjackStrategy = new BasicStrategy();
         }
     }

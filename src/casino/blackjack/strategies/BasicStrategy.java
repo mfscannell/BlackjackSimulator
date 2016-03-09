@@ -79,6 +79,10 @@ public class BasicStrategy extends BlackjackStrategy {
         //do nothing
     }
     
+    public String toString() {
+    	return "BasicStrategy";
+    }
+    
     /**
      * Take an initial recommended move and modify it for special cases and scenarios.  These scenarios include but are not
      * limited to trying to double after split when the rules do not permit it, trying to resplit a hand when the maximum number

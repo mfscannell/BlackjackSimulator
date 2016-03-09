@@ -58,12 +58,16 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
     }
     
     @Override
+    public void initialize(BlackjackRules rules, int numDecks) {
+        this.blackjackStrategy.initialize(rules, numDecks);
+    }
+    
+    @Override
     public void resetCount() {
         //do nothing
     }
     
-    @Override
-    public void initialize(BlackjackRules rules, int numDecks) {
-        this.blackjackStrategy.initialize(rules, numDecks);
+    public String toString() {
+    	return "CompositionStrategy " + this.blackjackStrategy.toString();
     }
 }

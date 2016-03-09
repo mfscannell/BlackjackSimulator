@@ -151,4 +151,8 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         
         return walk;
     }
+    
+    public String toString() {
+    	return "KISSIStrategy " + this.blackjackStrategy.toString();
+    }
 }

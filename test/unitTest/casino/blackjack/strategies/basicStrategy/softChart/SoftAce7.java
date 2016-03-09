@@ -15,6 +15,7 @@ import casino.playingCard.BlackjackCard;
 import casino.blackjack.strategies.BasicStrategy;
 import casino.blackjack.strategies.BlackjackStrategy;
 import casino.blackjack.enumerations.BlackjackMove;
+import casino.blackjack.enumerations.Strategy;
 import casino.playingCard.enumerations.CardRank;
 import casino.playingCard.enumerations.CardSuit;
 
@@ -28,7 +29,7 @@ public class SoftAce7 {
         rules = DefaultRulesSingleton.getDefaultRules();
         hand = BlackjackHandSoft.getHandAce7();
         player = new BlackjackPlayer(0);
-        player.resetBaseStrategy(BlackjackStrategy.BASIC_STRATEGY);
+        player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
     }
 
     @Test
