@@ -295,6 +295,38 @@ public class TestBasicStrategy {
     }
     
     @Test
+    public void testGetBetSize() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+    	
+        assertTrue(basicStrategy.getBetSize() == 1);
+    }
+    
+    @Test
+    public void testGetCount() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+    	
+        assertTrue(basicStrategy.getCount() == 0);
+    }
+    
+    @Test
     public void testMultiCantDouble() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);

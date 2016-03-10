@@ -32,55 +32,6 @@ public class BlackjackPlayer extends Gambler {
     }
     
     /**
-     * Checks if a player takes insurance.
-     * @return  True if a player takes insurance.
-     */
-    public boolean takesInsurance() {
-        return this.blackjackStrategy.getInsuranceAction();
-    }
-    
-    /**
-     * Associates the hands with the player.
-     * @param hands The hands to be associated with the player.
-     */
-    public void setHands(final ArrayList<BlackjackHand> hands) {
-        this.hands = hands;
-    }
-    
-    public BlackjackMove getAction(PlayingCard dealerUpCard, BlackjackHand playerHand, int numHands) {
-        return this.blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
-    }
-    
-    public void resetCount() {
-        this.blackjackStrategy.resetCount();
-    }
-    
-    public void setBetAmount() {
-        super.setBetAmount(this.blackjackStrategy.getBetSize());
-    }
-    
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        
-        for (int i = 0; i < this.hands.size(); i++) {
-            stringBuilder.append(this.hands.get(i).toString());
-            stringBuilder.append("\n");
-        }
-        
-        stringBuilder.append("Cash:" + cashTotal + "\n");
-        stringBuilder.append("Current bet:" + betAmount + "\n");
-        stringBuilder.append("\n");
-        
-        if (this.insurance) {
-            stringBuilder.append("Does Takes Insurance\n");
-        } else {
-            stringBuilder.append("Doesn't Takes Insurance\n");
-        }
-        
-        return stringBuilder.toString();
-    }
-    
-    /**
      * Add a new layer of blackjack strategy on top of the current layer.  If the strategy layer is a base layer, then the
      * player's strategy will reset to the base layer and there will be no other layers of strategy.  The new blackjack 
      * strategy layer will be referred to when getting a strategy.  If that layer cannot provide a move, the layer will 
@@ -107,6 +58,10 @@ public class BlackjackPlayer extends Gambler {
     	}
     }
     
+    public BlackjackMove getAction(PlayingCard dealerUpCard, BlackjackHand playerHand, int numHands) {
+        return this.blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
+    }
+    
     /**
      * Sets up the blackjack move strategy based upon the rules at the table and the number of decks
      * in the shoe at the table.
@@ -125,6 +80,55 @@ public class BlackjackPlayer extends Gambler {
         if (basicStrategyDescription == Strategy.BASIC_STRATEGY) {
             this.blackjackStrategy = new BasicStrategy();
         }
+    }
+    
+    public void resetCount() {
+        this.blackjackStrategy.resetCount();
+    }
+    
+    public void setBetAmount() {
+        super.setBetAmount(this.blackjackStrategy.getBetSize());
+    }
+    
+    /**
+     * Associates the hands with the player.
+     * @param hands The hands to be associated with the player.
+     */
+    public void setHands(final ArrayList<BlackjackHand> hands) {
+        this.hands = hands;
+    }
+    
+    /**
+     * Checks if a player takes insurance.
+     * @return  True if a player takes insurance.
+     */
+    public boolean takesInsurance() {
+        return this.blackjackStrategy.getInsuranceAction();
+    }
+    
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        for (int i = 0; i < this.hands.size(); i++) {
+            stringBuilder.append(this.hands.get(i).toString());
+            stringBuilder.append("\n");
+        }
+        
+        stringBuilder.append("Cash:" + cashTotal + "\n");
+        stringBuilder.append("Current bet:" + betAmount + "\n");
+        stringBuilder.append("\n");
+        
+        if (this.insurance) {
+            stringBuilder.append("Does Takes Insurance\n");
+        } else {
+            stringBuilder.append("Doesn't Takes Insurance\n");
+        }
+        
+        return stringBuilder.toString();
+    }
+    
+    public String toStringStrategy() {
+    	return this.blackjackStrategy.toString();
     }
 
     @Override
