@@ -2,8 +2,8 @@ package unitTest.casino.blackjack.strategies.basicStrategy.pairChart;
 
 import static org.junit.Assert.assertTrue;
 
-import mockData.casino.blackjack.BlackjackHandPairs;
-import mockData.casino.blackjack.DefaultRulesSingleton;
+import mockData.casino.blackjack.MockBlackjackHandPairs;
+import mockData.casino.blackjack.MockBlackjackRules;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,8 +32,8 @@ public class PairA {
     
     @BeforeClass
     public static void setUpBeforeClass() {
-        rules = DefaultRulesSingleton.getDefaultRules();
-        hand = BlackjackHandPairs.getPairA();
+        rules = MockBlackjackRules.getDefaultRules();
+        hand = MockBlackjackHandPairs.getPairA();
         player = new BlackjackPlayer(0);
         player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
     }

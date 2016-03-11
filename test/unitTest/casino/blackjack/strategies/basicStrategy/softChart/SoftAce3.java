@@ -2,8 +2,8 @@ package unitTest.casino.blackjack.strategies.basicStrategy.softChart;
 
 import static org.junit.Assert.assertTrue;
 
-import mockData.casino.blackjack.BlackjackHandSoft;
-import mockData.casino.blackjack.DefaultRulesSingleton;
+import mockData.casino.blackjack.MockBlackjackHandSoft;
+import mockData.casino.blackjack.MockBlackjackRules;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,8 +26,8 @@ public class SoftAce3 {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        rules = DefaultRulesSingleton.getDefaultRules();
-        hand = BlackjackHandSoft.getHandAce3();
+        rules = MockBlackjackRules.getDefaultRules();
+        hand = MockBlackjackHandSoft.getHandAce3();
         player = new BlackjackPlayer(0);
         player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
     }

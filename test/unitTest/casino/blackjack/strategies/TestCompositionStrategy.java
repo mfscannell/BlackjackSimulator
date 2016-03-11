@@ -14,14 +14,14 @@ import casino.blackjack.strategies.CompositionStrategy;
 import casino.blackjack.enumerations.BlackjackMove;
 import casino.playingCard.enumerations.CardRank;
 import casino.playingCard.enumerations.CardSuit;
-import mockData.casino.blackjack.DefaultRulesSingleton;
+import mockData.casino.blackjack.MockBlackjackRules;
 
 public class TestCompositionStrategy {
     private static BlackjackRules rules;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        rules = DefaultRulesSingleton.getDefaultRules();
+        rules = MockBlackjackRules.getDefaultRules();
     }
 
     @Test

@@ -5,7 +5,7 @@ import casino.playingCard.BlackjackCard;
 import casino.playingCard.enumerations.CardRank;
 import casino.playingCard.enumerations.CardSuit;
 
-public class BlackjackHandSoft {
+public class MockBlackjackHandSoft {
     private static BlackjackHand handAce2;
     private static BlackjackHand handAce3;
     private static BlackjackHand handAce4;
