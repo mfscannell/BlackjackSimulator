@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import casino.blackjack.BlackjackRules;
 import casino.blackjack.BlackjackTable;
+import casino.blackjack.enumerations.Strategy;
 import casino.gambler.BlackjackDealer;
 import casino.gambler.BlackjackPlayer;
 import casino.blackjack.exceptions.TableSeatNumberInvalidException;
@@ -237,7 +238,7 @@ public class Main {
             for (int j = 0; j < numStrategies; j++) {
                 heading = configFileReader.next();
                 int strategy = Integer.parseInt(heading);
-                player.addStrategyLayer(strategy);
+                player.addStrategyLayer(Strategy.values()[strategy]);
             }
             
             try {

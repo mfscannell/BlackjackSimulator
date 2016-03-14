@@ -17,24 +17,14 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     private int numDecks;
     public static int KISS_COUNT = 20;
     
+    /**
+     * Constructor.  The BasicStrategy.initialize method must be called after using this constructor to 
+     * initialize the class.
+     * @param blackjackStrategy  The blackjack strategy that will be referred to if this strategy cannot result in a 
+     * recommended action.
+     */
     public KISSIStrategy(BlackjackStrategy blackjackStrategy) {
         this.blackjackStrategy = blackjackStrategy;
-    }
-
-    /**
-     * Constructor
-     * @param rules  The specific rules at the table.
-     * @param numDecks  The number of decks used in the shoe.
-     * @throws InvalidNumDecksException  The number of decks specified must be between
-     * 1 and 8.
-     */
-    public KISSIStrategy(BlackjackStrategy blackjackStrategy, BlackjackRules rules, int numDecks) {
-        this.blackjackStrategy = blackjackStrategy;
-        this.rules = rules;
-        this.numDecks = numDecks;
-        
-        this.initialCount = INITIAL_COUNTS[numDecks];
-        this.count = initialCount;
     }
     
     @Override
@@ -137,6 +127,9 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     public void initialize(BlackjackRules rules, int numDecks) {
         this.rules = rules;
         this.numDecks = numDecks;
+        this.initialCount = INITIAL_COUNTS[numDecks];
+        this.count = initialCount;
+        
         this.blackjackStrategy.initialize(rules, numDecks);
     }
     
@@ -157,5 +150,9 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         }
         
         return walk;
+    }
+    
+    public String toString() {
+    	return "KISSIStrategy " + this.blackjackStrategy.toString();
     }
 }

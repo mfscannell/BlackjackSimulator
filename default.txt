@@ -27,11 +27,11 @@ false
 0
 #playerStrategy
 3
-101
-201
-202
+0
+1
+2
 #tableSeat
 1
 #playerStrategy
 1
-101
+0

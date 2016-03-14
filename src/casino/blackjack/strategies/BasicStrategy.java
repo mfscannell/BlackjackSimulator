@@ -18,19 +18,12 @@ public class BasicStrategy extends BlackjackStrategy {
     private BlackjackMove[][] softChart;
     private BlackjackRules rules;
     
+    /**
+     * Constructor.  The BasicStrategy.initialize method must be called after using this constructor to 
+     * initialize the class.
+     */
     public BasicStrategy() {
         
-    }
-    
-    /**
-     * Constructor
-     * @param rules  The rules at the table.
-     * @param numDecks  The number of decks used in the shoe.
-     * @throws InvalidNumDecksException  The number of decks specified must be between
-     * 1 and 8.
-     */
-    public BasicStrategy(final BlackjackRules rules, int numDecks) {
-        initialize(rules, numDecks);
     }
     
     @Override
@@ -84,6 +77,10 @@ public class BasicStrategy extends BlackjackStrategy {
     @Override
     public void resetCount() {
         //do nothing
+    }
+    
+    public String toString() {
+    	return "BasicStrategy";
     }
     
     /**
