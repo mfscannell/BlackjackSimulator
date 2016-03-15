@@ -315,11 +315,16 @@ public class BlackjackHand {
     }
     
     /**
-     * Checks if the hand was created from a previously split hand.
-     * @return  True if the hand was not the original hand dealt to the player.
+     * Converts the hand to a string.
      */
-    public boolean wasFromSplit() {
-        return this.fromSplit;
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        for (int i = 0; i < this.cards.size(); i++) {
+            stringBuilder.append(this.cards.get(i).toString());
+        }
+        
+        return stringBuilder.toString();
     }
     
     /**
@@ -331,16 +336,11 @@ public class BlackjackHand {
     }
     
     /**
-     * Converts the hand to a string.
+     * Checks if the hand was created from a previously split hand.
+     * @return  True if the hand was not the original hand dealt to the player.
      */
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        
-        for (int i = 0; i < this.cards.size(); i++) {
-            stringBuilder.append(this.cards.get(i).toString());
-        }
-        
-        return stringBuilder.toString();
+    public boolean wasFromSplit() {
+        return this.fromSplit;
     }
     
     /**

@@ -82,10 +82,16 @@ public class BlackjackPlayer extends Gambler {
         }
     }
     
+    /**
+     * Reset the player's strategy card count.
+     */
     public void resetCount() {
         this.blackjackStrategy.resetCount();
     }
     
+    /**
+     * Set the bet amount according to the player's strategy.
+     */
     public void setBetAmount() {
         super.setBetAmount(this.blackjackStrategy.getBetSize());
     }
