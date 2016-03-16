@@ -1,4 +1,4 @@
-package mockData.casino.blackjack;
+package mockData.com.scannell.mark.casino.blackjack;
 
 import com.scannell.mark.casino.blackjack.BlackjackHand;
 import com.scannell.mark.casino.playingCard.BlackjackCard;
