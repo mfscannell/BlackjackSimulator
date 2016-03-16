@@ -5,11 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import casino.blackjack.BlackjackHand;
-import casino.playingCard.BlackjackCard;
-import casino.playingCard.PlayingCard;
-import casino.playingCard.enumerations.CardRank;
-import casino.playingCard.enumerations.CardSuit;
+import com.scannell.mark.casino.blackjack.BlackjackHand;
+import com.scannell.mark.casino.playingCard.BlackjackCard;
+import com.scannell.mark.casino.playingCard.PlayingCard;
+import com.scannell.mark.casino.playingCard.enumerations.CardRank;
+import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 public class TestBlackjackHand {
     

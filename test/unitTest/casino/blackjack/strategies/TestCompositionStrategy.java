@@ -5,15 +5,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import casino.blackjack.BlackjackHand;
-import casino.blackjack.BlackjackRules;
-import casino.playingCard.BlackjackCard;
-import casino.blackjack.strategies.BasicStrategy;
-import casino.blackjack.strategies.BlackjackStrategy;
-import casino.blackjack.strategies.CompositionStrategy;
-import casino.blackjack.enumerations.BlackjackMove;
-import casino.playingCard.enumerations.CardRank;
-import casino.playingCard.enumerations.CardSuit;
+import com.scannell.mark.casino.blackjack.BlackjackHand;
+import com.scannell.mark.casino.blackjack.BlackjackRules;
+import com.scannell.mark.casino.playingCard.BlackjackCard;
+import com.scannell.mark.casino.blackjack.strategies.BasicStrategy;
+import com.scannell.mark.casino.blackjack.strategies.BlackjackStrategy;
+import com.scannell.mark.casino.blackjack.strategies.CompositionStrategy;
+import com.scannell.mark.casino.blackjack.enumerations.BlackjackMove;
+import com.scannell.mark.casino.playingCard.enumerations.CardRank;
+import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 import mockData.casino.blackjack.MockBlackjackRules;
 
 public class TestCompositionStrategy {

@@ -1,6 +1,6 @@
 package mockData.casino.blackjack;
 
-import casino.blackjack.BlackjackRules;
+import com.scannell.mark.casino.blackjack.BlackjackRules;
 
 public class MockBlackjackRules {
     private static BlackjackRules rules;

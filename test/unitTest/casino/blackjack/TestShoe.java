@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import casino.blackjack.Shoe;
-import casino.blackjack.exceptions.InvalidShoeException;
-import casino.playingCard.PlayingCard;
+import com.scannell.mark.casino.blackjack.Shoe;
+import com.scannell.mark.casino.blackjack.exceptions.InvalidShoeException;
+import com.scannell.mark.casino.playingCard.PlayingCard;
 
 public class TestShoe {
     @Test

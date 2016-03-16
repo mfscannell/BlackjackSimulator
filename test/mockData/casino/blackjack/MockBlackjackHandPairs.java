@@ -1,9 +1,9 @@
 package mockData.casino.blackjack;
 
-import casino.blackjack.BlackjackHand;
-import casino.playingCard.BlackjackCard;
-import casino.playingCard.enumerations.CardRank;
-import casino.playingCard.enumerations.CardSuit;
+import com.scannell.mark.casino.blackjack.BlackjackHand;
+import com.scannell.mark.casino.playingCard.BlackjackCard;
+import com.scannell.mark.casino.playingCard.enumerations.CardRank;
+import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 public class MockBlackjackHandPairs {
     private static BlackjackHand handPair2;
