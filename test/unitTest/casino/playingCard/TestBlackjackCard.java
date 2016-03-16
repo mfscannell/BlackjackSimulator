@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import casino.playingCard.BlackjackCard;
-import casino.blackjack.BlackjackRules;
-import casino.playingCard.enumerations.CardRank;
-import casino.playingCard.enumerations.CardSuit;
+import com.scannell.mark.casino.playingCard.BlackjackCard;
+import com.scannell.mark.casino.blackjack.BlackjackRules;
+import com.scannell.mark.casino.playingCard.enumerations.CardRank;
+import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 
 public class TestBlackjackCard {

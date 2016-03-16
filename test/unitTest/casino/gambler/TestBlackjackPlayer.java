@@ -8,12 +8,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import casino.blackjack.BlackjackHand;
-import casino.blackjack.enumerations.Strategy;
-import casino.gambler.BlackjackPlayer;
-import casino.playingCard.BlackjackCard;
-import casino.playingCard.enumerations.CardRank;
-import casino.playingCard.enumerations.CardSuit;
+import com.scannell.mark.casino.blackjack.BlackjackHand;
+import com.scannell.mark.casino.blackjack.enumerations.Strategy;
+import com.scannell.mark.casino.gambler.BlackjackPlayer;
+import com.scannell.mark.casino.playingCard.BlackjackCard;
+import com.scannell.mark.casino.playingCard.enumerations.CardRank;
+import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 public class TestBlackjackPlayer {
 

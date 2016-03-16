@@ -8,16 +8,16 @@ import mockData.casino.blackjack.MockBlackjackRules;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import casino.blackjack.BlackjackHand;
-import casino.blackjack.BlackjackRules;
-import casino.gambler.BlackjackPlayer;
-import casino.playingCard.BlackjackCard;
-import casino.blackjack.strategies.BasicStrategy;
-import casino.blackjack.strategies.BlackjackStrategy;
-import casino.blackjack.enumerations.BlackjackMove;
-import casino.blackjack.enumerations.Strategy;
-import casino.playingCard.enumerations.CardRank;
-import casino.playingCard.enumerations.CardSuit;
+import com.scannell.mark.casino.blackjack.BlackjackHand;
+import com.scannell.mark.casino.blackjack.BlackjackRules;
+import com.scannell.mark.casino.gambler.BlackjackPlayer;
+import com.scannell.mark.casino.playingCard.BlackjackCard;
+import com.scannell.mark.casino.blackjack.strategies.BasicStrategy;
+import com.scannell.mark.casino.blackjack.strategies.BlackjackStrategy;
+import com.scannell.mark.casino.blackjack.enumerations.BlackjackMove;
+import com.scannell.mark.casino.blackjack.enumerations.Strategy;
+import com.scannell.mark.casino.playingCard.enumerations.CardRank;
+import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 public class SoftAce3 {
     private static BlackjackRules rules;
