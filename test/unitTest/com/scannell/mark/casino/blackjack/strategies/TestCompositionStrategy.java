@@ -1,4 +1,4 @@
-package unitTest.casino.blackjack.strategies;
+package unitTest.com.scannell.mark.casino.blackjack.strategies;
 
 import static org.junit.Assert.assertTrue;
 
@@ -14,7 +14,7 @@ import com.scannell.mark.casino.blackjack.strategies.CompositionStrategy;
 import com.scannell.mark.casino.blackjack.enumerations.BlackjackMove;
 import com.scannell.mark.casino.playingCard.enumerations.CardRank;
 import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
-import mockData.casino.blackjack.MockBlackjackRules;
+import mockData.com.scannell.mark.casino.blackjack.MockBlackjackRules;
 
 public class TestCompositionStrategy {
     private static BlackjackRules rules;

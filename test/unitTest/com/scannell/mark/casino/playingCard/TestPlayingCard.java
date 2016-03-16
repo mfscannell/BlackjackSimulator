@@ -1,4 +1,4 @@
-package unitTest.casino.playingCard;
+package unitTest.com.scannell.mark.casino.playingCard;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

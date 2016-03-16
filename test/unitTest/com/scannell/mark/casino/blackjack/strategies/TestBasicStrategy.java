@@ -1,4 +1,4 @@
-package unitTest.casino.blackjack.strategies;
+package unitTest.com.scannell.mark.casino.blackjack.strategies;
 
 import static org.junit.Assert.assertTrue;
 

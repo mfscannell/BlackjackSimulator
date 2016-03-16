@@ -1,4 +1,4 @@
-package unitTest.casino.gambler;
+package unitTest.com.scannell.mark.casino.gambler;
 
 import static org.junit.Assert.*;
 

@@ -1,9 +1,9 @@
-package unitTest.casino.blackjack.strategies.basicStrategy.totalChart;
+package unitTest.com.scannell.mark.casino.blackjack.strategies.basicStrategy.totalChart;
 
 import static org.junit.Assert.assertTrue;
 
-import mockData.casino.blackjack.MockBlackjackHandHard;
-import mockData.casino.blackjack.MockBlackjackRules;
+import mockData.com.scannell.mark.casino.blackjack.MockBlackjackHandHard;
+import mockData.com.scannell.mark.casino.blackjack.MockBlackjackRules;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
