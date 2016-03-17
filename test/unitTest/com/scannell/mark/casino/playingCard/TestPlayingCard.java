@@ -13,25 +13,25 @@ import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 public class TestPlayingCard {
 
     @Test
-    public void testIsAce() {
+    public void testIsAce_ace() {
         PlayingCard card = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
         assertTrue(card.isAce());
     }
     
     @Test
-    public void testIsNotAce() {
+    public void testIsAce_two() {
         PlayingCard card = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
         assertFalse(card.isAce());
     }
     
     @Test
-    public void testIsFaceCard() {
+    public void testIsFaceCard_jack() {
         PlayingCard card = new BlackjackCard(CardRank.JACK, CardSuit.CLUBS);
         assertTrue(card.isFaceCard());
     }
     
     @Test
-    public void testIsNotFaceCard() {
+    public void testIsFaceCard_five() {
         PlayingCard card = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
         assertTrue(!card.isFaceCard());
     }

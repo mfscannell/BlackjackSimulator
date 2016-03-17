@@ -14,7 +14,7 @@ import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 public class TestBasicStrategy {
     @Test
-    public void testRulesCantResplitAces() {
+    public void getAction_cantResplitAces_stand() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -51,7 +51,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testRulesCanResplitAces() {
+    public void getAction_canResplitAces_split() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -88,7 +88,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMaxHandsReached() {
+    public void getAction_resplitMaxHandsReached_stand() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -123,7 +123,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMaxHandsNotReached() {
+    public void getAction_resplitMaxHandsNotReached_split() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -158,12 +158,12 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testSplitAceMustStand() {
+    public void getAction_splitAcesMustStand_stand() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
         rulesBuilder.setDoubleAfterSplitAllowed(false);
-        rulesBuilder.setMaxHandsAfterSplits(2);
+        rulesBuilder.setMaxHandsAfterSplits(4);
         rulesBuilder.setCanResplitAces(false);
         BlackjackRules rules = rulesBuilder.build();
         
@@ -188,12 +188,14 @@ public class TestBasicStrategy {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
         
         BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 2);
+        BlackjackMove move2 = basicStrategy.getAction(dealerUpCard, secondHand, 2);
         
         assertTrue(move == BlackjackMove.STAND);
+        assertTrue(move2 == BlackjackMove.SPLIT);
     }
     
     @Test
-    public void testPairMaxResplitReached() {
+    public void getAction_resplitMaxHandsReachedNonAce_stand() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -227,7 +229,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testCantDAS() {
+    public void getAction_cantDoubleAfterSplit_hit() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -261,7 +263,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testCanDAS() {
+    public void getAction_canDoubleAfterSplit_double() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -294,40 +296,10 @@ public class TestBasicStrategy {
         assertTrue(move == BlackjackMove.DOUBLE);
     }
     
-    @Test
-    public void testGetBetSize() {
-    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(false);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(true);
-        BlackjackRules rules = rulesBuilder.build();
-        
-        BasicStrategy basicStrategy = new BasicStrategy();
-        basicStrategy.initialize(rules, 2);
-    	
-        assertTrue(basicStrategy.getBetSize() == 1);
-    }
+    
     
     @Test
-    public void testGetCount() {
-    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(false);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(true);
-        BlackjackRules rules = rulesBuilder.build();
-        
-        BasicStrategy basicStrategy = new BasicStrategy();
-        basicStrategy.initialize(rules, 2);
-    	
-        assertTrue(basicStrategy.getCount() == 0);
-    }
-    
-    @Test
-    public void testMultiCantDouble() {
+    public void getAction_multiCardHandCantDouble_hit() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -356,7 +328,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMultiSoft17() {
+    public void getAction_multiCardSoft17_hit() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -385,7 +357,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMultiSoft18vs8() {
+    public void getAction_multiSoft18vs8_stand() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -414,7 +386,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMultiSoft18vs9() {
+    public void getAction_multiSoft18vs9_hit() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -443,7 +415,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMultiSoft18vs10() {
+    public void getAction_multiSoft18vs10_hit() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -472,7 +444,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMultiSoft18vsAce() {
+    public void getAction_multiSoft18vsAce_hit() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -501,7 +473,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMultiSoft19vsEight() {
+    public void getAction_multiSoft19vs8_stand() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -530,7 +502,7 @@ public class TestBasicStrategy {
     }
     
     @Test
-    public void testMultiSoft19vsAce() {
+    public void getAction_multiSoft19vsA_stand() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(false);
@@ -557,5 +529,36 @@ public class TestBasicStrategy {
         
         assertTrue(move == BlackjackMove.STAND);
     }
-
+    
+    @Test
+    public void getBetSize_basicStrategy_1() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+    	
+        assertTrue(basicStrategy.getBetSize() == 1);
+    }
+    
+    @Test
+    public void getCount_basicStrategy_0() {
+    	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(false);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(true);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+    	
+        assertTrue(basicStrategy.getCount() == 0);
+    }
 }

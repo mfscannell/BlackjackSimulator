@@ -34,7 +34,7 @@ public class TestBlackjackPlayer {
     }
     
     @Test
-    public void testResetBaseStrategy() {
+    public void testResetBaseStrategy_basicStrategy() {
         BlackjackPlayer player = new BlackjackPlayer(0);
         player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
         
@@ -44,7 +44,7 @@ public class TestBlackjackPlayer {
     }
     
     @Test
-    public void testAddStrategyLayerCompositionKISS() {
+    public void testAddStrategyLayer_compositionKISS() {
         BlackjackPlayer player = new BlackjackPlayer(0);
         player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
         player.addStrategyLayer(Strategy.COMPOSITION_STRATEGY);
@@ -56,7 +56,7 @@ public class TestBlackjackPlayer {
     }
     
     @Test
-    public void testAddStrategyLayerBasicResets() {
+    public void testAddStrategyLayer_basicResets() {
         BlackjackPlayer player = new BlackjackPlayer(0);
         player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
         player.addStrategyLayer(Strategy.COMPOSITION_STRATEGY);
