@@ -1,5 +1,6 @@
 package unitTest.com.scannell.mark.casino.blackjack.strategies;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
@@ -25,7 +26,7 @@ public class TestCompositionStrategy {
     }
 
     @Test
-    public void test102vs4() {
+    public void getAction_102vs4_hit() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
@@ -44,7 +45,7 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test210vs4() {
+    public void getAction_210vs4_hit() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
@@ -63,7 +64,7 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test102vs6() {
+    public void getAction_102vs6_stand() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
@@ -82,7 +83,7 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test210vs6() {
+    public void getAction_210vs6_stand() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.TEN, CardSuit.SPADES);
@@ -101,7 +102,7 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test84vs4() {
+    public void getAction_84vs4_stand() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
@@ -120,7 +121,7 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test16vs10with4() {
+    public void getAction_hard16with4vs10_stand() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
@@ -141,7 +142,7 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test16vs10with5() {
+    public void getAction_hard16with5vs10_stand() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -162,7 +163,47 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test16vs10without45() {
+    public void getAction_soft16with4vs10_stand() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.JACK, CardSuit.CLUBS);
+        
+        int numDecks = 2;
+        
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
+    }
+    
+    @Test
+    public void getAction_soft16with5vs10_stand() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.JACK, CardSuit.CLUBS);
+        
+        int numDecks = 2;
+        
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
+        
+        assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
+    }
+    
+    @Test
+    public void getAction_16vs10without4or5_hit() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -183,7 +224,7 @@ public class TestCompositionStrategy {
     }
     
     @Test
-    public void test16vsnon10with5() {
+    public void getAction_16vsnon10with5_hit() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
@@ -201,5 +242,38 @@ public class TestCompositionStrategy {
         strategy.initialize(rules, numDecks);
             
         assertTrue(strategy.getAction(dealerUpCard, hand, numDecks) == BlackjackMove.HIT);
+    }
+    
+    @Test
+    public void getBetSize_1() {
+    	int numDecks = 6;
+    	
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
+            
+        assertTrue(strategy.getBetSize() == 1);
+    }
+    
+    @Test
+    public void getCount_0() {
+    	int numDecks = 6;
+    	
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
+            
+        assertTrue(strategy.getCount() == 0);
+    }
+    
+    @Test
+    public void getInsuranceAction_false() {
+    	int numDecks = 6;
+    	
+        BlackjackStrategy strategy = new BasicStrategy();
+        strategy = new CompositionStrategy(strategy);
+        strategy.initialize(rules, numDecks);
+            
+        assertFalse(strategy.getInsuranceAction());
     }
 }
