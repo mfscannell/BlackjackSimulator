@@ -37,7 +37,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCountRed2() {
+    public void adjustCount_red2_noChange() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -48,7 +48,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCountBlack2() {
+    public void adjustCount_black2_decrement1() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -59,7 +59,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCount4() {
+    public void adjustCount_4_decrement1() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -70,7 +70,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCount5() {
+    public void adjustCount_5_decrement1() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -81,7 +81,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCount6() {
+    public void adjustCount_6_decrement1() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -92,7 +92,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCountJack() {
+    public void adjustCount_J_increment1() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -103,7 +103,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCountQueen() {
+    public void adjustCount_Q_increment1() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -114,7 +114,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testAdjustCountKing() {
+    public void adjustCount_K_increment1() {
         beforeEach(1);
         
         int initialCount = strategy.getCount();
@@ -125,7 +125,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testDoesNotTakeInsurance2Deck() {
+    public void getInsuranceAction_2deckincrement4_dontTakeInsurance() {
         int numDecks = 2;
         beforeEach(numDecks);
         
@@ -138,7 +138,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testDoesTakeInsurance2Deck() {
+    public void getInsuranceAction_2deckincrement5_takeInsurance() {
         int numDecks = 2;
         beforeEach(numDecks);
         
@@ -152,7 +152,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testDoesNotTakeInsurance4Deck() {
+    public void getInsuranceAction_4deckincrement10_dontTakeInsuranc() {
         int numDecks = 4;
         beforeEach(numDecks);
         
@@ -171,7 +171,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testDoesTakeInsurance4Deck() {
+    public void getInsuranceAction_4deckincrement11_takeInsurance() {
         int numDecks = 4;
         beforeEach(numDecks);
         
@@ -191,7 +191,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs1With2Decks() {
+    public void getBetSize_2deckIncr2_1() {
         int numDecks = 2;
         beforeEach(numDecks);
         
@@ -202,7 +202,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs2With2Decks() {
+    public void getBetSize_2deckIncr3_2() {
         int numDecks = 2;
         beforeEach(numDecks);
         
@@ -214,7 +214,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs4With2Decks() {
+    public void getBetSize_2deckIncr4_4() {
         int numDecks = 2;
         beforeEach(numDecks);
         
@@ -227,7 +227,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs6With2Decks() {
+    public void getBetSize_2deckIncr5_4() {
         int numDecks = 2;
         beforeEach(numDecks);
         
@@ -241,7 +241,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs1With6Decks() {
+    public void getBetSize_6deckIncr9_1() {
         int numDecks = 6;
         beforeEach(numDecks);
         
@@ -259,7 +259,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs2With6Decks() {
+    public void getBetSize_6deckIncr10_2() {
         int numDecks = 6;
         beforeEach(numDecks);
         
@@ -278,7 +278,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs4With6Decks() {
+    public void getBetSize_6deckIncr11_4() {
         int numDecks = 6;
         beforeEach(numDecks);
         
@@ -298,7 +298,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetBetSizeIs6With6Decks() {
+    public void getBetSize_6deckIncr12_6() {
         int numDecks = 6;
         beforeEach(numDecks);
         
@@ -319,7 +319,7 @@ public class TestKISSIStrategy {
     }
 
     @Test
-    public void testMultiCantDouble() {
+    public void getAction_A2vs5_double() {
         BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
         rulesBuilder.setBlackjackPayoutMultiple(1.5);
         rulesBuilder.setDealerHitsSoft17(true);
@@ -347,7 +347,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetAction9vs2() {
+    public void getAction_2deck9vs2incrCount3_double() {
         beforeEach(2);
         PlayingCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
         
@@ -371,7 +371,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetAction11vsA() {
+    public void getAction_2deck11vsAincrCount3_double() {
         beforeEach(2);
         PlayingCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         
@@ -394,7 +394,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetAction16vs10() {
+    public void getAction_2Deck16vsTincrCount3_stand() {
         beforeEach(2);
         PlayingCard dealerUpCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
         
@@ -417,7 +417,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetActionA7vs2() {
+    public void getAction_2deckA7vs2IncrCount3_double() {
         beforeEach(2);
         PlayingCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.SPADES);
         
@@ -440,7 +440,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetActionA8vs5() {
+    public void getAction_2DeckA8vs5Incr3_double() {
         beforeEach(2);
         PlayingCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
         
@@ -463,7 +463,7 @@ public class TestKISSIStrategy {
     }
     
     @Test
-    public void testGetActionA8vs6() {
+    public void getAction_2DeckA8vs6Incr3_double() {
         beforeEach(2);
         PlayingCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
         
