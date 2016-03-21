@@ -191,7 +191,7 @@ public class TestBasicStrategy {
         BlackjackMove move2 = basicStrategy.getAction(dealerUpCard, secondHand, 2);
         
         assertTrue(move == BlackjackMove.STAND);
-        assertTrue(move2 == BlackjackMove.SPLIT);
+        assertTrue(move2 == BlackjackMove.STAND);
     }
     
     @Test

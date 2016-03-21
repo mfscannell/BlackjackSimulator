@@ -46,18 +46,6 @@ public class BlackjackPlayer extends Gambler {
         }
     }
     
-    /**
-     * Add an additional layer of blackjack strategy to the player's strategy.
-     * @param strategyDecoratorDescription
-     */
-    public void enhanceStrategy(Strategy strategyDecoratorDescription) {
-    	if (strategyDecoratorDescription == Strategy.COMPOSITION_STRATEGY) {
-    		this.blackjackStrategy = new CompositionStrategy(this.blackjackStrategy);
-    	} else if (strategyDecoratorDescription == Strategy.KISS_I_STRATEGY) {
-    		this.blackjackStrategy = new KISSIStrategy(this.blackjackStrategy);
-    	}
-    }
-    
     public BlackjackMove getAction(PlayingCard dealerUpCard, BlackjackHand playerHand, int numHands) {
         return this.blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
     }
@@ -74,7 +62,7 @@ public class BlackjackPlayer extends Gambler {
     
     /**
      * Remove all layers of the player's strategy and replace it with a base strategy.
-     * @param basicStrategyDescription  The base strategy to rese the player's strategy to.
+     * @param basicStrategyDescription  The base strategy to reset the player's strategy to.
      */
     public void resetBaseStrategy(Strategy basicStrategyDescription) {
         if (basicStrategyDescription == Strategy.BASIC_STRATEGY) {
@@ -148,5 +136,17 @@ public class BlackjackPlayer extends Gambler {
             PlayingCard card = (PlayingCard)arg1;
             this.blackjackStrategy.adjustCount(card);
         }
+    }
+    
+    /**
+     * Add an additional layer of blackjack strategy to the player's strategy.
+     * @param strategyDecoratorDescription
+     */
+    private void enhanceStrategy(Strategy strategyDecoratorDescription) {
+    	if (strategyDecoratorDescription == Strategy.COMPOSITION_STRATEGY) {
+    		this.blackjackStrategy = new CompositionStrategy(this.blackjackStrategy);
+    	} else if (strategyDecoratorDescription == Strategy.KISS_I_STRATEGY) {
+    		this.blackjackStrategy = new KISSIStrategy(this.blackjackStrategy);
+    	}
     }
 }
