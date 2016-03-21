@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.scannell.mark.casino.blackjack.BlackjackHand;
 import com.scannell.mark.casino.blackjack.enumerations.Strategy;
 import com.scannell.mark.casino.gambler.BlackjackPlayer;
+import com.scannell.mark.casino.gambler.Gambler;
 import com.scannell.mark.casino.playingCard.BlackjackCard;
 import com.scannell.mark.casino.playingCard.enumerations.CardRank;
 import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
@@ -31,6 +32,27 @@ public class TestBlackjackPlayer {
 
     @After
     public void tearDown() throws Exception {
+    }
+    
+    @Test
+    public void getBetAmount_Initial() {
+    	Gambler gambler = new BlackjackPlayer(50);
+    	BlackjackPlayer blackjackPlayer = new BlackjackPlayer(10);
+    	
+    	assertTrue(gambler.getCashTotal() == 50);
+    	assertTrue(blackjackPlayer.getCashTotal() == 10);
+    }
+    
+    @Test
+    public void adjustCashTotal_2() {
+    	Gambler gambler = new BlackjackPlayer(50);
+    	BlackjackPlayer blackjackPlayer = new BlackjackPlayer(10);
+    	
+    	gambler.adjustCashTotal(2);
+    	blackjackPlayer.adjustCashTotal(-3);
+    	
+    	assertTrue(gambler.getCashTotal() == 52);
+    	assertTrue(blackjackPlayer.getCashTotal() == 7);
     }
     
     @Test

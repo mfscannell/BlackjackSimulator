@@ -35,7 +35,8 @@ public class BlackjackPlayer extends Gambler {
      * Add a new layer of blackjack strategy on top of the current layer.  If the strategy layer is a base layer, then the
      * player's strategy will reset to the base layer and there will be no other layers of strategy.  The new blackjack 
      * strategy layer will be referred to when getting a strategy.  If that layer cannot provide a move, the layer will 
-     * obtain a move from the next lower layer.
+     * obtain a move from the next lower layer.  After the final layer of strategy has been added, the method
+     * initializeStrategy will have to be called to initialize the player's strategy.
      * @param strategyDescription The description for the strategy layer.
      */
     public void addStrategyLayer(Strategy strategyDescription) {
@@ -71,7 +72,8 @@ public class BlackjackPlayer extends Gambler {
     }
     
     /**
-     * Reset the player's strategy card count.
+     * Reset the player's strategy card count.  After resetting the player's strategy, the method initializeStrategy
+     * will have to be called to initialize the strategy with the rules and the number of decks in the shoe.
      */
     public void resetCount() {
         this.blackjackStrategy.resetCount();
