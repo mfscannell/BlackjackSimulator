@@ -47,6 +47,13 @@ public class BlackjackPlayer extends Gambler {
         }
     }
     
+    /**
+     * Get the move (Hit, stand, split, double down) the player will make.
+     * @param dealerUpCard  The dealer's exposed card.
+     * @param playerHand  The hand the player makes a move on.
+     * @param numHands  The number of hands the player has after splits and re-splits.
+     * @return  The move the player makes on the hand.
+     */
     public BlackjackMove getAction(PlayingCard dealerUpCard, BlackjackHand playerHand, int numHands) {
         return this.blackjackStrategy.getAction(dealerUpCard, playerHand, numHands);
     }
@@ -123,6 +130,10 @@ public class BlackjackPlayer extends Gambler {
         return stringBuilder.toString();
     }
     
+    /**
+     * Gets the player's strategy in string form.
+     * @return
+     */
     public String toStringStrategy() {
     	return this.blackjackStrategy.toString();
     }
