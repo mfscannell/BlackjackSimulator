@@ -43,7 +43,7 @@ public class Pair10 {
     }
 
     @Test
-    public void testPair10vs2() {
+    public void getAction_pair10vs2_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -53,7 +53,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs3() {
+    public void getAction_pair10vs3_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -63,7 +63,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs4() {
+    public void getAction_pair10vs4_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -73,7 +73,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs5() {
+    public void getAction_pair10vs5_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -83,7 +83,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs6() {
+    public void getAction_pair10vs6_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -93,7 +93,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs7() {
+    public void getAction_pair10vs7_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -103,7 +103,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs8() {
+    public void getAction_pair10vs8_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -113,7 +113,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs9() {
+    public void getAction_pair10vs9_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -123,7 +123,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vs10() {
+    public void getAction_pair10vsT_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);
@@ -133,7 +133,7 @@ public class Pair10 {
     }
     
     @Test
-    public void testPair10vsA() {
+    public void getAction_pair10vsA_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
         strategy.initialize(rules, numDecks);

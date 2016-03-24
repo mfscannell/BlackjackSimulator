@@ -182,13 +182,7 @@ public class Pair6 {
     public void testPair6vs2DAS() {
         int numDecks = 4;
         
-        BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(false);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(false);
-        BlackjackRules rules = rulesBuilder.build();
+        BlackjackRules rules = MockBlackjackRules.getDASRules();
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();

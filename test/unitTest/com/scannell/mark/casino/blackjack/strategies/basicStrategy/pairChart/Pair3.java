@@ -182,13 +182,7 @@ public class Pair3 {
     public void testPair3vs2DAS() {
         int numDecks = 4;
         
-        BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(false);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(false);
-        BlackjackRules rules = rulesBuilder.build();
+        BlackjackRules rules = MockBlackjackRules.getDASRules();
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
@@ -204,13 +198,7 @@ public class Pair3 {
     public void testPair3vs3DAS() {
         int numDecks = 4;
         
-        BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(false);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(false);
-        BlackjackRules rules = rulesBuilder.build();
+        BlackjackRules rules = MockBlackjackRules.getDASRules();
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();

@@ -39,7 +39,7 @@ public class Pair2 {
     }
 
     @Test
-    public void testPair2vs2() {
+    public void getAction_pair2vs2_hit() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
@@ -53,7 +53,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs3() {
+    public void getAction_pair2vs3_hit() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
@@ -67,7 +67,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs4() {
+    public void getAction_pair2vs4_split() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
@@ -81,7 +81,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs5() {
+    public void getAction_pair2vs5_split() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FIVE, CardSuit.CLUBS);
@@ -95,7 +95,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs6() {
+    public void getAction_pair2vs6_split() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
@@ -109,7 +109,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs7() {
+    public void getAction_pair2vs7_split() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.SEVEN, CardSuit.CLUBS);
@@ -123,7 +123,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs8() {
+    public void getAction_pair2vs8_hit() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.EIGHT, CardSuit.CLUBS);
@@ -137,7 +137,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs9() {
+    public void getAction_pair2vs9_hit() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.NINE, CardSuit.CLUBS);
@@ -151,7 +151,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs10() {
+    public void getAction_pair2vsT_hit() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
@@ -165,7 +165,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vsA() {
+    public void getAction_pair2vsA_hit() {
         int numDecks = 4;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
@@ -179,16 +179,10 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs2DAS() {
+    public void getAction_pair2vs2DAS_split() {
         int numDecks = 4;
         
-        BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(false);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(false);
-        BlackjackRules rules = rulesBuilder.build();
+        BlackjackRules rules = MockBlackjackRules.getDASRules();
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
@@ -201,16 +195,10 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs3DAS() {
+    public void getAction_pair2vs3DAS_split() {
         int numDecks = 4;
         
-        BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(false);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(false);
-        BlackjackRules rules = rulesBuilder.build();
+        BlackjackRules rules = MockBlackjackRules.getDASRules();
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
@@ -223,7 +211,7 @@ public class Pair2 {
     }
     
     @Test
-    public void testPair2vs2SingleDeck() {
+    public void getAction_pair2vs2singleDeck_split() {
         int numDecks = 1;
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.THREE, CardSuit.CLUBS);

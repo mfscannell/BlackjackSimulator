@@ -176,13 +176,7 @@ public class Total11 {
     public void testTotal11vsADealerHitSoft17() {
         int numDecks = 4;
         
-        BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDealerHitsSoft17(true);
-        rulesBuilder.setDoubleAfterSplitAllowed(false);
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setCanResplitAces(false);
-        BlackjackRules rules = rulesBuilder.build();
+        BlackjackRules rules = MockBlackjackRules.getDealerHitSoft17Rules();
         
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
         BasicStrategy strategy = new BasicStrategy();
