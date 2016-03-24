@@ -9,12 +9,18 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.scannell.mark.casino.blackjack.BlackjackHand;
+import com.scannell.mark.casino.blackjack.BlackjackRules;
+import com.scannell.mark.casino.blackjack.enumerations.BlackjackMove;
 import com.scannell.mark.casino.blackjack.enumerations.Strategy;
+import com.scannell.mark.casino.blackjack.strategies.BasicStrategy;
 import com.scannell.mark.casino.gambler.BlackjackPlayer;
 import com.scannell.mark.casino.gambler.Gambler;
 import com.scannell.mark.casino.playingCard.BlackjackCard;
 import com.scannell.mark.casino.playingCard.enumerations.CardRank;
 import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
+
+import mockData.com.scannell.mark.casino.blackjack.MockBlackjackHandPairs;
+import mockData.com.scannell.mark.casino.blackjack.MockBlackjackRules;
 
 public class TestBlackjackPlayer {
 
@@ -32,6 +38,18 @@ public class TestBlackjackPlayer {
 
     @After
     public void tearDown() throws Exception {
+    }
+    
+    @Test
+    public void getAction_basicPair10vs2_stand() {
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
+        BlackjackHand hand = MockBlackjackHandPairs.getPair10();
+        BlackjackRules rules = MockBlackjackRules.getDefaultRules();
+        BlackjackPlayer player = new BlackjackPlayer(0);
+        player.addStrategyLayer(Strategy.BASIC_STRATEGY);
+        player.initializeStrategy(rules, 4);
+        
+        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.STAND);
     }
     
     @Test
