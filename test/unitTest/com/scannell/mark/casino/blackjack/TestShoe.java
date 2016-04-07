@@ -11,7 +11,7 @@ import com.scannell.mark.casino.playingCard.PlayingCard;
 
 public class TestShoe {
     @Test
-    public void testValidNumDecks() {
+    public void Shoe_numDecksValid_noException() {
         Shoe shoe;
         try {
             shoe = new Shoe(3, 50);
@@ -21,17 +21,17 @@ public class TestShoe {
     }
     
     @Test(expected=InvalidShoeException.class)
-    public void testInvalidNumDecksTooLow() throws InvalidShoeException {
+    public void Shoe_numDecksTooLow_InvalidShoeException() throws InvalidShoeException {
         Shoe shoe = new Shoe(0, 50);
     }
     
     @Test(expected=InvalidShoeException.class)
-    public void testInvalidNumDecksTooHigh() throws InvalidShoeException {
+    public void Shoe_numDecksTooHigh_InvalidNumDecks() throws InvalidShoeException {
         Shoe shoe = new Shoe(9, 50);
     }
     
     @Test
-    public void testValidPenetration() {
+    public void Shoe_validPenetration_noException() {
         Shoe shoe;
         try {
             shoe = new Shoe(6, 2);
@@ -41,17 +41,17 @@ public class TestShoe {
     }
     
     @Test(expected=InvalidShoeException.class)
-    public void testInvalidPenetrationTooLow() throws InvalidShoeException {
+    public void Shoe_penetrationTooLow_InvalidShoeException() throws InvalidShoeException {
         Shoe shoe = new Shoe(6, 0);
     }
     
     @Test(expected=InvalidShoeException.class)
-    public void testInvalidPenetrationTooHigh() throws InvalidShoeException {
+    public void Shoe_penetrationTooHigh_InvalidShoeException() throws InvalidShoeException {
         Shoe shoe = new Shoe(6, 100);
     }
     
     @Test
-    public void testGetNumCardsRemaining() {
+    public void getNumCardsRemaining_dealTenCards_42() {
         Shoe shoe;
         try {
             shoe = new Shoe(1, 66);
@@ -64,9 +64,25 @@ public class TestShoe {
             e.printStackTrace();
         }
     }
+    
+    @Test
+    public void wasCutCardMet_dealBound_false() {
+        Shoe shoe;
+        try {
+            shoe = new Shoe(6, 66);
+            
+            for (int i = 0; i < 205; i++) {
+                shoe.dealCard();
+            }
+            
+            assertFalse(shoe.wasCutCardMet());
+        } catch (InvalidShoeException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
-    public void testWasCutCardMetBound() {
+    public void wasCutCardMet_dealBound_true() {
         Shoe shoe;
         try {
             shoe = new Shoe(6, 66);
@@ -81,7 +97,7 @@ public class TestShoe {
     }
     
     @Test
-    public void testWasCutCardMet() {
+    public void wasCutCardMet_dealAlot_true() {
         Shoe shoe;
         try {
             shoe = new Shoe(6, 66);
@@ -95,24 +111,10 @@ public class TestShoe {
         }
     }
     
-    @Test
-    public void testWasNotCutCardMetBound() {
-        Shoe shoe;
-        try {
-            shoe = new Shoe(6, 66);
-            
-            for (int i = 0; i < 205; i++) {
-                shoe.dealCard();
-            }
-            
-            assertFalse(shoe.wasCutCardMet());
-        } catch (InvalidShoeException e) {
-            e.printStackTrace();
-        }
-    }
+    
     
     @Test
-    public void testWasNotCutCardMet() {
+    public void wasCutCardMet_dealFew_false() {
         Shoe shoe;
         try {
             shoe = new Shoe(6, 66);
@@ -128,7 +130,7 @@ public class TestShoe {
     }
     
     @Test
-    public void testIsNewShoe() {
+    public void isNewShoe_dealNoCards_true() {
         Shoe shoe;
         try {
             shoe = new Shoe(6, 66);
@@ -140,7 +142,7 @@ public class TestShoe {
     }
     
     @Test
-    public void testIsNotNewShoe() {
+    public void isNewShoe_dealCard_false() {
         Shoe shoe;
         try {
             shoe = new Shoe(6, 66);
@@ -154,7 +156,7 @@ public class TestShoe {
     }
     
     @Test
-    public void testShuffleOneDeck() {
+    public void shuffleShoe_oneDeck() {
         Shoe shoe;
         try {
             shoe = new Shoe(1, 66);
@@ -171,7 +173,7 @@ public class TestShoe {
     }
     
     @Test
-    public void testShuffleTwoDeck() {
+    public void shuffleShoe_twoDecks() {
         Shoe shoe;
         try {
             shoe = new Shoe(2, 66);
@@ -212,13 +214,4 @@ public class TestShoe {
             e.printStackTrace();
         }
     }
-    
-    @Test(expected = InvalidShoeException.class)
-    public void testNumDecksTooLarge() throws InvalidShoeException {
-        int numDecks = 9;
-        int deckPenetration = 50;
-        
-        Shoe shoe = new Shoe(numDecks, deckPenetration);
-    }
-
 }

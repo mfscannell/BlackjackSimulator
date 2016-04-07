@@ -13,18 +13,18 @@ import com.scannell.mark.casino.playingCard.enumerations.CardRank;
 import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 public class TestBlackjackRules {
-    private static BlackjackRules.Builder rulesBuilder;
-    private static BlackjackRules rules;
+    private static BlackjackRules.Builder defaultRulesBuilder;
+    private static BlackjackRules defaultRules;
     
     @BeforeClass
     public static void setUpBeforeClass() {
-        rulesBuilder = new BlackjackRules.Builder();
-        rulesBuilder.setMaxHandsAfterSplits(4);
-        rulesBuilder.setBlackjackPayoutMultiple(1.5);
-        rulesBuilder.setDoubleAfterSplitAllowed(true);
-        rulesBuilder.setDealerHitsSoft17(true);
-        rulesBuilder.setCanResplitAces(true);
-        rules = rulesBuilder.build();
+        defaultRulesBuilder = new BlackjackRules.Builder();
+        defaultRulesBuilder.setMaxHandsAfterSplits(4);
+        defaultRulesBuilder.setBlackjackPayoutMultiple(1.5);
+        defaultRulesBuilder.setDoubleAfterSplitAllowed(true);
+        defaultRulesBuilder.setDealerHitsSoft17(true);
+        defaultRulesBuilder.setCanResplitAces(true);
+        defaultRules = defaultRulesBuilder.build();
     }
 
     @Test
@@ -36,7 +36,7 @@ public class TestBlackjackRules {
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertTrue(rules.getDealersMove(hand) == BlackjackMove.HIT);
+        assertTrue(defaultRules.getDealersMove(hand) == BlackjackMove.HIT);
     }
     
     @Test
@@ -48,7 +48,7 @@ public class TestBlackjackRules {
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertTrue(rules.getDealersMove(hand) == BlackjackMove.STAND);
+        assertTrue(defaultRules.getDealersMove(hand) == BlackjackMove.STAND);
     }
     
     @Test
@@ -60,9 +60,12 @@ public class TestBlackjackRules {
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertTrue(rules.getDealersMove(hand) == BlackjackMove.HIT);
+        assertTrue(defaultRules.getDealersMove(hand) == BlackjackMove.HIT);
     }
     
+    /**
+     * The conditions involve the dealer's hand being a soft 17 and the rules state the dealer doesn't hit soft 17s.
+     */
     @Test
     public void getDealersMove_soft17_stand() {
     	BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
@@ -92,17 +95,17 @@ public class TestBlackjackRules {
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertTrue(rules.getDealersMove(hand) == BlackjackMove.STAND);
+        assertTrue(defaultRules.getDealersMove(hand) == BlackjackMove.STAND);
     }
     
     @Test
     public void getCardValue_ace() {
-        assertTrue(rules.getCardValue(CardRank.ACE) == 1);
+        assertTrue(defaultRules.getCardValue(CardRank.ACE) == 1);
     }
     
     @Test
     public void getCardValue_ten() {
-        assertTrue(rules.getCardValue(CardRank.TEN) == 10);
+        assertTrue(defaultRules.getCardValue(CardRank.TEN) == 10);
     }
     
     @Test
@@ -122,7 +125,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_WIN);
     }
@@ -146,7 +149,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE);
     }
@@ -170,7 +173,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE);
     }
@@ -194,7 +197,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_WIN);
     }
@@ -218,7 +221,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_DOUBLE_DOWN_LOSE);
     }
@@ -241,7 +244,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
     }
@@ -260,7 +263,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
     }
@@ -279,7 +282,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_WIN);
     }
@@ -302,7 +305,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
     }
@@ -325,7 +328,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_WIN);
     }
@@ -350,7 +353,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
     }
@@ -373,7 +376,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_WIN);
     }
@@ -392,7 +395,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_PUSH);
     }
@@ -415,7 +418,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_PUSH);
     }
@@ -438,7 +441,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerSecondCard);
         dealerHand.addCard(dealerThirdCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 2);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 2);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_PUSH);
     }
@@ -457,9 +460,9 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
-        assertTrue(payoutRate == rules.getBlackjackPayoutMultiple());
+        assertTrue(payoutRate == defaultRules.getBlackjackPayoutMultiple());
     }
     
     @Test
@@ -476,9 +479,9 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 2);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 2);
         
-        assertTrue(payoutRate == rules.PAYOUT_HAND_WIN);
+        assertTrue(payoutRate == defaultRules.PAYOUT_HAND_WIN);
     }
     
     @Test
@@ -495,7 +498,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_PUSH);
     }
@@ -514,7 +517,7 @@ public class TestBlackjackRules {
         dealerHand.addCard(dealerFirstCard);
         dealerHand.addCard(dealerSecondCard);
         
-        double payoutRate = rules.getPayoutAdjustment(playerHand, dealerHand, 1);
+        double payoutRate = defaultRules.getPayoutAdjustment(playerHand, dealerHand, 1);
         
         assertTrue(payoutRate == BlackjackRules.PAYOUT_HAND_LOSE);
     }

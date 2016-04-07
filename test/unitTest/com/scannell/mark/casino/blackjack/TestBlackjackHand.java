@@ -13,20 +13,10 @@ import com.scannell.mark.casino.playingCard.enumerations.CardSuit;
 
 public class TestBlackjackHand {
     
-    @Test
-    public void testGetNumCards_twocards() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.DIAMONDS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertTrue(hand.getNumCards() == 2);
-    }
+    
     
     @Test
-    public void testGetBlackjackTotal_noAceNoBust() {
+    public void getBlackjackTotal_noAceNoBust() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS);
         BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.DIAMONDS);
@@ -38,7 +28,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testGetBlackjackTotal_noAceBust() {
+    public void getBlackjackTotal_noAceBust() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS);
         BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
@@ -52,7 +42,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testGetBlackjackTotal_softAceNoBust() {
+    public void getBlackjackTotal_softAceNoBust() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
@@ -64,7 +54,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testGetBlackjackTotal_twoAces() {
+    public void getBlackjackTotal_twoAces() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
@@ -76,7 +66,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testGetBlackjackTotal_hardAceNoBust() {
+    public void getBlackjackTotal_hardAceNoBust() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
@@ -90,7 +80,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testGetBlackjackTotal_hardAceBust() {
+    public void getBlackjackTotal_hardAceBust() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
@@ -106,267 +96,43 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testIsBust_noAce_notBust() {
+    public void getFirstCard_8_true() {
         BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertFalse(hand.isBust());
-    }
-    
-    @Test
-    public void testIsBust_noAce_bust() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        
-        assertTrue(hand.isBust());
-    }
-    
-    @Test
-    public void testIsBust_softAce_noBust() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        
-        assertFalse(hand.isBust());
-    }
-    
-    @Test
-    public void testIsBust_hardAce_noBust() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        
-        assertFalse(hand.isBust());
-    }
-    
-    @Test
-    public void testIsBust_hardAce_bust() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-        BlackjackCard fourthCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        hand.addCard(fourthCard);
-        
-        assertTrue(hand.isBust());
-    }
-    
-    @Test
-    public void testIsPair_pairSixes_true() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertTrue(hand.isPair());
-    }
-    
-    @Test
-    public void testIsPair_twoCards_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertFalse(hand.isPair());
-    }
-    
-    @Test
-    public void testIsPair_oneCard_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        
-        assertFalse(hand.isPair());
-    }
-    
-    @Test
-    public void testIsPair_manyCards_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.HEARTS);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        
-        assertFalse(hand.isPair());
-    }
-    
-    @Test
-    public void testIsPair_aces_true() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertTrue(hand.isPairAces());
-    }
-    
-    @Test
-    public void testIsPair_aceThree_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
         
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertFalse(hand.isPairAces());
+        assertTrue(hand.getFirstCard().equals(firstCard));
     }
     
     @Test
-    public void testIsPair_manyAces_false() {
+    public void getNumCards_twocards() {
         BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        
-        assertFalse(hand.isPairAces());
-    }
-    
-    @Test
-    public void testSplit_pairNines() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.DIAMONDS);
         
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        BlackjackHand secondHand = hand.split();
-        
-        assertTrue(secondHand.getNumCards() == 1 && hand.getNumCards() == 1);
-        assertTrue(hand.getBlackjackTotal() == 9);
-        assertTrue(secondHand.getBlackjackTotal() == 9);
+        assertTrue(hand.getNumCards() == 2);
     }
     
     @Test
-    public void testIsSoft_a9_true() {
+    public void getSecondCard_3_true() {
         BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertTrue(hand.isSoft());
-    }
-    
-    @Test
-    public void testIsSoft_a37_true() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.SEVEN, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        
-        assertTrue(hand.isSoft());
-    }
-    
-    @Test
-    public void testIsSoft_79_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
         
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertFalse(hand.isSoft());
+        assertTrue(hand.getSecondCard().equals(secondCard));
     }
     
     @Test
-    public void testIsSoft_a74_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.HEARTS);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.FOUR, CardSuit.DIAMONDS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        hand.addCard(thirdCard);
-        
-        assertFalse(hand.isSoft());
-    }
-    
-    @Test
-    public void testIsFirstCardAce_ace_true() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertTrue(hand.isFirstCardAce());
-    }
-    
-    @Test
-    public void testIsFirstCardAce_k9_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertFalse(hand.isFirstCardAce());
-    }
-    
-    @Test
-    public void testIsFirstCardAce_kA_false() {
-        BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
-        
-        hand.addCard(firstCard);
-        hand.addCard(secondCard);
-        
-        assertFalse(hand.isFirstCardAce());
-    }
-    
-    @Test
-    public void testHasCardOfRank_9_true() {
+    public void hasCardOfRank_9_true() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
@@ -378,7 +144,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testHasCardOfRank_7_false() {
+    public void hasCardOfRank_7_false() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
@@ -389,8 +155,36 @@ public class TestBlackjackHand {
         assertFalse(hand.hasCardOfRank(CardRank.SEVEN));
     }
     
+    
+    
     @Test
-    public void testIsBlackjack_kA_true() {
+    public void hasExactlyTwoCards_83_true() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertTrue(hand.hasExactlyTwoCards());
+    }
+    
+    @Test
+    public void hasExactlyTwoCards_839_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertFalse(hand.hasExactlyTwoCards());
+    }
+    
+    @Test
+    public void isBlackjack_kA_true() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
@@ -402,7 +196,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testIsBlackjack_k9_false() {
+    public void isBlackjack_k9_false() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
@@ -414,7 +208,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testIsBlackjack_aTSplit_false() {
+    public void isBlackjack_aTSplit_false() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
@@ -435,7 +229,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testIsBlackjack_83_false() {
+    public void isBlackjack_83_false() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
@@ -447,33 +241,113 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testHasExactlyTwoCards_83_true() {
+    public void isBust_noAce_notBust() {
         BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
         
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertTrue(hand.hasExactlyTwoCards());
+        assertFalse(hand.isBust());
     }
     
     @Test
-    public void testHasExactlyTwoCards_839_false() {
+    public void isBust_noAce_bust() {
         BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
-        BlackjackCard thirdCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
         
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         hand.addCard(thirdCard);
         
-        assertFalse(hand.hasExactlyTwoCards());
+        assertTrue(hand.isBust());
     }
     
     @Test
-    public void testIsHand_83_true() {
+    public void isBust_softAce_noBust() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.FIVE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.SPADES);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertFalse(hand.isBust());
+    }
+    
+    @Test
+    public void isBust_hardAce_noBust() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertFalse(hand.isBust());
+    }
+    
+    @Test
+    public void isBust_hardAce_bust() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        BlackjackCard fourthCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        hand.addCard(fourthCard);
+        
+        assertTrue(hand.isBust());
+    }
+    
+    @Test
+    public void isFirstCardAce_ace_true() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertTrue(hand.isFirstCardAce());
+    }
+    
+    @Test
+    public void isFirstCardAce_k9_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertFalse(hand.isFirstCardAce());
+    }
+    
+    @Test
+    public void isFirstCardAce_kA_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.KING, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertFalse(hand.isFirstCardAce());
+    }
+    
+    @Test
+    public void isHand_83_true() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
@@ -486,7 +360,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testIsHand_83_false() {
+    public void isHand_83_false() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
@@ -502,7 +376,7 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testIsHand_839MultiCard_false() {
+    public void isHand_839MultiCard_false() {
         BlackjackHand hand = new BlackjackHand();
         BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
@@ -521,27 +395,166 @@ public class TestBlackjackHand {
     }
     
     @Test
-    public void testGetFirstCard_8_true() {
+    public void isPair_pairSixes_true() {
         BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
-        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.HEARTS);
         
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertTrue(hand.getFirstCard().equals(firstCard));
+        assertTrue(hand.isPair());
     }
     
     @Test
-    public void testGetSecondCard_3_true() {
+    public void isPair_twoCards_false() {
         BlackjackHand hand = new BlackjackHand();
-        BlackjackCard firstCard = new BlackjackCard(CardRank.EIGHT, CardSuit.SPADES);
+        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertFalse(hand.isPair());
+    }
+    
+    @Test
+    public void isPair_oneCard_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        
+        hand.addCard(firstCard);
+        
+        assertFalse(hand.isPair());
+    }
+    
+    @Test
+    public void isPair_manyCards_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.HEARTS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertFalse(hand.isPair());
+    }
+    
+    @Test
+    public void isPair_aces_true() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertTrue(hand.isPairAces());
+    }
+    
+    @Test
+    public void isPair_aceThree_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
         BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
         
         hand.addCard(firstCard);
         hand.addCard(secondCard);
         
-        assertTrue(hand.getSecondCard().equals(secondCard));
+        assertFalse(hand.isPairAces());
     }
-
+    
+    @Test
+    public void isPair_manyAces_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.ACE, CardSuit.HEARTS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertFalse(hand.isPairAces());
+    }
+    
+    @Test
+    public void isSoft_a9_true() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertTrue(hand.isSoft());
+    }
+    
+    @Test
+    public void isSoft_a37_true() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.SEVEN, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertTrue(hand.isSoft());
+    }
+    
+    @Test
+    public void isSoft_79_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.SEVEN, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertFalse(hand.isSoft());
+    }
+    
+    @Test
+    public void isSoft_a74_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.SEVEN, CardSuit.HEARTS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FOUR, CardSuit.DIAMONDS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertFalse(hand.isSoft());
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @Test
+    public void split_pairNines() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.NINE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.NINE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        BlackjackHand secondHand = hand.split();
+        
+        assertTrue(secondHand.getNumCards() == 1 && hand.getNumCards() == 1);
+        assertTrue(hand.getBlackjackTotal() == 9);
+        assertTrue(secondHand.getBlackjackTotal() == 9);
+    }
 }
