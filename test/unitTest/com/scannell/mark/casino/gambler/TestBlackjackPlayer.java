@@ -41,6 +41,43 @@ public class TestBlackjackPlayer {
     }
     
     @Test
+    public void addStrategyLayer_compositionKISS() {
+        BlackjackPlayer player = new BlackjackPlayer(0);
+        player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
+        player.addStrategyLayer(Strategy.COMPOSITION_STRATEGY);
+        player.addStrategyLayer(Strategy.KISS_I_STRATEGY);
+        
+        String actual = player.toStringStrategy();
+        
+        assertTrue(actual.compareTo("KISSIStrategy CompositionStrategy BasicStrategy") == 0);
+    }
+    
+    @Test
+    public void addStrategyLayer_basic_resets() {
+        BlackjackPlayer player = new BlackjackPlayer(0);
+        player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
+        player.addStrategyLayer(Strategy.COMPOSITION_STRATEGY);
+        player.addStrategyLayer(Strategy.KISS_I_STRATEGY);
+        player.addStrategyLayer(Strategy.BASIC_STRATEGY);
+        
+        String actual = player.toStringStrategy();
+        
+        assertTrue(actual.compareTo("BasicStrategy") == 0);
+    }
+    
+    @Test
+    public void adjustCashTotal_2() {
+    	Gambler gambler = new BlackjackPlayer(50);
+    	BlackjackPlayer blackjackPlayer = new BlackjackPlayer(10);
+    	
+    	gambler.adjustCashTotal(2);
+    	blackjackPlayer.adjustCashTotal(-3);
+    	
+    	assertTrue(gambler.getCashTotal() == 52);
+    	assertTrue(blackjackPlayer.getCashTotal() == 7);
+    }
+    
+    @Test
     public void getAction_basicPair10vs2_stand() {
         BlackjackCard dealerUpCard = new BlackjackCard(CardRank.TWO, CardSuit.CLUBS);
         BlackjackHand hand = MockBlackjackHandPairs.getPair10();
@@ -62,46 +99,9 @@ public class TestBlackjackPlayer {
     }
     
     @Test
-    public void adjustCashTotal_2() {
-    	Gambler gambler = new BlackjackPlayer(50);
-    	BlackjackPlayer blackjackPlayer = new BlackjackPlayer(10);
-    	
-    	gambler.adjustCashTotal(2);
-    	blackjackPlayer.adjustCashTotal(-3);
-    	
-    	assertTrue(gambler.getCashTotal() == 52);
-    	assertTrue(blackjackPlayer.getCashTotal() == 7);
-    }
-    
-    @Test
-    public void testResetBaseStrategy_basicStrategy() {
+    public void resetBaseStrategy_basicStrategy() {
         BlackjackPlayer player = new BlackjackPlayer(0);
         player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
-        
-        String actual = player.toStringStrategy();
-        
-        assertTrue(actual.compareTo("BasicStrategy") == 0);
-    }
-    
-    @Test
-    public void testAddStrategyLayer_compositionKISS() {
-        BlackjackPlayer player = new BlackjackPlayer(0);
-        player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
-        player.addStrategyLayer(Strategy.COMPOSITION_STRATEGY);
-        player.addStrategyLayer(Strategy.KISS_I_STRATEGY);
-        
-        String actual = player.toStringStrategy();
-        
-        assertTrue(actual.compareTo("KISSIStrategy CompositionStrategy BasicStrategy") == 0);
-    }
-    
-    @Test
-    public void testAddStrategyLayer_basicResets() {
-        BlackjackPlayer player = new BlackjackPlayer(0);
-        player.resetBaseStrategy(Strategy.BASIC_STRATEGY);
-        player.addStrategyLayer(Strategy.COMPOSITION_STRATEGY);
-        player.addStrategyLayer(Strategy.KISS_I_STRATEGY);
-        player.addStrategyLayer(Strategy.BASIC_STRATEGY);
         
         String actual = player.toStringStrategy();
         

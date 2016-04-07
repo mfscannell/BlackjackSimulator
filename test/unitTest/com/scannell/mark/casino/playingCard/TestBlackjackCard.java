@@ -15,31 +15,31 @@ public class TestBlackjackCard {
     private BlackjackRules blackjackRules = blackjackRulesBuilder.build();
 
     @Test
-    public void testIsTenValue_ten() {
+    public void isTenValue_ten_true() {
         BlackjackCard blackjackCard = new BlackjackCard(CardRank.TEN, CardSuit.CLUBS);
         assertTrue(blackjackCard.isTenValue());
     }
     
     @Test
-    public void testIsTenValue_jack() {
+    public void isTenValue_jack_true() {
         BlackjackCard blackjackCard = new BlackjackCard(CardRank.JACK, CardSuit.HEARTS);
         assertTrue(blackjackCard.isTenValue());
     }
     
     @Test
-    public void testIsTenValue_queen() {
+    public void isTenValue_queen_true() {
         BlackjackCard blackjackCard = new BlackjackCard(CardRank.QUEEN, CardSuit.HEARTS);
         assertTrue(blackjackCard.isTenValue());
     }
     
     @Test
-    public void testIsTenValue_king() {
+    public void isTenValue_king_true() {
         BlackjackCard blackjackCard = new BlackjackCard(CardRank.KING, CardSuit.DIAMONDS);
         assertTrue(blackjackCard.isTenValue());
     }
     
     @Test
-    public void testIsTenValue_ace() {
+    public void isTenValue_ace_false() {
         BlackjackCard blackjackCard = new BlackjackCard(CardRank.ACE, CardSuit.CLUBS);
         assertFalse(blackjackCard.isTenValue());
     }
