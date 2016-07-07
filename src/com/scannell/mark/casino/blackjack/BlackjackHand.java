@@ -63,6 +63,21 @@ public class BlackjackHand {
     }
     
     /**
+     * Checks if the hand's total is equal to the parameter.
+     * @param total The total the check the hand's total against.
+     * @return True if the hand's total equals the supplied total.
+     */
+    public boolean doesTotalEqual(int total) {
+        boolean totalEquals = false;
+        
+        if (total == getBlackjackTotal()) {
+            totalEquals = true;
+        }
+        
+        return totalEquals;
+    }
+    
+    /**
      * Gets the total value of the hand.
      * @return The total value of the hand.
      */
@@ -148,6 +163,20 @@ public class BlackjackHand {
         }
         
         return twoCards;
+    }
+    
+    /**
+     * Checks if the hand has less than two cards.
+     * @return True if the hand has less than two cards.
+     */
+    public boolean hasLessThanTwoCards() {
+        boolean lessThanTwoCards = false;
+        
+        if (this.cards.size() < 2) {
+            lessThanTwoCards = true;
+        }
+        
+        return lessThanTwoCards;
     }
     
     /**
@@ -268,6 +297,21 @@ public class BlackjackHand {
         }
         
         return softTotal;
+    }
+    
+    /**
+     * Checks if the hand's total is less than the parameter.
+     * @param total The total the check the hand's total against.
+     * @return True if the hand's total is less than the supplied total.
+     */
+    public boolean isTotalLessThan(int total) {
+        boolean totalLessThan = false;
+        
+        if (total < getBlackjackTotal()) {
+            totalLessThan = true;
+        }
+        
+        return totalLessThan;
     }
     
     /**

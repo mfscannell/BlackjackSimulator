@@ -110,6 +110,21 @@ public abstract class PlayingCard {
         return redCard;
     }
     
+    /**
+     * Checks if the card's value is the same as the parameterized value.
+     * @param value The value to compare to the playing card's value.
+     * @return True if the value is the same as the parameterized value.
+     */
+    public boolean isValue(int value) {
+        boolean equalsValue = false;
+        
+        if (value == getValue()) {
+            equalsValue = true;
+        }
+        
+        return equalsValue;
+    }
+    
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");

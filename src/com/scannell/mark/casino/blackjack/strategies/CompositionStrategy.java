@@ -33,7 +33,7 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
             (playerHand.hasCardOfRank(CardRank.FOUR) || playerHand.hasCardOfRank(CardRank.FIVE)) &&
             dealerUpCard.getValue() == 10) {
             move = BlackjackMove.STAND;
-        } else if (playerHand.isHand(CardRank.TEN, CardRank.TWO) && dealerUpCard.getValue() == 4) {
+        } else if (playerHand.isHand(CardRank.TEN, CardRank.TWO) && dealerUpCard.isValue(4)) {
             move = BlackjackMove.HIT;
         } else {
             move = this.blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
