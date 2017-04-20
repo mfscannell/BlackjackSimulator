@@ -149,6 +149,21 @@ public class BlackjackRules {
     }
     
     /**
+     * Checks if the maximum number of hands after splitting and re-splitting a player's hand has been reached.
+     * @param numHands The number of hands the player has after splitting and re-splitting his hands.
+     * @return True if the maximum number of hands has been reached.
+     */
+    public boolean isMaxHandsAfterSplitsReached(int numHands) {
+        boolean maxHandsReached = false;
+        
+        if (numHands >= maxHands) {
+            maxHandsReached = true;
+        }
+        
+        return maxHandsReached;
+    }
+    
+    /**
      * Refer to the rules as to whether or not re-splitting a pair of aces is allowed.
      * @return  True if the player can resplit aces.
      */

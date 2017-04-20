@@ -95,7 +95,7 @@ public class BlackjackTable extends Observable {
         }
         
         if (!this.dealerHand.isBlackjack()) {
-        	this.playPlayersTurns();
+            this.playPlayersTurns();
         }
         
         this.exposeDealerHoleCard();
@@ -221,7 +221,7 @@ public class BlackjackTable extends Observable {
         PlayingCard dealersCard = this.shoe.dealCard();
         
         if (cardPosition == 0) {
-        	this.notifyCardValueToPlayers(dealersCard);
+            this.notifyCardValueToPlayers(dealersCard);
         }
         
         this.dealerHand.addCard(dealersCard);
@@ -243,7 +243,7 @@ public class BlackjackTable extends Observable {
         for (int i = 0; i < BlackjackRules.NUM_CARDS_PER_INITIAL_DEAL; i++) {
             for (int j = 0; j < this.players.size(); j++) {
                 if (hasPlayerAtSeat(j)) {
-                	this.dealCardToPlayerInitialHand(j);
+                    this.dealCardToPlayerInitialHand(j);
                 }
             }
             
@@ -393,7 +393,7 @@ public class BlackjackTable extends Observable {
             final BlackjackHand playerHand = this.playersHands.get(seat).get(j);
             final int numHands = this.playersHands.get(seat).size();
             
-            if (playerHand.getNumCards() < 2) {
+            if (playerHand.hasLessThanTwoCards()) {
                 dealCardFromShoeToHand(playerHand);
             } else {
                 move = this.players.get(seat).getAction(dealerUpCard, playerHand, numHands);

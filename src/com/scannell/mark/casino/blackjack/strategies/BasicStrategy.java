@@ -97,7 +97,7 @@ public class BasicStrategy extends BlackjackStrategy {
         BlackjackMove correctedMove = move;
         int handTotal = hand.getBlackjackTotal();
         
-        if (move == BlackjackMove.SPLIT && numHands >= rules.getMaxHandsAfterSplits()) {
+        if (move == BlackjackMove.SPLIT && rules.isMaxHandsAfterSplitsReached(numHands)) {
             correctedMove = this.totalChart[handTotal][dealerCardValue];
         }
         
@@ -127,9 +127,9 @@ public class BasicStrategy extends BlackjackStrategy {
         int handTotal = hand.getBlackjackTotal();
         
         if (hand.isSoft()) {
-            if (hand.getBlackjackTotal() <= 17) {
+            if (hand.isTotalLessThan(18)) {
                 move = BlackjackMove.HIT;
-            } else if (hand.getBlackjackTotal() == 18 && 
+            } else if (hand.doesTotalEqual(18) && 
                        (dealerCardValue == 9 || dealerCardValue == 10 || dealerCardValue == 1)) {
                 move = BlackjackMove.HIT;
             }

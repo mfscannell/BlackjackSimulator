@@ -184,8 +184,11 @@ public class Total11 {
         
         player.initializeStrategy(rules, numDecks);
         
-        assertTrue(strategy.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
-        assertTrue(player.getAction(dealerUpCard, hand, 1) == BlackjackMove.DOUBLE);
+        BlackjackMove strategyMove = strategy.getAction(dealerUpCard, hand, 1);
+        BlackjackMove playerMove = player.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(strategyMove == BlackjackMove.DOUBLE);
+        assertTrue(playerMove == BlackjackMove.DOUBLE);
     }
     
     @Test

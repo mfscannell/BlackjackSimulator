@@ -532,15 +532,45 @@ public class TestBlackjackHand {
         assertFalse(hand.isSoft());
     }
     
+    @Test
+    public void isTotalLessThan_18startingHandSoft_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.FOUR, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        assertFalse(hand.isTotalLessThan(10));
+    }
     
+    @Test
+    public void isTotalLessThan_18multiCardSoft_true() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertTrue(hand.isTotalLessThan(18));
+    }
     
-    
-    
-    
-    
-    
-    
-    
+    @Test
+    public void isTotalLessThan_18multiCardSoft_false() {
+        BlackjackHand hand = new BlackjackHand();
+        BlackjackCard firstCard = new BlackjackCard(CardRank.ACE, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.THREE, CardSuit.HEARTS);
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS);
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        hand.addCard(thirdCard);
+        
+        assertFalse(hand.isTotalLessThan(18));
+    }
     
     @Test
     public void split_pairNines() {

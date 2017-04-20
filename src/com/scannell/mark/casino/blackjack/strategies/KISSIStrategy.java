@@ -29,12 +29,10 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     
     @Override
     public void adjustCount(PlayingCard card) {
-        int cardValue = card.getValue();
-        
-        if ((cardValue == 2 && !card.isRedCard()) || 
-            cardValue == 4 || 
-            cardValue == 5 || 
-            cardValue == 6) {
+        if ((card.isValue(2) && !card.isRedCard()) || 
+            card.isValue(4) || 
+            card.isValue(5) || 
+            card.isValue(6)) {
             this.count++;
         } else if (card.isFaceCard()) {
             this.count--;
@@ -46,17 +44,17 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         BlackjackMove move = BlackjackMove.STAND;
         
         if (this.count >= KISS_COUNT) {
-            if (playerHand.getBlackjackTotal() == 9 && !playerHand.isSoft() && dealerUpCard.getValue() == 2) {
+            if (playerHand.doesTotalEqual(9) && !playerHand.isSoft() && dealerUpCard.isValue(2)) {
                 move = BlackjackMove.DOUBLE;
-            } else if (playerHand.getBlackjackTotal() == 11 && dealerUpCard.isAce()) {
+            } else if (playerHand.doesTotalEqual(11) && dealerUpCard.isAce()) {
                 move = BlackjackMove.DOUBLE;
-            } else if (playerHand.getBlackjackTotal() == 16 && dealerUpCard.getValue() == 10) {
+            } else if (playerHand.doesTotalEqual(16) && dealerUpCard.isValue(10)) {
                 move = BlackjackMove.STAND;
-            } else if (playerHand.isHand(CardRank.ACE, CardRank.SEVEN) && dealerUpCard.getValue() == 2) {
+            } else if (playerHand.isHand(CardRank.ACE, CardRank.SEVEN) && dealerUpCard.isValue(2)) {
                 move = BlackjackMove.DOUBLE;
-            } else if (playerHand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 5) {
+            } else if (playerHand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.isValue(5)) {
                 move = BlackjackMove.DOUBLE;
-            } else if (playerHand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.getValue() == 6) {
+            } else if (playerHand.isHand(CardRank.ACE, CardRank.EIGHT) && dealerUpCard.isValue(6)) {
                 move = BlackjackMove.DOUBLE;
             } else {
                 move = this.blackjackStrategy.getAction(dealerUpCard, playerHand, numPlayerHands);
