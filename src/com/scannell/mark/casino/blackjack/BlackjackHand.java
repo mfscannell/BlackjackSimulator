@@ -307,7 +307,7 @@ public class BlackjackHand {
     public boolean isTotalLessThan(int total) {
         boolean totalLessThan = false;
         
-        if (total < getBlackjackTotal()) {
+        if (getBlackjackTotal() < total) {
             totalLessThan = true;
         }
         

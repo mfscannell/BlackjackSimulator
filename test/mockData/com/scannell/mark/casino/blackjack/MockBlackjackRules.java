@@ -5,6 +5,7 @@ import com.scannell.mark.casino.blackjack.BlackjackRules;
 public class MockBlackjackRules {
     private static BlackjackRules defaultRules;
     private static BlackjackRules doubleAfterSplitRules;
+    private static BlackjackRules dealerHitSoft17Rules;
     
     /**
      * Retrieve a set of default rules.  The default rules are:<br>
@@ -52,16 +53,16 @@ public class MockBlackjackRules {
      * @return A set of rules.
      */
     public static BlackjackRules getDealerHitSoft17Rules() {
-    	if (doubleAfterSplitRules ==  null) {
+    	if (dealerHitSoft17Rules ==  null) {
     		BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
             rulesBuilder.setBlackjackPayoutMultiple(1.5);
             rulesBuilder.setDealerHitsSoft17(true);
             rulesBuilder.setDoubleAfterSplitAllowed(false);
             rulesBuilder.setMaxHandsAfterSplits(4);
             rulesBuilder.setCanResplitAces(false);
-            doubleAfterSplitRules = rulesBuilder.build();
+            dealerHitSoft17Rules = rulesBuilder.build();
     	}
     	
-    	return doubleAfterSplitRules;
+    	return dealerHitSoft17Rules;
     }
 }
