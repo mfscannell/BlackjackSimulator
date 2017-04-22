@@ -48,7 +48,7 @@ public class BasicStrategy extends BlackjackStrategy {
     }
     
     @Override
-    public int getBetSize() {
+    public double getBetSize() {
         return 1;
     }
     
@@ -72,6 +72,10 @@ public class BasicStrategy extends BlackjackStrategy {
         updatePairChart(rules, numDecks);
         updateTotalChart(rules, numDecks);
         updateSoftChart(rules, numDecks);
+    }
+    
+    @Override
+    public void notifyCashAdjustment(double cashAdjustment) {
     }
     
     @Override
@@ -109,7 +113,8 @@ public class BasicStrategy extends BlackjackStrategy {
             correctedMove = BlackjackMove.STAND;
         }
         
-        if (hand.hasCardOfRank(CardRank.ACE) && !hand.isPair() && hand.wasFromSplit()) {
+        //if (hand.hasCardOfRank(CardRank.ACE) && !hand.isPair() && hand.wasFromSplit()) {
+        if (hand.isFirstCardAce() && !hand.isPair() && hand.wasFromSplit()) {
             correctedMove = BlackjackMove.STAND;
         }
         

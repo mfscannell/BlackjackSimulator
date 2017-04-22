@@ -9,6 +9,7 @@ public abstract class BlackjackStrategy {
     public static final int BASIC_STRATEGY = 101;
     public static final int COMPOSITION_STRATEGY = 201;
     public static final int KISS_I_STRATEGY = 202;
+    public static final int MARTINGALE_STRATEGY = 203;
     
     /**
      * Adjust the strategy's card count based upon the dealt card.
@@ -29,7 +30,7 @@ public abstract class BlackjackStrategy {
      * Get the bet size the strategy recommends.
      * @return  The recommended bet size.
      */
-    public abstract int getBetSize();
+    public abstract double getBetSize();
     
     /**
      * Get the strategy's card count.
@@ -49,6 +50,12 @@ public abstract class BlackjackStrategy {
      * @param numDecks  The number of decks in the shoe at the table.
      */
     public abstract void initialize(BlackjackRules rules, int numDecks);
+    
+    /**
+     * Update the strategy based upon the winnings / losings of the player.
+     * @param cashAdjustment
+     */
+    public abstract void notifyCashAdjustment(double cashAdjustment);
     
     /**
      * Reset the card count to the initial count.

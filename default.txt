@@ -8,30 +8,25 @@ true
 #dealerHitsSoft17
 true
 #resplitAces
-false
+true
 
 #SHOE_PARAMETERS
 #numDecks
-1
+6
 #deckPenetration
 60
 
 #TABLE_PARAMETERS
 #numHandsToSimulate
-10000
+100
 
 #PLAYER_PARAMETERS
 #numPlayers
-2
+1
 #tableSeat
 0
 #playerStrategy
 3
 0
 1
-2
-#tableSeat
-1
-#playerStrategy
-1
-0
+3

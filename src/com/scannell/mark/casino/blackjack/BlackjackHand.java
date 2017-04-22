@@ -368,6 +368,18 @@ public class BlackjackHand {
             stringBuilder.append(this.cards.get(i).toString());
         }
         
+        if (this.doubleDown) {
+            stringBuilder.append(" (DD)");
+        }
+        
+        if (this.fromSplit)  {
+            stringBuilder.append(" (SPLIT)");
+        }
+        
+        if (this.isBlackjack()) {
+            stringBuilder.append(" (BJ)");
+        }
+        
         return stringBuilder.toString();
     }
     

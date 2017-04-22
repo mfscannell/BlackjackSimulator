@@ -1,6 +1,7 @@
 package unitTest.com.scannell.mark.casino.blackjack.strategies;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -155,6 +156,52 @@ public class TestBasicStrategy {
         BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 3);
         
         assertTrue(move == BlackjackMove.SPLIT);
+    }
+    
+    @Test
+    public void getAction_splitSixes() {
+        BlackjackRules.Builder rulesBuilder = new BlackjackRules.Builder();
+        rulesBuilder.setBlackjackPayoutMultiple(1.5);
+        rulesBuilder.setDealerHitsSoft17(true);
+        rulesBuilder.setDoubleAfterSplitAllowed(true);
+        rulesBuilder.setMaxHandsAfterSplits(4);
+        rulesBuilder.setCanResplitAces(false);
+        BlackjackRules rules = rulesBuilder.build();
+        
+        BasicStrategy basicStrategy = new BasicStrategy();
+        basicStrategy.initialize(rules, 2);
+        
+        BlackjackCard dealerUpCard = new BlackjackCard(CardRank.FOUR, CardSuit.CLUBS);
+        
+        BlackjackCard firstCard = new BlackjackCard(CardRank.SIX, CardSuit.SPADES);
+        BlackjackCard secondCard = new BlackjackCard(CardRank.SIX, CardSuit.CLUBS);
+        
+        BlackjackHand hand = new BlackjackHand();
+        
+        hand.addCard(firstCard);
+        hand.addCard(secondCard);
+        
+        BlackjackMove move = basicStrategy.getAction(dealerUpCard, hand, 1);
+        
+        assertTrue(move == BlackjackMove.SPLIT);
+        
+        BlackjackHand secondHand = hand.split();
+        
+        BlackjackCard thirdCard = new BlackjackCard(CardRank.FIVE, CardSuit.HEARTS);
+        
+        hand.addCard(thirdCard);
+        
+        move = basicStrategy.getAction(dealerUpCard, hand, 2);
+        
+        assertTrue(move == BlackjackMove.DOUBLE);
+        
+        BlackjackCard fourthCard = new BlackjackCard(CardRank.ACE, CardSuit.DIAMONDS);
+        
+        secondHand.addCard(fourthCard);
+        
+        move = basicStrategy.getAction(dealerUpCard, secondHand, 2);
+        
+        assertTrue(move == BlackjackMove.DOUBLE);
     }
     
     @Test

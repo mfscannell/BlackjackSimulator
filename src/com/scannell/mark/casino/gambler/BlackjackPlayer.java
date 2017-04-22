@@ -11,6 +11,7 @@ import com.scannell.mark.casino.blackjack.strategies.BasicStrategy;
 import com.scannell.mark.casino.blackjack.strategies.BlackjackStrategy;
 import com.scannell.mark.casino.blackjack.strategies.CompositionStrategy;
 import com.scannell.mark.casino.blackjack.strategies.KISSIStrategy;
+import com.scannell.mark.casino.blackjack.strategies.MartingaleStrategy;
 import com.scannell.mark.casino.blackjack.strategies.NullStrategy;
 import com.scannell.mark.casino.blackjack.enumerations.BlackjackMove;
 import com.scannell.mark.casino.blackjack.enumerations.Strategy;
@@ -19,6 +20,9 @@ public class BlackjackPlayer extends Gambler {
     private ArrayList<BlackjackHand> hands;
     private boolean insurance;
     private BlackjackStrategy blackjackStrategy;
+    private double maxBet;
+    private double maxCash;
+    private double minCash;
 
     /**
      * Constructor.
@@ -45,6 +49,21 @@ public class BlackjackPlayer extends Gambler {
         } else {
             this.enhanceStrategy(strategyDescription);
         }
+    }
+    
+    @Override
+    public void adjustCashTotal(double amount) {
+        super.adjustCashTotal(amount);
+        
+        if (this.cashTotal < this.minCash) {
+            this.minCash = this.cashTotal;
+        }
+        
+        if (this.cashTotal > this.maxCash)  {
+            this.maxCash = this.cashTotal;
+        }
+        
+        this.blackjackStrategy.notifyCashAdjustment(amount);
     }
     
     /**
@@ -91,6 +110,10 @@ public class BlackjackPlayer extends Gambler {
      */
     public void setBetAmount() {
         super.setBetAmount(this.blackjackStrategy.getBetSize());
+        
+        if (this.betAmount > this.maxBet) {
+            this.maxBet = this.betAmount;
+        }
     }
     
     /**
@@ -112,20 +135,26 @@ public class BlackjackPlayer extends Gambler {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         
-        for (int i = 0; i < this.hands.size(); i++) {
-            stringBuilder.append(this.hands.get(i).toString());
-            stringBuilder.append("\n");
-        }
-        
-        stringBuilder.append("Cash:" + cashTotal + "\n");
-        stringBuilder.append("Current bet:" + betAmount + "\n");
-        stringBuilder.append("\n");
+        stringBuilder.append("Bet this round:" + betAmount + "\n");
         
         if (this.insurance) {
             stringBuilder.append("Does Takes Insurance\n");
         } else {
             stringBuilder.append("Doesn't Takes Insurance\n");
         }
+        
+        for (int i = 0; i < this.hands.size(); i++) {
+            stringBuilder.append(this.hands.get(i).toString());
+            stringBuilder.append("\n");
+        }
+        
+        stringBuilder.append("Cash at end of round:" + cashTotal + "\n");
+        stringBuilder.append("Max bet:" + this.maxBet + "\n");
+        stringBuilder.append("Min cash:" + this.minCash + "\n");
+        stringBuilder.append("Max cash:" + this.maxCash + "\n");
+        stringBuilder.append("\n");
+        
+        
         
         return stringBuilder.toString();
     }
@@ -160,6 +189,8 @@ public class BlackjackPlayer extends Gambler {
     		this.blackjackStrategy = new CompositionStrategy(this.blackjackStrategy);
     	} else if (strategyDecoratorDescription == Strategy.KISS_I_STRATEGY) {
     		this.blackjackStrategy = new KISSIStrategy(this.blackjackStrategy);
+    	} else if (strategyDecoratorDescription == Strategy.MARTINGALE_STRATEGY) {
+    	    this.blackjackStrategy = new MartingaleStrategy(this.blackjackStrategy, 10, 1000);
     	}
     }
 }

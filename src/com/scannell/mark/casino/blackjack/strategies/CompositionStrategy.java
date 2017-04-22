@@ -7,7 +7,7 @@ import com.scannell.mark.casino.playingCard.PlayingCard;
 import com.scannell.mark.casino.playingCard.enumerations.CardRank;
 
 public class CompositionStrategy extends BlackjackStrategyDecorator {
-    BlackjackStrategy blackjackStrategy;
+    private BlackjackStrategy blackjackStrategy;
 
     /**
      * Constructor.  The BasicStrategy.initialize method must be called after using this constructor to 
@@ -43,7 +43,7 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
     }
     
     @Override
-    public int getBetSize() {
+    public double getBetSize() {
         return 1;
     }
     
@@ -60,6 +60,10 @@ public class CompositionStrategy extends BlackjackStrategyDecorator {
     @Override
     public void initialize(BlackjackRules rules, int numDecks) {
         this.blackjackStrategy.initialize(rules, numDecks);
+    }
+    
+    @Override
+    public void notifyCashAdjustment(double cashAdjustment) {
     }
     
     @Override

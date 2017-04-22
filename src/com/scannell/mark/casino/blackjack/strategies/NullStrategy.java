@@ -16,7 +16,7 @@ public class NullStrategy extends BlackjackStrategy {
     }
     
     @Override
-    public int getBetSize() {
+    public double getBetSize() {
         return 0;
     }
     
@@ -32,6 +32,10 @@ public class NullStrategy extends BlackjackStrategy {
     
     @Override
     public void initialize(BlackjackRules rules, int numDecks) {
+    }
+    
+    @Override
+    public void notifyCashAdjustment(double cashAdjustment) {
     }
     
     @Override

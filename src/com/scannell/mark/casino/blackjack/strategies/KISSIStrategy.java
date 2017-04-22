@@ -71,8 +71,8 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
     }
     
     @Override
-    public int getBetSize() {
-        int betSize = 1;
+    public double getBetSize() {
+        double betSize = 1;
         
         if (this.numDecks <= 2) {
             if (this.count <= 19) {
@@ -129,6 +129,10 @@ public class KISSIStrategy extends BlackjackStrategyDecorator {
         this.count = initialCount;
         
         this.blackjackStrategy.initialize(rules, numDecks);
+    }
+    
+    @Override
+    public void notifyCashAdjustment(double cashAdjustment) {
     }
     
     @Override
