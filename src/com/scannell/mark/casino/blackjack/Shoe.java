@@ -1,6 +1,7 @@
 package com.scannell.mark.casino.blackjack;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.scannell.mark.casino.blackjack.exceptions.InvalidShoeException;
 import com.scannell.mark.casino.playingCard.BlackjackCard;
@@ -13,12 +14,13 @@ import com.scannell.mark.casino.playingCard.PlayingCard;
  */
 public class Shoe {
     public static final int NUM_CARDS_PER_DECK = 52;
-    public static final int SHUFFLES_PER_DECK = 2;
+    public static final int SHUFFLES_PER_DECK = 7;
     public static final int MIN_NUM_DECKS = 1;
     public static final int MAX_NUM_DECKS = 8;
     public static final int MIN_DECK_PENETRATION = 1;
     public static final int MAX_DECK_PENETRATION = 99;
     private ArrayList<PlayingCard> shoe;
+    //private PlayingCard[] shoe;
     private int numDecks;
     private int deckPenetration;
     
@@ -96,7 +98,8 @@ public class Shoe {
     public void shuffleShoe() {
         for (int i = 0; i < SHUFFLES_PER_DECK * this.numDecks; i++) {
             for (int j = 0; j < this.shoe.size(); j++) {
-                int swapIndex = (int) (Math.random() * this.shoe.size());
+                Random generator = new Random(System.currentTimeMillis());
+                int swapIndex = generator.nextInt(this.shoe.size());
                 PlayingCard temp = this.shoe.get(j);
                 this.shoe.set(j, this.shoe.get(swapIndex));
                 this.shoe.set(swapIndex, temp);

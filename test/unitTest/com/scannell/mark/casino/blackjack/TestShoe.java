@@ -189,6 +189,22 @@ public class TestShoe {
     }
     
     @Test
+    public void shuffleShoe_sixDecks() {
+        Shoe shoe;
+        try {
+            shoe = new Shoe(6, 66);
+            System.out.println("************************************************");
+            System.out.println("TestShoe.testShuffleSixDeck");
+            System.out.println("---------------------------");
+            shoe.shuffleShoe();
+            shoe.print();
+            System.out.println("************************************************");
+        } catch (InvalidShoeException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @Test
     public void testRemainingCards() {
         Shoe shoe;
         try {

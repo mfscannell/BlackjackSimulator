@@ -149,6 +149,7 @@ public class BlackjackPlayer extends Gambler {
         }
         
         stringBuilder.append("Cash at end of round:" + cashTotal + "\n");
+        stringBuilder.append("Count at end of round:" + this.blackjackStrategy.getCount() + "\n");
         stringBuilder.append("Max bet:" + this.maxBet + "\n");
         stringBuilder.append("Min cash:" + this.minCash + "\n");
         stringBuilder.append("Max cash:" + this.maxCash + "\n");
