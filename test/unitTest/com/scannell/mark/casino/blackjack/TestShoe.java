@@ -160,13 +160,6 @@ public class TestShoe {
         Shoe shoe;
         try {
             shoe = new Shoe(1, 66);
-            
-//            System.out.println("************************************************");
-//            System.out.println("TestShoe.testShuffleOneDeck");
-//            System.out.println("---------------------------");
-            shoe.shuffleShoe();
-//            shoe.print();
-//            System.out.println("************************************************");
         } catch (InvalidShoeException e) {
             e.printStackTrace();
         }
@@ -177,12 +170,6 @@ public class TestShoe {
         Shoe shoe;
         try {
             shoe = new Shoe(2, 66);
-//            System.out.println("************************************************");
-//            System.out.println("TestShoe.testShuffleTwoDeck");
-//            System.out.println("---------------------------");
-            shoe.shuffleShoe();
-//            shoe.print();
-//            System.out.println("************************************************");
         } catch (InvalidShoeException e) {
             e.printStackTrace();
         }
@@ -197,6 +184,13 @@ public class TestShoe {
             System.out.println("TestShoe.testShuffleSixDeck");
             System.out.println("---------------------------");
             shoe.shuffleShoe();
+            System.out.println("---------------------------");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException exception) {
+                // TODO Auto-generated catch block
+                exception.printStackTrace();
+            }
             shoe.print();
             System.out.println("************************************************");
         } catch (InvalidShoeException e) {
@@ -213,15 +207,15 @@ public class TestShoe {
 //            System.out.println("TestShoe.testRemainingCards");
 //            System.out.println("---------------------------");
 //            System.out.println("Starting cards");
-            shoe.print();
-            shoe.shuffleShoe();
+            //shoe.print();
+            //shoe.shuffleShoe();
 //            System.out.println("Starting cards");
 //            shoe.print();
             
-            for (int i = 0; i < 10; i++) {
-                PlayingCard card = shoe.dealCard();
-                System.out.println("Dealt card:" + card);
-            }
+//            for (int i = 0; i < 10; i++) {
+//                PlayingCard card = shoe.dealCard();
+//                System.out.println("Dealt card:" + card);
+//            }
             
 //            System.out.println("Remaining cards");
 //            shoe.print();

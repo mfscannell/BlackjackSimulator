@@ -1,6 +1,7 @@
 package com.scannell.mark.casino.blackjack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import com.scannell.mark.casino.blackjack.exceptions.InvalidShoeException;
@@ -14,7 +15,7 @@ import com.scannell.mark.casino.playingCard.PlayingCard;
  */
 public class Shoe {
     public static final int NUM_CARDS_PER_DECK = 52;
-    public static final int SHUFFLES_PER_DECK = 7;
+    public static final int SHUFFLES_PER_DECK = 11;
     public static final int MIN_NUM_DECKS = 1;
     public static final int MAX_NUM_DECKS = 8;
     public static final int MIN_DECK_PENETRATION = 1;
@@ -23,6 +24,8 @@ public class Shoe {
     //private PlayingCard[] shoe;
     private int numDecks;
     private int deckPenetration;
+    
+    private static Random generator;
     
     /**
      * Constructor.  Creates a shoe containing a number of deck of 52 playing cards.
@@ -36,6 +39,7 @@ public class Shoe {
         checkDeckPenetrationIsValid(deckPenetration);
         setShoeParameters(numDecks, deckPenetration);
         initializeShoe();
+        generator = new Random(System.currentTimeMillis());
     }
     
     /**
@@ -96,14 +100,10 @@ public class Shoe {
      * Shuffles the cards in the shoe.
      */
     public void shuffleShoe() {
-        for (int i = 0; i < SHUFFLES_PER_DECK * this.numDecks; i++) {
-            for (int j = 0; j < this.shoe.size(); j++) {
-                Random generator = new Random(System.currentTimeMillis());
-                int swapIndex = generator.nextInt(this.shoe.size());
-                PlayingCard temp = this.shoe.get(j);
-                this.shoe.set(j, this.shoe.get(swapIndex));
-                this.shoe.set(swapIndex, temp);
-            }
+        for (int i = 0; i < SHUFFLES_PER_DECK * this.shoe.size(); i++) {
+            int firstIndex = generator.nextInt(this.shoe.size());
+            int secondIndex = generator.nextInt(this.shoe.size());
+            Collections.swap(this.shoe, firstIndex, secondIndex);
         }
     }
     
@@ -149,10 +149,13 @@ public class Shoe {
      * Fill the shoe with all the playing cards in sorted order.
      */
     private void initializeShoe() {
+        int index = 0;
         for (int i = 0; i < this.numDecks; i++) {
             for (int j = 0; j < PlayingCard.NUMBER_OF_SUITS; j++) {
                 for (int k = 0; k < PlayingCard.NUMBER_OF_RANKS; k++) {
                     this.shoe.add(new BlackjackCard(PlayingCard.RANKS[k], PlayingCard.SUITS[j]));
+                    //this.shoe[index] = new BlackjackCard(PlayingCard.RANKS[k], PlayingCard.SUITS[j]);
+                    index++;
                 }
             }
         }

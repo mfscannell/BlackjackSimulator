@@ -80,7 +80,7 @@ public class BlackjackTable extends Observable {
      * Play one round of blackjack.
      */
     public void playRound() {
-        if (doesShoeNeedRefill()) {
+        if (doesShoeNeedRefill() || this.shoe.isNewShoe()) {
             System.out.println("***CUT CARD MET***");
             this.refillShoe();
             this.shuffleShoeAndDiscardFirstCard();

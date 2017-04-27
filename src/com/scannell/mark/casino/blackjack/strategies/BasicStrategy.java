@@ -49,7 +49,7 @@ public class BasicStrategy extends BlackjackStrategy {
     
     @Override
     public double getBetSize() {
-        return 1;
+        return 10;
     }
     
     @Override
