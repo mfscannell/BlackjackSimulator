@@ -11,6 +11,7 @@ import com.scannell.mark.casino.blackjack.strategies.BasicStrategy;
 import com.scannell.mark.casino.blackjack.strategies.BlackjackStrategy;
 import com.scannell.mark.casino.blackjack.strategies.CompositionStrategy;
 import com.scannell.mark.casino.blackjack.strategies.KISSIStrategy;
+import com.scannell.mark.casino.blackjack.strategies.MartingaleKissStrategy;
 import com.scannell.mark.casino.blackjack.strategies.MartingaleStrategy;
 import com.scannell.mark.casino.blackjack.strategies.NullStrategy;
 import com.scannell.mark.casino.blackjack.enumerations.BlackjackMove;
@@ -192,6 +193,8 @@ public class BlackjackPlayer extends Gambler {
     		this.blackjackStrategy = new KISSIStrategy(this.blackjackStrategy);
     	} else if (strategyDecoratorDescription == Strategy.MARTINGALE_STRATEGY) {
     	    this.blackjackStrategy = new MartingaleStrategy(this.blackjackStrategy, 10, 1000);
+    	} else if (strategyDecoratorDescription == Strategy.MARTINGALE_KISS_STRATEGY) {
+    	    this.blackjackStrategy = new MartingaleKissStrategy(this.blackjackStrategy, 10, 1000);
     	}
     }
 }

@@ -26,7 +26,8 @@ true
 #tableSeat
 0
 #playerStrategy
-3
+4
 0
 1
-3
+2
+4
